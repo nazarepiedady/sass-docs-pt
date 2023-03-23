@@ -1,47 +1,41 @@
 ---
-title: Install Sass
+title: Instalar o Sass
 no_container: true
 ---
 
 .sl-l-grid.sl-l-grid--full.sl-l-large-grid--fit.sl-l-large-grid--gutters-large
   .sl-l-grid__column
     :markdown
-      ## Applications
+      ## Aplicações
 
       ![Mouse](illustrations/mouse.svg)
 
-      There are a good many applications that will get you up and running
-      with Sass in a few minutes for Mac, Windows, and Linux. You can download
-      most of the applications for free but a few of them are paid apps
-      <small>(and totally worth it)</small>.
+
+      Existem muitas boas aplicações que ajudar-te-ão a executar e trabalhar com a Sass em alguns minutos para Mac, Windows e Linux. Tu podes descarregar a maioria das aplicações gratuitamente e algumas delas tens que pagar por elas <small>(mas valem a pena)</small>.
 
     %ul
       %li
         = link_to "CodeKit", "https://codekitapp.com/"
-        (Paid)
+        (Paga)
         Mac
 
       %li
         = link_to 'Prepros', 'https://prepros.io/'
-        (Paid)
+        (Paga)
         Mac
         Windows
         Linux
 
     :markdown
-      ## Libraries
+      ## Bibliotecas
 
-      The Sass team maintains two Node.js packages for Sass, both of which
-      support [the standard JavaScript API]. The [`sass` package] is pure
-      JavaScript, which is a little slower but can be installed on all platforms
-      Node.js supports. The [`sass-embedded` package] wraps a JS API around the
-      Dart VM, so it's faster but only supports Windows, Mac OS, and Linux.
+      A equipa da Sass mantêm dois pacotes de Node.js para Sass, ambos dos quais suportam a [API de JavaScript padrão][the standard JavaScript API]. O [pacote `sass`][`sass` package] é JavaScript puro, o qual é um pouco mais lento mas pode ser instalado em todas as plataformas que suportam a Node.js. O [pacote `sass-embedded`][`sass-embedded` package] envolve a API de JavaScript em torno da Máquina Virtual da Dart, assim é mais rápido mas apenas suporta Windows, Mac Os e Linux.
 
       [the standard JavaScript API]: /documentation/js-api
       [`sass` package]: https://www.npmjs.com/package/sass
       [`sass-embedded` package]: https://www.npmjs.com/package/sass-embedded
 
-      There are also community-maintained wrappers for the following languages:
+      Também existem envolvedores mantidos pela comunidade para as seguinte linguagens:
 
     %ul
       %li
@@ -60,72 +54,54 @@ no_container: true
 
   .sl-l-grid__column
     :markdown
-      ## Command Line
+      ## Linha de Comando
 
       ![Keyboard](illustrations/keyboard.svg)
 
-      When you install Sass on the command line, you'll be able to run the
-      `sass` executable to compile `.sass` and `.scss` files to `.css` files.
-      For example:
+      Quando instalares o Sass na linha de comando, serás capaz de executar o executável `sass` para compilar os ficheiros `.sass` e `.scss` para ficheiros `.css`. Por exemplo:
 
           sass source/stylesheets/index.scss build/stylesheets/index.css
 
-      First install Sass using one of the options below, then run
-      `sass --version` to be sure it installed correctly. If it did, this will
-      include `#{impl_version(:dart)}`. You can also run `sass --help` for more
-      information about the command-line interface.
+      Primeiro instale o Sass usando uma das opções abaixo, depois execute `sass --version` para teres a certeza de que foi instalada corretamente. Se feita, isto incluirá `#{impl_version(:dart)}`. Tu também podes executar `sass --help` para mais informações sobre a interface da linha de comando.
 
-      Once it's all set up, <strong>go and play</strong>. If you're brand new to
-      Sass we've set up some resources to help you learn pretty darn quick.
 
-    %p= link_to 'Learn More About Sass', '/guide', :class => 'sl-c-button sl-c-button--primary'
+      Uma vez que tudo estiver configurado, <strong>vai e experimente</strong>. Se fores novato para a Sass definimos alguns recursos para ajudar-te aprender muito rapidamente.
+
+    %p= link_to 'Saiba Mais Sobre a Sass', '/guide', :class => 'sl-c-button sl-c-button--primary'
 
     %dl
-      %dt Install Anywhere (Standalone)
+      %dt Instalar em Qualquer Lugar (Standalone)
 
       %dd
-        You can install Sass on Windows, Mac, or Linux by downloading the
-        package for your operating system
-        #{link_to 'from GitHub', release_url(:dart)} and
-        <a href='https://katiek2.github.io/path-doc/'>adding it to your
-        <code>PATH</code></a>. That's all—there are no external dependencies and
-        nothing else you need to install.
+        Tu podes instalar o Sass no Windows, Mac, ou Linux descarregando o pacote para o teu sistema operacional #{link_to 'from GitHub', release_url(:dart)} e <a href='https://katiek2.github.io/path-doc/'>adicionando-o ao teu <code>PATH</code></a>. É tudo — não existem dependências externas e não precisas de instalar nada mais.
 
-      %dt Install Anywhere (npm)
+      %dt Instalar em Qualquer Lugar (npm)
 
       %dd
         %p
-          If you use Node.js, you can also install Sass using
-          <a href='https://www.npmjs.com/'>npm</a> by running
+          Se usas a Node.js, também podes instalar o Sass usando o <a href='https://www.npmjs.com/'>npm</a> executando:
 
         %pre
           :preserve
             npm install -g sass
 
-        <strong>However, please note</strong> that this will install the pure
-        JavaScript implementation of Sass, which runs somewhat slower than the
-        other options listed here. But it has the same interface, so it'll be
-        easy to swap in another implementation later if you need a bit more
-        speed!
+        <strong>No entanto, nota</strong> que isto instalará a implementação de JavaScript pura de Sass, o qual executa um tanto mais lento do que as opções listadas aqui. Mas tem a mesma interface, então será fácil trocar por uma outra implementação mais tarde se precisares de um pouco mais de velocidade!
 
-      %dt Install on Windows (Chocolatey)
+      %dt Instalar no Windows (Chocolatey)
 
       %dd
         %p
-          If you use <a href='https://chocolatey.org/'>the Chocolatey package
-          manager</a> for Windows, you can install Dart Sass by running
+          Se usas o <a href='https://chocolatey.org/'>o gestor de pacote Chocolatey</a> para Windows, podes instalar a implementação de Dart de Sass executando:
 
         %pre
           :preserve
             choco install sass
 
-      %dt Install on Mac OS X or Linux (Homebrew)
+      %dt Instalar no Mac OS X ou Linux (Homebrew)
 
       %dd
         %p
-          If you use <a href='https://brew.sh/'>the Homebrew package
-          manager</a> for Mac OS X or Linux, you can install Dart Sass by
-          running
+          Se usas o <a href='https://brew.sh/'>gestor de pacote Homebrew</a> para Mac Os X ou Linux, podes instalar a implementação de Dart de Sass executando:
 
         %pre
           :preserve
