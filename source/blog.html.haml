@@ -1,12 +1,12 @@
 ---
-title: Sass Blog
+title: Blogue de Sass
 pageable: true
 per_page: 5
 ---
 
 - if paginate && num_pages > 1
   %p Page #{page_number} of #{num_pages}
-  %p= link_to 'Previous page', without_html(prev_page) if prev_page
+  %p= link_to 'Página anterior', without_html(prev_page) if prev_page
 
 - page_articles.each_with_index do |article, i|
   %h2= link_to article.title, without_html(article)
@@ -14,4 +14,4 @@ per_page: 5
   = article.summary.gsub(/href="#/, "href=\"#{without_html(article)}#")
 
 - if paginate
-  %p= link_to 'Next page', without_html(next_page) if next_page
+  %p= link_to 'Próxima página', without_html(next_page) if next_page
