@@ -1,18 +1,14 @@
 ---
-title: Syntax
+title: Sintaxe
 introduction: >
-  Sass supports two different syntaxes. Each one can load the other, so it's
-  up to you and your team which one to choose.
+  A Sass suporta dois sintaxes diferentes. Cada uma pode carregar a outra, está contigo e com a tua equipa a decisão de qual escolher.
 ---
 
 ## SCSS
 
-The SCSS syntax uses the file extension `.scss`. With a few small exceptions,
-it's a superset of CSS, which means essentially **all valid CSS is valid SCSS as
-well**. Because of its similarity to CSS, it's the easiest syntax to get used to
-and the most popular.
+A sintaxe de SCSS usa a extensão de ficheiro `.scss`. Com algumas poucas exceções, é um superconjunto de CSS, o que significa que essencialmente **toda CSS válida também é uma SCSS válida**. Por causa da sua semelhança com a CSS, é a sintaxe mais fácil de habituar-se e a mais popular.
 
-SCSS looks like this:
+A SCSS parece-se com isto:
 
 ```scss
 @mixin button-base() {
@@ -36,27 +32,20 @@ SCSS looks like this:
 }
 ```
 
-## The Indented Syntax
+## A Sintaxe Indentada
 
-The indented syntax was Sass's original syntax, and so it uses the file
-extension `.sass`. Because of this extension, it's sometimes just called "Sass".
-The indented syntax supports all the same features as SCSS, but it uses
-indentation instead of curly braces and semicolons to describe the format of the
-document.
+A sintaxe indentada foi a sintaxe original da Sass, e usa a extensão de ficheiro `.sass`. Por causa desta extensão, algumas vezes é apenas chamada de "Sass".
+A sintaxe indentada suporta todas as mesmas funcionalidades que a SCSS suporta, porém usa a indentação ao invés de chavetas e pontos e vírgulas para descrever o formato do documento.
 
-In general, any time you'd write curly braces in CSS or SCSS, you can just
-indent one level deeper in the indented syntax. And any time a line ends, that
-counts as a semicolon. There are also a few additional differences in the
-indented syntax that are noted throughout the reference.
+Em geral, em qualquer altura que escreveres chavetas na CSS ou SCSS, podes apenas indentar um nível de profundidade na sintaxe indentada. E em qualquer altura que uma linha terminar, isto conta como um ponto e vírgula. Existem também algumas diferenças adicionais na sintaxe indentada que são enfatizadas ao longo da referência.
 
 <% heads_up do %>
-  The indented syntax currently doesn't support expressions that wrap across
-  multiple lines. See [issue #216].
+  A sintaxe indentada atualmente não suporta expressões que envolvem várias linhas. Consulte a [issue #216].
 
   [issue #216]: https://github.com/sass/sass/issues/216
 <% end %>
 
-The indented syntax looks like this:
+A sintaxe indentada parece-se com isto:
 
 ```sass
 @mixin button-base()
