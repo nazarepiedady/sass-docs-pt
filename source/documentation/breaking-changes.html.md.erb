@@ -1,47 +1,30 @@
 ---
-title: Breaking Changes
+title: Mudanças de Rutura
 introduction: >
-  New versions of Sass are as backwards-compatible as possible, but sometimes
-  a breaking change is necessary. Sass needs to keep up with the evolving CSS
-  specification, and old language design mistakes occasionally need to be fixed.
+  Novas versões da Sass são as mais retrocompatíveis possíveis, mas algumas vezes uma mudança de rutura é necessária. A Sass precisa manter-se atualizada com a evolução da especificação da CSS, antigos equívocos do desenho da linguagem precisam de ocasionalmente ser corrigidos.
 overview: true
 ---
 
-Before each breaking change is released, Sass implementations will produce
-deprecation warnings for stylesheets whose behavior will change. Whenever
-possible, these warnings will include suggestions for how to update the
-deprecated styles to make them forward-compatible.
+Antes de cada mudança de rutura ser lançada, as implementações de Sass produzirão avisos de depreciação para as folhas de estilos cujo comportamento mudará. Sempre que possível, estes avisos incluirão sugestões de como atualizar os estilos depreciados para torná-los compatíveis com a versão expedida.
 
-Different implementations have different policies for breaking changes and
-deprecations. [Dart Sass][] will emit deprecation warnings for at least three
-months before releasing a breaking change, and will release the breaking change
-with a new major version number **unless that change is necessary for CSS
-compatibility**. CSS compatibility changes are often both non-disruptive and
-time-sensitive, so they may be released with new minor version numbers instead.
+Diferentes implementações têm diferentes políticas para as mudanças de rutura e depreciações. A [Sass de Dart][Dart Sass] emitirá avisos de depreciação por pelos menos três meses antes de lançar uma mudança de rutura, e lançará a mudança de rutura com um novo número de versão principal **a menos que esta mudança seja necessária para compatibilidade de CSS**. As mudanças de compatibilidade de CSS são com frequência não disruptivas e sensíveis ao tempo, assim podem ser lançadas com novos números de versão principal.
 
 [Dart Sass]: /dart-sass
 
-These breaking changes are coming soon or have recently been released:
+Estas mudanças de rutura estão para chegar brevemente ou foram lançadas recentemente:
 
-* [Functions are stricter about which units they
-  allow](breaking-changes/function-units) beginning in Dart Sass 1.32.0.
+* [As funções são mais rigorosas sobre quais unidades permitem](breaking-changes/function-units) começando na Sass de Dart 1.32.0.
 
-* [Selectors with invalid combinators are
-  invalid](breaking-changes/bogus-combinators) beginning in Dart Sass 1.54.0.
+* [Os seletores com combinadores inválidos são inválidos](breaking-changes/bogus-combinators) começando na Sass de Dart 1.54.0.
 
-* [`/` is changing from a division operation to a list
-  separator](breaking-changes/slash-div) beginning in Dart Sass 1.33.0.
+* [O símbolo `/` está mudando de uma operação de divisão para um separador de lista](breaking-changes/slash-div) começando na Sass de Dart 1.33.0.
 
-* [Parsing the special syntax of `@-moz-document` will be
-  invalid](breaking-changes/moz-document) beginning in Dart Sass 1.7.2.
+* [A analise da sintaxe especial de `@-moz-document` será inválida](breaking-changes/moz-document) começando na Sass de Dart 1.7.2.
 
-* [Compound selectors could not be extended](breaking-changes/extend-compound)
-  in Dart Sass 1.0.0 and Ruby Sass 4.0.0.
+* [Os seletores compostos não poderiam ser estendidos](breaking-changes/extend-compound) na Sass de Dart 1.0.0 e Sass de Ruby 4.0.0.
 
-* [The syntax for CSS custom property values changed](breaking-changes/css-vars)
-  in Dart Sass 1.0.0, LibSass 3.5.0, and Ruby Sass 3.5.0.
+* [A sintaxe para valores de propriedade personalizada de CSS mudada](breaking-changes/css-vars) na Sass de Dart 1.0.0, LibSass 3.5.0, e Sass de Ruby 3.5.0.
 
-## Early Opt-In
+## Optar Prematuramente
 
-Dart Sass users can opt in to treat deprecations as errors early using the
-[`--fatal-deprecation` command line option](cli/dart-sass#fatal-deprecation).
+Os utilizadores de Sass de Dart podem optar em tratar as depreciações como erros prematuramente usando a [opção de linha de comando `--fatal-deprecation`](cli/dart-sass#fatal-deprecation).
