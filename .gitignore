@@ -8,7 +8,6 @@ bundle
 .DS_Store?
 /Icon
 "Icon\r"
-.ruby-version
 /.dart-sass
 /.libsass
 /.language
