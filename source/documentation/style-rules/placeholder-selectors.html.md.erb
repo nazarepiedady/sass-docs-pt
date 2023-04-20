@@ -1,19 +1,12 @@
 ---
 title: Placeholder Selectors
 introduction: >
-  Sass has a special kind of selector known as a “placeholder”. It looks and
-  acts a lot like a class selector, but it starts with a `%` and it's not
-  included in the CSS output. In fact, any complex selector (the ones between
-  the commas) that even *contains* a placeholder selector isn't included in the
-  CSS, nor is any style rule whose selectors all contain placeholders.
+  Sass has a special kind of selector known as a “placeholder”. It looks and acts a lot like a class selector, but it starts with a `%` and it's not included in the CSS output. In fact, any complex selector (the ones between the commas) that even *contains* a placeholder selector isn't included in the CSS, nor is any style rule whose selectors all contain placeholders.
 ---
 
 <%= partial "code-snippets/example-placeholder" %>
 
-What's the use of a selector that isn't emitted? It can still be [extended][]!
-Unlike class selectors, placeholders don't clutter up the CSS if they aren't
-extended and they don't mandate that users of a library use specific class names
-for their HTML.
+What's the use of a selector that isn't emitted? It can still be [extended][]! Unlike class selectors, placeholders don't clutter up the CSS if they aren't extended and they don't mandate that users of a library use specific class names for their HTML.
 
 [extended]: ../at-rules/extend
 
@@ -56,7 +49,4 @@ for their HTML.
     color: #cddc39
 <% end %>
 
-Placeholder selectors are useful when writing a Sass library where each style
-rule may or may not be used. As a rule of thumb, if you're writing a stylesheet
-just for your own app, it's often better to just extend a class selector if one
-is available.
+Placeholder selectors are useful when writing a Sass library where each style rule may or may not be used. As a rule of thumb, if you're writing a stylesheet just for your own app, it's often better to just extend a class selector if one is available.
