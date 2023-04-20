@@ -1,11 +1,7 @@
 ---
 title: Booleans
 introduction: >
-  Booleans are the logical values `true` and `false`. In addition their literal
-  forms, booleans are returned by [equality](../operators/equality) and
-  [relational](../operators/relational) operators, as well as many built-in
-  functions like [`math.comparable()`](../modules/math#comparable) and
-  [`map.has-key()`](../modules/map#has-key).
+  Booleans are the logical values `true` and `false`. In addition their literal forms, booleans are returned by [equality](../operators/equality) and [relational](../operators/relational) operators, as well as many built-in functions like [`math.comparable()`](../modules/math#comparable) and [`map.has-key()`](../modules/map#has-key).
 ---
 
 <% example(autogen_css: false) do %>
@@ -24,10 +20,7 @@ introduction: >
   @debug math.comparable(100px, 3in)  // true
 <% end %>
 
-You can work with booleans using [boolean operators][]. The `and` operator
-returns `true` if *both* sides are `true`, and the `or` operator returns `true`
-if *either* side is `true`. The `not` operator returns the opposite of a single
-boolean value.
+You can work with booleans using [boolean operators][]. The `and` operator returns `true` if *both* sides are `true`, and the `or` operator returns `true` if *either* side is `true`. The `not` operator returns the opposite of a single boolean value.
 
 [boolean operators]: ../operators/boolean
 
@@ -53,15 +46,13 @@ boolean value.
 
 ## Using Booleans
 
-You can use booleans to choose whether or not to do various things in Sass. The
-[`@if` rule][] evaluates a block of styles if its argument is `true`:
+You can use booleans to choose whether or not to do various things in Sass. The [`@if` rule][] evaluates a block of styles if its argument is `true`:
 
 [`@if` rule]: ../at-rules/control/if
 
 <%= partial 'code-snippets/example-if' %>
 
-The [`if()` function][] returns one value if its argument is `true` and
-another if its argument is `false`:
+The [`if()` function][] returns one value if its argument is `true` and another if its argument is `false`:
 
 [`if()` function]: ../modules#if
 

@@ -1,9 +1,7 @@
 ---
 title: "null"
 introduction: >
-  The value `null` is the only value of its type. It represents the absence of a
-  value, and is often returned by [functions](../at-rules/function) to indicate
-  the lack of a result.
+  The value `null` is the only value of its type. It represents the absence of a value, and is often returned by [functions](../at-rules/function) to indicate the lack of a result.
 ---
 
 <% example(autogen_css: false) do %>
@@ -61,9 +59,7 @@ If a property value is `null`, that property is omitted entirely.
       family: map-get($fonts, "sans")
 <% end %>
 
-`null` is also [*falsey*][], which means it counts as `false` for any rules or
-[operators][] that take booleans. This makes it easy to use values that can be
-`null` as conditions for [`@if`][] and [`if()`][].
+`null` is also [*falsey*][], which means it counts as `false` for any rules or [operators][] that take booleans. This makes it easy to use values that can be `null` as conditions for [`@if`][] and [`if()`][].
 
 [*falsey*]: ../at-rules/control/if#truthiness-and-falsiness
 [operators]: ../operators/boolean
