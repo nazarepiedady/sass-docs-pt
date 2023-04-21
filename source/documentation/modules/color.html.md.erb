@@ -16,21 +16,11 @@ SIGNATURE
 
   Increases or decreases one or more properties of `$color` by fixed amounts.
 
-  Adds the value passed for each keyword argument to the corresponding property
-  of the color, and returns the adjusted color. It's an error to specify an RGB
-  property (`$red`, `$green`, and/or `$blue`) at the same time as an HSL
-  property (`$hue`, `$saturation`, and/or `$lightness`), or either of those at
-  the same time as an [HWB][] property (`$hue`, `$whiteness`, and/or
-  `$blackness`).
+  Adds the value passed for each keyword argument to the corresponding property of the color, and returns the adjusted color. It's an error to specify an RGB property (`$red`, `$green`, and/or `$blue`) at the same time as an HSL property (`$hue`, `$saturation`, and/or `$lightness`), or either of those at the same time as an [HWB][] property (`$hue`, `$whiteness`, and/or `$blackness`).
 
   [HWB]: https://en.wikipedia.org/wiki/HWB_color_model
 
-  All optional arguments must be numbers. The `$red`, `$green`, and `$blue`
-  arguments must be [unitless][] and between -255 and 255 (inclusive). The
-  `$hue` argument must have either the unit `deg` or no unit. The `$saturation`,
-  `$lightness`, `$whiteness`, and `$blackness` arguments must be between `-100%`
-  and `100%` (inclusive), and may not be unitless. The `$alpha` argument must be
-  unitless and between -1 and 1 (inclusive).
+  All optional arguments must be numbers. The `$red`, `$green`, and `$blue` arguments must be [unitless][] and between -255 and 255 (inclusive). The `$hue` argument must have either the unit `deg` or no unit. The `$saturation`, `$lightness`, `$whiteness`, and `$blackness` arguments must be between `-100%` and `100%` (inclusive), and may not be unitless. The `$alpha` argument must be unitless and between -1 and 1 (inclusive).
 
   [unitless]: ../values/numbers#units
 
@@ -54,9 +44,7 @@ SIGNATURE
 <% function 'adjust-hue($color, $degrees)', returns: 'color' do %>
   Increases or decreases `$color`'s hue.
 
-  The `$hue` must be a number between `-360deg` and `360deg` (inclusive) to add
-  to `$color`'s hue. It may be [unitless][] but it may not have any unit other
-  than `deg`.
+  The `$hue` must be a number between `-360deg` and `360deg` (inclusive) to add to `$color`'s hue. It may be [unitless][] but it may not have any unit other than `deg`.
 
   [unitless]: ../values/numbers#units
 
@@ -64,10 +52,7 @@ SIGNATURE
   color.
 
   <% heads_up do %>
-    Because `adjust-hue()` is redundant with [`adjust()`](#adjust), it's not
-    included directly in the new module system. Instead of
-    `adjust-hue($color, $amount)`, you can write
-    [`color.adjust($color, $hue: $amount)`](#adjust).
+    Because `adjust-hue()` is redundant with [`adjust()`](#adjust), it's not included directly in the new module system. Instead of `adjust-hue($color, $amount)`, you can write [`color.adjust($color, $hue: $amount)`](#adjust).
   <% end %>
 
   <% example(autogen_css: false) do %>
@@ -98,8 +83,7 @@ SIGNATURE
             returns: 'number' do %>
   Returns the alpha channel of `$color` as a number between 0 and 1.
 
-  As a special case, this supports the Internet Explorer syntax
-  `alpha(opacity=20)`, for which it returns an [unquoted string][].
+  As a special case, this supports the Internet Explorer syntax `alpha(opacity=20)`, for which it returns an [unquoted string][].
 
   [unquoted string]: ../values/strings#unquoted
 
@@ -191,29 +175,18 @@ SIGNATURE
 
   Sets one or more properties of a color to new values.
 
-  Uses the value passed for each keyword argument in place of the corresponding
-  property of the color, and returns the changed color. It's an error to specify
-  an RGB property (`$red`, `$green`, and/or `$blue`) at the same time as an HSL
-  property (`$hue`, `$saturation`, and/or `$lightness`), or either of those at
-  the same time as an [HWB][] property (`$hue`, `$whiteness`, and/or
-  `$blackness`).
+  Uses the value passed for each keyword argument in place of the corresponding property of the color, and returns the changed color. It's an error to specify an RGB property (`$red`, `$green`, and/or `$blue`) at the same time as an HSL property (`$hue`, `$saturation`, and/or `$lightness`), or either of those at the same time as an [HWB][] property (`$hue`, `$whiteness`, and/or `$blackness`).
 
   [HWB]: https://en.wikipedia.org/wiki/HWB_color_model
 
-  All optional arguments must be numbers. The `$red`, `$green`, and `$blue`
-  arguments must be [unitless][] and between 0 and 255 (inclusive). The `$hue`
-  argument must have either the unit `deg` or no unit. The `$saturation`,
-  `$lightness`, `$whiteness`, and `$blackness` arguments must be between `0%`
-  and `100%` (inclusive), and may not be unitless. The `$alpha` argument must be
-  unitless and between 0 and 1 (inclusive).
+  All optional arguments must be numbers. The `$red`, `$green`, and `$blue` arguments must be [unitless][] and between 0 and 255 (inclusive). The `$hue` argument must have either the unit `deg` or no unit. The `$saturation`, `$lightness`, `$whiteness`, and `$blackness` arguments must be between `0%` and `100%` (inclusive), and may not be unitless. The `$alpha` argument must be unitless and between 0 and 1 (inclusive).
 
   [unitless]: ../values/numbers#units
 
   See also:
 
   * [`color.scale()`](#scale) for fluidly scaling a color's properties.
-  * [`color.adjust()`](#adjust) for adjusting a color's properties by fixed
-    amounts.
+  * [`color.adjust()`](#adjust) for adjusting a color's properties by fixed amounts.
 
   <% example(autogen_css: false) do %>
     @debug color.change(#6b717f, $red: 100); // #64717f
@@ -261,18 +234,12 @@ SIGNATURE
 <% function 'darken($color, $amount)', returns: 'color' do %>
   Makes `$color` darker.
 
-  The `$amount` must be a number between `0%` and `100%` (inclusive). Decreases
-  the HSL lightness of `$color` by that amount.
+  The `$amount` must be a number between `0%` and `100%` (inclusive). Decreases the HSL lightness of `$color` by that amount.
 
   <% heads_up do %>
-    The `darken()` function decreases lightness by a fixed amount, which is often
-    not the desired effect. To make a color a certain percentage darker than it was
-    before, use [`color.scale()`](#scale) instead.
+    The `darken()` function decreases lightness by a fixed amount, which is often not the desired effect. To make a color a certain percentage darker than it was before, use [`color.scale()`](#scale) instead.
 
-    Because `darken()` is usually not the best way to make a color darker, it's
-    not included directly in the new module system. However, if you have to
-    preserve the existing behavior, `darken($color, $amount)` can be written
-    [`color.adjust($color, $lightness: -$amount)`](#adjust).
+    Because `darken()` is usually not the best way to make a color darker, it's not included directly in the new module system. However, if you have to preserve the existing behavior, `darken($color, $amount)` can be written [`color.adjust($color, $lightness: -$amount)`](#adjust).
 
     <% example(autogen_css: false) do %>
       // #036 has lightness 20%, so when darken() subtracts 30% it just returns black.
@@ -314,18 +281,12 @@ SIGNATURE
 <% function 'desaturate($color, $amount)', returns: 'color' do %>
   Makes `$color` less saturated.
 
-  The `$amount` must be a number between `0%` and `100%` (inclusive). Decreases
-  the HSL saturation of `$color` by that amount.
+  The `$amount` must be a number between `0%` and `100%` (inclusive). Decreases the HSL saturation of `$color` by that amount.
 
   <% heads_up do %>
-    The `desaturate()` function decreases saturation by a fixed amount, which is
-    often not the desired effect. To make a color a certain percentage less
-    saturated than it was before, use [`color.scale()`](#scale) instead.
+    The `desaturate()` function decreases saturation by a fixed amount, which is often not the desired effect. To make a color a certain percentage less saturated than it was before, use [`color.scale()`](#scale) instead.
 
-    Because `desaturate()` is usually not the best way to make a color less
-    saturated, it's not included directly in the new module system. However, if
-    you have to preserve the existing behavior, `desaturate($color, $amount)`
-    can be written [`color.adjust($color, $saturation: -$amount)`](#adjust).
+    Because `desaturate()` is usually not the best way to make a color less saturated, it's not included directly in the new module system. However, if you have to preserve the existing behavior, `desaturate($color, $amount)` can be written [`color.adjust($color, $saturation: -$amount)`](#adjust).
 
     <% example(autogen_css: false) do %>
       // #d2e1dd has saturation 20%, so when desaturate() subtracts 30% it just
@@ -442,24 +403,16 @@ SIGNATURE
             'color.hwb($hue, $whiteness, $blackness, $alpha: 1)', returns: 'color' do %>
   <% impl_status dart: '1.28.0', libsass: false, ruby: false %>
 
-  Returns a color with the given [hue, whiteness, and blackness][] and the given
-  alpha channel.
+  Returns a color with the given [hue, whiteness, and blackness][] and the given alpha channel.
 
   [hue, whiteness, and blackness]: https://en.wikipedia.org/wiki/HWB_color_model
 
-  The hue is a number between `0deg` and `360deg` (inclusive). The whiteness and
-  blackness are numbers between `0%` and `100%` (inclusive). The hue may be
-  [unitless][], but the whiteness and blackness must have unit `%`. The alpha
-  channel can be specified as either a unitless number between 0 and 1
-  (inclusive), or a percentage between `0%` and `100%` (inclusive).
+  The hue is a number between `0deg` and `360deg` (inclusive). The whiteness and blackness are numbers between `0%` and `100%` (inclusive). The hue may be [unitless][], but the whiteness and blackness must have unit `%`. The alpha channel can be specified as either a unitless number between 0 and 1 (inclusive), or a percentage between `0%` and `100%` (inclusive).
 
   [unitless]: ../values/numbers#units
-  
+
   <% heads_up do %>
-    Sass's [special parsing rules][] for slash-separated values make it
-    difficult to pass variables for `$blackness` or `$alpha` when using the
-    `color.hwb($hue $whiteness $blackness / $alpha)` signature. Consider using
-    `color.hwb($hue, $whiteness, $blackness, $alpha)` instead.
+    Sass's [special parsing rules][] for slash-separated values make it difficult to pass variables for `$blackness` or `$alpha` when using the `color.hwb($hue $whiteness $blackness / $alpha)` signature. Consider using `color.hwb($hue, $whiteness, $blackness, $alpha)` instead.
 
     [special parsing rules]: ../operators/numeric#slash-separated-values
   <% end %>
@@ -479,8 +432,7 @@ SIGNATURE
 <% function 'color.ie-hex-str($color)',
             'ie-hex-str($color)',
             returns: 'unquoted string' do %>
-  Returns an unquoted string that represents `$color` in the `#AARRGGBB` format
-  expected by Internet Explorer's [`-ms-filter`][] property.
+  Returns an unquoted string that represents `$color` in the `#AARRGGBB` format expected by Internet Explorer's [`-ms-filter`][] property.
 
   [`-ms-filter`]: https://developer.mozilla.org/en-US/docs/Web/CSS/-ms-filter
 
@@ -503,9 +455,7 @@ SIGNATURE
 
   [negative]: https://en.wikipedia.org/wiki/Negative_(photography)
 
-  The `$weight` must be a number between `0%` and `100%` (inclusive). A higher
-  weight means the result will be closer to the negative, and a lower weight means
-  it will be closer to `$color`. Weight `50%` will always produce `#808080`.
+  The `$weight` must be a number between `0%` and `100%` (inclusive). A higher weight means the result will be closer to the negative, and a lower weight means it will be closer to `$color`. Weight `50%` will always produce `#808080`.
 
   <% example(autogen_css: false) do %>
     @debug color.invert(#b37399); // #4c8c66
@@ -522,18 +472,12 @@ SIGNATURE
 <% function 'lighten($color, $amount)', returns: 'color' do %>
   Makes `$color` lighter.
 
-  The `$amount` must be a number between `0%` and `100%` (inclusive). Increases
-  the HSL lightness of `$color` by that amount.
+  The `$amount` must be a number between `0%` and `100%` (inclusive). Increases the HSL lightness of `$color` by that amount.
 
   <% heads_up do %>
-    The `lighten()` function increases lightness by a fixed amount, which is often
-    not the desired effect. To make a color a certain percentage lighter than it was
-    before, use [`scale()`](#scale) instead.
+    The `lighten()` function increases lightness by a fixed amount, which is often not the desired effect. To make a color a certain percentage lighter than it was before, use [`scale()`](#scale) instead.
 
-    Because `lighten()` is usually not the best way to make a color lighter,
-    it's not included directly in the new module system. However, if you have to
-    preserve the existing behavior, `lighten($color, $amount)` can be written
-    [`adjust($color, $lightness: $amount)`](#adjust).
+    Because `lighten()` is usually not the best way to make a color lighter, it's not included directly in the new module system. However, if you have to preserve the existing behavior, `lighten($color, $amount)` can be written [`adjust($color, $lightness: $amount)`](#adjust).
 
     <% example(autogen_css: false) do %>
       // #e1d7d2 has lightness 85%, so when lighten() adds 30% it just returns white.
@@ -605,10 +549,7 @@ SIGNATURE
             returns: 'color' do %>
   Returns a color that's a mixture of `$color1` and `$color2`.
 
-  Both the `$weight` and the relative opacity of each color determines how much of
-  each color is in the result. The `$weight` must be a number between `0%` and
-  `100%` (inclusive). A larger weight indicates that more of `$color1` should be
-  used, and a smaller weight indicates that more of `$color2` should be used.
+  Both the `$weight` and the relative opacity of each color determines how much of each color is in the result. The `$weight` must be a number between `0%` and `100%` (inclusive). A larger weight indicates that more of `$color1` should be used, and a smaller weight indicates that more of `$color2` should be used.
 
   <% example(autogen_css: false) do %>
     @debug color.mix(#036, #d2e1dd); // #698aa2
@@ -627,18 +568,12 @@ SIGNATURE
 <% function 'opacify($color, $amount)', 'fade-in($color, $amount)', returns: 'color' do %>
   Makes `$color` more opaque.
 
-  The `$amount` must be a number between `0` and `1` (inclusive). Increases the
-  alpha channel of `$color` by that amount.
+  The `$amount` must be a number between `0` and `1` (inclusive). Increases the alpha channel of `$color` by that amount.
 
   <% heads_up do %>
-    The `opacify()` function increases the alpha channel by a fixed amount, which is often
-    not the desired effect. To make a color a certain percentage more opaque than it was
-    before, use [`scale()`](#scale) instead.
+    The `opacify()` function increases the alpha channel by a fixed amount, which is often not the desired effect. To make a color a certain percentage more opaque than it was before, use [`scale()`](#scale) instead.
 
-    Because `opacify()` is usually not the best way to make a color more opaque,
-    it's not included directly in the new module system. However, if you have to
-    preserve the existing behavior, `opacify($color, $amount)` can be written
-    [`adjust($color, $alpha: -$amount)`](#adjust).
+    Because `opacify()` is usually not the best way to make a color more opaque, it's not included directly in the new module system. However, if you have to preserve the existing behavior, `opacify($color, $amount)` can be written [`adjust($color, $alpha: -$amount)`](#adjust).
 
     <% example(autogen_css: false) do %>
       // rgba(#036, 0.7) has alpha 0.7, so when opacify() adds 0.3 it returns a fully
@@ -698,18 +633,12 @@ SIGNATURE
 <% function 'saturate($color, $amount)', 'saturate($color, $amount)', returns: 'color' do %>
   Makes `$color` more saturated.
 
-  The `$amount` must be a number between `0%` and `100%` (inclusive). Increases
-  the HSL saturation of `$color` by that amount.
+  The `$amount` must be a number between `0%` and `100%` (inclusive). Increases the HSL saturation of `$color` by that amount.
 
   <% heads_up do %>
-    The `saturate()` function increases saturation by a fixed amount, which is often
-    not the desired effect. To make a color a certain percentage more saturated than
-    it was before, use [`scale()`](#scale) instead.
+    The `saturate()` function increases saturation by a fixed amount, which is often not the desired effect. To make a color a certain percentage more saturated than it was before, use [`scale()`](#scale) instead.
 
-    Because `saturate()` is usually not the best way to make a color more
-    saturated, it's not included directly in the new module system. However, if
-    you have to preserve the existing behavior, `saturate($color, $amount)` can
-    be written [`adjust($color, $saturation: $amount)`](#adjust).
+    Because `saturate()` is usually not the best way to make a color more saturated, it's not included directly in the new module system. However, if you have to preserve the existing behavior, `saturate($color, $amount)` can be written [`adjust($color, $saturation: $amount)`](#adjust).
 
     <% example(autogen_css: false) do %>
       // #0e4982 has saturation 80%, so when saturate() adds 30% it just becomes
@@ -788,26 +717,17 @@ SIGNATURE
 %>
   <% impl_status dart: '1.28.0', libsass: false, ruby: false, feature: "$whiteness and $blackness" %>
 
-Fluidly scales one or more properties of `$color`.
+  Fluidly scales one or more properties of `$color`.
 
-  Each keyword argument must be a number between `-100%` and `100%` (inclusive).
-  This indicates how far the corresponding property should be moved from its
-  original position towards the maximum (if the argument is positive) or the
-  minimum (if the argument is negative). This means that, for example,
-  `$lightness: 50%` will make all colors `50%` closer to maximum lightness
-  without making them fully white.
+  Each keyword argument must be a number between `-100%` and `100%` (inclusive). This indicates how far the corresponding property should be moved from its original position towards the maximum (if the argument is positive) or the minimum (if the argument is negative). This means that, for example, `$lightness: 50%` will make all colors `50%` closer to maximum lightness without making them fully white.
 
-  It's an error to specify an RGB property (`$red`, `$green`, and/or `$blue`) at
-  the same time as an HSL property (`$saturation`, and/or `$lightness`), or
-  either of those at the same time as an [HWB][] property (`$whiteness`, and/or
-  `$blackness`).
+  It's an error to specify an RGB property (`$red`, `$green`, and/or `$blue`) at the same time as an HSL property (`$saturation`, and/or `$lightness`), or either of those at the same time as an [HWB][] property (`$whiteness`, and/or `$blackness`).
 
   [HWB]: https://en.wikipedia.org/wiki/HWB_color_model
 
   See also:
 
-  * [`color.adjust()`](#adjust) for changing a color's properties by fixed
-    amounts.
+  * [`color.adjust()`](#adjust) for changing a color's properties by fixed amounts.
   * [`color.change()`](#change) for setting a color's properties.
 
   <% example(autogen_css: false) do %>
@@ -825,19 +745,12 @@ Fluidly scales one or more properties of `$color`.
 <% function 'transparentize($color, $amount)', 'fade-out($color, $amount)', returns: 'color' do %>
   Makes `$color` more transparent.
 
-  The `$amount` must be a number between `0` and `1` (inclusive). Decreases the
-  alpha channel of `$color` by that amount.
+  The `$amount` must be a number between `0` and `1` (inclusive). Decreases the alpha channel of `$color` by that amount.
 
   <% heads_up do %>
-    The `transparentize()` function decreases the alpha channel by a fixed amount,
-    which is often not the desired effect. To make a color a certain percentage more
-    transparent than it was before, use [`color.scale()`](#scale) instead.
+    The `transparentize()` function decreases the alpha channel by a fixed amount,  which is often not the desired effect. To make a color a certain percentage more  transparent than it was before, use [`color.scale()`](#scale) instead.
 
-    Because `transparentize()` is usually not the best way to make a color more
-    transparent, it's not included directly in the new module system. However,
-    if you have to preserve the existing behavior,
-    `transparentize($color, $amount)` can be written
-    [`color.adjust($color, $alpha: -$amount)`](#adjust).
+    Because `transparentize()` is usually not the best way to make a color more transparent, it's not included directly in the new module system. However, if you have to preserve the existing behavior, `transparentize($color, $amount)` can be written [`color.adjust($color, $alpha: -$amount)`](#adjust).
 
     <% example(autogen_css: false) do %>
       // rgba(#036, 0.3) has alpha 0.3, so when transparentize() subtracts 0.3 it

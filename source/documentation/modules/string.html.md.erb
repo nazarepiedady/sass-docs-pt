@@ -20,8 +20,7 @@ title: sass:string
 <% function 'string.index($string, $substring)',
             'str-index($string, $substring)',
             returns: 'number' do %>
-  Returns the first [index][] of `$substring` in `$string`, or `null` if
-  `$string` doesn't contain `$substring`.
+  Returns the first [index][] of `$substring` in `$string`, or `null` if `$string` doesn't contain `$substring`.
 
   [index]: ../values/strings#string-indexes
 
@@ -50,9 +49,7 @@ title: sass:string
     @debug string.insert("Roboto Bold", " Mono", -6)  // "Roboto Mono Bold"
   <% end %>
 
-  If `$index` is higher than the length of `$string`, `$insert` is added to
-  the end. If `$index` is smaller than the negative length of the string,
-  `$insert` is added to the beginning.
+  If `$index` is higher than the length of `$string`, `$insert` is added to the end. If `$index` is smaller than the negative length of the string, `$insert` is added to the beginning.
 
   <% example(autogen_css: false) do %>
     @debug string.insert("Roboto", " Bold", 100); // "Roboto Bold"
@@ -84,8 +81,7 @@ title: sass:string
 <% function 'string.slice($string, $start-at, $end-at: -1)',
             'str-slice($string, $start-at, $end-at: -1)',
             returns: 'string' do %>
-  Returns the slice of `$string` starting at [index][] `$start-at` and ending at
-  index `$end-at` (both inclusive).
+  Returns the slice of `$string` starting at [index][] `$start-at` and ending at index `$end-at` (both inclusive).
 
   [index]: ../values/strings#string-indexes
 
@@ -105,13 +101,9 @@ title: sass:string
             returns: 'list' do %>
   <% impl_status dart: '1.57.0', libsass: false, ruby: false %>
 
-  Returns a bracketed, comma-separated list of substrings of `$string` that are
-  separated by `$separator`. The `$separator`s aren't included in these
-  substrings.
+  Returns a bracketed, comma-separated list of substrings of `$string` that are separated by `$separator`. The `$separator`s aren't included in these substrings.
 
-  If `$limit` is a number `1` or higher, this splits on at most that many
-  `$separator`s (and so returns at most `$limit + 1` strings). The last
-  substring contains the rest of the string, including any remaining
+  If `$limit` is a number `1` or higher, this splits on at most that many `$separator`s (and so returns at most `$limit + 1` strings). The last substring contains the rest of the string, including any remaining
   `$separator`s.
 
   <% example(autogen_css: false) do %>
@@ -159,8 +151,7 @@ title: sass:string
 
 
 <% function 'string.unique-id()', 'unique-id()', returns: 'string' do %>
-  Returns a randomly-generated unquoted string that's guaranteed to be a valid
-  CSS identifier and to be unique within the current Sass compilation.
+  Returns a randomly-generated unquoted string that's guaranteed to be a valid CSS identifier and to be unique within the current Sass compilation.
 
   <% example(autogen_css: false) do %>
     @debug string.unique-id(); // uabtrnzug
@@ -175,8 +166,7 @@ title: sass:string
 <% function 'string.unquote($string)',
             'unquote($string)',
             returns: 'string' do %>
-  Returns `$string` as an unquoted string. This can produce strings that aren't
-  valid CSS, so use with caution.
+  Returns `$string` as an unquoted string. This can produce strings that aren't valid CSS, so use with caution.
 
   <% example(autogen_css: false) do %>
     @debug string.unquote("Helvetica"); // Helvetica
