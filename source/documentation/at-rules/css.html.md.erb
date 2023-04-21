@@ -4,18 +4,12 @@ table_of_contents: true
 ---
 
 <% impl_status dart: '1.15.0', libsass: false, ruby: false, feature: "Name Interpolation" do %>
-  LibSass, Ruby Sass, and older versions of Dart Sass don't support
-  [interpolation][] in at-rule names. They do support interpolation in values.
+  LibSass, Ruby Sass, and older versions of Dart Sass don't support [interpolation][] in at-rule names. They do support interpolation in values.
 
   [interpolation]: ../interpolation
 <% end %>
 
-Sass supports all the at-rules that are part of CSS proper. To stay flexible and
-forwards-compatible with future versions of CSS, Sass has general support that
-covers almost all at-rules by default. A CSS at-rule is written
-`@<name> <value>`, `@<name> { ... }`, or `@<name> <value> { ... }`. The name
-must be an identifier, and the value (if one exists) can be pretty much
-anything. Both the name and the value can contain [interpolation][].
+Sass supports all the at-rules that are part of CSS proper. To stay flexible and forwards-compatible with future versions of CSS, Sass has general support that covers almost all at-rules by default. A CSS at-rule is written `@<name> <value>`, `@<name> { ... }`, or `@<name> <value> { ... }`. The name must be an identifier, and the value (if one exists) can be pretty much anything. Both the name and the value can contain [interpolation][].
 
 [interpolation]: ../interpolation
 
@@ -43,10 +37,7 @@ anything. Both the name and the value can contain [interpolation][].
     symbols: "\1F44D"
 <% end %>
 
-If a CSS at-rule is nested within a style rule, the two automatically swap
-positions so that the at-rule is at the top level of the CSS output and the
-style rule is within it. This makes it easy to add conditional styling without
-having to rewrite the style rule's selector.
+If a CSS at-rule is nested within a style rule, the two automatically swap positions so that the at-rule is at the top level of the CSS output and the style rule is within it. This makes it easy to add conditional styling without having to rewrite the style rule's selector.
 
 <% example do %>
   .print-only {
@@ -65,9 +56,7 @@ having to rewrite the style rule's selector.
 ## `@media`
 
 <% impl_status dart: '1.11.0', libsass: false, ruby: '3.7.0', feature: 'Range Syntax' do %>
-  LibSass and older versions of Dart Sass and Ruby Sass don't support media
-  queries with features written in a [range context][]. They do support other
-  standard media queries.
+  LibSass and older versions of Dart Sass and Ruby Sass don't support media queries with features written in a [range context][]. They do support other standard media queries.
 
   [range context]: https://www.w3.org/TR/mediaqueries-4/#mq-range-context
 
@@ -90,9 +79,7 @@ having to rewrite the style rule's selector.
   <% end %>
 <% end %>
 
-The [`@media` rule][] does all of the above and more. In addition to allowing
-interpolation, it allows [SassScript expressions][] to be used directly in the
-[feature queries][].
+The [`@media` rule][] does all of the above and more. In addition to allowing interpolation, it allows [SassScript expressions][] to be used directly in the [feature queries][].
 
 [`@media` rule]: https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries
 [SassScript expressions]: ../syntax/structure#expressions
@@ -114,9 +101,7 @@ interpolation, it allows [SassScript expressions][] to be used directly in the
       display: none
 <% end %>
 
-When possible, Sass will also merge media queries that are nested within one
-another to make it easier to support browsers that don't yet natively support
-nested `@media` rules.
+When possible, Sass will also merge media queries that are nested within one another to make it easier to support browsers that don't yet natively support nested `@media` rules.
 
 <% example do %>
   @media (hover: hover) {
@@ -139,8 +124,7 @@ nested `@media` rules.
 
 ## `@supports`
 
-The [`@supports` rule][] also allows [SassScript expressions][] to be used in
-the declaration queries.
+The [`@supports` rule][] also allows [SassScript expressions][] to be used in the declaration queries.
 
 [`@supports` rule]: https://developer.mozilla.org/en-US/docs/Web/CSS/@supports
 
@@ -169,9 +153,7 @@ the declaration queries.
 
 ## `@keyframes`
 
-The [`@keyframes` rule][] works just like a general at-rule, except that its
-child rules must be valid keyframe rules (`<number>%`, `from`, or `to`) rather
-than normal selectors.
+The [`@keyframes` rule][] works just like a general at-rule, except that its child rules must be valid keyframe rules (`<number>%`, `from`, or `to`) rather than normal selectors.
 
 [`@keyframes` rule]: https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
 

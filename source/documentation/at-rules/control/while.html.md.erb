@@ -1,10 +1,7 @@
 ---
 title: "@while"
 introduction: >
-  The `@while` rule, written `@while <expression> { ... }`, evaluates its block
-  if its [expression](../../syntax/structure#expressions) returns `true`. Then,
-  if its expression still returns `true`, it evaluates its block again. This
-  continues until the expression finally returns `false`.
+  The `@while` rule, written `@while <expression> { ... }`, evaluates its block if its [expression](../../syntax/structure#expressions) returns `true`. Then, if its expression still returns `true`, it evaluates its block again. This continues until the expression finally returns `false`.
 ---
 
 <% example do %>
@@ -43,9 +40,7 @@ introduction: >
 <% end %>
 
 <% heads_up do %>
-  Although `@while` is necessary for a few particularly complex stylesheets, you're
-  usually better of using either [`@each`][] or [`@for`][] if either of them will
-  work. They're clearer for the reader, and often faster to compile as well.
+  Although `@while` is necessary for a few particularly complex stylesheets, you're usually better of using either [`@each`][] or [`@for`][] if either of them will work. They're clearer for the reader, and often faster to compile as well.
 
   [`@each`]: each
   [`@for`]: for
