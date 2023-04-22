@@ -1,6 +1,6 @@
-## Units
+## Unidades
 
-Sass has powerful support for manipulating units based on how [real-world unit calculations][] work. When two numbers are multiplied, their units are multiplied as well. When one number is divided by another, the result takes its numerator units from the first number and its denominator units from the second. A number can have any number of units in the numerator and/or denominator.
+A Sass tem poderoso suporte para manipulação de unidades baseada em como os [cálculos de unidade do mundo real][real-world unit calculations] funcionam. Quando dois números forem multiplicados, suas unidades também são multiplicadas. Quando um número é dividido por um outro, o resultado recebe as unidades do seu numerador do primeiro número e as unidades do seu denominador do segundo número. Um número pode ter qualquer número de unidades no numerador e/ou no denominador.
 
 [real-world unit calculations]: https://en.wikipedia.org/wiki/Unit_of_measurement#Calculations_with_units_of_measurement
 
@@ -27,24 +27,24 @@ Sass has powerful support for manipulating units based on how [real-world unit c
 <% end %>
 
 <% heads_up do %>
-  Because CSS doesn't support complex units like square pixels, using a number with complex units as a [property value][] will produce an error. This is a feature in disguise, though; if you aren't ending up with the right unit, it usually means that something's wrong with your calculations! And remember, you can always use the [`@debug` rule][] to check out the units of any variable or [expression][].
+  Uma vez que a CSS não suporta unidades complexas como pixeis quadrado, usar um número com unidades complexas como um [valor de propriedade][property value] produzirá um erro. Mesmo assim isto é uma funcionalidade disfarçada; se não estiveres acabar com a unidade correta, normalmente significa que existe algo de errado com os teus cálculos! E lembra-te de que, podes sempre usar a [regra `@debug`][`@debug` rule] para confirmares as unidades de qualquer variável ou [expressão][expression].
 
   [property value]: /documentation/style-rules/declarations
   [`@debug` rule]: /documentation/at-rules/debug
   [expression]: /documentation/syntax/structure#expressions
 <% end %>
 
-Sass will automatically convert between compatible units, although which unit it will choose for the result depends on which implementation of Sass you're using.If you try to combine incompatible units, like `1in + 1em`, Sass will throw an error.
+A Sass converterá automaticamente entre unidades compatíveis, ainda que a unidade que escolherá para o resultado dependa de qual implementação de Sass estás a usar. Se experimentares combinar unidades incompatíveis, como `1in + 1em`, a Sass lançará um erro.
 
 <% example(autogen_css: false) do %>
-  // CSS defines one inch as 96 pixels.
+  // A CSS uma polegada como 96 pixeis.
   @debug 1in + 6px; // 102px or 1.0625in
 
   @debug 1in + 1s;
   //     ^^^^^^^^
   // Error: Incompatible units s and in.
   ===
-  // CSS defines one inch as 96 pixels.
+  // A CSS uma polegada como 96 pixeis.
   @debug 1in + 6px  // 102px or 1.0625in
 
   @debug 1in + 1s
@@ -52,7 +52,7 @@ Sass will automatically convert between compatible units, although which unit it
   // Error: Incompatible units s and in.
 <% end %>
 
-As in real-world unit calculations, if the numerator contains units that are compatible with units in the denominator (like `math.div(96px, 1in)`), they'll cancel out. This makes it easy to define a ratio that you can use for converting between units. In the example below, we set the desired speed to one second per 50 pixels, and then multiply that by the number of pixels the transition covers to get the time it should take.
+De acordo com os cálculos de unidade no mundo real, ase o numerador contém unidades que são compatíveis com as unidades no denominador (como `math.dv(96px, 1in)`), anular-se-ão. Isto torna fácil definir uma proporção que podes usar ou converter entre unidades. No exemplo abaixo, definimos a velocidade desejada para um segundo por 50 pixeis, e depois multiplicamos este pelo número de pixeis que a transição ocupa para receber o tempo deveria levar.
 
 <%# TODO(nweiz): auto-generate this CSS once we're compiling with Dart Sass %>
 
@@ -99,9 +99,9 @@ As in real-world unit calculations, if the numerator contains units that are com
 <% end %>
 
 <% heads_up do %>
-  If your arithmetic gives you the wrong unit, you probably need to check your math. You may be leaving off units for a quantity that should have them! Staying unit-clean allows Sass to give you helpful errors when something isn't right.
+  Se a tua aritmética dá-te a unidade errada, provavelmente precisarás de verificar a tua matemática. Tu podes estar a deixar de usar as unidades para uma quantidade que deveria té-las! Ser claro quanto a unidade permite a Sass dar-te erros úteis quando algo não estiver correto.
 
-  You should especially avoid using interpolation like `#{$number}px`. This doesn't actually create a number! It creates an [unquoted string][] that *looks* like a number, but won't work with any [number operations][] or [functions][]. Try to make your math unit-clean so that `$number` already has the unit `px`, or write `$number * 1px`.
+  Tu deverias de maneira especial evitar usar interpolação como `#{$number}px`. Isto na verdade não cria um número! Isto cria uma [sequência de caracteres não citada ou que não é envolvida por aspas][unquoted string] que se *parece* como um número, mas não funcionará com quaisquer [operações de número][number operations] ou [funções][functions]. Tente tornar a tua matemática clara quanto a unidade para que `$number` já tenha a unidade `px`, ou escreva `$number * 1px`.
 
   [unquoted string]: /documentation/values/strings#unquoted
   [number operations]: /documentation/operators/numeric
@@ -109,9 +109,9 @@ As in real-world unit calculations, if the numerator contains units that are com
 <% end %>
 
 <% heads_up do %>
-  Percentages in Sass work just like every other unit. They are *not* interchangeable with decimals, because in CSS decimals and percentages mean different things. For example, `50%` is a number with `%` as its unit, and Sass considers it different than the number `0.5`.
+  As percentagens na Sass funcionam tal como toda outra unidade. Elas *não* são permutáveis com decimais, porque nos decimais e percentagens de CSS significam coisas diferentes. Por exemplo, `50%` é um número com `%` como sua unidade, e a Sass o considera diferente do número `0.5`.
 
-  You can convert between decimals and percentages using unit arithmetic. `math.div($percentage, 100%)` will return the corresponding decimal, and `$decimal * 100%` will return the corresponding percentage. You can also use the [`math.percentage()` function][] as a more explicit way of writing `$decimal * 100%`.
+  Tu podes converter entre decimais e percentagens usando a aritmética de unidade. `math.div($percentage, 100%)` retornará o decimal correspondente, e `$decimal * 100%` retornará a percentagem correspondente. Tu podes também usar a [função `math.percentage()`][`math.percentage()` function] como uma maneira mais explícita de escrever `$decimal * 100%`.
 
   [`math.percentage()` function]: /documentation/modules/math#percentage
 <% end %>
