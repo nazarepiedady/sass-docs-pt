@@ -1,11 +1,10 @@
 ---
-title: Style Guide
+title: Guia de Estilo
 introduction: >
-  Contributing to this website? Awesome! Use this style guide, developed by
-  Team Sass Design. If you add new design, please document it here.
+  Contribuindo para esta documentação? Fenomenal! Use este guia de estilo, desenvolvido pela Equipa de Desenho da Sass. Se adicionares novo desenho, faça a gentiliza de o documentar aqui.
 ---
 
-### Site Objectives
+### Objetivos da Página
 
-1. Show why Sass is the best CSS Preprocessor, and why you should use it.
-2. Be a resource for those who are already using Sass, at whatever level.
+1. Mostrar o porquê a Sass é o melhor pré-processador de CSS, e o porquê deverias usá-la.
+2. Ser um recurso para aqueles que já estão a usar a Sass, em seja qual for o nível.
