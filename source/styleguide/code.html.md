@@ -1,8 +1,7 @@
 ---
 title: Code Style Guide
 introduction: >
-  If you would like to contribute to this website's code, please adhere to the
-  following code style guidelines.
+  If you would like to contribute to this website's code, please adhere to the following code style guidelines.
 ---
 
 - Please try to keep lines at a maximum of 80 characters.
@@ -12,8 +11,7 @@ introduction: >
 
 ## Markup
 
-For the most part, we use [Haml][] and [Markdown][] for writing markup. If you
-need to use regular HTML anywhere, write HTML5, but favor a strict XHTML style:
+For the most part, we use [Haml][] and [Markdown][] for writing markup. If you need to use regular HTML anywhere, write HTML5, but favor a strict XHTML style:
 
 - Use well-formed markup; elements are nested properly and do not overlap.
 - Write elements and attributes in lowercase.
@@ -23,16 +21,12 @@ need to use regular HTML anywhere, write HTML5, but favor a strict XHTML style:
 
 ## Style
 
-This website uses Sass in the SCSS syntax. Make sure you're using the classes
-that we have to offer before rewriting something, unless you can justify
-otherwise.
+This website uses Sass in the SCSS syntax. Make sure you're using the classes that we have to offer before rewriting something, unless you can justify otherwise.
 
 - Use the style [Brad Frost writes about][bf] for clarity:
-  - Note that older classes do not use this style yet, but we will refactor over
-    time.
+  - Note that older classes do not use this style yet, but we will refactor over time.
   - Use a `sl-` global namespace.
-  - Use the class prefixes [Harry Roberts][hr] advocates, though we are using a
-    much simpler set:
+  - Use the class prefixes [Harry Roberts][hr] advocates, though we are using a much simpler set:
     - `c-` is for **components**. Example: `sl-c-card`.
     - `l-` is for **layouts**. Example: `sl-l-grid`.
     - `is-` and `has-` for states. Example: `sl-is-active`.
@@ -45,13 +39,8 @@ otherwise.
     `sl-c-card--primary`. It can also be put on an element Example:
     `sl-c-card__header--large`.
 - Keep classes as flat as possible, and avoid nesting too deep.
-- Avoid using element selectors __unless__ you're using a wrapper utility to
-  target everything inside (such as a class around a block of markdown or other
-  longform text to style all its elements properly). This is specifically for
-  when it doesn't make sense to use classes. Be mindful when do this. We can
-  give you feedback in a code review for instances like this.
-- For naming of variables, mixins, placeholder selectors, or classes, use the
-  general-to-specific approach. See [this article][gts] for more details.
+- Avoid using element selectors __unless__ you're using a wrapper utility to target everything inside (such as a class around a block of markdown or other long form text to style all its elements properly). This is specifically for when it doesn't make sense to use classes. Be mindful when do this. We can give you feedback in a code review for instances like this.
+- For naming of variables, mixins, placeholder selectors, or classes, use the general-to-specific approach. See [this article][gts] for more details.
 - Write comma-delimited selectors on separate lines.
 
 [haml]:     http://haml.info/
