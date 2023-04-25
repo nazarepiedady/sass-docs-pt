@@ -2,11 +2,7 @@
 title: Dart Sass
 no_container: true
 introduction: >
-  Dart Sass is the primary implementation of Sass, which means it gets new
-  features before any other implementation. It's fast, easy to install, and it
-  compiles to pure JavaScript which makes it easy to integrate into modern web
-  development workflows. Find out more or help out with its development on
-  [GitHub](https://github.com/sass/dart-sass).
+  Dart Sass is the primary implementation of Sass, which means it gets new features before any other implementation. It's fast, easy to install, and it compiles to pure JavaScript which makes it easy to integrate into modern web development workflows. Find out more or help out with its development on [GitHub](https://github.com/sass/dart-sass).
 ---
 
 .sl-l-grid.sl-l-grid--full.sl-l-large-grid--fit.sl-l-large-grid--gutters-large
@@ -14,26 +10,19 @@ introduction: >
     :markdown
       ## Command Line
 
-      Dart Sass's stand-alone command-line executable uses the blazing-fast Dart
-      VM to compile your stylesheets. To install Dart Sass on the command line,
-      check out the #{link_to "installation instructions", "/install"}. Once
-      you've got it running, you can use it compile files:
+      Dart Sass's stand-alone command-line executable uses the blazing-fast Dart VM to compile your stylesheets. To install Dart Sass on the command line, check out the #{link_to "installation instructions", "/install"}. Once you've got it running, you can use it compile files:
 
       ```sh
       sass source/index.scss css/index.css
       ```
 
-      See `sass --help` for additional information on the command-line
-      interface.
+      See `sass --help` for additional information on the command-line interface.
 
       ### Dart Library
 
-      You can also use Dart Sass as a Dart library to get the speed of the Dart
-      VM plus the ability to define your own functions and importers. To add it
-      to an existing project:
+      You can also use Dart Sass as a Dart library to get the speed of the Dart VM plus the ability to define your own functions and importers. To add it to an existing project:
 
-      1. [Install the Dart SDK][install]. Make sure its `bin` directory is [on
-         your `PATH`][path].
+      1. [Install the Dart SDK][install]. Make sure its `bin` directory is [on your `PATH`][path].
 
          [install]: https://www.dartlang.org/install#automated-installation-and-updates
          [path]:    https://katiek2.github.io/path-doc/
@@ -76,12 +65,7 @@ introduction: >
     :markdown
       ## JavaScript Library
 
-      Dart Sass is also distributed as the pure JavaScript [`sass`
-      package](https://npmjs.com/package/sass) on npm. The pure JS version is
-      slower than the stand-alone executable, but it's easy to integrate into
-      existing workflows and it allows you to define custom functions and
-      importers in JavaScript. You can add it to your project using
-      `npm install --save-dev sass` and `require()` it as a library:
+      Dart Sass is also distributed as the pure JavaScript [`sass` package](https://npmjs.com/package/sass) on npm. The pure JS version is slower than the stand-alone executable, but it's easy to integrate into existing workflows and it allows you to define custom functions and importers in JavaScript. You can add it to your project using `npm install --save-dev sass` and `require()` it as a library:
 
       ```js
       var sass = require('sass');
@@ -99,16 +83,9 @@ introduction: >
       });
       ```
 
-      When installed via npm, Dart Sass supports a JavaScript API that aims to
-      be compatible with [Node Sass](https://github.com/sass/node-sass#usage).
-      Full compatibility is a work in progress, but Dart Sass currently supports
-      the `render()` and `renderSync()` functions. Note however that by default,
-      **`renderSync()` is more than twice as fast as `render()`**, due to the
-      overhead of asynchronous callbacks.
+      When installed via npm, Dart Sass supports a JavaScript API that aims to be compatible with [Node Sass](https://github.com/sass/node-sass#usage). Full compatibility is a work in progress, but Dart Sass currently supports the `render()` and `renderSync()` functions. Note however that by default, **`renderSync()` is more than twice as fast as `render()`**, due to the overhead of asynchronous callbacks.
 
-      To avoid this performance hit, `render()` can use the [`fibers`][fibers]
-      package to call asynchronous importers from the synchronous code path. To
-      enable this, pass the `Fiber` class to the `fiber` option:
+      To avoid this performance hit, `render()` can use the [`fibers`][fibers] package to call asynchronous importers from the synchronous code path. To enable this, pass the `Fiber` class to the `fiber` option:
 
       [fibers]: https://www.npmjs.com/package/fibers
 
@@ -127,7 +104,6 @@ introduction: >
       });
       ```
 
-      See [Dart Sass's documentation][js api] for more information about its
-      JavaScript API.
+      See [Dart Sass's documentation][js api] for more information about its JavaScript API.
 
       [js api]: https://github.com/sass/dart-sass/blob/master/README.md#javascript-api
