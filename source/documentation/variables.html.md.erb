@@ -1,11 +1,11 @@
 ---
-title: Variables
+title: Variáveis
 table_of_contents: true
 introduction: >
-  Sass variables are simple: you assign a value to a name that begins with `$`, and then you can refer to that name instead of the value itself. But despite their simplicity, they're one of the most useful tools Sass brings to the table. Variables make it possible to reduce repetition, do complex math, configure libraries, and much more.
+  As variáveis da Sass são simples: atribuis um valor à um nome que começa com `$`, e depois podes fazer referência àquele nome ao lugar do próprio valor. Mas apesar da sua simplicidade, são uma das ferramentas mais úteis que a Sass trás para a mesa. As variáveis tornam possível reduzir a repetição, fazer cálculos complexos, configurar bibliotecas, e muito mais.
 ---
 
-A variable declaration looks a lot like a [property declaration][]: it's written `<variable>: <expression>`. Unlike a property, which can only be declared in a style rule or at-rule, variables can be declared anywhere you want. To use a variable, just include it in a value.
+Uma declaração de variável parece-se muito com uma [declaração de propriedade][property declaration]: é escrita `<variable>: <expression>`. Diferente duma propriedade, a qual pode apenas ser declarada numa regra de estilo ou regra que usa arroba, as variáveis podem ser declaradas em qualquer parte que quiseres. Para usares uma variável, apenas inclua-a num valor:
 
 [property declaration]: style-rules/declarations
 
@@ -25,15 +25,15 @@ A variable declaration looks a lot like a [property declaration][]: it's written
 <% end %>
 
 <% heads_up do %>
-  CSS has [variables of its own][], which are totally different than Sass variables. Know the differences!
+  A CSS tem [suas próprias variáveis][variables of its own], as quais são totalmente diferentes das variáveis de Sass. Conheça as diferenças!
 
   [variables of its own]: style-rules/declarations#custom-properties
 
-  * Sass variables are all compiled away by Sass. CSS variables are included in the CSS output.
+  * As variáveis de Sass são compiladas pela Sass. As variáveis de CSS são incluídas na saída de CSS.
 
-  * CSS variables can have different values for different elements, but Sass variables only have one value at a time.
+  * As variáveis de CSS podem ter valores diferentes para elementos diferentes, mas as variáveis de Sass apenas têm um valor de cada vez.
 
-  * Sass variables are *imperative*, which means if you use a variable and then change its value, the earlier use will stay the same. CSS variables are *declarative*, which means if you change the value, it'll affect both earlier uses and later uses.
+  * As variáveis de Sass são *imperativas*, o que significa que se usas uma variável e depois mudares o seu valor, o uso anterior continuará o mesmo. As variáveis de CSS são *declarativas*, o que significa se mudares o valor, afetará tanto o uso anteriores e posteriores.
 
   <% example do %>
     $variable: value 1;
@@ -58,50 +58,50 @@ A variable declaration looks a lot like a [property declaration][]: it's written
 <% end %>
 
 <% fun_fact do %>
-  Sass variables, like all Sass identifiers, treat hyphens and underscores as identical. This means that `$font-size` and `$font_size` both refer to the same variable. This is a historical holdover from the very early days of Sass, when it *only* allowed underscores in identifier names. Once Sass added support for hyphens to match CSS's syntax, the two were made equivalent to make migration easier.
+  As variáveis de Sass, tal como todos os identificadores de Sass, tratam os hiféns e sublinhados como idênticos. Isto significa que ambos `$font-size` e `$font_size` referem-se a mesma variável. Isto é um comportamento histórico que vem desde os primeiros dias da Sass, quando *apenas* permitia sublinhados como nomes de identificador. Assim que a Sass adicionou suporte para hiféns para corresponder a sintaxe da CSS, os dois foram tornados equivalentes para tornar a migração mais fácil.
 <% end %>
 
-## Default Values
+<h2 id="default-values">Valores Padrão</h2>
 
-Normally when you assign a value to a variable, if that variable already had a value, its old value is overwritten. But if you're writing a Sass library, you might want to allow your users to configure your library's variables before you use them to generate CSS.
+Normalmente quando atribuímos um valor para uma variável, se esta variável já tiver um valor, o seu valor anterior é sobrescrito. Mas se estiveres a escrever uma biblioteca de Sass, podes querer permitir que os teus utilizadores configurem as variáveis da tua biblioteca antes de usá-las para gerar o CSS.
 
-To make this possible, Sass provides the `!default` flag. This assigns a value to a variable *only if* that variable isn't defined or its value is [`null`][]. Otherwise, the existing value will be used.
+Para tornar isto possível, a Sass fornece a opção `!default`. Esta atribui um valor à uma variável *apenas se* esta variável não estiver definida ou seu valor for [`null`][]. De outro modo, o valor existente será usado.
 
 [`null`]: values/null
 
-### Configuring Modules
+<h3 id="configuring-modules">Configurando Módulos</h3>
 
 <%= partial 'snippets/module-system-status' %>
 
-Variables defined with `!default` can be configured when loading a module with the [`@use` rule][]. Sass libraries often use `!default` variables to allow their users to configure the library's CSS.
+As variáveis definidas com `!default` podem ser configuradas quando carregas um módulo com a [regra `@use`][`@use` rule]. As bibliotecas de Sass frequentemente usam variáveis `!default` para permitir seus utilizadores configurarem a CSS da biblioteca.
 
 [`@use` rule]: at-rules/use
 
-To load a module with configuration, write `@use <url> with (<variable>: <value>, <variable>: <value>)`. The configured values will override the variables' default values. Only variables written at the top level of the stylesheet with a `!default` flag can be configured.
+Para carregares um módulo com configuração, escreve `@use <url> com (<variable>: <value>, <variable>: <value>)`. Os valores configurados sobreporão as os valores padrão da variáveis. Apenas variáveis escritas no alto nível da folha de estilo com a palavra-chave `!default` podem ser configuradas.
 
 <%= partial '../code-snippets/example-use-with' %>
 
-## Built-in Variables
+<h2 id="built-in-variables">Variáveis Embutidas</h2>
 
-Variables that are defined by a [built-in module] cannot be modified.
+As variáveis que são definidas por um [módulo embutido][built-in module] não podem ser modificadas.
 
 [built-in module]: modules
 
 <% example(autogen_css: false) do %>
   @use "sass:math" as math;
 
-  // This assignment will fail.
+  // Esta atribuição falhará.
   math.$pi: 0;
   ===
   @use "sass:math" as math
 
-  // This assignment will fail.
+  // Esta atribuição falhará.
   math.$pi: 0
 <% end %>
 
-## Scope
+<h2 id="scope">Âmbito</h2>
 
-Variables declared at the top level of a stylesheet are *global*. This means that they can be accessed anywhere in their module after they've been declared. But that's not true for all variables. Those declared in blocks (curly braces in SCSS or indented code in Sass) are usually *local*, and can only be accessed within the block they were declared.
+As variáveis declaras no alto nível de uma folha de estilo são *globais*. Isto significa que são acessadas em qualquer parte nos seus módulos depois terem sido declaradas. Mas isto não é verdade para todas as variáveis. Aquelas variáveis declaradas nos blocos (chavetas na SCSS ou código indentado na Sass) são normalmente *locais*, e podem apenas ser acessadas dentro do bloco que foram declaradas.
 
 <% example do %>
   $global-variable: global value;
@@ -115,7 +115,7 @@ Variables declared at the top level of a stylesheet are *global*. This means tha
   .sidebar {
     global: $global-variable;
 
-    // This would fail, because $local-variable isn't in scope:
+    // Isto falharia, porque $local-variable não está no âmbito:
     // local: $local-variable;
   }
   ===
@@ -130,13 +130,13 @@ Variables declared at the top level of a stylesheet are *global*. This means tha
   .sidebar
     global: $global-variable
 
-    // This would fail, because $local-variable isn't in scope:
+    // Isto falharia, porque $local-variable não está no âmbito:
     // local: $local-variable
 <% end %>
 
-### Shadowing
+<h3 id="shadowing">Sombreando</h3>
 
-Local variables can even be declared with the same name as a global variable. If this happens, there are actually two different variables with the same name: one local and one global. This helps ensure that an author writing a local variable doesn't accidentally change the value of a global variable they aren't even aware of.
+As variáveis locais podem mesmo ser declaradas com o mesmo nome como uma variável global. Se isto acontecer, existem na realidade dois variáveis diferentes com o mesmo nome: uma local e uma global. Isto ajuda a garantir que um autor escrevendo uma variável local não muda acidentalmente o valor de uma variável global de que não estão consciente:
 
 <% example do %>
   $variable: global value;
@@ -161,7 +161,7 @@ Local variables can even be declared with the same name as a global variable. If
     value: $variable
 <% end %>
 
-If you need to set a global variable's value from within a local scope (such as in a mixin), you can use the `!global` flag. A variable declaration flagged as `!global` will *always* assign to the global scope.
+Se precisares de definir um valor da variável global de dentro de um âmbito local (tal como numa mistura), podes usar a palavra-chave `!global`. Uma declaração de variável marcada como `!global` *sempre* atribuirá para o âmbito global.
 
 <% example do %>
   $variable: first global value;
@@ -188,16 +188,16 @@ If you need to set a global variable's value from within a local scope (such as 
 
 <% heads_up do %>
   <% impl_status dart: '2.0.0', libsass: false, ruby: false do %>
-    Older Sass versions allowed `!global` to be used for a variable that doesn't exist yet. This behavior was deprecated to make sure each stylesheet declares the same variables no matter how it's executed.
+    As versões mais antigas da Sass permitiam que a `!global` fosse usada para uma variável que ainda não existe. Este comportamento foi depreciado garantir que cada folha de estilo declara a mesma variável não importa como é executado.
   <% end %>
 
-  The `!global` flag may only be used to set a variable that has already been declared at the top level of a file. It *may not* be used to declare a new variable.
+  A palavra-chave `!global` apenas pode ser usada para definir uma variável que já foi declarada no alto nível dum ficheiro. Esta *não pode* ser usada para declarar uma nova variável.
 
 <% end %>
 
-### Flow Control Scope
+<h2 id="flow-control-scope">Âmbito de Controlo de Fluxo</h2>
 
-Variables declared in [flow control rules][] have special scoping rules: they don't shadow variables at the same level as the flow control rule. Instead, they just assign to those variables. This makes it much easier to conditionally assign a value to a variable, or build up a value as part of a loop.
+As variáveis declaradas nas [regras de controlo de fluxo][flow control rules] têm regras definição de âmbito especiais: não sombreiam as variáveis no mesmo nível como regra de controlo de fluxo. Ao invés disto, apenas atribuem para estas variáveis. Isto torna muito mais fácil de condicionalmente atribuir um valor para uma variável, ou construir um valor como parte de um laço.
 
 [flow control rules]: at-rules/control
 
@@ -233,18 +233,18 @@ Variables declared in [flow control rules][] have special scoping rules: they do
 <% end %>
 
 <% heads_up do %>
-  Variables in flow control scope can assign to existing variables in the outer scope, but they can't declare new variables there. Make sure the variable is already declared before you assign to it, even if you need to declare it as `null`.
+  As variáveis no âmbito do controlo de fluxo podem atribuir para variáveis existentes no âmbito externo, mas não podem declarar novas variáveis lá. Certifica-te de que a variável já foi declarada antes de atribuires à ela, mesmo se precisares de declará-la como `null`.
 <% end %>
 
-## Advanced Variable Functions
+<h2 id="advanced-variable-functions">Funções de Variável Avançadas</h2>
 
-The Sass core library provides a couple advanced functions for working with variables. The [`meta.variable-exists()` function][] returns whether a variable with the given name exists in the current scope, and the [`meta.global-variable-exists()` function][] does the same but only for the global scope.
+A biblioteca fundamental da Sass fornece algumas funções avançadas para trabalhar com variáveis. A [função `meta.variable-exists()`][`meta.variable-exists()` function] retorna se uma variável com o dado nome existe no âmbito atual, e a [função `meta.global-variable-exists()`][`meta.global-variable-exists()` function] faz o mesmo mas apenas para o âmbito global.
 
 [`meta.variable-exists()` function]: modules/meta#variable-exists
 [`meta.global-variable-exists()` function]: modules/meta#global-variable-exists
 
 <% heads_up do %>
-  Users occasionally want to use interpolation to define a variable name based on another variable. Sass doesn't allow this, because it makes it much harder to tell at a glance which variables are defined where. What you *can* do, though, is define a [map][] from names to values that you can then access using variables.
+  Utilizadores querem ocasionalmente usar interpolação para definir um nome de variável baseada em uma outra variável. A Sass não permite isto, porque torna muito mais difícil dizer de relance quais variáveis são definidas onde. O que *podes* fazer, é definir um [mapa][map] a partir dos nomes para as variáveis que podes depois acessar usando variáveis.
 
   [map]: values/maps
 
@@ -258,7 +258,7 @@ The Sass core library provides a couple advanced functions for working with vari
     );
 
     .alert {
-      // Instead of $theme-color-#{warning}
+      // No lugar de $theme-color-#{warning}
       background-color: map.get($theme-colors, "warning");
     }
     ===
@@ -267,7 +267,7 @@ The Sass core library provides a couple advanced functions for working with vari
     $theme-colors: ("success": #28a745, "info": #17a2b8, "warning": #ffc107)
 
     .alert
-      // Instead of $theme-color-#{warning}
+      // No lugar de $theme-color-#{warning}
       background-color: map.get($theme-colors, "warning")
     ===
     .alert {
