@@ -1,31 +1,31 @@
 ---
-title: At-Rules
+title: Regras Que Usam Arroba
 introduction: >
-  Much of Sass’s extra functionality comes in the form of new [at-rules](https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule) it adds on top of CSS:
+  Muita da funcionalidade adicional da Sass vem na forma de novas [regras que usam arroba](https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule) que ela adiciona sobre a CSS.
 overview: true
 ---
 
-* [`@use`](at-rules/use) loads mixins, functions, and variables from other Sass stylesheets, and combines CSS from multiple stylesheets together.
+* [`@use`](at-rules/use) carrega as misturas, funções, e variáveis de outras folhas de estilo de Sass, e combina juntas a CSS de várias folhas de estilo.
 
-* [`@forward`](at-rules/forward) loads a Sass stylesheet and makes its mixins, functions, and variables available when your stylesheet is loaded with the `@use` rule.
+* [`@forward`](at-rules/forward) carrega uma folha de estilo de Sass e torna as suas misturas, funções, e variáveis disponíveis quando a tua folha de estilo for carregada com a regra `@use`.
 
-* [`@import`](at-rules/import) extends the CSS at-rule to load styles, mixins, functions, and variables from other stylesheets.
+* [`@import`](at-rules/import) estende a regra de CSS que usa arroba para carregar estilos, misturas, funções, e variáveis de outras folhas de estilo.
 
-* [`@mixin` and `@include`](at-rules/mixin) makes it easy to re-use chunks of styles.
+* [`@mixin` e `@include`](at-rules/mixin) torna fácil reutilizar pedaços de estilos.
 
-* [`@function`](at-rules/function) defines custom functions that can be used in [SassScript expressions][].
+* [`@function`](at-rules/function) define funções personalizadas que podem ser usadas em [expressões de SassScript][SassScript expressions].
 
-* [`@extend`](at-rules/extend) allows selectors to inherit styles from one another.
+* [`@extend`](at-rules/extend) permite os seletores herdarem estilos de outros seletores.
 
-* [`@at-root`](at-rules/at-root) puts styles within it at the root of the CSS document.
+* [`@at-root`](at-rules/at-root) coloca estilos dentro isto na raiz do documento de CSS.
 
-* [`@error`](at-rules/error) causes compilation to fail with an error message.
+* [`@error`](at-rules/error) causa a falha de compilação com uma mensagem de erro.
 
-* [`@warn`](at-rules/warn) prints a warning without stopping compilation entirely.
+* [`@warn`](at-rules/warn) imprime um aviso sem interromper completamente a compilação.
 
-* [`@debug`](at-rules/debug) prints a message for debugging purposes.
+* [`@debug`](at-rules/debug) imprime uma mensagem para fins de depuração.
 
-* Flow control rules like [`@if`][], [`@each`][], [`@for`][], and [`@while`][] control whether or how many times styles are emitted.
+* As regras de controlo de fluxo como [`@if`][], [`@each`][], [`@for`][], e [`@while`][] controlam se ou quantas vezes os estilos são emitidos.
 
 [SassScript expressions]: syntax/structure#expressions
 [`@if`]: at-rules/control/if
@@ -33,7 +33,7 @@ overview: true
 [`@for`]: at-rules/control/for
 [`@while`]: at-rules/control/while
 
-Sass also has some special behavior for [plain CSS at-rules][]: they can contain [interpolation][], and they can be nested in style rules. Some of them, like [`@media`][] and [`@supports`][], also allow SassScript to be used directly in the rule itself without interpolation.
+A Sass também algum comportamento especial para [regras de CSS simples que usam arroba][plain CSS at-rules]: elas podem conter [interpolação][interpolation], e podem ser encaixadas nas regras de estilo. Algumas delas, como [`@media`][] e [`@supports`][], também permitem a SassScript ser usada diretamente na própria regra sem interpolação.
 
 [plain CSS at-rules]: at-rules/css
 [interpolation]: interpolation
