@@ -1,7 +1,7 @@
 ---
 title: "null"
 introduction: >
-  The value `null` is the only value of its type. It represents the absence of a value, and is often returned by [functions](../at-rules/function) to indicate the lack of a result.
+  O valor `null` é o único valor do seu tipo. Ele representa a ausência de um valor, e é frequentemente retornado pelas [funções](../at-rules/function) para indicar a falta de um resultado.
 ---
 
 <% example(autogen_css: false) do %>
@@ -20,7 +20,7 @@ introduction: >
   @debug &  // null
 <% end %>
 
-If a [list][] contains a `null`, that `null` is omitted from the generated CSS.
+Se um [lista][list] conter um `null`, este `null` é omitido da CSS gerada.
 
 [list]: lists
 
@@ -37,7 +37,7 @@ If a [list][] contains a `null`, that `null` is omitted from the generated CSS.
     font: 18px bold map-get($fonts, "sans")
 <% end %>
 
-If a property value is `null`, that property is omitted entirely.
+Se um valor de propriedade for `null`, esta propriedade é omitida completamente.
 
 <% example do %>
   $fonts: ("serif": "Helvetica Neue", "monospace": "Consolas");
@@ -59,7 +59,7 @@ If a property value is `null`, that property is omitted entirely.
       family: map-get($fonts, "sans")
 <% end %>
 
-`null` is also [*falsey*][], which means it counts as `false` for any rules or [operators][] that take booleans. This makes it easy to use values that can be `null` as conditions for [`@if`][] and [`if()`][].
+`null` também é [*falso*][*falsey*], o que significa que conta como `false` para quaisquer regras ou [operadores][operators] que recebem booleanos. Isto torna fácil usar valores que podem ser `null` como condições para [`@if`][] e [`if()`][]:
 
 [*falsey*]: ../at-rules/control/if#truthiness-and-falsiness
 [operators]: ../operators/boolean
