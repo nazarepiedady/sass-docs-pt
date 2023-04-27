@@ -1,7 +1,7 @@
 ---
-title: Numbers
+title: Números
 introduction: >
-  Numbers in Sass have two components: the number itself, and its units. For example, in `16px` the number is `16` and the unit is `px`. Numbers can have no units, and they can have complex units. See [Units](#units) below for more details.
+  Os números na Sass têm dois componentes: o próprio número, e a sua unidade. Por exemplo, em `16px` o número é `16` e a unidade é `px`. Os números podem não ter nenhuma unidade, e podem ter unidades complexas. Consulte as [Unidades](#units) abaixo para mais detalhes.
 ---
 
 <% example(autogen_css: false) do %>
@@ -16,7 +16,7 @@ introduction: >
   @debug 5px * 2px  // 10px*px (read "square pixels")
 <% end %>
 
-Sass numbers support the same formats as CSS numbers, including [scientific notation][], which is written with an `e` between the number and its power of 10. Because support for scientific notation in browsers has historically been spotty, Sass always compiles it to fully expanded numbers.
+Os números da Sass suportam os mesmos formatos que os números da CSS, incluindo a [notação científica][scientific notation], que é escrita com um `e` entre o número e a sua potência de 10. Uma vez que o suporte para notação científica nos navegadores tem sido historicamente irregular, a Sass sempre compila-o para números completamente expandidos:
 
 [scientific notation]: https://en.wikipedia.org/wiki/Scientific_notation
 
@@ -29,24 +29,24 @@ Sass numbers support the same formats as CSS numbers, including [scientific nota
 <% end %>
 
 <% heads_up do %>
-  Sass doesn't distinguish between whole numbers and decimals, so for example `math.div(5, 2)` returns `2.5` rather than `2`. This is the same behavior as JavaScript, but different than many other programming languages.
+  A Sass não faz distinção entre números inteiros e números decimais, então por exemplo `math.div(5, 2)` retorna `2.5` ao invés de `2`. Isto é o mesmo comportamento da JavaScript, mas diferente de muitas outras linguagens de programação.
 <% end %>
 
 <%= partial 'documentation/snippets/number-units' %>
 
-## Precision
+<h2 id="precision">Precisão</h2>
 
 <% impl_status dart: true, libsass: false, ruby: '3.5.0', feature: '10 Digit Default' do %>
-  LibSass and older versions of Ruby Sass default to 5 digits of numeric precision, but can be configured to use a different number. It's recommended that users configure them for 10 digits for greater accuracy and forwards-compatibility.
+  A LibSass e versões mais antigas da Sass de Ruby predefinem para 5 dígitos de precisão numérica, mas podem ser configuradas para usar um número diferente. É recomendado que os utilizadores as configurem para 10 dígitos para mais exatidão e compatibilidade avançada.
 <% end %>
 
-Sass numbers support up to 10 digits of precision after the decimal point. This means a few different things:
+Os números da Sass suportam até 10 dígitos de precisão depois do ponto decimal. Isto significa algumas coisas diferentes:
 
-* Only the first ten digits of a number after the decimal point will be included in the generated CSS.
+* Apenas os primeiros dez dígitos de um número depois do ponto decimal será incluído na CSS gerada.
 
-* Operations like [`==`][] and [`>=`][] will consider two numbers equivalent if they're the same up to the tenth digit after the decimal point.
+* Operações como [`==`][] e [`>=`][] considerarão dois números equivalentes se forem o mesmo até o décimo dígito depois do ponto decimal.
 
-* If a number is less than `0.0000000001` away from an integer, it's considered to be an integer for the purposes of functions like [`list.nth()`][] that require integer arguments.
+* Se um número for menor do que `0.0000000001` longe de um inteiro, é considerado como um inteiro para os fins de funções como [`list.nth()`][] que exigem argumentos inteiros.
 
 [`==`]: ../operators/equality
 [`>=`]: ../operators/relational
@@ -65,5 +65,5 @@ Sass numbers support up to 10 digits of precision after the decimal point. This 
 <% end %>
 
 <% fun_fact do %>
-  Numbers are rounded to 10 digits of precision *lazily* when they're used in a place where precision is relevant. This means that math functions will work with the full number value internally to avoid accumulating extra rounding errors.
+  Os números arredondados para 10 dígitos de precisão *preguiçosamente* quando são usados num lugar onde a precisão é relevante. Isto significa que função matemáticas trabalharão com valor do número completo internamente para evitar acumular erros de arredondamentos adicionais.
 <% end %>
