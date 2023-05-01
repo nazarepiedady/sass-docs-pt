@@ -12,7 +12,7 @@ module SassHelpers
     if current_page.data.title
       title << current_page.data.title
     else
-      title << "Syntactically Awesome Style Sheets"
+      title << "Folhas de Estilo Sintaticamente Impressionates"
     end
     title
   end
@@ -66,7 +66,7 @@ module SassHelpers
   def _toc_level(parent_href, links)
     if parent_href
       overview = content_tag(:li,
-        content_tag(:a, "Overview", href: parent_href,
+        content_tag(:a, "Visão de Conjunto", href: parent_href,
           class: ("selected" if current_page.url == parent_href + ".html")),
         class: "overview")
     end
@@ -234,15 +234,15 @@ module SassHelpers
     ]
     if scss
       contents <<
-        _syntax_div("SCSS Syntax", "scss", scss_sections, scss_paddings, id, enabled: scss)
+        _syntax_div("Sintaxe de SCSS", "scss", scss_sections, scss_paddings, id, enabled: scss)
     end
     if sass
       contents <<
-        _syntax_div("Sass Syntax", "sass", sass_sections, sass_paddings, id, enabled: !scss)
+        _syntax_div("Sintaxe de Sass", "sass", sass_sections, sass_paddings, id, enabled: !scss)
     end
     if css
       contents <<
-        _syntax_div("CSS Output", "css", css_sections, css_paddings, id)
+        _syntax_div("Saída de CSS", "css", css_sections, css_paddings, id)
     end
 
     max_source_width = (scss_sections + sass_sections).map {|s| s.split("\n")}.flatten.map(&:size).max
@@ -346,7 +346,7 @@ module SassHelpers
   # The contents should be supplied as a block.
   def heads_up
     _concat(content_tag :div, [
-      content_tag(:h3, '⚠️ Heads up!'),
+      content_tag(:h3, '⚠️ Atenção!'),
       _render_markdown(_capture {yield})
     ], class: 'sl-c-callout sl-c-callout--warning')
   end
@@ -357,7 +357,7 @@ module SassHelpers
   # The contents should be supplied as a block.
   def fun_fact
     _concat(content_tag :div, [
-      content_tag(:h3, '💡 Fun fact:'),
+      content_tag(:h3, '💡 Fato Divertido:'),
       _render_markdown(_capture {yield})
     ], class: 'sl-c-callout sl-c-callout--fun-fact')
   end
@@ -393,13 +393,13 @@ module SassHelpers
   # This takes an optional Markdown block that should provide more information
   # about the implementation differences or the old behavior.
   def impl_status(dart: nil, libsass: nil, ruby: nil, node: nil, feature: nil)
-    compatibility = feature ? "Compatibility (#{feature}):" : "Compatibility:"
+    compatibility = feature ? "Compatibilidade (#{feature}):" : "Compatibilidade:"
 
     contents = [content_tag(:div, compatibility, class: "compatibility")]
-    contents << _impl_status_row('Dart Sass', dart) unless dart.nil?
+    contents << _impl_status_row('Sass de Dart', dart) unless dart.nil?
     contents << _impl_status_row('LibSass', libsass) unless libsass.nil?
-    contents << _impl_status_row('Node Sass', node) unless node.nil?
-    contents << _impl_status_row('Ruby Sass', ruby) unless ruby.nil?
+    contents << _impl_status_row('Sass de Node', node) unless node.nil?
+    contents << _impl_status_row('Sass de Ruby', ruby) unless ruby.nil?
 
     if block_given?
       # The no-op href here ensures that this toggle is focusable in browsers.
@@ -422,9 +422,9 @@ module SassHelpers
       elsif status == false
         "✗"
       elsif status == :partial
-        "partial"
+        "parcial"
       else
-        "since #{status}"
+        "desde #{status}"
       end
 
     content_tag :div, [
