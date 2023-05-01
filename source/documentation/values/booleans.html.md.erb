@@ -1,7 +1,7 @@
 ---
-title: Booleans
+title: Booleanos
 introduction: >
-  Booleans are the logical values `true` and `false`. In addition their literal forms, booleans are returned by [equality](../operators/equality) and [relational](../operators/relational) operators, as well as many built-in functions like [`math.comparable()`](../modules/math#comparable) and [`map.has-key()`](../modules/map#has-key).
+  Os booleanos são os valores lógicos `true` e `false`. Além das suas formas literais, os booleanos são retornados pelos operadores de [igualdade](../operators/equality) e [relacionais](../operators/relational), bem como muitas funções embutidas como [`math.comparable()`](../modules/math#comparable) e [`map.has-key()`](../modules/map#has-key).
 ---
 
 <% example(autogen_css: false) do %>
@@ -20,7 +20,7 @@ introduction: >
   @debug math.comparable(100px, 3in)  // true
 <% end %>
 
-You can work with booleans using [boolean operators][]. The `and` operator returns `true` if *both* sides are `true`, and the `or` operator returns `true` if *either* side is `true`. The `not` operator returns the opposite of a single boolean value.
+Tu podes trabalhar com booleanos usando [operadores booleanos][boolean operators]. O operador `and` retorna `true` se *ambos* ambos lados forem `true`, e o operador `or` retorna `true` se *um ou outro* lado for `true`. O operador `not` retorna o oposto de um único valor booleano.
 
 [boolean operators]: ../operators/boolean
 
@@ -44,15 +44,15 @@ You can work with booleans using [boolean operators][]. The `and` operator retur
   @debug not false  // true
 <% end %>
 
-## Using Booleans
+<h2 id="using-booleans">Usando Booleanos</h2>
 
-You can use booleans to choose whether or not to do various things in Sass. The [`@if` rule][] evaluates a block of styles if its argument is `true`:
+Tu podes usar booleanos para escolheres se fazes ou não várias coisas na Sass. A [regra `@if`][`@if` rule] avalia um bloco de estilos se seu argumento for `true`:
 
 [`@if` rule]: ../at-rules/control/if
 
 <%= partial 'code-snippets/example-if' %>
 
-The [`if()` function][] returns one value if its argument is `true` and another if its argument is `false`:
+A [função `if()`][`if()` function] retorna um valor se seu argumento `true` e um outro se seu argumento for `false`:
 
 [`if()` function]: ../modules#if
 
