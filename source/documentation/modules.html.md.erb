@@ -80,7 +80,7 @@ A Sass fornece os seguintes módulos embutidos:
             'hsla($hue $saturation $lightness / $alpha)',
             'hsla($hue, $saturation, $lightness, $alpha: 1)',
             returns: 'color' do %>
-  <% impl_status dart: '1.15.0', libsass: false, ruby: false, feature: "Level 4 Syntax" do %>
+  <% impl_status dart: '1.15.0', libsass: false, ruby: false, feature: "Sintaxe de Nível 4" do %>
     A LibSass e Sass de Ruby apenas suportam as seguintes assinaturas:
 
     * `hsl($hue, $saturation, $lightness)`
@@ -89,7 +89,7 @@ A Sass fornece os seguintes módulos embutidos:
     Nota que para estas implementações, o argumento `$alpha` é *obrigatório* se o nome de função `hsla()` for usado, e *proibido* se o nome de função `hsl()` for usado.
   <% end %>
 
-  <% impl_status dart: true, libsass: false, ruby: '3.7.0', feature: "Percent Alpha" do %>
+  <% impl_status dart: true, libsass: false, ruby: '3.7.0', feature: "Alfa Por Cento" do %>
     A LibSass e versões mais antigas da Sass de Ruby não suportam valores de alfa especificado como percentagens.
   <% end %>
 
@@ -97,7 +97,7 @@ A Sass fornece os seguintes módulos embutidos:
 
   [hue, saturation, and lightness]: https://en.wikipedia.org/wiki/HSL_and_HSV
 
-  A tonalidade é um número entre `0deg` e `360deg` (inclusivo) e pode estar sem unidade. A saturação e claridade são números entre `0%` e `100%` (inclusivo) e não pode estar sem unidade. O canal de alfa pode ser especificado como seja um número sem unidade entre 0 e 1 (inclusivo), ou como uma percentagem entre `0%` e `100%` (inclusivo).
+  A tonalidade é um número entre `0deg` e `360deg` (inclusivo) e pode estar [sem unidade][unitless]. A saturação e claridade são números entre `0%` e `100%` (inclusivo) e não pode estar [sem unidade][unitless]. O canal de alfa pode ser especificado como seja um número [sem unidade][unitless] entre 0 e 1 (inclusivo), ou como uma percentagem entre `0%` e `100%` (inclusivo).
 
   [unitless]: values/numbers#units
 
@@ -163,7 +163,7 @@ A Sass fornece os seguintes módulos embutidos:
             'rgba($red, $green, $blue, $alpha: 1)',
             'rgba($color, $alpha)',
             returns: 'color' do %>
-  <% impl_status dart: '1.15.0', libsass: false, ruby: false, feature: "Level 4 Syntax" do %>
+  <% impl_status dart: '1.15.0', libsass: false, ruby: false, feature: "Sintaxe de Nível 4" do %>
     A LibSass e Sass de Ruby apenas suportam as seguintes assinaturas:
 
     * `rgb($red, $green, $blue)`
@@ -173,7 +173,7 @@ A Sass fornece os seguintes módulos embutidos:
     Nota que para estas implementações, o argumento `$alpha` é *obrigatório* se o nome de função `rgba()` for usado, e *proibido* se o nome de função `rgb()` for usado.
   <% end %>
 
-  <% impl_status dart: true, libsass: false, ruby: '3.7.0', feature: "Percent Alpha" do %>
+  <% impl_status dart: true, libsass: false, ruby: '3.7.0', feature: "Alfa Por Cento" do %>
     A LibSass e versões mais antigas da Sass de Ruby não suportam valores de alfa especificados como percentagens.
   <% end %>
 
