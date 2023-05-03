@@ -40,9 +40,9 @@ introduction: >
   @include corner-icon("mail", top, left)
 <% end %>
 
-## Na SassScript
+<h2 id="in-sassscript">Na SassScript</h2>
 
-<% impl_status dart: true, libsass: false, ruby: '4.0.0 (unreleased)', feature: "Modern Syntax" do %>
+<% impl_status dart: true, libsass: false, ruby: '4.0.0 (não lançada)', feature: "Sintaxe Moderna" do %>
   A LibSass e a Sass de Ruby atualmente usam uma sintaxe mais antiga para analise de interpolação em SassScript. Para os propósitos mais práticos funciona da mesma maneira, mas pode comportar-se estranhamente em volta dos [operadores][operators]. Consulte [este documento][this document] por detalhes.
 
   [operators]: operators
@@ -106,7 +106,7 @@ A interpolação pode ser usada na SassScript para injetar SassScript para [sequ
   [unit arithmetic]: values/numbers#units
 <% end %>
 
-## Sequências de Caracteres Com Aspas
+<h2 id="quoted-strings">Sequências de Caracteres Com Aspas</h2>
 
 Na maioria dos casos, a interpolação injeta o mesmo exato texto que seria usado se a expressão fosse usada como um [valor de propriedade][property value]. Mas existe uma exceção: as aspas envolta das sequências de caracteres com aspas são removidas (mesmo se estas sequências de caracteres com aspas estiverem em listas). Isto torna possível escrever sequências de caracteres com aspas que contém sintaxe que não é permitida na SassScript (como seletores) e interpole-os em regras de estilo.
 
