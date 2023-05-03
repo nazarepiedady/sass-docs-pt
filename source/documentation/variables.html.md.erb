@@ -233,7 +233,7 @@ As variáveis declaradas nas [regras de controlo de fluxo][flow control rules] t
 <% end %>
 
 <% heads_up do %>
-  As variáveis no âmbito do controlo de fluxo podem atribuir para variáveis existentes no âmbito externo, mas não podem declarar novas variáveis lá. Certifica-te de que a variável já foi declarada antes de atribuires à ela, mesmo se precisares de declará-la como `null`.
+  As variáveis no âmbito do controlo de fluxo podem atribuir para variáveis existentes no âmbito externo, mas novas variáveis declaradas no controlo de fluxo não serão acessíveis no âmbito externo. Certifica-te de que a variável já foi declarada antes de atribuires à ela, mesmo se precisares de declará-la como `null`.
 <% end %>
 
 <h2 id="advanced-variable-functions">Funções de Variável Avançadas</h2>
