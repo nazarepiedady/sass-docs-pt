@@ -1,12 +1,12 @@
 ---
-title: Placeholder Selectors
+title: Seletores de Espaço Reservado
 introduction: >
-  Sass has a special kind of selector known as a “placeholder”. It looks and acts a lot like a class selector, but it starts with a `%` and it's not included in the CSS output. In fact, any complex selector (the ones between the commas) that even *contains* a placeholder selector isn't included in the CSS, nor is any style rule whose selectors all contain placeholders.
+  A Sass tem um tipo especial de seletor conhecido como “placeholder”. Ele se parece e comporta-se muito como um seletor de classe, mas começa com um `%` e não é incluído na saída de CSS. De fato, qualquer seletor complexo (aqueles entre as vírgulas) que ainda *contém* um seletor de espaço reservado não é incluído na CSS, nem qualquer regra de estilo cujos seletores todos contém espaços reservados.
 ---
 
 <%= partial "code-snippets/example-placeholder" %>
 
-What's the use of a selector that isn't emitted? It can still be [extended][]! Unlike class selectors, placeholders don't clutter up the CSS if they aren't extended and they don't mandate that users of a library use specific class names for their HTML.
+Qual é o uso dum seletor que não é emitido? Ele ainda pode ser [estendido][extended]! Ao contrário dos seletores de classe, os espaços reservados não atravancam a CSS se não forem estendidas e não exigem que os utilizadores duma biblioteca usem nomes de classe específicos para o seu HTML:
 
 [extended]: ../at-rules/extend
 
@@ -49,4 +49,4 @@ What's the use of a selector that isn't emitted? It can still be [extended][]! U
     color: #cddc39
 <% end %>
 
-Placeholder selectors are useful when writing a Sass library where each style rule may or may not be used. As a rule of thumb, if you're writing a stylesheet just for your own app, it's often better to just extend a class selector if one is available.
+Os seletores de espaço reservado são úteis quando escreves uma biblioteca de Sass onde cada regra de estilo pode ou não ser usada. Como uma boa regra, se estiveres a escrever uma folha de estilo só para a tua própria aplicação, muitas vezes é melhor apenas estender um seletor de classe se um estiver disponível.
