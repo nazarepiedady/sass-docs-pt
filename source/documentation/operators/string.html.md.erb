@@ -1,12 +1,12 @@
 ---
-title: String Operators
+title: Operadores de Sequência de Caracteres
 introduction: >
-  Sass supports a few operators that generate [strings](../values/strings):
+  A Sass suporta alguns operadores que geram [sequências de caracteres](../values/strings):
 ---
 
-* `<expression> + <expression>` returns a string that contains both expressions' values. If the either value is a [quoted string][], the result will be quoted; otherwise, it will be unquoted.
+* `<expression> + <expression>` retorna uma sequência de caracteres que contém os valores de ambas expressões. Se um dos valores for uma [sequência de caracteres com aspas][quoted string], o resultado será com aspas; de outro modo, será sem aspas.
 
-* `<expression> - <expression>` returns an unquoted string that contains both expressions' values, separated by `-`. This is a legacy operator, and [interpolation][] should generally be used instead.
+* `<expression> - <expression>` retorna uma sequência de caracteres sem aspas contém os valores de ambas expressões, separados por `-`. Isto é um operador legado, e a [interpolação][interpolation] deveria ser geralmente usada de preferência.
 
 [quoted string]: ../values/strings#quoted
 [interpolation]: ../interpolation
@@ -21,10 +21,10 @@ introduction: >
   @debug sans - serif  // sans-serif
 <% end %>
 
-These operators don't just work for strings! They can be used with any values that can be written to CSS, with a few exceptions:
+Estes operadores não trabalham apenas com sequências de caracteres! Eles podem ser usados com quaisquer valores que pode ser escrito para CSS, com algumas exceções:
 
-* Numbers can't be used as the left-hand value, because they have [their own operators][numeric].
-* Colors can't be used as the left-hand value, because they used to have [their own operators][color].
+* Números que não podem ser usados como valor à esquerdo, já que têm [seus próprios operadores][numeric].
+* Cores que não podem ser usados como valor à esquerda, já que costumam a ter [seus próprios operadores][color]
 
 [numeric]: numeric
 [color]: ../operators
@@ -38,17 +38,17 @@ These operators don't just work for strings! They can be used with any values th
 <% end %>
 
 <% heads_up do %>
-  It's often cleaner and clearer to use [interpolation][] to create strings, rather than relying on these operators.
+  É muitas vezes mais limpo e claro usar a [interpolação][interpolation] para criar sequências de caracteres, ao invés de depender destes operadores.
 
   [interpolation]: ../interpolation
 <% end %>
 
-## Unary Operators
+<h2 id="unary-operators">Operadores Unário</h2>
 
-For historical reasons, Sass also supports `/` and `-` as a unary operators which take only one value:
+Por razões históricas, a Sass também suporta `/` e `-` como operadores unários que recebem apenas um valor:
 
-* `/<expression>` returns an unquoted string starting with `/` and followed by the expression's value.
-* `-<expression>` returns an unquoted string starting with `-` and followed by the expression's value.
+* `/<expression>` retorna uma sequência de caracteres sem aspas começando com `/` e seguido pelo valor da expressão.
+* `-<expression>` retorna uma sequência de caracteres sem aspas começando com `-` e seguido pelo valor da expressão.
 
 <% example(autogen_css: false) do %>
   @debug / 15px; // /15px
