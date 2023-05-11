@@ -1,13 +1,13 @@
 ---
-title: Relational Operators
+title: Operadores Relacionais
 introduction: >
-  Relational operators determine whether [numbers](../values/numbers) are larger or smaller than one another. They automatically convert between compatible units.
+  Os operadores relacionais determinam se [números](../values/numbers) são maiores ou menores mutuamente. Eles convertem automaticamente entre unidades compatíveis.
 ---
 
-* `<expression> < <expression>` returns whether the first [expression][]'s value is less than the second's.
-* `<expression> <= <expression>` returns whether the first [expression][]'s value is less than or equal to the second's.
-* `<expression> > <expression>` returns whether the first [expression][]'s value is greater than to the second's.
-* `<expression> >= <expression>`, returns whether the first [expression][]'s value is greater than or equal to the second's.
+* `<expression> < <expression>`, retorna se a primeiro valor da [expressão][expression] for menor do que o segundo.
+* `<expression> <= <expression>`, retorna se o primeiro valor da [expressão][expression] for menor do que ou igual ao segundo.
+* `<expression> > <expression>`, retorna se o primeiro valor da [expressão][expression] for maior do que o segundo.
+* `<expression> >= <expression>`, retorna se o primeiro valor da [expressão][expression] for maior do que ou igual ao segundo.
 
 [expression]: ../syntax/structure#expressions
 
@@ -23,7 +23,7 @@ introduction: >
   @debug 1000ms <= 1s  // true
 <% end %>
 
-Unitless numbers can be compared with any number. They're automatically converted to that number's unit.
+Os números sem unidades podem ser comparados com qualquer número. São convertidos automaticamente para a unidade daquele número:
 
 <% example(autogen_css: false) do %>
   @debug 100 > 50px; // true
@@ -33,7 +33,7 @@ Unitless numbers can be compared with any number. They're automatically converte
   @debug 10px < 17  // true
 <% end %>
 
-Numbers with incompatible units can't be compared.
+Os números com unidades incompatíveis não podem ser comparados:
 
 <% example(autogen_css: false) do %>
   @debug 100px > 10s;
