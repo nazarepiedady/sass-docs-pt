@@ -1,13 +1,13 @@
 # humanstxt.org/
-# The humans responsible & technology colophon
+# Os humanos responsáveis & colofão da tecnologia
 
-# TEAM
+<h1 id="team">EQUIPA</h1>
 
 <% for person in data.humans.team %>
     <%= person.name %> -- <%= person.role %> -- @<%= person.twitter %>
 <% end %>
 
-# THANKS
+<h1 id="thanks">AGRADECIMENTO</h1>
 
 <% for person in data.humans.contributors %>
     <%= person.name %> -- <%= person.role %> -- @<%= person.twitter %>
@@ -16,7 +16,7 @@
     <%= person.name %>
 <% end %>
 
-# TECHNOLOGY COLOPHON
+<h1 id="technology-colophon">COLOFÃO DA TECNOLOGIA</h1>
 
     <% for tech in data.humans.markup %><%= tech.name %>, <% end %>
     <% for tech in data.humans.style %><%= tech.name %>, <% end %>
