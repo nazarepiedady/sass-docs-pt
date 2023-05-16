@@ -1,33 +1,32 @@
 ---
-title: Parsing a Stylesheet
+title: Analisando uma Folha de Estilo
 introduction: >
-  A Sass stylesheet is parsed from a sequence of Unicode code points. It's parsed directly, without first being converted to a token stream.
+  Uma folha de estilo de Sass é analisado a partir duma sequência de pontos de código de unicode. É analisado diretamente, sem primeiro ser convertida para uma corrente simbólico.
 ---
 
-## Input Encoding
+<h2 id="input-encoding">Codificação da Entrada</h2>
 
 <% impl_status dart: false, libsass: true, ruby: true do %>
-  Dart Sass currently *only* supports the UTF-8 encoding. As such, it's safest to encode all Sass stylesheets as UTF-8.
+  A Sass de Dart atualmente *apenas* suporta a codificação UTF-8. Como tal, é mais seguro codificar todas as folhas de estilos de Sass como UTF-8.
 <% end %>
 
-It's often the case that a document is initially available only as a sequence of bytes, which must be decoded into Unicode. Sass performs this decoding as follows:
+É frequentemente o caso de que um documento está inicialmente disponível apenas como uma sequência de bytes, que deve ser descodificado para Unicode. A Sass realiza esta descodificação como se segue:
 
-* If the sequence of bytes begins with the UTF-8 or UTF-16 encoding of U+FEFF BYTE ORDER MARK, the corresponding encoding is used.
+* Se a sequência de bytes começar com a codificação UTF-8 ou UTF-16 da MARCA DE ORDEM DE BYTE U+FEFF, a codificação correspondente é usada.
 
-* If the sequence of bytes begins with the plain ASCII string `@charset`, Sass determines the encoding using step 2 of the CSS algorithm for [determining the fallback encoding][].
+* Se a sequência de bytes começar com a sequência de caracteres ASCII simples `@charset`, a Sass determina a codificação usado a etapa 2 do algoritmo de CSS para [determinar a codificação de retorno][determining the fallback encoding].
 
   [determining the fallback encoding]: https://drafts.csswg.org/css-syntax-3/#input-byte-stream
 
-* Otherwise, UTF-8 is used.
+* De outro modo, a UTF-8 é usada.
 
-## Parse Errors
+<h2 id="parse-errors">Erros de Analise</h2>
 
-When Sass encounters invalid syntax in a stylesheet, parsing will fail and an error will be presented to the user with information about the location of the invalid syntax and the reason it was invalid.
+Quando a Sass deparar-se com sintaxe inválida numa folha de estilos, a analise falhará e um erro será apresentado ao utilizador com a informação sobre a localização da sintaxe inválida e o motivo que fez dela inválida.
 
-Note that this is different than CSS, which specifies how to recover from most errors rather than failing immediately. This is one of the few cases where SCSS isn't *strictly* a superset of CSS. However, it's much more useful to Sass users to see errors immediately, rather than having them passed through to the CSS
-output.
+Nota que isto é diferente da CSS, que especifica como recuperar da maioria dos erros ao invés de falhar imediatamente. Isto é um dos poucos casos onde a SCSS não é *estritamente* um super conjunto de CSS. No entanto, é muito mais útil para os utilizadores de Sass ver os erros imediatamente, no lugar de tê-los passados para saída de CSS.
 
-The location of parse errors can be accessed through implementation-specific APIs. For example, in Dart Sass you can access [`SassException.span`][], and in Node Sass's and Dart Sass's JS API you can access the [`file`, `line`, and `column`][js error] properties.
+A localização dos erros de analise pode ser acessada através das APIs específicas da implementação. Por exemplo, na Sass de Dart podes acessar [`SassException.span`][], e na API de JavaScript da Sass de Node e Sass podes acessar as propriedades [`file`, `line`, e `column`][js error].
 
 [`SassException.span`]: https://pub.dartlang.org/documentation/sass/latest/sass/SassException/span.html
 [js error]: https://github.com/sass/node-sass#error-object
