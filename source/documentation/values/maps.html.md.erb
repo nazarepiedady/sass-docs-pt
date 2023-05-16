@@ -1,51 +1,51 @@
 ---
-title: Maps
+title: Mapas
 table_of_contents: true
 ---
 
-Maps in Sass hold pairs of keys and values, and make it easy to look up a value by its corresponding key. They're written `(<expression>: <expression>, <expression>: <expression>)`. The [expression](../syntax/structure#expressions) before the `:` is the key, and the expression after is the value associated with that key. The keys must be unique, but the values may be duplicated. Unlike [lists](lists), maps *must* be written with parentheses around them. A map with no pairs is written `()`.
+Os mapas na Sass seguram pares de chaves e valores, tornam fácil o ato de procurar um valor através da sua chave correspondente. São escritos `(<expression>: <expression>, <expression>: <expression>)`. A [expressão](../syntax/structure#expressions) antes dos `:` é a chave, e a expressão depois é o valor associado aquela chave. As chaves devem ser únicas, mas os valores podem ser duplicados. Ao contrário das [listas](lists), os mapas *devem* ser escritos com parênteses a sua volta. Um mapa sem pares é escrito como `()`.
 
 <% fun_fact do %>
-  Astute readers may note that an empty map, `()`, is written the same as an empty list. That's because it counts as both a map and a list. In fact, *all* maps count as lists! Every map counts as a list that contains a two-element list for each key/value pair. For example, `(1: 2, 3: 4)` counts as `(1 2, 3 4)`.
+  Os leitores astutos podem notar que um mapa vazio, `()`, é escrito da mesma maneira que uma lista vazia. Isto porque conta tanto como um mapa quanto uma lista. De fato, *todos* os mapas contam como listas! Cada mapa conta como uma lista que contém uma lista de dois elementos para cada par de chave e valor. Por exemplo, `(1: 2, 3: 4)` conta como `(1 2, 3 4)`.
 <% end %>
 
-Maps allow any Sass values to be used as their keys. The [`==` operator][] is used to determine whether two keys are the same.
+Os mapas permitem quaisquer valores de Sass seja usados como suas chaves. O [operador `==`][`==` operator] é usado para determinar se duas chaves são iguais.
 
 [`==` operator]: ../operators/equality
 
 <% heads_up do %>
-  Most of the time, it's a good idea to use [quoted strings][] rather than [unquoted strings][] for map keys. This is because some values, such as color names, may *look* like unquoted strings but actually be other types. To avoid confusing problems down the line, just use quotes!
+  A maior parte das vezes, é uma boa ideia usar [sequências de caracteres com aspas][quoted strings] ao invés de [sequências de caracteres sem aspas][unquoted strings] para as chaves do mapa. Isto é porque alguns valores, tais como nomes de cor, podem *parecer-se* com sequências de caracteres sem aspas mas na realidade serem outros tipos. Para evitares problemas confusos, apenas use aspas!
 
   [quoted strings]: strings#quoted
   [unquoted strings]: strings#unquoted
 <% end %>
 
-## Using Maps
+<h2 id="using-maps">Usando Mapas</h2>
 
-Since maps aren't valid CSS values, they don't do much of anything on their own. That's why Sass provides a bunch of [functions][] to create maps and access the values they contain.
+Já que mapas não são valores de CSS válidos, não fazem muito de nada por conta própria. É por isto que a Sass fornece um grupo de [funções][functions] para criar os mapas e acessar os valores que contêm.
 
 [functions]: ../modules/map
 
-### Look Up a Value
+<h3 id="look-up-a-value">Procurar um Valor</h3>
 
-Maps are all about associating keys and values, so naturally there's a way to get the value associated with a key: the [`map.get($map, $key)` function][]! This function returns the value in the map associated with the given key. It returns [`null`][] if the map doesn't contain the key.
+Mapas são sobre a associação de chaves e valores, assim existe naturalmente uma maneira de receber o valor associado com uma chave: a [função `map.get($map. $key)`][`map.get($map, $key)` function]! Esta função retorna o valor no mapa associado com a dada chave. Ela retorna [`null`][] se o mapa não conter a chave:
 
 [`map.get($map, $key)` function]: ../modules/map#get
 [`null`]: null
 
 <%= partial 'code-snippets/example-map-get' %>
 
-### Do Something for Every Pair
+<h3 id="do-something-for-every-par">Fazer Algo em Todos Pares</h3>
 
-This doesn't actually use a function, but it's still one of the most common ways to use maps. The [`@each` rule][] evaluates a block of styles for each key/value pair in a map. The key and the value are assigned to variables so they can easily be accessed in the block.
+Isto na realidade não usa uma função, mas continua a ser uma das maneiras mais comuns de usar os mapas. A [regra `@each`] avalia um bloco de estilos para cada par de chave e valor num mapa. A chave e o valor são atribuídos às variáveis assim podem facilmente ser acessadas no bloco:
 
 [`@each` rule]: ../at-rules/control/each
 
 <%= partial 'code-snippets/example-each-map' %>
 
-### Add to a Map
+<h3 id="add-to-a-map">Adicionar à um Mapa</h3>
 
-It's also useful to add new pairs to a map, or to replace the value for an existing key. The [`map.set($map, $key, $value)` function][] does this: it returns a copy of `$map` with the value at `$key` set to `$value`.
+É também útil adicionar novos pares à um mapa, ou substituir o valor para uma chave existente. a [função `map.set($map, $key, $value)`][`map.set($map, $key, $value)` function] faz isto: ela retorna uma cópia de `$map` com o valor em `$key` definido para `$value`:
 
 [`map.set($map, $key, $value)` function]: ../modules/map#set
 
@@ -69,8 +69,7 @@ It's also useful to add new pairs to a map, or to replace the value for an exist
   // ("regular": 400, "medium": 500, "bold": 900)
 <% end %>
 
-Instead of setting values one-by-one, you can also merge two existing maps using
-[`map.merge($map1, $map2)`][].
+Ao invés de definir valores um por um, podes também combinar dois mapas existentes usando [`map.merge($map1, $map2)`][`map.merge($map1, $map2)`]:
 
 [`map.merge($map1, $map2)`]: ../modules/map#merge
 
@@ -92,7 +91,7 @@ Instead of setting values one-by-one, you can also merge two existing maps using
   // ("lightest": 100, "light": 300, "medium": 500, "bold": 700)
 <% end %>
 
-If both maps have the same keys, the second map's values are used in the map that gets returned.
+Se ambos mapas tiverem as mesmas chaves, os valores do segundo mapa são usados no mapa que for retornado:
 
 <% example(autogen_css: false) do %>
   @use "sass:map";
@@ -110,15 +109,15 @@ If both maps have the same keys, the second map's values are used in the map tha
   // ("light": 300, "medium": 700)
 <% end %>
 
-Note that because Sass maps are [immutable][], `map.set()` and `map.merge()` do not modify the original list.
+Nota que uma vez que os mapas de Sass são [imutáveis][immutable], `map.set()` e `map.merge()` não modificam a lista original.
 
 [immutable]: #immutability
 
-## Immutability
+<h2 id="immutability">Imutabilidade</h2>
 
-Maps in Sass are *immutable*, which means that the contents of a map value never changes. Sass's map functions all return new maps rather than modifying the originals. Immutability helps avoid lots of sneaky bugs that can creep in when the same map is shared across different parts of the stylesheet.
+Os mapas na Sass são *imutáveis*, o que significa que o conteúdo dum valor do mapa nunca muda. As funções do mapa da Sass retornam todas novos mapas ao invés de modificarem os originais. A imutabilidade ajuda a evitar muitos erros de programação sorrateiros que podem infiltrar-se quando o mesmo mapa for partilhado através de diferentes partes da folha de estilos.
 
-You can still update your state over time by assigning new maps to the same variable, though. This is often used in functions and mixins to track configuration in a map.
+Mesmo assim podes continuar a atualizar o teu estado ao longo do tempo atribuindo novos mapas para a mesma variável. Isto é muitas vezes usado em funções e misturas para rastrear a configuração num mapa:
 
 <% example(autogen_css: false) do %>
   @use "sass:map";
