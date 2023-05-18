@@ -1,66 +1,66 @@
 ---
-title: Lists
+title: Listas
 table_of_contents: true
 ---
 
-<% impl_status dart: true, libsass: '3.5.0', ruby: '3.5.0', feature: 'Square Brackets' do %>
-  Older implementations of LibSass and Ruby Sass didn't support lists with square brackets.
+<% impl_status dart: true, libsass: '3.5.0', ruby: '3.5.0', feature: 'Parênteses Reto' do %>
+  Implementações antigas da LibSass e Sass de Ruby não suportavam listas com parênteses reto.
 <% end %>
 
-Lists contain a sequence of other values. In Sass, elements in lists can be separated by commas (`Helvetica, Arial, sans-serif`), spaces (`10px 15px 0 0`), or [slashes] as long as it's consistent within the list. Unlike most other languages, lists in Sass don't require special brackets; any [expressions] separated with spaces or commas count as a list. However, you're allowed to write lists with square brackets (`[line1 line2]`), which is useful when using [`grid-template-columns`].
+As listas contém uma sequência de outros valores. Na Sass, os elementos na listas podem ser separados pos vírgulas (`Helvetica, Arial, sans-serif`), espaços (`10px 15px 0 0`), ou [barras][slashes] enquanto for consistente dentro da lista. Ao contrário da maioria das outras linguagens, listas em Sass não requerem parêntesis especiais; quaisquer [expressões][expressions] separados com espaços ou vírgulas contem como uma lista. No entanto, estás autorizado a escrever listas com parênteses reto (`[line1 line2]`), o que é útil quando usas [`grid-template-columns`].
 
 [slashes]: #slash-separated-lists
 [expressions]: ../syntax/structure#expressions
 [`grid-template-columns`]: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
 
-Sass lists can contain one or even zero elements. A single-element list can be written either `(<expression>,)` or `[<expression>]`, and a zero-element list can be written either `()` or `[]`. Also, all [list functions][] will treat individual values that aren't in lists as though they're lists containing that value, which means you rarely need to explicitly create single-element lists.
+As listas de Sass podem conter um ou mesmo nenhum elemento. Uma lista de um único elemento pode ser escrito ou `(<expression>,)` ou `[<expression>]`, e uma lista de zero elemento pode ser escrito ou `()` ou `[]`. Além disto, todas [funções de lista][list functions] tratarão valores individuais que não estão nas listas como se estivessem as listas a conter aquele valor, o que significa que raramente precisas de explicitamente criar as listas de um único elemento.
 
 [list functions]: ../modules/list
 
 <% heads_up do %>
-  Empty lists without brackets aren't valid CSS, so Sass won't let you use one in a property value.
+  As listas vazias sem parêntesis não são CSS válidos, assim a Sass não te permitirá usar uma num valor da propriedade.
 <% end %>
 
-## Slash-Separated Lists
+<h2 id="slash-separated-lists">Listas Separadas por Barra</h2>
 
-Lists in Sass can be separated by slashes, to represent values like the `font: 12px/30px` shorthand for setting `font-size` and `line-height` or the `hsl(80 100% 50% / 0.5)` syntax for creating a color with a given opacity value. However, **slash-separated lists can't currently be written literally.** Sass historically used the `/` character to indicate division, so while existing stylesheets transition to using [`math.div()`] slash-separated lists can only be written using [`list.slash()`].
+As listas na Sass podem ser separadas por barras, para representar os valores como a abreviação `font: 12px/30px` para definir a `font-size` e `line-height` ou a sintaxe `hsl(80 100% 50% / 0.5)` para criar uma color com um dado valor de opacidade. No entanto, as listas **separadas por barra** não podem atualmente ser escrito literalmente**. A Sass historicamente usava o carácter `/` para indicar a divisão, assim embora a transição das folhas de estilos existentes para usar [`math.div()`] as listas separadas por barra pode apenas ser escrita usando [`list.slash()`].
 
 [`math.div()`]: ../modules/math#div
 [`list.slash()`]: ../modules/list#slash
 
-For more details, see [Breaking Change: Slash as Division].
+Para mais detalhes, consulte [Mudança de Rutura: Barra como Divisão][Breaking Change: Slash as Division].
 
 [Breaking Change: Slash as Division]: ../breaking-changes/slash-div
 
-## Using Lists
+<h2 id="using-listas">Usando Listas</h2>
 
-Sass provides a handful of [functions][] that make it possible to use lists to write powerful style libraries, or to make your app's stylesheet cleaner and more maintainable.
+A Sass fornece uma mão-cheia de [funções][functions] que torna possível usar listas para escrever bibliotecas de estilo poderosas, ou tornar a folha de estilo da tua aplicação mais clara e sustentáveis.
 
 [functions]: ../modules/list
 
-### Indexes
+<h3 id="indexes">Índices</h3>
 
-Many of these functions take or return numbers, called *indexes*, that refer to the elements in a list. The index 1 indicates the first element of the list. Note that this is different than many programming languages where indexes start at 0! Sass also makes it easy to refer to the end of a list. The index -1 refers to the last element in a list, -2 refers to the second-to-last, and so on.
+Muitas destas funções recebem ou retornam números, chamados *índices*, que fazem referência aos elementos numa lista. O índice 1 indica o primeiro elemento da lista. Nota que isto é diferente de muitas linguagens de programação onde os índices começam no 0! A Sass também torna fácil fazer referência ao final duma lista. O índice -1 faz referência ao último elemento numa lista, -2 faz referência ao penúltimo, e assim por diante.
 
-### Access an Element
+<h3 id="access-an-element">Acessar um Elemento</h3>
 
-Lists aren't much use if you can't get values out of them. You can use the [`list.nth($list, $n)` function][] to get the element at a given index in a list. The first argument is the list itself, and the second is the index of the value you want to get out.
+As listas não são de muito uso se não puderes receber valores delas. Tu podes usar a [função `list.nth($list, $n)`][`list.nth($list, $n)` function] para receber o elemento num dado índice numa lista. O primeiro argumento é a própria lista, e o segundo é o índice do valor que queres extrair:
 
 [`list.nth($list, $n)` function]: ../modules/list#nth
 
 <%= partial 'code-snippets/example-list-nth' %>
 
-### Do Something for Every Element
+<h3 id="do-something-for-every-element">Fazer Algo em Todos Elementos</h3>
 
-This doesn't actually use a function, but it's still one of the most common ways to use lists. The [`@each` rule][] evaluates a block of styles for each element in a list, and assigns that element to a variable.
+Este na realidade não usa uma função, mas continua uma das maneiras mais comuns usar as listas. O [regra `@each`][`@each` rule] avalia um bloco de estilos por cada elemento numa lista, e atribui este elemento à uma variável:
 
 [`@each` rule]: ../at-rules/control/each
 
 <%= partial 'code-snippets/example-each-list' %>
 
-### Add to a List
+<h3 id="add-to-a-list">Adicionar à uma Lista</h3>
 
-It's also useful to add elements to a list. The [`list.append($list, $val)` function][] takes a list and a value, and returns a copy of the list with the value added to the end. Note that because Sass lists are [immutable][], it doesn't modify the original list.
+É também útil adicionar elementos à uma lista. A [função `list.append($list, $val)`][`list.append($list, $val)` function] recebe uma lista e um valor, e retorna uma cópia da lista com o valor adicionado ao final. Nota que uma vez as listas de Sass são [imutáveis][immutable], isto não modifica a lista original:
 
 [`list.append($list, $val)` function]: ../modules/list#append
 [immutable]: #immutability
@@ -73,15 +73,15 @@ It's also useful to add elements to a list. The [`list.append($list, $val)` func
   @debug append([col1-line1], col1-line2)  // [col1-line1, col1-line2]
 <% end %>
 
-### Find an Element in a List
+<h3 id="find-an-element-in-a-list">Encontrar um Elemento numa Lista</h3>
 
-If you need to check if an element is in a list or figure out what index it's at, use the [`list.index($list, $value)` function][]. This takes a list and a value to locate in that list, and returns the index of that value.
+Se precisas de verificar se um elemento está numa lista ou descobrir em qual índice se encontra, use a [função `list.index($list, $value)`][`list.index($list, $value)` function]. Esta recebe uma lista e um valor à localizar nesta lista, e retorna o índice deste valor:
 
 [`list.index($list, $value)` function]: ../modules/list#index
 
 <%= partial 'code-snippets/example-list-index' %>
 
-If the value isn't in the list at all, `list.index()` returns [`null`][]. Because `null` is [falsey][], you can use `list.index()` with [`@if`][] or [`if()`][] to check whether a list does or doesn't contain a given value.
+Se o valor não estiver na lista, `list.index()` retorna [`null`][`null`]. Já que `null` é [falso][falsey], podes usar `list.index()` com [`@if`][] ou [`if()`][] para verificar se uma lista contém ou não contém um dado valor:
 
 [`null`]: null
 [falsey]: ../at-rules/control/if#truthiness-and-falsiness
@@ -113,11 +113,11 @@ If the value isn't in the list at all, `list.index()` returns [`null`][]. Becaus
     // ...
 <% end %>
 
-## Immutability
+<h2 id="immutability">Imutabilidade</h2>
 
-Lists in Sass are *immutable*, which means that the contents of a list value never changes. Sass's list functions all return new lists rather than modifying the originals. Immutability helps avoid lots of sneaky bugs that can creep in when the same list is shared across different parts of the stylesheet.
+As listas na Sass são *imutáveis*, o que significa que o conteúdo dum valor de lista nunca muda. As funções de lista da Sass retornam todas novas listas ao invés de modificar os originais. A imutabilidade ajuda a evitar muitos erros de programação sorrateiros que podem infiltrar-se quando a mesma lista for partilhada através de diferentes partes da folha de estilos.
 
-You can still update your state over time by assigning new lists to the same variable, though. This is often used in functions and mixins to collect a bunch of values into one list.
+Tu podes continuar a atualizar o teu estado ao longo do tempo atribuindo novas listas para a mesma variável. Isto é muitas vezes usado em funções e misturas para colecionar um grupo de valores em uma lista:
 
 <% example(autogen_css: false) do %>
   @use "sass:list";
@@ -151,9 +151,9 @@ You can still update your state over time by assigning new lists to the same var
   @debug prefixes-for-browsers("firefox" "ie")  // moz ms
 <% end %>
 
-## Argument Lists
+<h2 id="argument-lists">Listas de Argumento</h2>
 
-When you declare a mixin or function that takes [arbitrary arguments][], the value you get is a special list known as an *argument list*. It acts just like a list that contains all the arguments passed to the mixin or function, with one extra feature: if the user passed keyword arguments, they can be accessed as a map by passing the argument list to the [`meta.keywords()` function][].
+Quando declaras uma mistura ou função que recebe [argumentos arbitrário][arbitrary arguments], o valor que recebes é uma lista especial conhecida como um *lista de argumento*. Ela age apenas como uma lista que contém todos os argumentos passados às misturas ou função, com uma funcionalidade adicional: se o utilizador passou argumentos de palavra-chave, podem ser acessados como um mapa passando a lista de argumento a [função `meta.keywords()`][`meta.keywords()` function]:
 
 <%= partial 'code-snippets/example-mixin-arbitrary-keyword-arguments' %>
 
