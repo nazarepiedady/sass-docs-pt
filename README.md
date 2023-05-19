@@ -2,7 +2,7 @@
 
 O código-fonte da documentação da Sass em Português é código-aberto. Vês um erro de digitação? Tens uma melhoria de experiência de utilizador? Consulte o [Guia de Contribuição][contrib]! e também consulte o [Guia de Estilo][sg].
 
-O presente trabalho é fruto dos esforços e aspirações do programador [@nazarepiedady](@nazarepiedady).
+O presente trabalho é fruto dos esforços e aspirações do programador [@nazarepiedady](@nazarepiedady) em diminuir o máximo possível a dependência da língua Inglesa para o aprendizado de tecnologias.
 
 Obrigado!
 
