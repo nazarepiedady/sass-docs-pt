@@ -1,13 +1,13 @@
 ---
-title: Calculations
+title: Cálculos
 introduction: >
-  Calculations are how Sass represents the `calc()` function, as well as similar functions like `clamp()`, `min()`, and `max()`. Sass will simplify these as much as possible, even if they're combined with one another.
+  Os cálculos são como a Sass representa a função `calc()`, bem como funções parecidas como `clamp()`, `min()`, e `max()`. A Sass simplificará estas o quanto for possível, mesmo se forem combinadas com uma outra.
 ---
 
 <% impl_status dart: '1.40.0', libsass: false, ruby: false do %>
-  LibSass, Ruby Sass, and versions of Dart Sass prior to 1.40.0 parse `calc()` as a [special function] like `element()`.
+  A LibSass, Sass de Ruby, e versões de Sass de Dart anteriores a 1.40.0 analisam a `calc()` como uma [função especial][special function] como `element()`.
 
-  LibSass, Ruby Sass, and versions of Dart Sass prior to 1.31.0 parse `clamp()` as a [plain CSS function] rather than supporting special syntax within it. Versions of Dart Sass between 1.31.0 and 1.40.0 parse `clamp()` as a [special function] like `element()`.
+  A LibSass, Sass de Ruby, e versões de Sass de Dart anteriores a 1.31.0 analisam `clamp()` como uma [função de CSS simples][plain CSS function] ao invés de suportar sintaxe especial dentro dela. As versões da Sass de Dart entre 1.31.0 e 1.40.0 analisam a `clamp` como uma [função especial][special function] como `element()`.
 
   [plain CSS function]: ../at-rules/function#plain-css-functions
   [special function]: ../syntax/special-functions#element-progid-and-expression
@@ -23,30 +23,30 @@ introduction: >
   @debug min(100px, calc(1rem + 10%) ; // min(100px, 1rem + 10%)
 <% end %>
 
-Calculations use a special syntax that's different from normal SassScript. It's the same syntax as the CSS `calc()`, but with the additional ability to use [Sass variables] and call [Sass functions]. This means that `/` is always a division operator within a calculation!
+Os cálculos usam uma sintaxe especial que é diferente da SassScript normal. É a mesma sintaxe da `calc()` de CSS, mas com habilidade adicional para usar [variáveis de Sass][Sass variables] e chamar [funções de Sass][Sass functions]. Isto significa que `/` é sempre um operador de divisão dentro dum cálculo!
 
 [Sass variables]: ../variables
 [Sass functions]: ../modules
 
 <% fun_fact do %>
-  The arguments to a Sass function call use the normal Sass syntax, rather than the special calculation syntax!
+  Os argumentos para uma chamada de função de Sass usam a sintaxe de Sass normal, ao invés da sintaxe de cálculo especial!
 <% end %>
 
-You can also use [interpolation] in a calculation. However, if you do, nothing in the parentheses that surround that interpolation will be simplified or type-checked, so it's easy to end up with extra verbose or even invalid CSS. Rather than writing `calc(10px + #{$var})`, just write `calc(10px + $var)`!
+Tu podes também usar a [interpolação][interpolation] num cálculo. No entanto, se fizeres, nada dentro dos parênteses que envolve esta interpolação será simplificado ou verificado o seu tipo, assim é fácil terminar com CSS verboso a mais ou mesmo inválido. No lugar de escrever `calc(10px + #{$var})`, apenas escreva `calc(10px + $var)`!
 
 [interpolation]: ../interpolation
 
-## Simplification
+<h2 id="simplification">Simplificação</h2>
 
-Sass will simplify adjacent operations in calculations if they use units that can be combined at compile-time, such as `1in + 10px` or `5s * 2`. If possible, it'll even simplify the whole calculation to a single number—for example, `clamp(0px, 30px, 20px)` will return `20px`.
+A Sass simplificará as operações adjacentes nos cálculos se usarem unidades que podem ser combinadas em tempo de compilação, tais como `1in + 10px` ou `5s * 2`. Se possível, até mesmo simplificará o cálculo inteiro para um único número — por exemplo, `clamp(0px, 30px, 20px)` retornará `20px`.
 
 <% heads_up do %>
-  This means that a calculation expression won't necessarily always return a calculation! If you're writing a Sass library, you can always use the [`meta.type-of()`] function to determine what type you're dealing with.
+  Isto significa que uma expressão de cálculo não retornarão sempre necessariamente um cálculo! Se estiveres a escrever uma biblioteca de Sass, podes sempre usar a função [`meta.type-of()`] para determinar com qual tipo estás a lidar.
 
   [`meta.type-of()`]: ../modules/meta#type-of
 <% end %>
 
-Calculations will also be simplified within other calculations. In particular, if a `calc()` end up inside any other calculation, the function call will be removed and it'll be replaced by a plain old operation.
+Os cálculos também serão simplificados dentro de outros cálculos. Em especial, se um `calc()` termina dentro de qualquer cálculo, a chamada de função será removida e será substituída por uma operação anterior simples:
 
 <% example do %>
   $width: calc(400px + 10%);
@@ -68,11 +68,11 @@ Calculations will also be simplified within other calculations. In particular, i
   }
 <% end %>
 
-## Operations
+<h2 id="operations">Operações</h2>
 
-You can't use calculations with normal SassScript operations like `+` and `*`. If you want to write some math functions that allow calculations just write them within their own `calc()` expressions—if they're passed a bunch of numbers with compatible units, they'll return plain numbers as well, and if they're passed calculations they'll return calculations.
+Tu não podes usar os cálculos com opções de SassScript normais como `+` e `*`. Se quiseres escrever algumas funções matemáticas que permitam cálculos apenas as escreva dentro sua própria expressões de `calc()` — Se forem passada uma mão-cheia de números com unidades compatíveis, retornarão números simples também, e se forem passados cálculos retornarão cálculos.
 
-This restriction is in place to make sure that if calculations *aren't* wanted, they throw an error as soon as possible. Calculations can't be used everywhere plain numbers can: they can't be injected into CSS identifiers (such as `.item-#{$n}`), for example, and they can't be passed to Sass's built-in [math functions]. Reserving SassScript operations for plain numbers makes it clear exactly where calculations are allowed and where they aren't.
+Esta restrição está no lugar para certificar-se que se os cálculos *não forem* desejados, lançam um erro o mesmo cedo possível. Os cálculos não podem ser usados em toda parte que os números simples podem: eles não podem ser injetados para os identificadores de CSS (tais como `.item-#{$n}`), por exemplo, não podem ser passados para as [funções matemáticas][math functions] embutidas da Sass. Reservar operações de SassScript para números simples esclarece exatamente onde os cálculos são permitidos e onde não são:
 
 [math functions]: ../modules/math
 
@@ -86,33 +86,33 @@ This restriction is in place to make sure that if calculations *aren't* wanted, 
   @debug calc($width * 2); // calc((100% + 10px) * 2);
 <% end %>
 
-## `min()` and `max()`
+## `min()` e `max()`
 
-<% impl_status dart: ">=1.11.0 <1.42.0", libsass: false, ruby: false, feature: "Special function syntax" do %>
-  LibSass, Ruby Sass, and versions of Dart Sass prior to 1.11.0 *always* parse `min()` and `max()` as Sass functions. To create a plain CSS `min()` or `max()` call for those implementations, you can write something like `unquote("min(#{$padding}, env(safe-area-inset-left))")` instead.
+<% impl_status dart: ">=1.11.0 <1.42.0", libsass: false, ruby: false, feature: "Sintaxe de Função Especial" do %>
+  A LibSass, Sass de Ruby, e verões de Sass de Dart anteriores a 1.11.0 *sempre* analisam `min()` e `max()` como funções de Sass. Para criares uma chamada `min()` ou `max()` de CSS simples para estas implementações, podes escrever algo como `unquote("min(#{$padding}, env(safe-area-inset-left))")`.
 
-  Versions of Dart Sass between 1.11.0 and 1.40.0, and between 1.40.1 and 1.42.0 parse `min()` and `max()` functions as [special functions] if they're valid plain CSS, but parse them as Sass functions if they contain Sass features other than interpolation, like variables or function calls.
+  As versões da Sass de Dart entre 1.11.0 e 1.40.0, e entre 1.40.1 e 1.42.0 analisam as funções `min()` e `max()` como [funções especiais][special functions] se forem CSS simples válidos, mas as analisa como funções de Sass se conterem funcionalidades de Sass para além da interpolação, como variáveis ou chamadas de função.
 
-  Dart Sass 1.41.0 parses `min()` and `max()` functions as calculations, but doesn't allow unitless numbers to be combined with numbers with units. This was backwards-incompatible with the global `min()` and `max()` functions, so that behavior was reverted.
+  A Sass de Dart 1.41.0 analisa as funções `min()` e `max()` como cálculos, mas não permite que números sem unidade sejam combinados com números com unidades. Isto foi retro-incompatível com as funções `min()` e `max()` globais, assim este comportamento foi revertido.
 
   [special functions]: ../syntax/special-functions
 <% end %>
 
-CSS added support for [`min()` and `max()` functions] in Values and Units Level 4, from where they were quickly adopted by Safari [to support the iPhoneX]. But Sass supported its own [`min()`] and [`max()`] functions long before this, and it needed to be backwards-compatible with all those existing stylesheets. This led to the need for extra-special syntactic cleverness.
+A CSS adicionou suporte para as [funções `min()` e `max()`] no Nível 4 de Valores e Unidades, de onde foram rapidamente adotados pelo Safari [para suportar o iPhoneX][to support the iPhoneX]. Mas a Sass suportava suas próprias funções [`min()`] e [`max()`] muito antes disto, e precisava de ser retro-compatível com todas aquelas folhas de estilos existentes. Isto conduz para a necessidade de inteligência sintática muito especial.
 
 [`min()` and `max()` functions]: https://drafts.csswg.org/css-values-4/#calc-notation
 [to support the iPhoneX]: https://webkit.org/blog/7929/designing-websites-for-iphone-x/
 [`min()`]: ../modules/math#min
 [`max()`]: ../modules/math#max
 
-If a `min()` or `max()` function call is a valid calculation expression, it will be parsed as a calculation. But as soon as any part of the call contains a SassScript feature that isn't supported in a calculation, like the [modulo operator], it's parsed as a call to Sass's core `min()` or `max()` function instead.
+Se uma chamada de função `min()` e `max()` é uma expressão de cálculo válida, será analisada como um cálculo. Mas logo que qualquer parte da chama conter uma funcionalidade de SassScript que não é suportado num cálculo, como o [operador modulo], é analisada como uma chamada para função `min()` ou `max()` principal.
 
-Since calculations are simplified to numbers when possible anyway, the only substantive difference is that the Sass functions only support units that can be combined at build time, so `min(12px % 10, 10%)` will throw an error.
+Já que cálculos são simplificados aos números quando possível de qualquer modo, a única diferença de substantivo é que as funções de Sass apenas suportam unidades que podem ser combinadas em tempo de construção, assim `min(12px % 10, 10%)` lançarão um erro.
 
 [modulo operator]: ../operators/numeric
 
 <% heads_up do %>
-  Other calculations don't allow unitless numbers to be added to, subtracted from, or compared to numbers with units. `min()` and `max()` are different, though: for backwards-compatibility with the global Sass `min()` and `max()` functions which allow unit/unitless mixing for historical reasons, these units can be mixed as long as they're contained directly within a `min()` or `max()` calculation.
+  Outros cálculos não permitem que números sem unidades sejam adicionados a, subtraídos de, ou comparados aos números com as unidades. `min()` e `max()` são diferentes: para retro-compatibilidade com as funções `min()` e `max()` de Sass globais que permitem unidade/sem unidade misturando por razões históricas, estas unidades podem ser misturada enquanto são contidos diretamente dentro dum cálculo de `min()` ou `max()`.
 <% end %>
 
 <!-- TODO(nweiz): auto-generate this CSS once we're compiling with Dart Sass -->
@@ -121,15 +121,15 @@ Since calculations are simplified to numbers when possible anyway, the only subs
   $padding: 12px;
 
   .post {
-    // Since these max() calls are valid calculation expressions, they're
-    // parsed as calculations.
+    // Já que estas chamadas max() são expressões de cálculos válidos,
+    // são analisados como cálculos.
     padding-left: max($padding, env(safe-area-inset-left));
     padding-right: max($padding, env(safe-area-inset-right));
   }
 
   .sidebar {
-    // Since these use the SassScript-only modulo operator, they're parsed as
-    // SassScript function calls.
+    // Já que estes usam o operador modulo exclusivo de SassScript,
+    // são analisados como chamadas da função de SassScript.
     padding-left: max($padding % 10, 20px);
     padding-right: max($padding % 10, 20px);
   }
@@ -137,15 +137,15 @@ Since calculations are simplified to numbers when possible anyway, the only subs
   $padding: 12px
 
   .post
-    // Since these max() calls are valid calculation expressions, they're
-    // parsed as calculations.
+    // Já que estas chamadas max() são expressões de cálculos válidos,
+    // são analisados como cálculos.
     padding-left: max($padding, env(safe-area-inset-left))
     padding-right: max($padding, env(safe-area-inset-right))
 
 
   .sidebar
-    // Since these use the SassScript-only modulo operator, they're parsed as
-    // SassScript function calls.
+    // Já que estes usam o operador modulo exclusivo de SassScript,
+    // são analisados como chamadas da função de SassScript.
     padding-left: max($padding % 10, 20px)
     padding-right: max($padding % 10, 20px)
   ===
