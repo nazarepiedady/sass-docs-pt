@@ -1,29 +1,29 @@
 ---
 title: LibSass
 introduction: >
-  LibSass is an implementation of Sass in C/C++, designed to be easy to integrate into many different languages. However, as time wore on it ended up lagging behind [Dart Sass](dart-sass) in features and CSS compatibility. **LibSass is now deprecated**—new projects should use Dart Sass instead.
+  A LibSass é uma implementação de Sass em C/C++, desenhada para ser fácil de integrar em muitas diferentes linguagens. No entanto, a medida que o tempo passava lentamente terminou moroso atrás da [Sass de Dart](dart-sass) em funcionalidades e compatibilidade de CSS. A **LibSass está agora depreciada** — os novos projetos devem usar a Sass de Dart.
 ---
 
 :markdown
-  ## Wrappers
+  ## Invólucros
 
-  LibSass is just a library. To run the code locally (i.e. to compile your stylesheets), you need an implementer, or "wrapper". There are a number of other wrappers for LibSass. We encourage you to write your own wrapper --- the whole point of LibSass is that we want to bring Sass to many other languages, not just Ruby!
+  A LibSass é apenas uma biblioteca. Para executares o código localmente (por exemplo, para compilares os teus folhas de estilos), precisas de um implementador, ou "invólucro". Existem um número de outros invólucros para LibSass. Nós encorajamos-te a escrever o teu próprio invólucros --- o objetivo da LibSass é precisamente que queremos levar a Sass para outras linguagens, não apenas Ruby!
 
-  Below are the LibSass wrappers that we're currently aware of. Sometimes there are multiple wrappers per language – in those cases, we put the most recently-updated wrapper first.
+  Abaixo estão invólucros de LibSass que estamos atualmente consciente. Algumas vezes existem vários invólucros por linguagem – nestes casos, colocamos primeiro o mais recentemente atualizado invólucro.
 
 %ul.slides
   %li#sassc
     :markdown
       ### Sass C
 
-      [SassC](https://github.com/sass/sassc) (get it?) is a wrapper written in C.
+      [SassC](https://github.com/sass/sassc) (percebeste?) é um invólucro escrito em C.
 
-      To run the compiler on your local machine, you need to build SassC. To build SassC, you must have either a local copy of the LibSass source or it must be installed into your system. For development, please use the source version. You must then setup an environment variable pointing to the LibSass folder, for example:
+      Para executares o compilador na tua máquina local, precisas de construir a SassC. Para construíres a SassC, deves ter ou uma cópia local da fonte da LibSass ou deve estar instalada no teu sistema. Para desenvolvimento, use a versão da fonte. Tu deves então configurar uma variável de ambiente apontando para a pasta da LibSass, por exemplo:
 
     = partial 'code-snippets/libsass-setup'
 
     :markdown
-      The executable will be in the bin folder. To run it, try something  like:
+      O executável estará na pasta `bin/`. Para o executares, tente algo como:
 
     = partial 'code-snippets/libsass-execute'
 
@@ -31,104 +31,103 @@ introduction: >
     :markdown
       ### Crystal
 
-      [sass.cr](https://github.com/straight-shoota/sass.cr) is a LibSass wrapper for the [Crystal programming language](https://crystal-lang.org/).
+      [sass.cr](https://github.com/straight-shoota/sass.cr) é um invólucro de LibSass para a [linguagem de programação Crystal](https://crystal-lang.org/).
 
   %li#go
     :markdown
       ### Go
 
-      [go-libsass](https://github.com/wellington/go-libsass) has the most active GoLang wrapper. [gosass](https://github.com/moovweb/gosass) is another LibSass wrapper.
+      [go-libsass](https://github.com/wellington/go-libsass) tem o mais ativo invólucro de GoLang. [gosass](https://github.com/moovweb/gosass) é um outro invólucro de LibSass.
 
-      [C6](https://github.com/c9s/c6) is a Sass 3.2 compatible implementation written in pure GoLang that aims to extend Sass.
-      [wellington/sass](https://github.com/wellington/sass) is an in-progress pure Go Sass lexer, parser, and compiler.
+      [C6](https://github.com/c9s/c6) é uma implementação compatível Sass 3.2 escrito na GoLang pura que tem por objetivo estender a Sass.
+      [wellington/sass](https://github.com/wellington/sass) é um léxico, analisador, e compilador de Sass de Go puro em progresso.
 
   %li#java
     :markdown
       ### Java
 
-      There is one Java wrapper --- [jsass](https://github.com/bit3/jsass).
-      There is also a plugin for Maven --- [LibSass Maven plugin](https://gitlab.com/haynes/libsass-maven-plugin).
+      Existe um invólucro de Java --- [jsass](https://github.com/bit3/jsass).
+      Existe também um extensão para Maven --- [extensão de Maven de LibSass](https://gitlab.com/haynes/libsass-maven-plugin).
 
   %li#javascript
     :markdown
       ### JavaScript
 
-      The [sass.js](https://github.com/medialize/sass.js) project makes LibSass available as pure JavaScript. There's a way to [test it in the  browser](http://medialize.github.io/playground.sass.js/), too.
+      O projeto [sass.js](https://github.com/medialize/sass.js) torna a LibSass disponível como JavaScript puro. Existe uma maneira de [testá-lo no navegador](http://medialize.github.io/playground.sass.js/), também.
 
   %li#lua
     :markdown
       ### Lua
 
-      The Lua wrapper is found at [lua-sass](https://github.com/craigbarnes/lua-sass).
+      O invólucro de Lua é encontrado na [lua-sass](https://github.com/craigbarnes/lua-sass).
 
   %li#net
     :markdown
       ### .NET
 
-      [LibSass Host](https://github.com/Taritsyn/LibSassHost) is updated regularly, and is probably the best bet. There's also [libsass-net](https://github.com/darrenkopp/libsass-net) or [NSass](https://github.com/TBAPI-0KA/NSass), although they haven't been updated in a while.
+      [LibSass Host](https://github.com/Taritsyn/LibSassHost) é regularmente atualizado, e é provavelmente a melhor aposta. Existe também [libsass-net](https://github.com/darrenkopp/libsass-net) ou [NSass](https://github.com/TBAPI-0KA/NSass), embora não tem sido atualizado por algum tempo.
 
   %li#node
     :markdown
       ### Node
 
-      The [node-sass](https://github.com/sass/node-sass) project has proven to be popular, and we've taken it into the main Sass GitHub repo. Check out its package page [here](https://www.npmjs.org/package/node-sass), and [there's a dedicated twitter account](https://twitter.com/nodesass) for updates.
+      O projeto [node-sass](https://github.com/sass/node-sass) reconhecido ser popular, e levamos-o para o principal repositório da GitHub da Sass. Consulte a página do seu pacote [nesta ligação](https://www.npmjs.org/package/node-sass), e [existe uma conta de twitter dedicado](https://twitter.com/nodesass) por atualizações.
 
   %li#perl
     :markdown
       ### Perl
 
-      The [CSS::Sass](https://github.com/sass/perl-libsass) project is updated regularly. There's the [Text-Sass-XS](https://github.com/ysasaki/Text-Sass-XS) project, too, although it hasn't been updated in a while.
+      O projeto [CSS::Sass](https://github.com/sass/perl-libsass) é atualizado regularmente. Existe o projeto [Text-Sass-XS](https://github.com/ysasaki/Text-Sass-XS), também, embora não tenha sido atualizado por algum tempo.
 
   %li#php
     :markdown
       ### PHP
 
-      The [SassPHP](https://github.com/absalomedia/sassphp) project is an updated fork of an [older PHP version](https://github.com/jamierumbelow/sassphp).
+      O projeto [SassPHP](https://github.com/absalomedia/sassphp) é uma bifurcação atualizada duma [versão de PHP mais antigo](https://github.com/jamierumbelow/sassphp).
 
   %li#python
     :markdown
       ### Python
 
-      The [libsass-python](https://github.com/sass/libsass-python) project is updated regularly. There are more details on [its own website](https://sass.github.io/libsass-python/).
+      O projeto [libsass-python](https://github.com/sass/libsass-python) é atualizado regularmente. Existem muitos detalhes na [sua própria página](https://sass.github.io/libsass-python/).
 
-      Three other Python projects, [python-scss](https://github.com/pistolero/python-scss), [pylibsass](https://github.com/rsenk330/pylibsass) and [SassPython](https://github.com/marianoguerra/SassPython), haven't been updated in a while.
+      Outros três projetos de Python, [python-scss](https://github.com/pistolero/python-scss), [pylibsass](https://github.com/rsenk330/pylibsass) e [SassPython](https://github.com/marianoguerra/SassPython), não tem sido atualizados por algum tempo.
 
 
   %li#ruby
     :markdown
       ### Ruby
 
-      LibSass has also been ported back into Ruby for the [sassc-ruby](https://github.com/sass/sassc-ruby) project.
+      A LibSass também tem sido transportada de volta para a Ruby para o projeto [sassc-ruby](https://github.com/sass/sassc-ruby).
 
   %li#r
     :markdown
       ### R
 
-      The [R](https://www.r-project.org/) [Sass package](https://github.com/rstudio/sass) wraps LibSass with additional caching and bundling methods.
-      [Extended documentation](https://rstudio.github.io/sass/).
+      O [pacote de Sass](https://github.com/rstudio/sass) de [R](https://www.r-project.org/) envolve a LibSass com métodos de empacotamento e armazenamento de consulta imediata adicionais. [Documentação estendida](https://rstudio.github.io/sass/).
 
   %li#rust
     :markdown
       ### Rust
 
-      The [`sass_rs`](https://github.com/compass-rs/sass-rs) crate is a LibSass wrapper and is updated regularly.
+      A caixa [`sass_rs`](https://github.com/compass-rs/sass-rs) é um invólucro de LibSass e é atualizado regularmente.
 
   %li#scala
     :markdown
       ### Scala
 
-      The only Scala project, [Sass-Scala](https://github.com/kkung/Sass-Scala), hasn't been updated in a couple of years.
+      O único projeto de Scala, [Sass-Scala](https://github.com/kkung/Sass-Scala), não tem sido atualizado por alguns anos.
 
-%h2 About LibSass
+%h2 Sobre a LibSass
 
 :markdown
-  This project is the brainchild of [Hampton Catlin](http://twitter.com/hcatlin), the original creator of Sass, and is sponsored by [Moovweb](http://moovweb.com/). [Aaron Leung](http://github.com/akhleung) from Moovweb is the primary developer.
+  Este projeto é a criação de [Hampton Catlin](http://twitter.com/hcatlin), o criador original de Sass, e é patrocinado pela [Moovweb](http://moovweb.com/). [Aaron Leung](http://github.com/akhleung) da Moovweb é o programador primário.
 
 %figure
-  = image_tag 'logos/libsass.png', alt: 'LibSass logo'
+  = image_tag 'logos/libsass.png', alt: 'Logótipo da LibSass'
 
 - content_for :navigation do
-  %h2 Wrappers
+  %h2 Invólucros
 
   .sl-c-list-navigation-wrapper
     :markdown
@@ -148,7 +147,7 @@ introduction: >
       - [Scala](#scala)
 
 - content_for :complementary do
-  %h2 Resources
+  %h2 Recursos
 
   %ul
     - for project in data.libsass.resources
