@@ -5,7 +5,7 @@ title: sass:string
 <%= partial '../snippets/built-in-module-status' %>
 
 <% function 'string.quote($string)', 'quote($string)', returns: 'string' do %>
-  Returns `$string` as a quoted string.
+  Retorna `$string` como uma sequência de caracteres com aspas.
 
   <% example(autogen_css: false) do %>
     @debug string.quote(Helvetica); // "Helvetica"
@@ -20,7 +20,7 @@ title: sass:string
 <% function 'string.index($string, $substring)',
             'str-index($string, $substring)',
             returns: 'number' do %>
-  Returns the first [index][] of `$substring` in `$string`, or `null` if `$string` doesn't contain `$substring`.
+  Retorna o primeiro [índice][index] da `$substring` na `$string`, ou `null` se `$string` não contiver a `$substring`.
 
   [index]: ../values/strings#string-indexes
 
@@ -37,7 +37,7 @@ title: sass:string
 <% function 'string.insert($string, $insert, $index)',
             'str-insert($string, $insert, $index)',
             returns: 'string' do %>
-  Returns a copy of `$string` with `$insert` inserted at [`$index`][].
+  Retorna uma cópia da `$string` com `$insert` inserido no [`$index`][].
 
   [`$index`]: ../values/strings#string-indexes
 
@@ -49,7 +49,7 @@ title: sass:string
     @debug string.insert("Roboto Bold", " Mono", -6)  // "Roboto Mono Bold"
   <% end %>
 
-  If `$index` is higher than the length of `$string`, `$insert` is added to the end. If `$index` is smaller than the negative length of the string, `$insert` is added to the beginning.
+  Se `$index` for maior do que o comprimento da `$string`, `$insert` é adicionado ao final. Se `$index` for menor do que o comprimento negativo da sequência de caracteres, `$insert` é adicionado ao início.
 
   <% example(autogen_css: false) do %>
     @debug string.insert("Roboto", " Bold", 100); // "Roboto Bold"
@@ -64,7 +64,7 @@ title: sass:string
 <% function 'string.length($string)',
             'str-length($string)',
             returns: 'number' do %>
-  Returns the number of characters in `$string`.
+  Retorna o número de caracteres na `$string`.
 
   <% example(autogen_css: false) do %>
     @debug string.length("Helvetica Neue"); // 14
@@ -81,7 +81,7 @@ title: sass:string
 <% function 'string.slice($string, $start-at, $end-at: -1)',
             'str-slice($string, $start-at, $end-at: -1)',
             returns: 'string' do %>
-  Returns the slice of `$string` starting at [index][] `$start-at` and ending at index `$end-at` (both inclusive).
+  Retorna a fatia da `$string` começando no [índice][index] `$start-at` e terminando no índice `$end-at` (ambos inclusos).
 
   [index]: ../values/strings#string-indexes
 
@@ -101,10 +101,9 @@ title: sass:string
             returns: 'list' do %>
   <% impl_status dart: '1.57.0', libsass: false, ruby: false %>
 
-  Returns a bracketed, comma-separated list of substrings of `$string` that are separated by `$separator`. The `$separator`s aren't included in these substrings.
+  Retorna uma lista separada por vírgula de subsequência de caracteres de `$string` entre parênteses reto que são separados pelo `$separator`. Os `$separator` não são incluído nestas subsequência de caracteres.
 
-  If `$limit` is a number `1` or higher, this splits on at most that many `$separator`s (and so returns at most `$limit + 1` strings). The last substring contains the rest of the string, including any remaining
-  `$separator`s.
+  Se `$limit` for um número `1` ou superior, este separa no máximo de `$separator` (se então retorna no máximo sequências de caracteres de `$limit + 1`). A última subsequência de caracteres contém o resto da sequência de caracteres, incluindo quaisquer `$separator` restantes:
 
   <% example(autogen_css: false) do %>
     @debug string.split("Segoe UI Emoji", " "); // ["Segoe", "UI", "Emoji"]
@@ -119,7 +118,7 @@ title: sass:string
 <% function 'string.to-upper-case($string)',
             'to-upper-case($string)',
             returns: 'string' do %>
-  Returns a copy of `$string` with the [ASCII][] letters converted to upper case.
+  Retorna uma cópia de `$string` com as letras de [ASCII][] convertidas para maiúsculas.
 
   [ASCII]: https://en.wikipedia.org/wiki/ASCII
 
@@ -136,7 +135,7 @@ title: sass:string
 <% function 'string.to-lower-case($string)',
             'to-lower-case($string)',
             returns: 'string' do %>
-  Returns a copy of `$string` with the [ASCII][] letters converted to lower case.
+  Retorna uma cópia de `$string` com as letras [ASCII][] convertidas para minúsculas.
 
   [ASCII]: https://en.wikipedia.org/wiki/ASCII
 
@@ -151,7 +150,7 @@ title: sass:string
 
 
 <% function 'string.unique-id()', 'unique-id()', returns: 'string' do %>
-  Returns a randomly-generated unquoted string that's guaranteed to be a valid CSS identifier and to be unique within the current Sass compilation.
+  Retorna uma sequência de caracteres sem aspas gerada aleatoriamente que é garantido ser um identificador de CSS válido e ser único dentro da atual compilação de Sass.
 
   <% example(autogen_css: false) do %>
     @debug string.unique-id(); // uabtrnzug
@@ -166,7 +165,7 @@ title: sass:string
 <% function 'string.unquote($string)',
             'unquote($string)',
             returns: 'string' do %>
-  Returns `$string` as an unquoted string. This can produce strings that aren't valid CSS, so use with caution.
+  Retorna `$string` como uma sequência de caracteres sem aspas. Este pode produzir sequências de caracteres que não são CSS válidos, então use com cuidado.
 
   <% example(autogen_css: false) do %>
     @debug string.unquote("Helvetica"); // Helvetica
