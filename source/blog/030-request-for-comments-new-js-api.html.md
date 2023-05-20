@@ -4,11 +4,7 @@ author: Natalie Weizenbaum
 date: 2021-08-05 15:30 PST
 ---
 
-I'm excited to officially unveil something that's been in the works for quite a
-while now: a (proposal for a) brand new JavaScript API for Sass. This API has
-been redesigned from the ground up based on lessons learned from both the Node
-Sass API and various other historical Sass APIs in other languages through the
-years, and it addresses many of the shortcomings of the existing API.
+I'm excited to officially unveil something that's been in the works for quite a while now: a (proposal for a) brand new JavaScript API for Sass. This API has been redesigned from the ground up based on lessons learned from both the Node Sass API and various other historical Sass APIs in other languages through the years, and it addresses many of the shortcomings of the existing API.
 
 The API has four main components, all of which I'll cover in this post:
 
@@ -17,51 +13,30 @@ The API has four main components, all of which I'll cover in this post:
 * [The importer API](#importers)
 * [The function API](#functions)
 
-As you read on, remember that this API is still just a proposal. We want to hear
-from you, our users, whether it meets your needs and how we can improve it
-before we lock it in to a full release. So go ahead and make your voices known
-[on the issue tracker]!
+As you read on, remember that this API is still just a proposal. We want to hear from you, our users, whether it meets your needs and how we can improve it before we lock it in to a full release. So go ahead and make your voices known [on the issue tracker]!
 
 [on the issue tracker]: https://github.com/sass/sass/issues/new
 
 ## Why a New API?
 
-The existing JavaScript API is showing its age. It predates Dart Sass, having
-been originally designed for the `node-sass` package, which wrapped the
-now-[deprecated] [LibSass] implementation. (That's why we call it the "Node Sass
-API"!) It grew organically and often messily along with LibSass, and ended up
-with more than a few awkward legacy behaviors. Many of these behaviors are more
-of a pain for implementation than anything else, but a few of them made life
-quite difficult:
+The existing JavaScript API is showing its age. It predates Dart Sass, having been originally designed for the `node-sass` package, which wrapped the now-[deprecated] [LibSass] implementation. (That's why we call it the "Node Sass API"!) It grew organically and often messily along with LibSass, and ended up with more than a few awkward legacy behaviors. Many of these behaviors are more of a pain for implementation than anything else, but a few of them made life quite difficult:
 
 [deprecated]: /blog/libsass-is-deprecated
 [LibSass]: /libsass
 
-* The importer API was built around file paths rather than URLs, and was tightly
-  coupled to the physical filesystem. This made it impossible to override *all*
-  file-based loads and present a fully virtual filesystem, and caused custom
-  Node importers to interact poorly with the new [module system].
+* The importer API was built around file paths rather than URLs, and was tightly coupled to the physical filesystem. This made it impossible to override *all* file-based loads and present a fully virtual filesystem, and caused custom Node importers to interact poorly with the new [module system].
 
-* The function API was built around mutable value objects, which runs counter to
-  Sass's immutable nature. It also provided no utility methods (such as looking
-  up a key in a map) to make it easier to implement idiomatic custom functions,
-  and didn't provide access to crucial information about values such as whether
-  strings were quoted.
+* The function API was built around mutable value objects, which runs counter to Sass's immutable nature. It also provided no utility methods (such as looking up a key in a map) to make it easier to implement idiomatic custom functions, and didn't provide access to crucial information about values such as whether strings were quoted.
 
-* All of the asynchronous functions were callback-based rather than
-  promise-based.
+* All of the asynchronous functions were callback-based rather than promise-based.
 
 [module system]: https://sass-lang.com/blog/the-module-system-is-launched
 
-The new API addresses these issues and more with a modern, idiomatic API that
-will make working with Sass from JS a breeze.
+The new API addresses these issues and more with a modern, idiomatic API that will make working with Sass from JS a breeze.
 
 ## Compilation
 
-At the heart of the API are four functions that do the actual Sass compilation,
-two synchronous and two asynchronous. They're presented here in TypeScript
-syntax to clarify exactly what they take and return, but you can always call
-them from plain JS:
+At the heart of the API are four functions that do the actual Sass compilation, two synchronous and two asynchronous. They're presented here in TypeScript syntax to clarify exactly what they take and return, but you can always call them from plain JS:
 
 ```ts
 function compile(
@@ -85,57 +60,38 @@ function compileStringAsync(
 ): Promise<CompileResult>;
 ```
 
-The `compile()` and `compileAsync()` functions load a Sass file from a path on
-disk, whereas `compileString()` and `compileStringAsync()` compile Sass source
-code passed in as a string. All these take the following options:
+The `compile()` and `compileAsync()` functions load a Sass file from a path on disk, whereas `compileString()` and `compileStringAsync()` compile Sass source code passed in as a string. All these take the following options:
 
-* `alertAscii`: Whether errors and warnings should use only ASCII characters (as
-  opposed to, for example, Unicode box-drawing characters).
+* `alertAscii`: Whether errors and warnings should use only ASCII characters (as opposed to, for example, Unicode box-drawing characters).
 * `alertColor`: Whether errors and warnings should use terminal colors.
-* `loadPaths`: A list of file paths to use to look up files to load, just like
-  `includePaths` in the old API.
-* `importers`: A list of [custom importers](#importers) to use to load Sass
-  source files.
-* `functions`: An object whose keys are Sass function signatures and whose
-  values are [custom functions](#functions).
+* `loadPaths`: A list of file paths to use to look up files to load, just like `includePaths` in the old API.
+* `importers`: A list of [custom importers](#importers) to use to load Sass source files.
+* `functions`: An object whose keys are Sass function signatures and whose values are [custom functions](#functions).
 * `quietDeps`: Whether to silence deprecation warnings in dependencies.
-* `logger`: The [custom logger](#loggers) to use to emit warnings and debug
-  messages.
+* `logger`: The [custom logger](#loggers) to use to emit warnings and debug messages.
 * `sourceMap`: Whether to generate a source map during compilation.
 * `style`: The output style, `'compressed'` or `'expanded'`.
 * `verbose`: Whether to emit every deprecation warning encountered.
 
-The `compileString()` and `compileStringAsync()` functions take a few additional
-options:
+The `compileString()` and `compileStringAsync()` functions take a few additional options:
 
-* `syntax`: The syntax of the file, `'scss'` (the default), `'indented'`, or
-  `'css'`.
+* `syntax`: The syntax of the file, `'scss'` (the default), `'indented'`, or `'css'`.
 * `url`: The [canonical URL](#canonicalizing) of the file.
-* `importer`: The [custom importer](#importers) to treat as the file's source.
-  If this is passed, this importer will be used to resolve relative loads from
-  this stylesheet.
+* `importer`: The [custom importer](#importers) to treat as the file's source. If this is passed, this importer will be used to resolve relative loads from this stylesheet.
 
 All these functions return an object with the following fields:
 
 * `css`: The compiled CSS, as a string.
-* `loadedUrls`: All the URLs loaded during the compilation, in no particular
-  order.
-* `sourceMap`: The source map for the file if `sourceMap: true` was passed, as
-  a decoded object.
+* `loadedUrls`: All the URLs loaded during the compilation, in no particular order.
+* `sourceMap`: The source map for the file if `sourceMap: true` was passed, as a decoded object.
 
-As with the Node Sass API, the synchronous functions will be substantially
-faster than their asynchronous counterparts. Unfortunately the new API will not
-support the `fibers` option for speeding up asynchronous compilation, since [the
-`fibers` package has been discontinued].
+As with the Node Sass API, the synchronous functions will be substantially faster than their asynchronous counterparts. Unfortunately the new API will not support the `fibers` option for speeding up asynchronous compilation, since [the `fibers` package has been discontinued].
 
 [the `fibers` package has been discontinued]: /blog/node-fibers-discontinued
 
 ## Loggers
 
-The logger API gives you more fine-grained control over how and when warnings
-and debug messages are emitted. Unlike other aspects of this proposal, a
-`logger` option will also be added to the *old* API to allow you to control your
-messages there without needing to upgrade to the new API immediately.
+The logger API gives you more fine-grained control over how and when warnings and debug messages are emitted. Unlike other aspects of this proposal, a `logger` option will also be added to the *old* API to allow you to control your messages there without needing to upgrade to the new API immediately.
 
 A logger implements the following interface:
 
@@ -157,31 +113,22 @@ interface Logger {
 }
 ```
 
-The `warn` function handles warnings, including both warnings from the compiler
-itself and from `@warn` rules. It's passed:
+The `warn` function handles warnings, including both warnings from the compiler itself and from `@warn` rules. It's passed:
 
 * The warning message
 * A flag indicating whether it's specifically a deprecation warning
-* A span indicating where the warning was located, if it comes from a specific
-  location
-* The Sass stack trace at the point at which the warning was encountered, if it
-  was encountered during execution
+* A span indicating where the warning was located, if it comes from a specific location
+* The Sass stack trace at the point at which the warning was encountered, if it was encountered during execution
 
-The `debug` function handles only `@debug` rules, and is just passed the message
-and the rule's span. For more information on the `SourceSpan` type, see [the
-Logger proposal].
+The `debug` function handles only `@debug` rules, and is just passed the message and the rule's span. For more information on the `SourceSpan` type, see [the Logger proposal].
 
 [the Logger proposal]: https://github.com/sass/sass/tree/main/proposal/js-logger.d.ts
 
-Sass will also provide a built-in logger, `Logger.silent`, that never emits any
-messages. This will allow you to easily run Sass in "quiet mode" where no
-warnings are ever surfaced.
+Sass will also provide a built-in logger, `Logger.silent`, that never emits any messages. This will allow you to easily run Sass in "quiet mode" where no warnings are ever surfaced.
 
 ## Importers
 
-Rather than modeling importers as single-function callbacks, the new API models
-them as objects that expose two methods: one that _canonicalizes_ a URL, and one
-that _loads_ a canonical URL.
+Rather than modeling importers as single-function callbacks, the new API models them as objects that expose two methods: one that _canonicalizes_ a URL, and one that _loads_ a canonical URL.
 
 ```ts
 // Importers for compileAsync() and compileStringAsync() are the same, except
@@ -196,90 +143,47 @@ interface Importer {
 }
 ```
 
-Note that even stylesheets that are loaded directly from the filesystem through
-`compile()` or `loadPaths` are treated as though they're loaded by an importer.
-This built-in filesystem importer canonicalizes all paths to `file:` URLs, and
-loads those URLs from the physical filesystem.
+Note that even stylesheets that are loaded directly from the filesystem through `compile()` or `loadPaths` are treated as though they're loaded by an importer. This built-in filesystem importer canonicalizes all paths to `file:` URLs, and loads those URLs from the physical filesystem.
 
 ### Canonicalizing
 
-The first step determines the canonical URL for a stylesheet. Each stylesheet
-has exactly one canonical URL that in turn refers to exactly one stylesheet. The
-canonical URL must be absolute, including a scheme, but the specific structure
-is up to the importer. In most cases, the stylesheet in question will exist on
-disk and the importer will just return a `file:` URL for it.
+The first step determines the canonical URL for a stylesheet. Each stylesheet has exactly one canonical URL that in turn refers to exactly one stylesheet. The canonical URL must be absolute, including a scheme, but the specific structure is up to the importer. In most cases, the stylesheet in question will exist on disk and the importer will just return a `file:` URL for it.
 
-The `canonicalize()` method takes a URL string that may be either relative or
-absolute. If the importer recognizes that URL, it returns a corresponding
-absolute URL (including a scheme). This is the _canonical URL_ for the
-stylesheet in question. Although the input URL may omit a file extension or
-an initial underscore, the canonical URL must be fully resolved.
+The `canonicalize()` method takes a URL string that may be either relative or absolute. If the importer recognizes that URL, it returns a corresponding absolute URL (including a scheme). This is the _canonical URL_ for the stylesheet in question. Although the input URL may omit a file extension or an initial underscore, the canonical URL must be fully resolved.
 
-For a stylesheet that's loaded from the filesystem, the canonical URL will be
-the absolute `file:` URL of the physical file on disk. If it's generated
-in-memory, the importer should choose a custom URL scheme to guarantee that
-its canonical URLs don't conflict with any other importer's.
+For a stylesheet that's loaded from the filesystem, the canonical URL will be the absolute `file:` URL of the physical file on disk. If it's generated in-memory, the importer should choose a custom URL scheme to guarantee that its canonical URLs don't conflict with any other importer's.
 
-For example, if you're loading Sass files from a database, you might use the
-scheme `db:`. The canonical URL for a stylesheet associated with key `styles`
-in the database might be `db:styles`.
+For example, if you're loading Sass files from a database, you might use the scheme `db:`. The canonical URL for a stylesheet associated with key `styles` in the database might be `db:styles`.
 
-This function also takes a `fromImport` option that indicates whether the
-importer is being invoked from an `@import` rule (as opposed to `@use`,
-`@forward`, or `meta.load-css()`).
+This function also takes a `fromImport` option that indicates whether the importer is being invoked from an `@import` rule (as opposed to `@use`, `@forward`, or `meta.load-css()`).
 
-Having a canonical URL for each stylesheet allows Sass to ensure that the
-same stylesheet isn't loaded multiple times in the new module system.
+Having a canonical URL for each stylesheet allows Sass to ensure that the same stylesheet isn't loaded multiple times in the new module system.
 
 #### Canonicalizing Relative Loads
 
-When a stylesheet tries to load a relative URL, such as `@use "variables"`, it's
-not clear from the document itself whether that refers to a file that exists
-relative to the stylesheet or to another importer or load path. Here's how the
-importer API resolves that ambiguity:
+When a stylesheet tries to load a relative URL, such as `@use "variables"`, it's not clear from the document itself whether that refers to a file that exists relative to the stylesheet or to another importer or load path. Here's how the importer API resolves that ambiguity:
 
-* First, the relative URL is resolved relative to the canonical URL of the
-  stylesheet that contained the `@use` (or `@forward` or `@import`). For
-  example, if the canonical URL is `file:///path/to/my/_styles.scss`, then the
-  resolved URL will be `file:///path/to/my/variables`.
+* First, the relative URL is resolved relative to the canonical URL of the stylesheet that contained the `@use` (or `@forward` or `@import`). For example, if the canonical URL is `file:///path/to/my/_styles.scss`, then the resolved URL will be `file:///path/to/my/variables`.
 
-* This URL is then passed to the `canonicalize()` method of the importer that
-  loaded the old stylesheet. (That means it's important for your importers to
-  support absolute URLs!) If the importer recognizes it, it returns the
-  canonical value which is then passed to that importer's `load()`; otherwise,
-  it returns `null`.
+* This URL is then passed to the `canonicalize()` method of the importer that loaded the old stylesheet. (That means it's important for your importers to support absolute URLs!) If the importer recognizes it, it returns the canonical value which is then passed to that importer's `load()`; otherwise, it returns `null`.
 
-* If the old stylesheet's importer didn't recognize the URL, it's passed to all
-  the `importers`' canonicalize functions in the order they appear in `options`,
-  then checked for in all the `loadPaths`. If none of those recognizes it, the
-  load fails.
+* If the old stylesheet's importer didn't recognize the URL, it's passed to all the `importers`' canonicalize functions in the order they appear in `options`, then checked for in all the `loadPaths`. If none of those recognizes it, the load fails.
 
-It's important that local relative paths take precedence over other importers or
-load paths, because otherwise your local stylesheets could get unexpectedly
-broken by a dependency adding a file with a conflicting name.
+It's important that local relative paths take precedence over other importers or load paths, because otherwise your local stylesheets could get unexpectedly broken by a dependency adding a file with a conflicting name.
 
 ### Loading
 
-The second step actually loads the text of the stylesheet. The `load()`
-method takes a canonical URL that was returned by `canonicalize()` and
-returns the contents of the stylesheet at that URL. This is only called once
-per compilation for each canonical URL; future loads of the same URL will
-re-use either the existing module (for `@use` and `@forward`) or the parse
-tree (for `@import`).
+The second step actually loads the text of the stylesheet. The `load()` method takes a canonical URL that was returned by `canonicalize()` and returns the contents of the stylesheet at that URL. This is only called once per compilation for each canonical URL; future loads of the same URL will re-use either the existing module (for `@use` and `@forward`) or the parse tree (for `@import`).
 
 The `load()` method returns an object with the following fields:
 
 * `css`: The text of the loaded stylesheet.
 * `syntax`: The syntax of the file: `'scss'`, `'indented'`, or `'css'`.
-* `sourceMapUrl`: An optional browser-accessible `URL` to include in source maps
-  when referring to this file.
+* `sourceMapUrl`: An optional browser-accessible `URL` to include in source maps when referring to this file.
 
 ### `FileImporter`
 
-This proposal also adds a special type of importer known as a `FileImporter`.
-This importer makes the common case of redirecting loads to somewhere on the
-physical filesystem easier. It doesn't require the caller to implement
-`load()`, since that's always going to be the same for files on disk.
+This proposal also adds a special type of importer known as a `FileImporter`. This importer makes the common case of redirecting loads to somewhere on the physical filesystem easier. It doesn't require the caller to implement `load()`, since that's always going to be the same for files on disk.
 
 ```ts
 interface FileImporter {
@@ -290,14 +194,10 @@ interface FileImporter {
 }
 ```
 
-The `findFileUrl()` method takes a relative URL and returns an object with the
-following fields:
+The `findFileUrl()` method takes a relative URL and returns an object with the following fields:
 
-* `url`: The absolute `file:` URL of the file to load. This URL doesn't need to
-  be fully canonicalized: the Sass compiler will take care of resolving
-  partials, file extensions, index files, and so on.
-* `sourceMapUrl`: An optional browser-accessible `URL` to include in source maps
-  when referring to this file.
+* `url`: The absolute `file:` URL of the file to load. This URL doesn't need to be fully canonicalized: the Sass compiler will take care of resolving partials, file extensions, index files, and so on.
+* `sourceMapUrl`: An optional browser-accessible `URL` to include in source maps when referring to this file.
 
 ## Functions
 
@@ -312,8 +212,7 @@ The only differences are:
 * Async functions return a `Promise<Value>` rather than calling a callback.
 * The value types themselves are different.
 
-The second point is pretty substantial, though! The new value types are much
-more fleshed out than the old versions. Let's start with the parent class:
+The second point is pretty substantial, though! The new value types are much more fleshed out than the old versions. Let's start with the parent class:
 
 ```ts
 abstract class Value {
@@ -412,42 +311,23 @@ abstract class Value {
 
 There are a couple important things to note here:
 
-* Because CSS doesn't have a strong syntactic differentiation between a single
-  element and a list containing one element, any Sass value may be treated as
-  though it's a list. The `Value` makes it easy to follow this convention by
-  making the `asList()`, `hasBrackets()`, and `separator()` getters available
-  for every `Value`.
+* Because CSS doesn't have a strong syntactic differentiation between a single element and a list containing one element, any Sass value may be treated as though it's a list. The `Value` makes it easy to follow this convention by making the `asList()`, `hasBrackets()`, and `separator()` getters available for every `Value`.
 
-* The list returned this was and the map returned by `asMap()` are immutable
-  types from the [`immutable` package]. This reflects Sass's built-in
-  immutability of all its types. Although these values can't be modified
-  directly, their APIs make it easy and efficient to create new values with
-  changes applied.
+* The list returned this was and the map returned by `asMap()` are immutable types from the [`immutable` package]. This reflects Sass's built-in immutability of all its types. Although these values can't be modified directly, their APIs make it easy and efficient to create new values with changes applied.
 
-* Sass's list-indexing conventions are different than JavaScript's. The
-  `sassIndexToListIndex()` function makes it easy to convert from Sass index to
-  JS index.
+* Sass's list-indexing conventions are different than JavaScript's. The `sassIndexToListIndex()` function makes it easy to convert from Sass index to JS index.
 
-* In Sass, any value may be used in a boolean context, with `false`
-  and `null` counting as "falsey" values. The `isTruthy` getter makes this
-  convention easy to follow.
+* In Sass, any value may be used in a boolean context, with `false` and `null` counting as "falsey" values. The `isTruthy` getter makes this convention easy to follow.
 
-* The `assert*()` functions make it easy to ensure that you're being passed the
-  arguments you expect, and to throw an idiomatic error if you're not. They're
-  particularly useful for TypeScript users since they'll automatically narrow
-  the type of the `Value`.
+* The `assert*()` functions make it easy to ensure that you're being passed the arguments you expect, and to throw an idiomatic error if you're not. They're particularly useful for TypeScript users since they'll automatically narrow the type of the `Value`.
 
 [`immutable` package]: https://immutable-js.com/
 
-Most Sass values have their own subclasses, but there are three singleton values
-that are just available as constants: `sassTrue`, `sassFalse`, and `sassNull`
-represent Sass's `true`, `false`, and `null` values respectively.
+Most Sass values have their own subclasses, but there are three singleton values that are just available as constants: `sassTrue`, `sassFalse`, and `sassNull` represent Sass's `true`, `false`, and `null` values respectively.
 
 ### Colors
 
-The new API's `SassColor` class provides access to colors in RGB, HSL, and HWB
-format. As with built-in Sass color functions, any attribute can be accessed on
-any color regardless of how it was initially created.
+The new API's `SassColor` class provides access to colors in RGB, HSL, and HWB format. As with built-in Sass color functions, any attribute can be accessed on any color regardless of how it was initially created.
 
 ```ts
 class SassColor extends Value {
@@ -539,16 +419,9 @@ class SassColor extends Value {
 
 ### Numbers
 
-The `SassNumber` class stores its numerator and denominator units as arrays
-rather than strings. In addition, it provides methods for asserting that it has
-specific units (`assertNoUnits()`, `assertUnit()`) and for converting it to
-specific units (`convert()`, `convertToMatch()`, `convertValue()`,
-`convertValueToMatch()`, `coerce()`, `coerceValue()`, `coerceValueToMatch()`).
+The `SassNumber` class stores its numerator and denominator units as arrays rather than strings. In addition, it provides methods for asserting that it has specific units (`assertNoUnits()`, `assertUnit()`) and for converting it to specific units (`convert()`, `convertToMatch()`, `convertValue()`, `convertValueToMatch()`, `coerce()`, `coerceValue()`, `coerceValueToMatch()`).
 
-Sass's numeric logic is also subtly different from JS, since Sass considers
-numbers that differ by less than the 10th decimal digit to be identical. This
-API provides a number of methods that help convert between this and JavaScript's
-numeric logic.
+Sass's numeric logic is also subtly different from JS, since Sass considers numbers that differ by less than the 10th decimal digit to be identical. This API provides a number of methods that help convert between this and JavaScript's numeric logic.
 
 ```ts
 class SassNumber extends Value {
@@ -687,10 +560,7 @@ class SassNumber extends Value {
 
 ### Strings
 
-The `SassString` class provides access to information about whether or not the
-string is quoted. As with lists, JS's notion of indexes differs from Sass's, so
-it also provides the `sassIndexToStringIndex()` method to convert a JS index
-into a Sass index.
+The `SassString` class provides access to information about whether or not the string is quoted. As with lists, JS's notion of indexes differs from Sass's, so it also provides the `sassIndexToStringIndex()` method to convert a JS index into a Sass index.
 
 ```ts
 class SassString extends Value {
@@ -731,9 +601,7 @@ class SassString extends Value {
 
 ### Lists
 
-As mentioned above, most list functions are on the `Value` superclass to make it
-easy to follow the Sass convention of treating all values as lists. However, the
-`SassList` class can still be constructed to make new lists:
+As mentioned above, most list functions are on the `Value` superclass to make it easy to follow the Sass convention of treating all values as lists. However, the `SassList` class can still be constructed to make new lists:
 
 ```ts
 class SassList extends Value {
@@ -760,8 +628,7 @@ class SassList extends Value {
 
 ### Maps
 
-The `SassMap` class simply exposes its contents as an `OrderedMap` from the
-[`immutable` package].
+The `SassMap` class simply exposes its contents as an `OrderedMap` from the [`immutable` package].
 
 ```ts
 class SassMap extends Value {
@@ -778,9 +645,7 @@ class SassMap extends Value {
 
 ### Functions
 
-The `SassFunction` class is fairly restrictive: it just allows a new first-class
-function to be created with a synchronous callback. These functions can't be
-invoked by custom functions—but they still provide more power than the old API!
+The `SassFunction` class is fairly restrictive: it just allows a new first-class function to be created with a synchronous callback. These functions can't be invoked by custom functions—but they still provide more power than the old API!
 
 ```ts
 class SassFunction extends Value {
@@ -797,16 +662,13 @@ class SassFunction extends Value {
 
 ## More Information
 
-If you want to know more about these proposals and see their most up-to-date
-forms, they're available on GitHub to view in full:
+If you want to know more about these proposals and see their most up-to-date forms, they're available on GitHub to view in full:
 
 * [Compile API proposal](https://github.com/sass/sass/tree/main/proposal/new-js-api.d.ts)
 * [Logger proposal](https://github.com/sass/sass/blob/main/proposal/js-logger.d.ts)
 * [Importer proposal](https://github.com/sass/sass/blob/main/proposal/new-js-importer.d.ts)
 * [Functions and values proposal](https://github.com/sass/sass/blob/main/proposal/new-function-and-values-api.d.ts)
 
-We're eager for feedback, so please [let us know what you think]! The proposals
-in question will be open for at least a month after this blog post goes live,
-and possibly more depending on how lively the discussion around them is.
+We're eager for feedback, so please [let us know what you think]! The proposals in question will be open for at least a month after this blog post goes live, and possibly more depending on how lively the discussion around them is.
 
 [let us know what you think]: https://github.com/sass/sass/issues/new
