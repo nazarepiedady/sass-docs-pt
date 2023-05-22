@@ -1,15 +1,15 @@
 ---
-title: "@if and @else"
+title: "@if e @else"
 table_of_contents: true
 introduction: >
-  The `@if` rule is written `@if <expression> { ... }`, and it controls whether or not its block gets evaluated (including emitting any styles as CSS). The [expression](../../syntax/structure#expressions) usually returns either [`true` or `false`](../../values/booleans)—if the expression returns `true`, the block is evaluated, and if the expression returns `false` it’s not.
+  Se a regra `@if` for escrita `@if <expression> { ... }`, e controlar se o seu bloco é ou não avaliado (incluindo emissões de quaisquer estilos como CSS). A [expressão](../../syntax/structure#expressions) normalmente retorna ou [`true` ou `false`](../../values/booleans) — se a expressão retornar `true`, o bloco é avaliado, e se a expressão retornar `false` não.
 ---
 
 <%= partial 'code-snippets/example-if' %>
 
 ## `@else`
 
-An `@if` rule can optionally be followed by an `@else` rule, written `@else { ... }`. This rule's block is evaluated if the `@if` expression returns `false`.
+Uma regra `@if` pode opcionalmente será seguido por uma regra `@else`, escrita `@else { ... }`. Este bloco da regra é avaliado se a expressão de `@if` retornar `false`:
 
 <% example do %>
   $light-background: #f2ece4;
@@ -55,15 +55,15 @@ An `@if` rule can optionally be followed by an `@else` rule, written `@else { ..
       @include theme-colors($light-theme: false)
 <% end %>
 
-Conditional expressions may contain [boolean operators][] (`and`, `or`, `not`).
+As expressões condicionais pode conter [operadores booleanos][boolean operators][boolean operators] (`and`, `or`, `not`).
 
 [boolean operators]: ../../operators/boolean
 
 ### `@else if`
 
-You can also choose whether to evaluate an `@else` rule's block by writing it `@else if <expression> { ... }`. If you do, the block is evaluated only if the preceding `@if`'s expression returns `false` *and* the `@else if`'s expression returns `true`.
+Tu também podes escolher se avalia um bloco da regra `@else` escrevendo-o `@else if <expression> { ... }`. Se fizeres, o bloco é avaliado somente se a expressão da `@if` precedente retornar `false` *e* a expressão da `@else if` retornar `true`.
 
-In fact, you can chain as many `@else if`s as you want after an `@if`. The first block in the chain whose expression returns `true` will be evaluated, and no others. If there's a plain `@else` at the end of the chain, its block will be evaluated if every other block fails.
+Na realidade, podes acorrentar tantos `@else if` quiseres depois dum `@if`. O primeiro bloco na cadeia cuja expressão retorna `true` será avaliado, e os outros não. Se existir um `@else` simples no final da cadeia, o seu bloco será avaliado se todos os outros blocos falharem:
 
 <% example do %>
   @use "sass:math";
