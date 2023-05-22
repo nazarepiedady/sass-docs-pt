@@ -1,13 +1,13 @@
 ---
 title: "@while"
 introduction: >
-  The `@while` rule, written `@while <expression> { ... }`, evaluates its block if its [expression](../../syntax/structure#expressions) returns `true`. Then, if its expression still returns `true`, it evaluates its block again. This continues until the expression finally returns `false`.
+  A regra `@while`, escrita `@while <expression> { ... }`, avalia o seu bloco se sua [expressão](../../syntax/structure#expressions) retornar `true`. Então, se sua expressão continuar a retornar `true`, avalia o seu bloco novamente. Isto continua até a expressão finalmente retornar `false`.
 ---
 
 <% example do %>
   @use "sass:math";
 
-  /// Divides `$value` by `$ratio` until it's below `$base`.
+  /// Divide `$value` por `$ratio` até estiver abaixo de `$base`.
   @function scale-below($value, $base, $ratio: 1.618) {
     @while $value > $base {
       $value: math.div($value, $ratio);
@@ -22,7 +22,7 @@ introduction: >
   ===
   @use "sass:math"
 
-  /// Divides `$value` by `$ratio` until it's below `$base`.
+  /// Divide `$value` por `$ratio` até estiver abaixo de `$base`.
   @function scale-below($value, $base, $ratio: 1.618)
     @while $value > $base
       $value: math.div($value, $ratio)
@@ -40,7 +40,7 @@ introduction: >
 <% end %>
 
 <% heads_up do %>
-  Although `@while` is necessary for a few particularly complex stylesheets, you're usually better of using either [`@each`][] or [`@for`][] if either of them will work. They're clearer for the reader, and often faster to compile as well.
+  Embora `@while` é necessário para algumas folhas de estilos particularmente complexas, estarás melhor usando ou [`@each`][] ou [`@for`][] se qualquer um delas funcionar. São mais claras para o leitor, e frequentemente também mais rápido de compilar:
 
   [`@each`]: each
   [`@for`]: for
