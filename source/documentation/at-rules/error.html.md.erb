@@ -1,10 +1,10 @@
 ---
 title: "@error"
 introduction: >
-  When writing [mixins](mixin) and [functions](function) that take arguments, you usually want to ensure that those arguments have the types and formats your API expects. If they aren't, the user needs to be notified and your mixin/function needs to stop running.
+  Quando escreves [misturas](mixin) e [funções](function) que recebem argumentos, normalmente queres garantir que estes argumentos têm os tipos e formatos que a tua API espera. Se tiverem, o utilizador precisa ser notificado e a tua mistura ou função precisa parar a execução.
 ---
 
-Sass makes this easy with the `@error` rule, which is written `@error <expression>`. It prints the value of the [expression][] (usually a string) along with a stack trace indicating how the current mixin or function was called. Once the error is printed, Sass stops compiling the stylesheet and tells whatever system is running it that an error occurred.
+A Sass torna isto fácil com a regra `@error`, que é escrita como `@error <expression>`. Ela imprime o valor da [expressão][expression] (normalmente uma sequência de caracteres) juntamente com um vestígio da pilha indicando como a mistura ou função atual foi chamada. Assim que o erro for imprimido, a Sass para a compilação da folha de estilo e diz ao seja qual for o sistema que estiver a executá-la que um erro ocorreu:
 
 [expression]: ../syntax/structure#expressions
 
@@ -53,7 +53,7 @@ Sass makes this easy with the `@error` rule, which is written `@error <expressio
     // Error: Property top must be either left or right.
 <% end %>
 
-The exact format of the error and stack trace varies from implementation to implementation, and can also depend on your build system. This is what it looks like in Dart Sass when run from the command line:
+O formato exato do erro e vestígio da pilha varia de implementação à implementação, e também pode depender do teu sistema de construção. Isto é como se parece na Sass de Dart quando executado a partir da linha de comando:
 
 ```
 Error: "Property top must be either left or right."
