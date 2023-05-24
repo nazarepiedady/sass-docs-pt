@@ -1,10 +1,10 @@
 ---
 title: "@warn"
 introduction: >
-  When writing [mixins](mixin) and [functions](function), you may want to discourage users from passing certain arguments or certain values. They may be passing legacy arguments that are now deprecated, or they may be calling your API in a way that’s not quite optimal.
+  Quando executas [misturas](mixin) e [funções](function), podes querer desencorajar os utilizadores de passarem certos argumentos ou valores. Eles podem estar a passar argumentos legados que agora estão depreciados, ou podem estar a chamar a tua API duma maneira que não é muito ideal.
 ---
 
-The `@warn` rule is designed just for that. It's written `@warn <expression>` and it prints the value of the [expression][] (usually a string) for the user, along with a stack trace indicating how the current mixin or function was called. Unlike the [`@error` rule][], though, it doesn't stop Sass entirely.
+A regra `@warn` é desenhada apenas para isto. É escrita como `@warn <expression>` e imprime o valor da [expressão][expression] (normalmente uma sequência de caracteres) para o utilizador, juntamente com um vestígio da pilha indicando como a mistura ou função atual foi executada. Ao contrário da [regra `@error`][`@error` rule], não para totalmente a Sass:
 
 [expression]: ../syntax/structure#expressions
 [`@error` rule]: error
@@ -46,7 +46,7 @@ The `@warn` rule is designed just for that. It's written `@warn <expression>` an
     @include prefix(transform, rotate(15deg), wekbit ms)
 <% end %>
 
-The exact format of the warning and stack trace varies from implementation to implementation. This is what it looks like in Dart Sass:
+O formato exato do aviso e vestígio da pilha varia de implementação à implementação. Isto é como se parece na Sass de Dart:
 
 ```
 Warning: Unknown prefix wekbit.
