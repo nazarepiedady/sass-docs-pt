@@ -24,7 +24,8 @@ introduction: >
   <% end %>
 <% end %>
 
-<h2 id="escapes">Saídas</h2>
+<span id="escapes">Saídas</span>
+## Saídas
 
 Todas as sequências de caracteres da Sass suportam os [códigos de saída][escape codes] da CSS padrão:
 
@@ -55,7 +56,8 @@ Todas as sequências de caracteres da Sass suportam os [códigos de saída][esca
   Para os caracteres que são permitidos aparecerem em sequências de caracteres, escrever a saída de unicode produz exatamente a mesma sequência de caracteres que a escrita do próprio carácter.
 <% end %>
 
-<h2 id="quoted">Com Aspas</h2>
+<span id="quoted"></span>
+## Com Aspas
 
 As sequências de caracteres são escritas ou entre aspas simples ou entre aspas duplas, como em `"Helvetica Neue"`. Elas podem conter [interpolação][interpolation], bem como qualquer carácter cuja saída não foi tratada exceto para:
 
@@ -94,7 +96,8 @@ As sequências de caracteres são asseguradas que sejam compiladas para sequênc
   [its quotes are removed]: ../interpolation#quoted-strings
 <% end %>
 
-<h2 id="unquoted">Sem Aspas</h2>
+<span id="unquoted">Sem Aspas</span>
+## Sem Aspas
 
 As sequências de caracteres sem aspas são escritas como [identificadores][identifiers] de CSS, seguindo o diagrama de sintaxe abaixo. Eles podem incluir [interpolação][interpolation] em qualquer parte.
 
@@ -138,9 +141,8 @@ As sequências de caracteres sem aspas são escritas como [identificadores][iden
   Por causa disto, é geralmente uma boa ideia escrever sequências de caracteres com aspas a menos que estejas especificamente a escrever o valor de uma propriedade de CSS que usa sequências de caracteres sem aspas.
 <% end %>
 
-<h3 id="escapes-in-unquoted-strings">
-Saídas em Sequências de Caracteres Sem Aspas
-</h3>
+<span id="escapes-in-unquoted-strings"></span>
+### Saídas em Sequências de Caracteres Sem Aspas
 
 <% impl_status dart: '1.11.0', libsass: false, ruby: false, feature: 'Normalization' do %>
   A LibSass, Sass de Ruby, e versões antigas da Sass de Dart não normalizam as saídas nos identificadores. Ao invés disto, o texto na sequência de caracteres sem aspas é o preciso texto que o utilizador escreveu. Por exemplo, `\1F46D` e `👭` não são considerados equivalentes.
@@ -170,9 +172,8 @@ Quando uma sequência de caracteres sem aspas é analisada, o texto literal das 
   @debug string.length(\7Fx)  // 5
 <% end %>
 
-<h2 id="string-indexes">
-Índices de Sequência de Caracteres
-</h2>
+<span id="string-indexes"></span>
+## Índices da Sequência de Caracteres
 
 A Sass tem um número de [funções de sequência de caracteres][string functions] que recebem ou retornam números, chamados *índices*, que fazem referência aos caracteres numa sequência de caracteres. O índice 1 indica o primeiro carácter da sequência de caracteres. Nota que isto é diferente de muitas linguagens de programação onde os índices começam no 0! A Sass também torna fácil fazer referência ao final duma sequência de caracteres. O índice -1 faz referência ao último carácter numa sequência de caracteres, -2 faz referência ao penúltimo, e assim por diante.
 
