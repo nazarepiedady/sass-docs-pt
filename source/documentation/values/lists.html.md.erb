@@ -21,7 +21,8 @@ As listas de Sass podem conter um ou mesmo nenhum elemento. Uma lista de um úni
   As listas vazias sem parêntesis não são CSS válidos, assim a Sass não te permitirá usar uma num valor da propriedade.
 <% end %>
 
-<h2 id="slash-separated-lists">Listas Separadas por Barra</h2>
+<span id="slash-separated-lists"></span>
+## Listas Separadas por Barra
 
 As listas na Sass podem ser separadas por barras, para representar os valores como a abreviação `font: 12px/30px` para definir a `font-size` e `line-height` ou a sintaxe `hsl(80 100% 50% / 0.5)` para criar uma color com um dado valor de opacidade. No entanto, as listas **separadas por barra** não podem atualmente ser escrito literalmente**. A Sass historicamente usava o carácter `/` para indicar a divisão, assim embora a transição das folhas de estilos existentes para usar [`math.div()`] as listas separadas por barra pode apenas ser escrita usando [`list.slash()`].
 
@@ -32,17 +33,20 @@ Para mais detalhes, consulte [Mudança de Rutura: Barra como Divisão][Breaking 
 
 [Breaking Change: Slash as Division]: ../breaking-changes/slash-div
 
-<h2 id="using-listas">Usando Listas</h2>
+<span id="using-lists"></span>
+## Usando Listas
 
 A Sass fornece uma mão-cheia de [funções][functions] que torna possível usar listas para escrever bibliotecas de estilo poderosas, ou tornar a folha de estilo da tua aplicação mais clara e sustentáveis.
 
 [functions]: ../modules/list
 
-<h3 id="indexes">Índices</h3>
+<span id="indexes"></span>
+## Índices
 
 Muitas destas funções recebem ou retornam números, chamados *índices*, que fazem referência aos elementos numa lista. O índice 1 indica o primeiro elemento da lista. Nota que isto é diferente de muitas linguagens de programação onde os índices começam no 0! A Sass também torna fácil fazer referência ao final duma lista. O índice -1 faz referência ao último elemento numa lista, -2 faz referência ao penúltimo, e assim por diante.
 
-<h3 id="access-an-element">Acessar um Elemento</h3>
+<span id="access-an-element"></span>
+## Acessar um Elemento
 
 As listas não são de muito uso se não puderes receber valores delas. Tu podes usar a [função `list.nth($list, $n)`][`list.nth($list, $n)` function] para receber o elemento num dado índice numa lista. O primeiro argumento é a própria lista, e o segundo é o índice do valor que queres extrair:
 
@@ -50,7 +54,8 @@ As listas não são de muito uso se não puderes receber valores delas. Tu podes
 
 <%= partial 'code-snippets/example-list-nth' %>
 
-<h3 id="do-something-for-every-element">Fazer Algo em Todos Elementos</h3>
+<span id="do-something-for-every-element"></span>
+## Fazer Algo em Todos os Elementos
 
 Este na realidade não usa uma função, mas continua uma das maneiras mais comuns usar as listas. O [regra `@each`][`@each` rule] avalia um bloco de estilos por cada elemento numa lista, e atribui este elemento à uma variável:
 
@@ -58,7 +63,8 @@ Este na realidade não usa uma função, mas continua uma das maneiras mais comu
 
 <%= partial 'code-snippets/example-each-list' %>
 
-<h3 id="add-to-a-list">Adicionar à uma Lista</h3>
+<span id="add-to-a-list">Adicionar à uma Lista</span>
+### Adicionar à uma Lista
 
 É também útil adicionar elementos à uma lista. A [função `list.append($list, $val)`][`list.append($list, $val)` function] recebe uma lista e um valor, e retorna uma cópia da lista com o valor adicionado ao final. Nota que uma vez as listas de Sass são [imutáveis][immutable], isto não modifica a lista original:
 
@@ -73,7 +79,8 @@ Este na realidade não usa uma função, mas continua uma das maneiras mais comu
   @debug append([col1-line1], col1-line2)  // [col1-line1, col1-line2]
 <% end %>
 
-<h3 id="find-an-element-in-a-list">Encontrar um Elemento numa Lista</h3>
+<span id="find-an-element-in-a-list"></span>
+### Encontrar um Elemento numa Lista
 
 Se precisas de verificar se um elemento está numa lista ou descobrir em qual índice se encontra, use a [função `list.index($list, $value)`][`list.index($list, $value)` function]. Esta recebe uma lista e um valor à localizar nesta lista, e retorna o índice deste valor:
 
@@ -113,7 +120,8 @@ Se o valor não estiver na lista, `list.index()` retorna [`null`][`null`]. Já q
     // ...
 <% end %>
 
-<h2 id="immutability">Imutabilidade</h2>
+<span id="immutability"></span>
+## Imutabilidade
 
 As listas na Sass são *imutáveis*, o que significa que o conteúdo dum valor de lista nunca muda. As funções de lista da Sass retornam todas novas listas ao invés de modificar os originais. A imutabilidade ajuda a evitar muitos erros de programação sorrateiros que podem infiltrar-se quando a mesma lista for partilhada através de diferentes partes da folha de estilos.
 
@@ -151,7 +159,8 @@ Tu podes continuar a atualizar o teu estado ao longo do tempo atribuindo novas l
   @debug prefixes-for-browsers("firefox" "ie")  // moz ms
 <% end %>
 
-<h2 id="argument-lists">Listas de Argumento</h2>
+<span id="argument-lists">Listas de Argumento</span>
+## Listas de Argumento
 
 Quando declaras uma mistura ou função que recebe [argumentos arbitrário][arbitrary arguments], o valor que recebes é uma lista especial conhecida como um *lista de argumento*. Ela age apenas como uma lista que contém todos os argumentos passados às misturas ou função, com uma funcionalidade adicional: se o utilizador passou argumentos de palavra-chave, podem ser acessados como um mapa passando a lista de argumento a [função `meta.keywords()`][`meta.keywords()` function]:
 
