@@ -20,13 +20,15 @@ Os mapas permitem quaisquer valores de Sass seja usados como suas chaves. O [ope
   [unquoted strings]: strings#unquoted
 <% end %>
 
-<h2 id="using-maps">Usando Mapas</h2>
+<span id="using-maps">Usando Mapas</span>
+## Usando Mapas
 
 Já que mapas não são valores de CSS válidos, não fazem muito de nada por conta própria. É por isto que a Sass fornece um grupo de [funções][functions] para criar os mapas e acessar os valores que contêm.
 
 [functions]: ../modules/map
 
 <h3 id="look-up-a-value">Procurar um Valor</h3>
+### Procurar um Valor
 
 Mapas são sobre a associação de chaves e valores, assim existe naturalmente uma maneira de receber o valor associado com uma chave: a [função `map.get($map. $key)`][`map.get($map, $key)` function]! Esta função retorna o valor no mapa associado com a dada chave. Ela retorna [`null`][] se o mapa não conter a chave:
 
@@ -35,7 +37,8 @@ Mapas são sobre a associação de chaves e valores, assim existe naturalmente u
 
 <%= partial 'code-snippets/example-map-get' %>
 
-<h3 id="do-something-for-every-par">Fazer Algo em Todos Pares</h3>
+<span id="do-something-for-every-par"></span>
+### Fazer Algo em Todos Pares
 
 Isto na realidade não usa uma função, mas continua a ser uma das maneiras mais comuns de usar os mapas. A [regra `@each`] avalia um bloco de estilos para cada par de chave e valor num mapa. A chave e o valor são atribuídos às variáveis assim podem facilmente ser acessadas no bloco:
 
@@ -43,7 +46,8 @@ Isto na realidade não usa uma função, mas continua a ser uma das maneiras mai
 
 <%= partial 'code-snippets/example-each-map' %>
 
-<h3 id="add-to-a-map">Adicionar à um Mapa</h3>
+<span id="add-to-a-map">Adicionar à um Mapa</span>
+### Adicionar à um Mapa
 
 É também útil adicionar novos pares à um mapa, ou substituir o valor para uma chave existente. a [função `map.set($map, $key, $value)`][`map.set($map, $key, $value)` function] faz isto: ela retorna uma cópia de `$map` com o valor em `$key` definido para `$value`:
 
@@ -113,7 +117,8 @@ Nota que uma vez que os mapas de Sass são [imutáveis][immutable], `map.set()` 
 
 [immutable]: #immutability
 
-<h2 id="immutability">Imutabilidade</h2>
+<span id="immutability"></span>
+## Imutabilidade
 
 Os mapas na Sass são *imutáveis*, o que significa que o conteúdo dum valor do mapa nunca muda. As funções do mapa da Sass retornam todas novos mapas ao invés de modificarem os originais. A imutabilidade ajuda a evitar muitos erros de programação sorrateiros que podem infiltrar-se quando o mesmo mapa for partilhado através de diferentes partes da folha de estilos.
 
