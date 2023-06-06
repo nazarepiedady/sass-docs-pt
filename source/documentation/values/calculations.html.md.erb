@@ -36,7 +36,8 @@ Tu podes também usar a [interpolação][interpolation] num cálculo. No entanto
 
 [interpolation]: ../interpolation
 
-<h2 id="simplification">Simplificação</h2>
+<span id="simplification"></span>
+## Simplificação
 
 A Sass simplificará as operações adjacentes nos cálculos se usarem unidades que podem ser combinadas em tempo de compilação, tais como `1in + 10px` ou `5s * 2`. Se possível, até mesmo simplificará o cálculo inteiro para um único número — por exemplo, `clamp(0px, 30px, 20px)` retornará `20px`.
 
@@ -68,7 +69,8 @@ Os cálculos também serão simplificados dentro de outros cálculos. Em especia
   }
 <% end %>
 
-<h2 id="operations">Operações</h2>
+<span id="operations"></span>
+## Operações
 
 Tu não podes usar os cálculos com opções de SassScript normais como `+` e `*`. Se quiseres escrever algumas funções matemáticas que permitam cálculos apenas as escreva dentro sua própria expressões de `calc()` — Se forem passada uma mão-cheia de números com unidades compatíveis, retornarão números simples também, e se forem passados cálculos retornarão cálculos.
 
