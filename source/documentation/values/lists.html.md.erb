@@ -63,7 +63,7 @@ Este na realidade não usa uma função, mas continua uma das maneiras mais comu
 
 <%= partial 'code-snippets/example-each-list' %>
 
-<span id="add-to-a-list">Adicionar à uma Lista</span>
+<span id="add-to-a-list"></span>
 ### Adicionar à uma Lista
 
 É também útil adicionar elementos à uma lista. A [função `list.append($list, $val)`][`list.append($list, $val)` function] recebe uma lista e um valor, e retorna uma cópia da lista com o valor adicionado ao final. Nota que uma vez as listas de Sass são [imutáveis][immutable], isto não modifica a lista original:
@@ -159,7 +159,7 @@ Tu podes continuar a atualizar o teu estado ao longo do tempo atribuindo novas l
   @debug prefixes-for-browsers("firefox" "ie")  // moz ms
 <% end %>
 
-<span id="argument-lists">Listas de Argumento</span>
+<span id="argument-lists"></span>
 ## Listas de Argumento
 
 Quando declaras uma mistura ou função que recebe [argumentos arbitrário][arbitrary arguments], o valor que recebes é uma lista especial conhecida como um *lista de argumento*. Ela age apenas como uma lista que contém todos os argumentos passados às misturas ou função, com uma funcionalidade adicional: se o utilizador passou argumentos de palavra-chave, podem ser acessados como um mapa passando a lista de argumento a [função `meta.keywords()`][`meta.keywords()` function]:
