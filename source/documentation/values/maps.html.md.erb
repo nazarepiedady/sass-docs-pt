@@ -20,14 +20,14 @@ Os mapas permitem quaisquer valores de Sass seja usados como suas chaves. O [ope
   [unquoted strings]: strings#unquoted
 <% end %>
 
-<span id="using-maps">Usando Mapas</span>
+<span id="using-maps"></span>
 ## Usando Mapas
 
 Já que mapas não são valores de CSS válidos, não fazem muito de nada por conta própria. É por isto que a Sass fornece um grupo de [funções][functions] para criar os mapas e acessar os valores que contêm.
 
 [functions]: ../modules/map
 
-<h3 id="look-up-a-value">Procurar um Valor</h3>
+<h3 id="look-up-a-value"></h3>
 ### Procurar um Valor
 
 Mapas são sobre a associação de chaves e valores, assim existe naturalmente uma maneira de receber o valor associado com uma chave: a [função `map.get($map. $key)`][`map.get($map, $key)` function]! Esta função retorna o valor no mapa associado com a dada chave. Ela retorna [`null`][] se o mapa não conter a chave:
@@ -46,7 +46,7 @@ Isto na realidade não usa uma função, mas continua a ser uma das maneiras mai
 
 <%= partial 'code-snippets/example-each-map' %>
 
-<span id="add-to-a-map">Adicionar à um Mapa</span>
+<span id="add-to-a-map"></span>
 ### Adicionar à um Mapa
 
 É também útil adicionar novos pares à um mapa, ou substituir o valor para uma chave existente. a [função `map.set($map, $key, $value)`][`map.set($map, $key, $value)` function] faz isto: ela retorna uma cópia de `$map` com o valor em `$key` definido para `$value`:
