@@ -6,14 +6,23 @@ introduction: >
 ---
 
 * [Seletores nas Regras de Estilo](style-rules#interpolation)
+
 * [Nomes de Propriedade nas Declarações](style-rules/declarations#interpolation)
+
 * [Valores de Propriedade Personalizada](style-rules/declarations#custom-properties)
+
 * [Regras de CSS que Usam Arroba](at-rules/css)
+
 * [`@extend`s](at-rules/extend)
+
 * [`@import`s Simples de CSS](at-rules/import#plain-css-imports)
+
 * [Sequências de Caracteres Com Aspas ou Sem Aspas](values/strings)
+
 * [Funções Especiais](syntax/special-functions)
+
 * [Nomes de Função de CSS Simples](at-rules/function#plain-css-functions)
+
 * [Comentários Ruidosos](syntax/comments)
 
 <% example do %>
@@ -40,7 +49,8 @@ introduction: >
   @include corner-icon("mail", top, left)
 <% end %>
 
-<h2 id="in-sassscript">Na SassScript</h2>
+<span id="in-sassscript"></span>
+## Na SassScript
 
 <% impl_status dart: true, libsass: false, ruby: '4.0.0 (não lançada)', feature: "Sintaxe Moderna" do %>
   A LibSass e a Sass de Ruby atualmente usam uma sintaxe mais antiga para analise de interpolação em SassScript. Para os propósitos mais práticos funciona da mesma maneira, mas pode comportar-se estranhamente em volta dos [operadores][operators]. Consulte [este documento][this document] por detalhes.
@@ -106,7 +116,8 @@ A interpolação pode ser usada na SassScript para injetar SassScript para [sequ
   [unit arithmetic]: values/numbers#units
 <% end %>
 
-<h2 id="quoted-strings">Sequências de Caracteres Com Aspas</h2>
+<span id="quoted-strings"></span>
+## Sequências de Caracteres Com Aspas
 
 Na maioria dos casos, a interpolação injeta o mesmo exato texto que seria usado se a expressão fosse usada como um [valor de propriedade][property value]. Mas existe uma exceção: as aspas envolta das sequências de caracteres com aspas são removidas (mesmo se estas sequências de caracteres com aspas estiverem em listas). Isto torna possível escrever sequências de caracteres com aspas que contém sintaxe que não é permitida na SassScript (como seletores) e interpole-os em regras de estilo.
 
