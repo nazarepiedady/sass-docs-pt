@@ -21,7 +21,8 @@ introduction: >
     border: 1px solid #e1e4e8
 <% end %>
 
-<h2 id="nesting">Encaixamento</h2>
+<span id="nesting"></span>
+## Encaixamento
 
 Mas a Sass quer tornar a tua vida mais fácil. No lugar de repetir os mesmos seletores vezes sem conta, podes escrever um regra de estilo dentro de uma outra. A Sass combinará automaticamente o seletor da regra exterior com o da regra interior:
 
@@ -31,7 +32,8 @@ Mas a Sass quer tornar a tua vida mais fácil. No lugar de repetir os mesmos sel
   As regras encaixadas são super úteis, mas também podem tornar difícil visualizar o quanto de CSS estás de fato a gerar. Quanto mais fundo encaixares, mais largura de banda custa para ser a tua CSS e mais trabalho custa para o navegador desenhá-la. Mantenha estes seletores pouco profundo!
 <% end %>
 
-<h3 id="selector-lists">Listas de Seletor</h3>
+<span id="selector-lists"></span>
+### Listas de Seletor
 
 As regras encaixadas são inteligentes sobre o lidar com listas de seletor (que são, seletores separados por vírgula). Cada seletor complexo (aqueles entre as vírgulas) é encaixado separadamente, e depois são combinados de volta em uma lista de seletor:
 
@@ -51,7 +53,8 @@ As regras encaixadas são inteligentes sobre o lidar com listas de seletor (que 
       padding-bottom: 0
 <% end %>
 
-<h3 id="selector-combinators">Combinadores de Seletor</h3>
+<span id="selector-combinators"></span>
+### Combinadores de Seletor
 
 Tu também podes encaixar seletores que usam [combinadores][combinators]. Tu podes colocar o combinador no final do seletor externo, no início do seletor interno, ou mesmo todos em si mesmo entre os dois:
 
@@ -96,13 +99,15 @@ Tu também podes encaixar seletores que usam [combinadores][combinators]. Tu pod
         opacity: 0.8
 <% end %>
 
-<h3 id="advanced-nesting">Encaixamento Avançado</h3>
+<span id="advanced-nesting"></span>
+### Encaixamento Avançado
 
 Se quiseres fazer mais com as tuas regras de estilo encaixadas do que apenas combiná-las em ordem com o combinador descendente (que é, uma espaço simples) separando-os, a Sass tem a tua solução. Consulte a [documentação de seletor pai][parent selector documentation] por mais detalhes.
 
 [parent selector documentation]: style-rules/parent-selector
 
-<h2 id="interpolation">Interpolação</h2>
+<span id="interpolation"></span>
+## Interpolação
 
 Tu podes usar [interpolação][interpolation] para injetar valores a partir de [expressões][expressions] como variáveis e chamadas de função para os teus seletores. Isto é particularmente útil quando estás a escrever [misturas][mixins], já que isto permite-te criar seletores a partir de parâmetros que os teus utilizadores passam:
 
