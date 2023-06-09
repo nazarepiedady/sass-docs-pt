@@ -58,10 +58,11 @@ Uma declaração de variável parece-se muito com uma [declaração de proprieda
 <% end %>
 
 <% fun_fact do %>
-  As variáveis de Sass, tal como todos os identificadores de Sass, tratam os hiféns e sublinhados como idênticos. Isto significa que ambos `$font-size` e `$font_size` referem-se a mesma variável. Isto é um comportamento histórico que vem desde os primeiros dias da Sass, quando *apenas* permitia sublinhados como nomes de identificador. Assim que a Sass adicionou suporte para hiféns para corresponder a sintaxe da CSS, os dois foram tornados equivalentes para tornar a migração mais fácil.
+  As variáveis de Sass, tal como todos os identificadores de Sass, tratam os hífens e sublinhados como idênticos. Isto significa que ambos `$font-size` e `$font_size` referem-se a mesma variável. Isto é um comportamento histórico que vem desde os primeiros dias da Sass, quando *apenas* permitia sublinhados como nomes de identificador. Assim que a Sass adicionou suporte para héfens para corresponder a sintaxe da CSS, os dois foram tornados equivalentes para tornar a migração mais fácil.
 <% end %>
 
-<h2 id="default-values">Valores Padrão</h2>
+<span id="default-values"></span>
+## Valores Padrão
 
 Normalmente quando atribuímos um valor para uma variável, se esta variável já tiver um valor, o seu valor anterior é sobrescrito. Mas se estiveres a escrever uma biblioteca de Sass, podes querer permitir que os teus utilizadores configurem as variáveis da tua biblioteca antes de usá-las para gerar o CSS.
 
@@ -69,7 +70,8 @@ Para tornar isto possível, a Sass fornece a opção `!default`. Esta atribui um
 
 [`null`]: values/null
 
-<h3 id="configuring-modules">Configurando Módulos</h3>
+<span id="configuring-modules"></span>
+### Configurando Módulos
 
 <%= partial 'snippets/module-system-status' %>
 
@@ -81,7 +83,8 @@ Para carregares um módulo com configuração, escreve `@use <url> com (<variabl
 
 <%= partial '../code-snippets/example-use-with' %>
 
-<h2 id="built-in-variables">Variáveis Embutidas</h2>
+<span id="built-in-variables"></span>
+## Variáveis Embutidas
 
 As variáveis que são definidas por um [módulo embutido][built-in module] não podem ser modificadas.
 
@@ -99,7 +102,8 @@ As variáveis que são definidas por um [módulo embutido][built-in module] não
   math.$pi: 0
 <% end %>
 
-<h2 id="scope">Âmbito</h2>
+<span id="scope"></span>
+## Âmbito
 
 As variáveis declaras no alto nível de uma folha de estilo são *globais*. Isto significa que são acessadas em qualquer parte nos seus módulos depois terem sido declaradas. Mas isto não é verdade para todas as variáveis. Aquelas variáveis declaradas nos blocos (chavetas na SCSS ou código indentado na Sass) são normalmente *locais*, e podem apenas ser acessadas dentro do bloco que foram declaradas.
 
@@ -134,7 +138,8 @@ As variáveis declaras no alto nível de uma folha de estilo são *globais*. Ist
     // local: $local-variable
 <% end %>
 
-<h3 id="shadowing">Sombreando</h3>
+<span id="shadowing"></span>
+### Sombreando
 
 As variáveis locais podem mesmo ser declaradas com o mesmo nome como uma variável global. Se isto acontecer, existem na realidade dois variáveis diferentes com o mesmo nome: uma local e uma global. Isto ajuda a garantir que um autor escrevendo uma variável local não muda acidentalmente o valor de uma variável global de que não estão consciente:
 
@@ -195,7 +200,8 @@ Se precisares de definir um valor da variável global de dentro de um âmbito lo
 
 <% end %>
 
-<h2 id="flow-control-scope">Âmbito de Controlo de Fluxo</h2>
+<span id="flow-control-scope"></span>
+## Âmbito de Controlo de Fluxo
 
 As variáveis declaradas nas [regras de controlo de fluxo][flow control rules] têm regras definição de âmbito especiais: não sombreiam as variáveis no mesmo nível como regra de controlo de fluxo. Ao invés disto, apenas atribuem para estas variáveis. Isto torna muito mais fácil de condicionalmente atribuir um valor para uma variável, ou construir um valor como parte de um laço.
 
@@ -236,7 +242,8 @@ As variáveis declaradas nas [regras de controlo de fluxo][flow control rules] t
   As variáveis no âmbito do controlo de fluxo podem atribuir para variáveis existentes no âmbito externo, mas novas variáveis declaradas no controlo de fluxo não serão acessíveis no âmbito externo. Certifica-te de que a variável já foi declarada antes de atribuires à ela, mesmo se precisares de declará-la como `null`.
 <% end %>
 
-<h2 id="advanced-variable-functions">Funções de Variável Avançadas</h2>
+<span id="advanced-variable-functions"></span>
+## Funções de Variável Avançadas
 
 A biblioteca fundamental da Sass fornece algumas funções avançadas para trabalhar com variáveis. A [função `meta.variable-exists()`][`meta.variable-exists()` function] retorna se uma variável com o dado nome existe no âmbito atual, e a [função `meta.global-variable-exists()`][`meta.global-variable-exists()` function] faz o mesmo mas apenas para o âmbito global.
 
