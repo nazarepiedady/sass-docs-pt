@@ -16,7 +16,8 @@ introduction: >
   [Color functions]: modules/color
 <% end %>
 
-<h2 id="order-of-operations">Ordem das Operações</h2>
+<span id="order-of-operations"></span>
+## Ordem das Operações
 
 A Sass tem uma linda [ordem de operações][order of operations] padrão, do mais apertado até o mais desapertado:
 
@@ -50,7 +51,8 @@ A Sass tem uma linda [ordem de operações][order of operations] padrão, do mai
   @debug true or false and false == true or (false and false)  // true
 <% end %>
 
-<h3 id="parentheses">Parêntesis</h3>
+<span id="parentheses"></span>
+### Parênteses
 
 Tu podes controlar explicitamente a ordem das operações usando parêntesis. Uma operação dentro de parêntesis é sempre avaliada antes de quaisquer operadores fora dos parêntesis. Os parêntesis podem mesmo ser encaixados, no qual caso os parêntesis mais íntimo serão avaliados primeiro:
 
@@ -62,9 +64,10 @@ Tu podes controlar explicitamente a ordem das operações usando parêntesis. Um
   @debug ((1 + 2) * 3 + 4) * 5  // 65
 <% end %>
 
-<h2 id="single-equals">Único Sinal de Igualdade</h2>
+<h2 id="single-equals"></h2>
+## Único Sinal de Igualdade
 
-A Sass suporta um operador especial `=` que é apenas permitido nos argumentos de função, que cria apenas uma [sequência de caracteres sem aspas][unquoted string] com os seus dois operandos separados pelo `=`. Isto existe por questões de retrocompatibilidade com a sintaxe muito antiga usada apenas no Internet Explorer.
+A Sass suporta um operador especial `=` que é apenas permitido nos argumentos de função, que cria apenas uma [sequência de caracteres sem aspas][unquoted string] com os seus dois operandos separados pelo `=`. Isto existe por questões de retro-compatibilidade com a sintaxe muito antiga usada apenas no Internet Explorer.
 
 [unquoted string]: values/strings#unquoted
 
