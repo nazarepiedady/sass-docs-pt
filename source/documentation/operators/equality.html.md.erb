@@ -13,12 +13,19 @@ Os operadores de igualdade retornam se dois valores são ou não iguais. São es
 [expressions]: ../syntax/structure#expressions
 
 * [Números][Numbers] são iguais se tiverem o mesmo valor *e* a mesma unidade, ou se os seus valores forem iguais quando suas unidades forem convertidas mutuamente entre si.
+
 * [Sequências de Caracteres][Strings] são invulgares em que sequências de caracteres [sem aspas][unquoted] e [com aspas][quoted] com o mesmo conteúdo são consideradas iguais.
+
 * [Cores][Colors] são iguais se tiverem os mesmos valores de vermelho, verde, azul, e alfa.
+
 * [Listas][Lists] são iguais se seus conteúdos forem iguais. As listas separadas por vírgulas não são iguais as listas separadas por espaço, e listas entre parêntesis não são iguais as sem parêntesis.
+
 * [Mapas][Maps] são iguais se suas chaves e valores forem ambas iguais.
+
 * [Cálculos][Calculations] são iguais se seus nomes e argumentos forem todos iguais. Os argumentos da operação são comparados textualmente.
+
 * [`true`, `false`][], e [`null`][] apenas são iguais a si mesmos.
+
 * [Funções][Functions] são iguais a mesma função. As funções são comparadas *por referência*, então mesmo se duas funções tiverem o mesmo nome e definição são consideradas diferentes se não forem definidas no mesmo lugar.
 
 [Numbers]: ../values/numbers
