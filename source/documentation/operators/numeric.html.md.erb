@@ -47,7 +47,8 @@ Números com unidades incompatíveis não podem ser usados com adição, subtra�
   // Error: Incompatible units px and s.
 <% end %>
 
-<h2 id="unary-operators">Operadores Unários</h2>
+<span id="unary-operators"></span>
+## Operadores Unários
 
 Tu podes também escrever `+` e `-` como operadores unários, que recebem apenas um valor:
 
@@ -100,7 +101,8 @@ Tu podes também escrever `+` e `-` como operadores unários, que recebem apenas
   <% end %>
 <% end %>
 
-<h2 id="division">Divisão</h2>
+<span id="division"></span>
+## Divisão
 
 <% impl_status dart: '1.33.0', libsass: false, ruby: false, feature: 'math.div()' %>
 
@@ -109,7 +111,8 @@ Ao contrário dos outros operadores matemáticos, a divisão na Sass é feita co
 [`math.div()`]: ../modules/math#div
 [will be removed]: ../breaking-changes/slash-div
 
-<h3 id="slash-separated-values">Valores Separados Por Barra</h3>
+<span id="slash-separated-values"></span>
+### Valores Separados Por Barra
 
 Por agora ainda que a Sass continue a suportar `/` como um operador de divisão, tem de ter uma maneira de desambiguar entre `/` como um separador e `/` como divisão. Para fazer isto funcionar, se dois números forem separados por `/`, a Sass imprimirá o resultado como separado por barra no lugar de dividido a menos que uma destas condições seja cumprida:
 
