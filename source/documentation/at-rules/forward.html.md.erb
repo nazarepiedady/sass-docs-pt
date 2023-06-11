@@ -58,7 +58,8 @@ Se *escreveres* tanto uma `@forward` como uma `@use` para o mesmo módulo no mes
   }
 <% end %>
 
-## Adicionando um Prefixo {#adding-a-prefix}
+<span id="adding-a-prefix"></span>
+## Adicionando um Prefixo
 
 Uma vez que os membros do módulo são normalmente usados com um [espaço de nome], curto e nomes simples são usualmente a opção mais legíveis. Mas estes nomes podem não fazer sentido fora do módulo one estão definidos, então a `@forward` tem a opção de adicionar um prefixo adicional à todos os membros que esta expedi.
 
@@ -106,7 +107,8 @@ Isto é escrito como `@forward "<url>" as <prefix>-*`, e adiciona o dado prefixo
   }
 <% end %>
 
-## Controlando a Visibilidade <span id="controlling-visibility"></span>
+<span id="controlling-visibility"></span>
+## Controlando a Visibilidade
 
 Algumas vezes, não queres expedir *todo* membro dum módulo. Tu podes querer manter alguns membros privados para que apenas o teu pacote possa usá-los, ou podes querer exigir que os teus utilizadores carreguem alguns membros duma maneira diferente. Tu podes controlar exatamente quais membros são expedidos escrevendo `@forward "<url>" hide <members...>` ou `@forward "<url>" show <members...>`.
 
@@ -159,7 +161,8 @@ A forma `hide` significa que os membros listados não deveriam ser expedido, mas
   @forward "src/list" hide list-reset, $horizontal-list-gap
 <% end %>
 
-## Configurando os Módulos <span id="configuring-modules"></span>
+<span id="configuring-modules"></span>
+## Configurando os Módulos
 
 <% impl_status dart: '1.24.0', libsass: false, ruby: false %>
 
