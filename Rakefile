@@ -143,7 +143,7 @@ namespace :sass do
       Dir.chdir(".language") do
         sh %{npm install}
         sh %{ln -sf ../.language/node_modules ../tool/node_modules}
-        sh %{npx run typedoc -- \
+        sh %{npm run typedoc -- \
             --plugin ../tool/typedoc-theme.js --theme sass-site \
             --out ../source/documentation/js-api \
             --cleanOutputDir
