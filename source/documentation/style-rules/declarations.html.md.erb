@@ -20,7 +20,8 @@ introduction: >
     border-radius: $size * 0.5
 <% end %>
 
-<h2 id="interpolation">Interpolação</h2>
+<span id="interpolation"></span>
+## Interpolação
 
 Um nome de propriedade pode incluir [interpolação][interpolation], o que torna possível gerar dinamicamente as propriedades quando necessário. Tu podes mesmo interpolar o nome da propriedade inteira!
 
@@ -49,7 +50,8 @@ Um nome de propriedade pode incluir [interpolação][interpolation], o que torna
     @include prefix(filter, grayscale(50%), moz webkit)
 <% end %>
 
-<h2 id="nesting">Encaixamento</h2>
+<span id="nesting"></span>
+## Encaixamento
 
 Muitas propriedades de CSS começam com o mesmo prefixo que agem como tipo de espaço de nome. Por exemplo, `font-family`, `font-size`, e `font-weight` todas começam com `font-`. A Sass torna isto mais fácil e menos redundante permitindo que as declarações de propriedade sejam encaixadas. Os nomes da propriedade externa são adicionados à interna, separados por um hífen:
 
@@ -92,7 +94,8 @@ Algumas destas propriedades de CSS têm versões abreviadas que usam o espaço d
       top: 2px
 <% end %>
 
-<h2 id="hidden-declarations">Declarações Escondidas</h2>
+<span id="hidden-declarations"></span>
+## Declarações Escondidas
 
 Algumas vezes só queres que uma declaração de propriedade apareça por algum tempo. Se o valor de uma declaração for [`null`][] ou [sequência de caracteres sem aspas][unquoted string] vazia, a Sass não compilará esta declaração para o CSS:
 
@@ -114,7 +117,8 @@ Algumas vezes só queres que uma declaração de propriedade apareça por algum 
     border-radius: if($rounded-corners, 5px, null)
 <% end %>
 
-<h2 id="custom-properties">Propriedades Personalizadas</h2>
+<span id="custom-properties"></span>
+## Propriedades Personalizadas
 
 <% impl_status dart: true, libsass: '3.5.0', ruby: '3.5.0', feature: 'Sintaxe de SassScript' do %>
   As versões mais antigas de LibSass e Sass de Ruby analisavam as declarações de propriedade personalizadas tal como qualquer outra declaração de propriedade, permitindo a gama completa de expressões de SassScript como valores. Mesmo quando usares estas versões, é recomendado que uses a interpolação para injetar os valores de SassScript para compatibilidade para a frente.
@@ -142,8 +146,8 @@ Por causa disto, a Sass analisa as declarações de propriedade personalizada de
     --accent: #{$accent};
     --warn: #{$warn};
 
-    // Even though this looks like a Sass variable, it's valid CSS so it's not
-    // evaluated.
+    // Muito embora isto se pareça com uma variável de Sass,
+    // é CSS válida então não é avaliada.
     --consumed-by-js: $primary;
   }
   ===
@@ -156,8 +160,8 @@ Por causa disto, a Sass analisa as declarações de propriedade personalizada de
     --accent: #{$accent}
     --warn: #{$warn}
 
-    // Even though this looks like a Sass variable, it's valid CSS so it's not
-    // evaluated.
+    // Muito embora isto se pareça com uma variável de Sass,
+    // é CSS válida então não é avaliada.
     --consumed-by-js: $primary
   ===
   :root {
