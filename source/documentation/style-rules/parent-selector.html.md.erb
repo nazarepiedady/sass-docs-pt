@@ -54,7 +54,8 @@ Quando um seletor de pai é usado num seletor interno, é substituído pelo sele
   [this GitHub issue]: https://github.com/sass/sass/issues/1425
 <% end %>
 
-<h2 id="adding-suffixes">Adicionando Sufixos</h2>
+<span id="adding-suffixes"></span>
+## Adicionando Sufixos
 
 Tu podes também usar o seletor de pai para adicionar sufixos adicionais ao seletor externo. Isto é particularmente útil quando usas uma metodologia como [BEM][] que usa nomes de classe altamente estruturados. Enquanto o seletor externo termina com um nome alfanumérico (como classe, identificador, e seletores de elemento), podes usar o seletor de pai para anexar texto adicional:
 
@@ -101,7 +102,8 @@ Tu podes também usar o seletor de pai para adicionar sufixos adicionais ao sele
         display: block
 <% end %>
 
-<h2 id="in-sassscript">Na SassScript</h2>
+<span id="in-sassscript"></span>
+## Na SassScript
 
 O seletor de pai também pode ser usado dentro da SassScript. É uma expressão especial que retorna o seletor pai atual no mesmo formato usado pelas [funções de seletor][selector functions]: uma lista separada por vírgula (a lista de seletor) que contém listas separadas por espaço (os seletores complexos) que contém sequências de caracteres sem aspas (os seletores compostos):
 
@@ -128,7 +130,8 @@ Se a expressão `&` for usada fora de  quaisquer regras de estilo, retorna `null
 
 <%= partial 'code-snippets/example-if-parent-selector' %>
 
-<h3 id="advanced-nesting">Encaixamento Avançado</h3>
+<span id="advanced-nesting"></span>
+### Encaixamento Avançado
 
 Tu podes usar `&` como um expressão de SassScript normal, o que significa que podes passá-lo para funções ou incluí-lo na interpolação — mesmo em outros seletores! Usá-lo em conjunto com [funções de seletor][selector functions] e a [regra `@at-root`] permite-te encaixar seletores de maneiras muito poderosas:
 
