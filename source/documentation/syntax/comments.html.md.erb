@@ -4,7 +4,8 @@ introduction: >
   A maneira que os comentários de Sass funcionam difere substancialmente entre a SCSS e a sintaxe indentada. Ambas sintaxes suportam dois tipos de comentários: comentários definidos usando `/* */` que são (usualmente) compilados para CSS, e os comentários definidos usando `//` que não são compilados.
 ---
 
-<h2 id="in-scss">Na SCSS</h2>
+<span id="in-scss"></span>
+## Na SCSS
 
 Os comentários na SCSS funcionam de maneira parecida aos comentários em outras linguagens como JavaScript. Os **comentários de uma linha** começam com `//`, e seguem até o final da linha. Nada num comentário de uma linha é emitido como CSS; no que diz respeito a Sass, eles podem também não existir. Também são chamados de **comentários silenciosos**, porque não produzem nenhum CSS.
 
@@ -33,7 +34,8 @@ Por padrão, os comentários de várias linhas são arrancados da CSS compilada 
   }
 <% end %>
 
-<h2 id="in-sass">Na Sass</h2>
+<span id="in-sass"></span>
+## Na Sass
 
 Os comentários na sintaxe indentada funcionam um pouco diferente: são baseado em indentação, tal como o resto da sintaxe. Como a SCSS, os comentários silenciosos escritos com `//` nunca são emitidos como CSS, mas ao contrário da SCSS tudo indentado sob a `//` de abertura também é comentado.
 
@@ -58,7 +60,8 @@ Os comentários também podem ser usados dentro de [expressões][expressions] na
     font: Helvetica, /* Comentários em linha devem ser fechados. */ sans-serif
 <% end %>
 
-<h2 id="documentation-comments">Comentários de Documentação</h2>
+<span id="documentation-comments"></span>
+## Comentários de Documentação
 
 Quando escreveres bibliotecas de estilo usando a Sass, podes usar comentários para documentar as [misturas][mixins], [funções][functions], [variáveis][variables], e [seletores de espaço reservado][placeholder selectors] que a tua biblioteca fornece, bem como a própria biblioteca. Estes comentários são lidos pela ferramenta [SassDoc][], que usa-os para gerar documentação bonita. Consulte a documentação do [motor de grade da Susy][susy] para vê-la em ação!
 
