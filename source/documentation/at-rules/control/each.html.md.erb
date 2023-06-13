@@ -7,13 +7,15 @@ introduction: >
 
 <%= partial 'code-snippets/example-each-list' %>
 
-## Com Mapas <span id="with-maps" style="display:none"></span>
+<span id="with-maps"></span>
+## Com Mapas
 
 Tu também podes usar `@each` para iterar sobre cada par de chave e valor num mapa escrevendo `@each <variable>, <variable> in <expression> { ... }`. A chave é atribuída ao primeiro nome de variável, e o elemento é atribuído ao segundo:
 
 <%= partial 'code-snippets/example-each-map' %>
 
-## Desestruturação <span id="destructuring" style="display:none"></span>
+<span id="destructuring"></span>
+## Desestruturação
 
 Se tiveres uma lista de listas, podes usar `@each` para atribuir automaticamente variáveis para cada um dos valores das listas internas escrevendo `@each <variable...> in <expression> { ... }`. Isto é conhecido como *desestruturação*, visto que a variável corresponde a estrutura de listas internas. Cada nome de variável é atribuído ao valor na posição correspondente na lista, ou [`null`][] se a lista não tiver valores suficientes:
 
