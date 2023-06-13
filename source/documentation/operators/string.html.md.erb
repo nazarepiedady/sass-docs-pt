@@ -24,6 +24,7 @@ introduction: >
 Estes operadores não trabalham apenas com sequências de caracteres! Eles podem ser usados com quaisquer valores que pode ser escrito para CSS, com algumas exceções:
 
 * Números que não podem ser usados como valor à esquerdo, já que têm [seus próprios operadores][numeric].
+
 * Cores que não podem ser usados como valor à esquerda, já que costumam a ter [seus próprios operadores][color]
 
 [numeric]: numeric
@@ -43,7 +44,8 @@ Estes operadores não trabalham apenas com sequências de caracteres! Eles podem
   [interpolation]: ../interpolation
 <% end %>
 
-<h2 id="unary-operators">Operadores Unário</h2>
+<span id="unary-operators"></span>
+## Operadores Unário
 
 Por razões históricas, a Sass também suporta `/` e `-` como operadores unários que recebem apenas um valor:
 
