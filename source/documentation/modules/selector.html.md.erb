@@ -4,9 +4,10 @@ title: sass:selector
 
 <%= partial '../snippets/built-in-module-status' %>
 
-## Selector Values
+<span id="selector-values"></span>
+## Valores de Seletor
 
-The functions in this module inspect and manipulate selectors. Whenever they return a selector, it's always a comma-separated [list][] (the selector list) that contains space-separated lists (the complex selectors) that contain [unquoted strings][] (the compound selectors). For example, the selector `.main aside:hover, .sidebar p` would be returned as:
+As funções neste módulo inspecionam e manipulam os seletores. Sempre que retornam um seletor, é sempre uma [lista][list] separada por vírgula (a lista de seletor) que contém listas separadas por espaço (os seletores complexos) que contém [sequências de caracteres sem aspas][unquoted strings] (os seletores compostos). Por exemplo, o seletor `.main aside:hover, .sidebar p` seria retornado como:
 
 [list]: ../values/lists
 [unquoted strings]: ../values/strings#unquoted
@@ -17,17 +18,17 @@ The functions in this module inspect and manipulate selectors. Whenever they ret
 // .main aside:hover, .sidebar p
 ```
 
-Selector arguments to these functions may be in the same format, but they can also just be normal strings (quoted or unquoted), or a combination. For example, `".main aside:hover, .sidebar p"` is a valid selector argument.
+Os argumentos de seletor para estas funções podem estar no mesmo formato, mas também podem apenas ser sequências de caracteres normais (com aspas ou sem aspas), ou uma combinação. Por exemplo, `".main aside:hover, .sidebar p"` é um argumento de seletor válido.
 
 
 <% function 'selector.is-superselector($super, $sub)',
             'is-superselector($super, $sub)',
             returns: 'boolean' do %>
-  Returns whether the selector `$super` matches all the elements that the selector `$sub` matches.
+  Retorna verdadeiro se o seletor `$super` corresponder todos os elementos que o seletor `$sub` corresponder.
 
-  Still returns true even if `$super` matches *more* elements than `$sub`.
+  Continua a retornar verdadeiro mesmo se `$super` corresponder *mais* elementos do que `$sub`.
 
-  The `$super` and `$sub` selectors may contain [placeholder selectors][], but not [parent selectors][].
+  Os seletores `$super` e `$sub` podem conter [seletores de espaço reservado][placeholder selectors], mas não [seletores de pai][parent selectors]:
 
   [placeholder selectors]: ../style-rules/placeholder-selectors
   [parent selectors]: ../style-rules/parent-selector
@@ -51,18 +52,18 @@ Selector arguments to these functions may be in the same format, but they can al
 <% function 'selector.append($selectors...)',
             'selector-append($selectors...)',
             returns: 'selector' do %>
-  Combines `$selectors` without [descendant combinators][]—that is, without whitespace between them.
+  Combina `$selectors` sem os [combinadores de descendente][descendant combinators] — que está, sem espaço em branco entre eles.
 
   [descendant combinators]: https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_selectors
 
-  If any selector in `$selectors` is a selector list, each complex selector is combined separately.
+  Se qualquer seletor em `$selectors` for uma lista de seletor, cada seletor complexo é combinado separadamente.
 
-  The `$selectors` may contain [placeholder selectors][], but not [parent selectors][].
+  O `$selectors` pode conter [seletores de espaço reservado][placeholder selectors], mas não [seletores de pai][parent selectors].
 
   [placeholder selectors]: ../style-rules/placeholder-selectors
   [parent selectors]: ../style-rules/parent-selector
 
-  See also [`selector.nest()`](#nest).
+  Consulte também [`selector.nest()`](#nest).
 
   <% example(autogen_css: false) do %>
     @debug selector.append("a", ".disabled"); // a.disabled
@@ -81,11 +82,11 @@ Selector arguments to these functions may be in the same format, but they can al
 <% function 'selector.extend($selector, $extendee, $extender)',
             'selector-extend($selector, $extendee, $extender)',
             returns: 'selector' do %>
-  Extends `$selector` as with the [`@extend` rule][].
+  Estende `$selector` de acordo com a [regra `@extend`].
 
   [`@extend` rule]: ../at-rules/extend
 
-  Returns a copy of `$selector` modified with the following `@extend` rule:
+  Retorna uma cópia de `$seletor` modificado com a seguinte regra `@extend`:
 
   ```scss
   #{$extender} {
@@ -93,14 +94,14 @@ Selector arguments to these functions may be in the same format, but they can al
   }
   ```
 
-  In other words, replaces all instances of `$extendee` in `$selector` with `$extendee, $extender`. If `$selector` doesn't contain `$extendee`, returns it as-is.
+  Em outras palavras, substitui todas as instâncias de `$extendee` no `$selector` com `$extendee, $extender`. Se `$selector` não contém `$extendee`, retorna-o como está.
 
-  The `$selector`, `$extendee`, and `$extender` selectors may contain [placeholder selectors][], but not [parent selectors][].
+  Os seletores `$selector`, `$extendee`, e `$extender` podem conter [seletores de espaço reservado][placeholder selectors] , mas não [seletores de pai][parent selectors].
 
   [placeholder selectors]: ../style-rules/placeholder-selectors
   [parent selectors]: ../style-rules/parent-selector
 
-  See also [`selector.replace()`](#replace).
+  Consulte também [`selector.replace()`](#replace).
 
   <% example(autogen_css: false) do %>
     @debug selector.extend("a.disabled", "a", ".link"); // a.disabled, .link.disabled
@@ -119,14 +120,14 @@ Selector arguments to these functions may be in the same format, but they can al
 <% function 'selector.nest($selectors...)',
             'selector-nest($selectors...)',
             returns: 'selector' do %>
-  Combines `$selectors` as though they were nested within one another in the stylesheet.
+  Combina `$selectors` como se estivessem encaixados dentro dum do outro na folha de estilo.
 
-  The `$selectors` may contain [placeholder selectors][]. Unlike other selector functions, all of them except the first may also contain [parent selectors][].
+  O `$selectors` pode conter [seletores de espaço reservado][placeholder selectors]. Ao contrário de outras funções de seletor, todas elas exceto a primeira também podem conter [seletores de pai][parent selectors].
 
   [placeholder selectors]: ../style-rules/placeholder-selectors
   [parent selectors]: ../style-rules/parent-selector
 
-  See also [`selector.append()`](#append).
+  Consulte também [`selector.append()`](#append).
 
   <% example(autogen_css: false) do %>
     @debug selector.nest("ul", "li"); // ul li
@@ -145,7 +146,7 @@ Selector arguments to these functions may be in the same format, but they can al
 <% function 'selector.parse($selector)',
             'selector-parse($selector)',
             returns: 'selector' do %>
-  Returns `$selector` in the [selector value](#selector-values) format.
+  Retorna `$selector` no formato do [valor do seletor](#selector-values):
 
   <% example(autogen_css: false) do %>
     @debug selector.parse(".main aside:hover, .sidebar p");
@@ -162,20 +163,19 @@ Selector arguments to these functions may be in the same format, but they can al
 <% function 'selector.replace($selector, $original, $replacement)',
             'selector-replace($selector, $original, $replacement)',
             returns: 'selector' do %>
-  Returns a copy of `$selector` with all instances of `$original` replaced by `$replacement`.
+  Retorna uma cópia de `$selector` com todas as instâncias de `$original` substituídas pelo `$replacement`.
 
-  This uses the [`@extend` rule][]'s [intelligent unification][] to make sure `$replacement` is seamlessly integrated into `$selector`. If `$selector` doesn't contain `$original`, returns it as-is.
+  Isto usa a [unificação inteligente][intelligent unification] da [regra `@extend`][`@extend` rule] para garantir que `$replacement` é integrado de maneira transparente ao `$selector`. Se `$selector` não contiver `$original`, retorna-o como está.
 
   [`@extend` rule]: ../at-rules/extend
   [intelligent unification]: ../at-rules/extend#how-it-works
 
-  The `$selector`, `$original`, and `$replacement` selectors may contain
-  [placeholder selectors][], but not [parent selectors][].
+  Os seletores `$selector`, `$original`, e `$replacement` podem conter [seletores de espaço reservado][placeholder selectors], mas nao [seletores de pai][parent selectors].
 
   [placeholder selectors]: ../style-rules/placeholder-selectors
   [parent selectors]: ../style-rules/parent-selector
 
-  See also [`selector.extend()`](#extend).
+  Consulte também [`selector.extend()`](#extend).
 
   <% example(autogen_css: false) do %>
     @debug selector.replace("a.disabled", "a", ".link"); // .link.disabled
@@ -194,11 +194,11 @@ Selector arguments to these functions may be in the same format, but they can al
 <% function 'selector.unify($selector1, $selector2)',
             'selector-unify($selector1, $selector2)',
             returns: 'selector | null' do %>
-  Returns a selector that matches only elements matched by *both* `$selector1` and `$selector2`.
+  Retorna um seletor que corresponde apenas os elementos correspondidos por *ambos* `$selector1` e `$selector2`.
 
-  Returns `null` if `$selector1` and `$selector2` don't match any of the same elements, or if there's no selector that can express their overlap.
+  Retorna `null` se `$selector1` e `$selector2` não correspondem nenhum dos mesmos elementos, ou se não existir seletor que pode expressar suas sobreposições.
 
-  Like selectors generated by the [`@extend` rule][], the returned selector isn't guaranteed to match *all* the elements matched by both `$selector1` and `$selector2` if they're both complex selectors.
+  Tal como os seletores gerados pela [regra `@extend`][`@extend` rule], o seletor retornado não dá garantia de corresponder *todos* os elementos correspondidos por ambos `$selector1` e `$selector2` se forem ambos seletores complexos:
 
   [`@extend` rule]: ../at-rules/extend#html-heuristics
 
@@ -219,11 +219,11 @@ Selector arguments to these functions may be in the same format, but they can al
 <% function 'selector.simple-selectors($selector)',
             'simple-selectors($selector)',
             returns: 'list' do %>
-  Returns a list of simple selectors in `$selector`.
+  Retorna uma lista de seletores simples no `$selector`.
 
-  The `$selector` must be a single string that contains a compound selector. This means it may not contain combinators (including spaces) or commas.
+  O `$seletor` deve ser uma única sequência de caracteres que contém um seletor composto. Isto significa que não pode conter combinadores (incluindo espaços) ou vírgulas.
 
-  The returned list is comma-separated, and the simple selectors are unquoted strings.
+  A lista retornada é separada por vírgula, e os seletores simples são sequências de caracteres sem aspas:
 
   <% example(autogen_css: false) do %>
     @debug selector.simple-selectors("a.disabled"); // a, .disabled
