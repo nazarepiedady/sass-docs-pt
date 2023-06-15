@@ -11,7 +11,7 @@ Os comentários na SCSS funcionam de maneira parecida aos comentários em outras
 
 Os **comentários de várias linhas** começam com `/*` e terminam no próximo `*/`. Se um comentário de várias linhas for escrito em algum lugar que uma [declaração][statement] é permitida, é compilado para um comentário de CSS. Também são chamados de **comentário ruidoso**, em contrapartida com os comentários silenciosos. Um comentário de várias linhas que é compilado para CSS pode conter [interpolação][interpolation], que será avaliada entes de comentário ser compilado.
 
-Por padrão, os comentários de várias linhas são arrancados da CSS compilada no [modo comprimido][compressed mode]. Se um comentário começar com `/*!`, sempre será incluído na saída de CSS:
+Por padrão, os comentários de várias linhas serão arrancados da CSS compilada no [modo comprimido][compressed mode]. Se um comentário começar com `/*!`, sempre será incluído na saída de CSS:
 
 [statement]: structure#statements
 [interpolation]: ../interpolation
