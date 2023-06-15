@@ -5,9 +5,9 @@ title: sass:map
 <%= partial '../snippets/built-in-module-status' %>
 
 <% fun_fact do %>
-  Sass libraries and design systems tend to share and override configurations that are represented as nested maps (maps that contain maps that contain maps).
+  As bibliotecas e sistema de desenho da Sass tendem a partilhar e sobrepor configurações que são representadas como mapas encaixados (mapas que contêm mapas que contêm mapas).
 
-  To help you work with nested maps, some map functions support deep operations. For example, if you pass multiple keys to `map.get()`, it will follow those keys to find the desired nested map:
+  Para ajudar a trabalhar com mapas encaixados, algumas funções de mapa suportam operações profundas. Por exemplo, se passares várias chaves para `map.get()`, seguirão estas chaves para encontrar o mapa encaixado desejado:
 
   <% example(autogen_css: false) do %>
     $config: (a: (b: (c: d)));
@@ -22,7 +22,7 @@ title: sass:map
 <% function 'map.deep-merge($map1, $map2)', returns: 'map' do %>
   <% impl_status dart: '1.27.0', libsass: false, ruby: false %>
 
-  Identical to [`map.merge()`](#merge), except that nested map values are *also* recursively merged.
+  Idêntico ao [`map.merge()`](#merge), exceto que os valores do mapa encaixado *também* são combinados recursivamente:
 
   <% example(autogen_css: false) do %>
     $helvetica-light: (
@@ -82,7 +82,7 @@ title: sass:map
             returns: 'map' do %>
   <% impl_status dart: '1.27.0', libsass: false, ruby: false %>
 
-If `$keys` is empty, returns a copy of `$map` without a value associated with `$key`.
+  Se `$keys` estiver vazio, retorna uma cópia de `$map` sem um valor associado ao `$key`:
 
   <% example(autogen_css: false) do %>
     $font-weights: ("regular": 400, "medium": 500, "bold": 700);
@@ -98,9 +98,9 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
 
   ---
 
-  If `$keys` is not empty, follows the set of keys including `$key` and excluding the last key in `$keys`, from left to right, to find the nested map targeted for updating.
+  Se `$keys` não estiver vazio, segue o conjunto de chaves incluindo `$key` e excluindo a última chave em `$keys`, da esquerda para a direita, para encontrar o mapa encaixado apontado para a atualização.
 
-  Returns a copy of `$map` where the targeted map does not have a value associated with the last key in `$keys`.
+  Retorna uma cópia de `$map` onde o mapa escolhido como alvo não tem um valor associado à última chave em `$keys`:
 
   <% example(autogen_css: false) do %>
     $fonts: (
@@ -140,23 +140,23 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
 
 <% function 'map.get($map, $key, $keys...)',
             'map-get($map, $key, $keys...)' do %>
-  If `$keys` is empty, returns the value in `$map` associated with `$key`.
+  Se `$keys` estiver vazio, retorna o valor no `$map` associado ao `$key`.
 
-  If `$map` doesn't have a value associated with `$key`, returns [`null`][].
+  Se `$map` não tiver um valor associado ao `$key`, retorna [`null`][].
 
   <%= partial 'code-snippets/example-map-get' %>
 
   ---
 
   <% impl_status dart: '1.27.0', libsass: false, ruby: false do %>
-    Only Dart Sass supports calling `map.get()` with more than two arguments.
+    Apenas Sass de Dart suporta chamar `map.get()` com mais de dois argumentos.
   <% end %>
 
-  If `$keys` is not empty, follows the set of keys including `$key` and excluding the last key in `$keys`, from left to right, to find the nested map targeted for searching.
+  Se `$keys` não estiver vazio, segue o conjunto de chaves incluindo `$kye` e excluindo a última chave no `$keys`, da esquerda para a direita, para encontrar o mapa encaixado apontado para a averiguação.
 
-  Returns the value in the targeted map associated with the last key in `$keys`.
+  Retorna o valor no mapa escolhido como alvo associado à última chave em `$keys`.
 
-  Returns [`null`][] if the map does not have a value associated with the key, or if any key in `$keys` is missing from a map or references a value that is not a map.
+  Retorna [`null`][] se o mapa não tiver um valor associado à chave, ou se qualquer chave em `$keys` estiver em falta num mapa ou fizer referência a um valor que não é um mapa:
 
   <% example(autogen_css: false) do %>
     $fonts: (
@@ -185,7 +185,7 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
 <% function 'map.has-key($map, $key, $keys...)',
             'map-has-key($map, $key, $keys...)',
             returns: 'boolean' do %>
-  If `$keys` is empty, returns whether `$map` contains a value associated with `$key`.
+  Se `$keys` estive vazio, retorna verdadeiro se `$map` contiver um valor associando à `$key`:
 
   <% example(autogen_css: false) do %>
     $font-weights: ("regular": 400, "medium": 500, "bold": 700);
@@ -202,14 +202,14 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
   ---
 
   <% impl_status dart: '1.27.0', libsass: false, ruby: false do %>
-    Only Dart Sass supports calling `map.has-key()` with more than two arguments.
+    Apenas a Sass de Dart suporta chamar `map.has-key()` com mais de dois argumentos.
   <% end %>
 
-  If `$keys` is not empty, follows the set of keys including `$key` and excluding the last key in `$keys`, from left to right, to find the nested map targeted for searching.
+  Se `$keys` não estiver vazia, segue o conjunto de chaves incluindo `$key` e excluindo a última chave em `$keys`, da esquerda para a direita, para encontrar o mapa encaixado apontado para averiguação.
 
-  Returns true if the targeted map contains a value associated with the last key in `$keys`.
+  Retorna verdadeiro se o mapa escolhido como alvo contiver um valor associado à última chave em `$keys`.
 
-  Returns false if it does not, or if any key in `$keys` is missing from a map or references a value that is not a map.
+  Retorna falso se não contiver, ou se qualquer chave em `$keys` estiver em falta num mapa ou fizer referência a um valor que não estiver num mapa:
 
   <% example(autogen_css: false) do %>
     $fonts: (
@@ -234,7 +234,7 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
 
 
 <% function 'map.keys($map)', 'map-keys($map)', returns: 'list' do %>
-  Returns a comma-separated list of all the keys in `$map`.
+  Retorna uma lista separada por vírgula de todas as chaves no `$map`:
 
   <% example(autogen_css: false) do %>
     $font-weights: ("regular": 400, "medium": 500, "bold": 700);
@@ -254,14 +254,14 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
             'map-merge($map1, $keys..., $map2)',
             returns: 'map' do %>
   <% heads_up do %>
-    In practice, the actual arguments to `map.merge($map1, $keys..., $map2)` are passed as `map.merge($map1, $args...)`. They are described here as `$map1, $keys..., $map2` for explanation purposes only.
+    Na prática, os argumentos exatos para `map.merge($map1, $keys..., $map2)` são passados como `map.merge($map1, $args...)`. Eles são descritos aqui como `$map1, $keys..., $map2` apenas para fins de explicação.
   <% end %>
 
-  If no `$keys` are passed, returns a new map with all the keys and values from both `$map1` and `$map2`.
+  Se numa `$keys` forem passadas, retorna um novo mapa com todas as chaves e valores de ambos `$map1` e `$map2`.
 
-  If both `$map1` and `$map2` have the same key, `$map2`'s value takes precedence.
+  Se ambos `$map1` e `$map2` tiverem a mesma chave, o valor de `$map2` tem prioridade.
 
-  All keys in the returned map that also appear in `$map1` have the same order as in `$map1`. New keys from `$map2` appear at the end of the map.
+  Todas as chaves no mapa retorna que também aparecem em `$map1` têm a mesma ordem que em `$map1`. As novas chaves de `$map2` aparecem no final do mapa:
 
   <% example(autogen_css: false) do %>
     $light-weights: ("lightest": 100, "light": 300);
@@ -280,12 +280,12 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
   ---
 
   <% impl_status dart: '1.27.0', libsass: false, ruby: false do %>
-    Only Dart Sass supports calling `map.merge()` with more than two arguments.
+    Apenas a Sass de Dart suporta chamar `map.merge` com mais de dois argumentos.
   <% end %>
 
-  If `$keys` is not empty, follows the `$keys` to find the nested map targeted for merging. If any key in `$keys` is missing from a map or references a value that is not a map, sets the value at that key to an empty map.
+  Se `$keys` não estiver vazio, segue as `$keys` para encontrar o mapa encaixado apontado para a fusão. Se qualquer chave em `$keys` estiver em faltando num mapa ou fizer referência a um valor que não for um mapa, define o valor nessa chave para um mapa vazio.
 
-  Returns a copy of `$map1` where the targeted map is replaced by a new map that contains all the keys and values from both the targeted map and `$map2`.
+  Retorna uma cópia de `$map1` onde o mapa escolhido como alvo é substituído por um mapa novo que contém todas as chaves e valores de ambos o mapa escolhido como alvo e `$map2`:
 
   <% example(autogen_css: false) do %>
     $fonts: (
@@ -331,9 +331,9 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
 <% function 'map.remove($map, $keys...)',
             'map-remove($map, $keys...)',
             returns: 'map' do %>
-  Returns a copy of `$map` without any values associated with `$keys`.
+  Retorna uma cópia de `$map` sem quaisquer valores associados às `$keys`.
 
-  If a key in `$keys` doesn't have an associated value in `$map`, it's ignored.
+  Se uma chave em `$keys` não tem um valor associado no `$map`, é ignorada:
 
   <% example(autogen_css: false) do %>
     $font-weights: ("regular": 400, "medium": 500, "bold": 700);
@@ -357,10 +357,10 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
             'map.set($map, $keys..., $key, $value)',
             returns: 'map' do %>
   <% heads_up do %>
-    In practice, the actual arguments to `map.set($map, $keys..., $key, $value)` are passed as `map.set($map, $args...)`. They are described here as `$map, $keys..., $key, $value` for explanation purposes only.
+    Na prática, os argumentos exatos para `map.set($map, $keys..., $key, $value)` são passados como `map.set($map, $args...)`. Eles são descritos aqui como `$map, $keys..., $key, $value` apenas por fins de explicação.
   <% end %>
 
-  If `$keys` are not passed, returns a copy of `$map` with the value at `$key` set to `$value`.
+  Se `$keys` não forem passadas, retorna uma cópia de `$map` com o valor na `$key` definida para `$value`:
 
   <% example(autogen_css: false) do %>
     $font-weights: ("regular": 400, "medium": 500, "bold": 700);
@@ -377,12 +377,12 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
   ---
 
   <% impl_status dart: '1.27.0', libsass: false, ruby: false do %>
-    Only Dart Sass supports calling `map.set()` with more than three arguments.
+    Apenas Sass de Dart suporta chamar `map.set()` com mais de três argumentos.
   <% end %>
 
-  If `$keys` are passed, follows the `$keys` to find the nested map targeted for updating. If any key in `$keys` is missing from a map or references a value that is not a map, sets the value at that key to an empty map.
+  Se `$keys` forem passadas, segue as `$keys` para encontrar o mapa encaixado apontado para atualização. Se qualquer chave em `$keys` estiver faltando num mapa ou fizer referência a um valor que não é um mapa, define o valor nesta chave para um mapa vazio.
 
-  Returns a copy of `$map` with the targeted map's value at `$key` set to `$value`.
+  Retorna uma cópia de `$map` com o valor do mapa escolhido como alvo na `$key` definido para `$value`:
 
   <% example(autogen_css: false) do %>
     $fonts: (
@@ -423,7 +423,7 @@ If `$keys` is empty, returns a copy of `$map` without a value associated with `$
 
 
 <% function 'map.values($map)', 'map-values($map)', returns: 'list' do %>
-  Returns a comma-separated list of all the values in `$map`.
+  Retorna uma lista separada por vírgula de todos os valores em `$map`.
 
   <% example(autogen_css: false) do %>
     $font-weights: ("regular": 400, "medium": 500, "bold": 700);
