@@ -5,24 +5,24 @@ title: sass:list
 <%= partial '../snippets/built-in-module-status' %>
 
 <% fun_fact do %>
-  In Sass, every [map][] counts as a list that contains a two-element list for each key/value pair. For example, `(1: 2, 3: 4)` counts as `(1 2, 3 4)`. So all these functions work for maps as well!
+  Na Sass, todo [mapa][map] conta como uma lista que contém uma lista de dois elementos para cada par de chave e valor. Por exemplo, `(1: 2, 3: 4)` conta como `(1 2, 3 4)`. Todas estas funções também funcionam para os mapas!
 
   [map]: ../values/maps
 
-  Individual values also count as lists. All these functions treat `1px` as a list that contains the value `1px`.
+  Os valores individuais também contam como listas. Todas estas funções tratam `1px` como uma lista que contém o valor `1px`.
 <% end %>
 
 
 <% function 'list.append($list, $val, $separator: auto)',
             'append($list, $val, $separator: auto)',
             returns: 'list' do %>
-  Returns a copy of `$list` with `$val` added to the end.
+  Retorna uma cópia de `$list` com `$val` adicionado ao final.
 
-  If `$separator` is `comma`, `space`, or `slash`, the returned list is comma-separated, space-separated, or slash-separated, respectively. If it's `auto` (the default), the returned list will use the same separator as `$list` (or `space` if `$list` doesn't have a separator). Other values aren't allowed.
+  Se `$separator` for `comma`, `space`, ou `slash`, a lista retornada é separada por vírgula, separada por espaço, ou separada por barra, respetivamente. Se for `auto` (o padrão), a lista retornada usará o mesmo separador que a `$list` (ou `space` se `$list` não tiver um separador). Outros valores não são permitidos.
 
   [separator]: ../values/lists
 
-  Note that unlike [`list.join()`](#join), if `$val` is a list it's nested  within the returned list rather than having all its elements added to the returned list.
+  Nota que ao contrário de [`list.join()`](#join), se `$val` for uma lista é encaixada dentro da lista retornada no lugar de ter todos os seus elementos adicionados à lista retornada:
 
   <% example(autogen_css: false) do %>
     @debug list.append(10px 20px, 30px); // 10px 20px 30px
@@ -43,11 +43,11 @@ title: sass:list
 <% function 'list.index($list, $value)',
             'index($list, $value)',
             returns: 'number | null' do %>
-  Returns the [index][] of `$value` in `$list`.
+  Retorna o [índice][index] do `$value` no `$list`.
 
   [index]: ../values/lists#indexes
 
-  If `$value` doesn't appear in `$list`, this returns [`null`][]. If `$value` appears multiple times in `$list`, this returns the index of its first appearance.
+  Se `$value` não aparecer na `$list`, este retorna [`null`][]. Se `$value` aparecer várias vezes na `$list`, esta retorna o índice do seu primeiro aparecimento:
 
   [`null`]: ../values/null
 
@@ -58,7 +58,7 @@ title: sass:list
 <% function 'list.is-bracketed($list)',
             'is-bracketed($list)',
             returns: 'boolean' do %>
-  Returns whether `$list` has square brackets.
+  Retorna verdadeiro se `$list` tiver parênteses reto:
 
   <% example(autogen_css: false) do %>
     @debug list.is-bracketed(1px 2px 3px); // false
@@ -73,17 +73,17 @@ title: sass:list
 <% function 'list.join($list1, $list2, $separator: auto, $bracketed: auto)',
             'join($list1, $list2, $separator: auto, $bracketed: auto)',
             returns: 'list' do %>
-  Returns a new list containing the elements of `$list1` followed by the elements of `$list2`.
+  Retorna uma nova lista contendo os elementos de `$list1` seguido pelos elementos de `$list2`.
 
   <% heads_up do %>
-    Because individual values count as single-element lists, it's possible to use `list.join()` to add a value to the end of a list. However, *this is not recommended*, since if that value is a list it will be concatenated, which is probably not what you're expecting.
+    Uma vez que valores individuais contam como listas de um elemento, é possível usar `list.join()` para adicionar um valor no final duma lista. No entanto, *isto não é recomendado*, uma vez que se este valor for uma lista será concatenado, o que é provavelmente o que estás a espera.
 
-    Use [`list.append()`](#append) instead to add a single value to a list. Only use `list.join()` to combine two lists together into one.
+    Use [`list.append()`](#append) para adicionar um único valor à uma lista. Apenas use `list.join()` para combinar duas listas numa.
   <% end %>
 
-  If `$separator` is `comma`, `space`, or `slash`, the returned list is comma-separated, space-separated, or slash-separated, respectively. If it's `auto` (the default), the returned list will use the same separator as `$list1` if it has a separator, or else `$list2` if it has a separator, or else `space`. Other values aren't allowed.
+  Se `$separator` for `comma`, `space`, ou `slash`, a lista retornada é separada por vírgula, separada por espaço, ou separada por barra, respetivamente. Se for `auto` (o padrão), a lista retornada usará o mesmo separador que a `$list1` se esta tiver um separador, ou `$list2` se esta tiver um separador, ou então `space`. Outros valores não são permitidos.
 
-  If `$bracketed` is `auto` (the default), the returned list will be bracketed if `$list1` is. Otherwise, the returned list will have square brackets if `$bracketed` is [truthy] and no brackets if `$bracketed` is falsey.
+  Se `$bracketed` for `auto` (o padrão), a lista retornada será envolvida em parênteses se `$list` estiver. De outro modo, a lista retornada terá parênteses reto se `$bracketed` for [verdadeiro][truthy] e sem parênteses se `$bracketed` for falso:
 
   [truthy]: /documentation/values/booleans#truthiness-and-falsiness
 
@@ -108,9 +108,9 @@ title: sass:list
 
 
 <% function 'list.length($list)', 'length($list)', returns: 'number' do %>
-  Returns the length of `$list`.
+  Retorna o comprimento da `$list`.
 
-  This can also return the number of pairs in a map.
+  Este também pode retornar o número de pares num mapa.
 
   <% example(autogen_css: false) do %>
     @debug list.length(10px); // 1
@@ -127,9 +127,9 @@ title: sass:list
 <% function 'list.separator($list)',
             'list-separator($list)',
             returns: 'unquoted string' do %>
-  Returns the name of the separator used by `$list`, either `space`, `comma`, or `slash`.
+  Retorna o nome do separador usado pela `$list`, ou `space`, `comma`, ou `slash`.
 
-  If `$list` doesn't have a separator, returns `space`.
+  Se `$list` não tiver um separador, retorna `space`.
 
   <% example(autogen_css: false) do %>
     @debug list.separator(1px 2px 3px); // space
@@ -146,11 +146,11 @@ title: sass:list
 
 
 <% function 'list.nth($list, $n)', 'nth($list, $n)' do %>
-  Returns the element of `$list` at [index][] `$n`.
+  Retorna o elemento da `$list` no [índice][index] `$n`.
 
   [index]: ../values/lists#indexes
 
-  If `$n` is negative, it counts from the end of `$list`. Throws an error if there is no element at index `$n`.
+  Se `$n` for negativo, conta a partir do final da `$list`. Lança um erro se não existir nenhum elemento no índice `$n`.
 
   <%= partial 'code-snippets/example-list-nth' %>
 <% end %>
@@ -159,11 +159,11 @@ title: sass:list
 <% function 'list.set-nth($list, $n, $value)',
             'set-nth($list, $n, $value)',
             returns: 'list' do %>
-  Returns a copy of `$list` with the element at [index][] `$n` replaced with `$value`.
+  Retorna uma cópia de `$list` com o elemento no [índice][index] `$n` substituído por `$value`.
 
   [index]: ../values/lists#indexes
 
-  If `$n` is negative, it counts from the end of `$list`. Throws an error if there is no existing element at index `$n`.
+  Se `$n` for negativo, conta a partir do final da `$list`. Lança um erro se não existir nenhum elemento no índice `$n`.
 
   <% example(autogen_css: false) do %>
     @debug list.set-nth(10px 20px 30px, 1, 2em); // 2em 20px 30px
@@ -178,10 +178,10 @@ title: sass:list
 
 
 <% function 'list.slash($elements...)', returns: 'list' do %>
-  Returns a slash-separated list that contains `$elements`.
+  Retorna uma lista separada por barra que contém `$elements`.
 
   <% heads_up do %>
-    This function is a temporary solution for creating slash-separated lists. Eventually, they'll be written literally with slashes, as in `1px / 2px / solid`, but for the time being [slashes are used for division] so Sass can't use them for new syntax until the old syntax is removed.
+    Esta função é uma solução temporária para criação de listas separadas por barra. Eventualmente, serão escritas literalmente com barras, como em `1px / 2px / solid`, mas por enquanto as [barras são usadas para divisão][slashes are used for division] então a Sass não pode usá-los para a nova sintaxe até a antiga sintaxe ser removida.
 
     [slashes are used for division]: ../breaking-changes/slash-div
   <% end %>
@@ -195,11 +195,11 @@ title: sass:list
 
 
 <% function 'list.zip($lists...)', 'zip($lists...)', returns: 'list' do %>
-  Combines every list in `$lists` into a single list of sub-lists.
+  Combina todas as listas em `$lists` numa única lista de sub-listas.
 
-  Each element in the returned list contains all the elements at that position in `$lists`. The returned list is as long as the shortest list in `$lists`.
+  Cada elemento na lista retornada contém todos os elementos naquela posição na `$lists`. A lista retornada é tão longa quanto a lista mais curta em `$lists`.
 
-  The returned list is always comma-separated and the sub-lists are always space-separated.
+  A lista retornada é sempre separada por vírgula e as sub-listas são sempre separadas por espaço.
 
   <% example(autogen_css: false) do %>
     @debug list.zip(10px 50px 100px, short mid long); // 10px short, 50px mid, 100px long
