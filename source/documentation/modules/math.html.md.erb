@@ -56,9 +56,7 @@ title: sass:math
 <% function 'math.clamp($min, $number, $max)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Restricts `$number` to the range between `$min` and `$max`. If `$number` is
-  less than `$min` this returns `$min`, and if it's greater than `$max` this
-  returns `$max`.
+  Restricts `$number` to the range between `$min` and `$max`. If `$number` is less than `$min` this returns `$min`, and if it's greater than `$max` this returns `$max`.
 
   `$min`, `$number`, and `$max` must have compatible units, or all be unitless.
 
@@ -141,8 +139,7 @@ title: sass:math
 ## Distance Functions
 
 <% function 'math.abs($number)', 'abs($number)', returns: 'number' do %>
-  Returns the [absolute value][] of `$number`. If `$number` is negative, this
-  returns `-$number`, and if `$number` is positive, it returns `$number` as-is.
+  Returns the [absolute value][] of `$number`. If `$number` is negative, this returns `-$number`, and if `$number` is positive, it returns `$number` as-is.
 
   [absolute value]: https://en.wikipedia.org/wiki/Absolute_value
 
