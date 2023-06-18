@@ -4,12 +4,13 @@ title: sass:math
 
 <%= partial '../snippets/built-in-module-status' %>
 
-## Variables
+<span id="variables"></span>
+## Variáveis
 
 <% function 'math.$e' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Equal to the value of the [mathematical constant *e*][].
+  Igual ao valor da [constante matemática *e*][mathematical constant *e*].
 
   [mathematical constant *e*]: https://en.wikipedia.org/wiki/E_(mathematical_constant)
 
@@ -24,7 +25,7 @@ title: sass:math
 <% function 'math.$pi' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Equal to the value of the [mathematical constant *π*][].
+  Igual ao valor da [constante matemática *π*][mathematical constant *π*].
 
   [mathematical constant *π*]: https://en.wikipedia.org/wiki/Pi
 
@@ -36,10 +37,11 @@ title: sass:math
 <% end %>
 
 
-## Bounding Functions
+<span id="bounding-functions"></span>
+## Funções de Limites
 
 <% function 'math.ceil($number)', 'ceil($number)', returns: 'number' do %>
-  Rounds `$number` up to the next highest whole number.
+  Arredonda `$number` para cima para o próximo maior número inteiro.
 
   <% example(autogen_css: false) do %>
     @debug math.ceil(4); // 4
@@ -56,9 +58,9 @@ title: sass:math
 <% function 'math.clamp($min, $number, $max)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Restricts `$number` to the range between `$min` and `$max`. If `$number` is less than `$min` this returns `$min`, and if it's greater than `$max` this returns `$max`.
+  Reduz `$number` para o limite entre `$min` e `$max`. Se `$number` for menor do que `$min` este retorna `$min`, e se for maior do que `$max` este retorna `$max`.
 
-  `$min`, `$number`, and `$max` must have compatible units, or all be unitless.
+  `$min`, `$number`, e `$max` devem ter unidades compatíveis, ou ser todos sem unidade.
 
   <% example(autogen_css: false) do %>
     @debug math.clamp(-1, 0, 1); // 0
@@ -73,7 +75,7 @@ title: sass:math
 
 
 <% function 'math.floor($number)', 'floor($number)', returns: 'number' do %>
-  Rounds `$number` down to the next lowest whole number.
+  Arredonda `$number` para baixo para o próximo menor número inteiro.
 
   <% example(autogen_css: false) do %>
     @debug math.floor(4); // 4
@@ -88,7 +90,7 @@ title: sass:math
 
 
 <% function 'math.max($number...)', 'max($number...)', returns: 'number' do %>
-  Returns the highest of one or more numbers.
+  Retorna o maior de um ou mais números.
 
   <% example(autogen_css: false) do %>
     @debug math.max(1px, 4px); // 4px
@@ -105,7 +107,7 @@ title: sass:math
 
 
 <% function 'math.min($number...)', 'min($number...)', returns: 'number' do %>
-  Returns the lowest of one or more numbers.
+  Retorna o menor de um ou mais números.
 
   <% example(autogen_css: false) do %>
     @debug math.min(1px, 4px); // 1px
@@ -122,7 +124,7 @@ title: sass:math
 
 
 <% function 'math.round($number)', 'round($number)', returns: 'number' do %>
-  Rounds `$number` to the nearest whole number.
+  Arredonda `$number` para o mais próximo número inteiro.
 
   <% example(autogen_css: false) do %>
     @debug math.round(4); // 4
@@ -136,10 +138,11 @@ title: sass:math
 <% end %>
 
 
-## Distance Functions
+<span id="distance-functions"></span>
+## Funções de Distâncias
 
 <% function 'math.abs($number)', 'abs($number)', returns: 'number' do %>
-  Returns the [absolute value][] of `$number`. If `$number` is negative, this returns `-$number`, and if `$number` is positive, it returns `$number` as-is.
+  Retorna o [valor absoluto][absolute value] de `$number`. Se `$number` for negativo, este retorna `-$number`, e se `$number` for positivo, retorna `$number` como está.
 
   [absolute value]: https://en.wikipedia.org/wiki/Absolute_value
 
@@ -156,9 +159,9 @@ title: sass:math
 <% function 'math.hypot($number...)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the length of the *n*-dimensional [vector][] that has components equal to each `$number`. For example, for three numbers *a*, *b*, and *c*, this returns the square root of *a² + b² + c²*.
+  Retorna o comprimento do [vetor][vector] de *n*-dimensão que tem componentes iguais a cada `$number`. Por exemplo, para três números *a*, *b*, e *c*, este retorna a raiz quadrada de *a² + b² + c²*.
 
-  The numbers must either all have compatible units, or all be unitless. And since the numbers' units may differ, the output takes the unit of the first number.
+  Os números devem ou todos ter unidades compatíveis, ou ser todos sem unidade. E uma vez que as unidades dos números podem diferir, a saída recebe a unidade do primeiro número.
 
   [vector]: https://en.wikipedia.org/wiki/Euclidean_vector
 
@@ -176,14 +179,15 @@ title: sass:math
 <% end %>
 
 
-## Exponential Functions
+<span id="exponential-functions"></span>
+## Funções Exponenciais
 
 <% function 'math.log($number, $base: null)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the [logarithm][] of `$number` with respect to `$base`. If `$base` is `null`, the [natural log][] is calculated.
+  Retorna o [logaritmo][logarithm] de `$number` com respeito a `$base`. Se `$base` é `null`, o [logaritmo natural][natural log] é calculado.
 
-  `$number` and `$base` must be unitless.
+  `$number` e `$base` devem ser sem unidade.
 
   [logarithm]: https://en.wikipedia.org/wiki/Logarithm
   [natural log]: https://en.wikipedia.org/wiki/Natural_logarithm
@@ -201,9 +205,9 @@ title: sass:math
 <% function 'math.pow($base, $exponent)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Raises `$base` [to the power of][] `$exponent`.
+  Eleva `$base` [à potência de][to the power of] `$exponent`.
 
-  `$base` and `$exponent` must be unitless.
+  `$base` e `$exponent` devem ser sem unidade.
 
   [to the power of]: https://en.wikipedia.org/wiki/Exponentiation
 
@@ -222,9 +226,9 @@ title: sass:math
 <% function 'math.sqrt($number)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the [square root][] of `$number`.
+  Retorna a [raiz quadrada][square root] de `$number`.
 
-  `$number` must be unitless.
+  `$number` deve ser sem unidade.
 
   [square root]: https://en.wikipedia.org/wiki/Square_root
 
@@ -240,14 +244,15 @@ title: sass:math
 <% end %>
 
 
-## Trigonometric Functions
+<span id="trigonometric-functions"></span>
+## Funções Trigonométricas
 
 <% function 'math.cos($number)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the [cosine][] of `$number`.
+  Retorna o [cosseno][cosine] de `$number`.
 
-  `$number` must be an angle (its units must be compatible with `deg`) or unitless. If `$number` has no units, it is assumed to be in `rad`.
+  `$number` deve ser um ângulo (sua unidade deve ser compatível com `deg`) ou sem unidade. Se `$number` não tiver nenhuma unidade, assume-se que está em `rad`.
 
   [cosine]: https://en.wikipedia.org/wiki/Trigonometric_functions#Right-angled_triangle_definitions
 
@@ -266,9 +271,9 @@ title: sass:math
 <% function 'math.sin($number)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the [sine][] of `$number`.
+  Retorna o [seno][sine] de `$number`.
 
-  `$number` must be an angle (its units must be compatible with `deg`) or unitless. If `$number` has no units, it is assumed to be in `rad`.
+  `$number` deve ser um ângulo (sua unidade deve ser compatível com `deg`) ou sem unidade. Se `$number` não tiver nenhuma unidade, assume-se que está em `rad`.
 
   [sine]: https://en.wikipedia.org/wiki/Trigonometric_functions#Right-angled_triangle_definitions
 
@@ -287,9 +292,9 @@ title: sass:math
 <% function 'math.tan($number)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the [tangent][] of `$number`.
+  Retorna o [tangente][tangent] de `$number`.
 
-  `$number` must be an angle (its units must be compatible with `deg`) or unitless. If `$number` has no units, it is assumed to be in `rad`.
+  `$number` deve ser um ângulo (sua unidade deve ser compatível com `deg`) ou sem unidade. Se `$number` não tiver nenhuma unidade, assume-se que está em `rad`.
 
   [tangent]: https://en.wikipedia.org/wiki/Trigonometric_functions#Right-angled_triangle_definitions
 
@@ -308,9 +313,9 @@ title: sass:math
 <% function 'math.acos($number)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the [arccosine][] of `$number` in `deg`.
+  Retorna o [arco-cosseno][arccosine] de `$number` em `deg`.
 
-  `$number` must be unitless.
+  `$number` deve estar sem unidade.
 
   [arccosine]: https://en.wikipedia.org/wiki/Inverse_trigonometric_functions#Basic_properties
 
@@ -327,9 +332,9 @@ title: sass:math
 <% function 'math.asin($number)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the [arcsine][] of `$number` in `deg`.
+  Retorna o [arco-seno][arcsine] de `$number`
 
-  `$number` must be unitless.
+  `$number` deve estar sem unidade.
 
   [arcsine]: https://en.wikipedia.org/wiki/Inverse_trigonometric_functions#Basic_properties
 
@@ -346,9 +351,9 @@ title: sass:math
 <% function 'math.atan($number)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the [arctangent][] of `$number` in `deg`.
+  Retorna o [arco-tangente][arctangent] de `$number` em `deg`.
 
-  `$number` must be unitless.
+  `$number` deve estar sem unidade.
 
   [arctangent]: https://en.wikipedia.org/wiki/Inverse_trigonometric_functions#Basic_properties
 
@@ -363,14 +368,14 @@ title: sass:math
 <% function 'math.atan2($y, $x)', returns: 'number' do %>
   <% impl_status dart: '1.25.0', libsass: false, ruby: false %>
 
-  Returns the [2-argument arctangent][] of `$y` and `$x` in `deg`.
+  Retorna o [arco-tangente de dois argumentos][2-argument arctangent] de `$y` e `$x` em `deg`.
 
-  `$y` and `$x` must have compatible units or be unitless.
+  `$y` e `$x` devem ter unidades compatíveis ou ser sem unidade.
 
   [2-argument arctangent]: https://en.wikipedia.org/wiki/Atan2
 
   <% fun_fact do %>
-    `math.atan2($y, $x)` is distinct from `atan(math.div($y, $x))` because it preserves the quadrant of the point in question. For example, `math.atan2(1, -1)` corresponds to the point `(-1, 1)` and returns `135deg`. In contrast, `math.atan(math.div(1, -1))` and `math.atan(math.div(-1, 1))` resolve first to `atan(-1)`, so both return `-45deg`.
+    `math.atan2($y, $x)` é distinto de `atan(math.div($y, $x))` porque preserva o quadrante do ponto em questão. Por exemplo, `math.atan2(1, -1)` corresponde ao ponto `(-1, 1)` e retorna `135deg`. Em contrapartida, `math.atan(math.div(1, -1))` e `math.atan(math.div(-1, 1))` resolve primeiro para `atan(-1)`, assim ambos retornam `-45deg`.
   <% end %>
 
   <% example(autogen_css: false) do %>
@@ -381,21 +386,22 @@ title: sass:math
 <% end %>
 
 
-## Unit Functions
+<span id="unit-functions"></span>
+## Funções de Unidade
 
 <% function 'math.compatible($number1, $number2)',
             'comparable($number1, $number2)',
             returns: 'boolean' do %>
-  Returns whether `$number1` and `$number2` have compatible units.
+  Retorna verdadeiro se `$number1` e `$number2` tiverem unidades compatíveis.
 
-  If this returns `true`, `$number1` and `$number2` can safely be [added][], [subtracted][], and [compared][]. Otherwise, doing so will produce errors.
+  Se este retornar `true`, `$number1` e `$number2` pode seguramente ser [adicionado][added], [subtraído][subtracted], e [comparado][compared]. De outro modo, produzirá erros.
 
   [added]: ../operators/numeric
   [subtracted]: ../operators/numeric
   [compared]: ../operators/relational
 
   <% heads_up do %>
-    The global name of this function is <code>compa<strong>ra</strong>ble</code>, but when it was added to the `sass:math` module the name was changed to <code>compa<strong>ti</strong>ble</code> to more clearly convey what the function does.
+    O nome global desta função é <code>compa<strong>ra</strong>ble</code>, mas quando foi adicionada ao módulo `sass:math` o nome foi mudado para <code>compa<strong>ti</strong>ble</code> para transmitir mais claramente o que a função faz.
   <% end %>
 
   <% example(autogen_css: false) do %>
@@ -413,7 +419,7 @@ title: sass:math
 <% function 'math.is-unitless($number)',
             'unitless($number)',
             returns: 'boolean' do %>
-  Returns whether `$number` has no units.
+  Retorna verdadeiro se `$number` não tiver nenhuma unidade.
 
   <% example(autogen_css: false) do %>
     @debug math.is-unitless(100); // true
@@ -428,10 +434,10 @@ title: sass:math
 <% function 'math.unit($number)',
             'unit($number)',
             returns: 'quoted string' do %>
-  Returns a string representation of `$number`'s units.
+  Retorna uma representação de sequência de caracteres da unidade do `$number`.
 
   <% heads_up do %>
-    This function is intended for debugging; its output format is not guaranteed to be consistent across Sass versions or implementations.
+    Esta função está destinada para depuração; não é garantido que formato da sua saída seja consistente com as versões ou implementações da Sass.
   <% end %>
 
   <% example(autogen_css: false) do %>
@@ -448,17 +454,18 @@ title: sass:math
 <% end %>
 
 
-## Other Functions
+<span id="other-functions"></span>
+## Outras Funções
 
 <% function 'math.div($number1, $number2)', returns: 'number' do %>
   <% impl_status dart: '1.33.0', libsass: false, ruby: false %>
 
-  Returns the result of dividing `$number1` by `$number2`.
+  Retorna o resultado da divisão de `$number1` por `$number2`.
 
-  Any units shared by both numbers will be canceled out. Units in `$number1` that aren't in `$number2` will end up in the return value's numerator, and units in `$number2` that aren't in `$number1` will end up in its denominator.
+  Quaisquer unidades partilhada por ambos números serão canceladas. As unidades em `$number1` que não estiverem em `$number2` terminarão no numerador do valor retornado, e as unidades em `$number2` que não estiverem em `$number1` terminarão no seu denominador.
 
   <% heads_up do %>
-    For backwards-compatibility purposes, this returns the *exact same result* as [the deprecated `/` operator], including concatenating two strings with a `/` character between them. However, this behavior will be removed eventually and shouldn't be used in new stylesheets.
+    Para fins de retro-compatibilidade, este retorna o *exato mesmo resultado* que o [o operador `/` depreciado][the deprecated `/` operator], inclusive concatenando duas sequências de caracteres com um carácter `/` entre elas. No entanto, este comportamento será removido eventualmente e não deveria ser usado em novas folhas de estilo.
 
     [the deprecated `/` operator]: ../breaking-changes/slash-div
   <% end %>
@@ -480,10 +487,10 @@ title: sass:math
 <% function 'math.percentage($number)',
             'percentage($number)',
             returns: 'number' do %>
-  Converts a unitless `$number` (usually a decimal between 0 and 1) to a percentage.
+  Converte um `$number` sem unidades (usualmente um decimal entre 0 e 1) para uma percentagem.
 
   <% fun_fact do %>
-    This function is identical to `$number * 100%`.
+    Esta função é idêntica ao `$number * 100%`.
   <% end %>
 
   <% example(autogen_css: false) do %>
@@ -499,7 +506,7 @@ title: sass:math
 <% function 'math.random($limit: null)',
             'random($limit: null)',
             returns: 'number' do %>
-  If `$limit` is `null`, returns a random decimal number between 0 and 1.
+  Se `$limit` for `null`, retorna um número decimal aleatório entre 0 e 1.
 
   <% example(autogen_css: false) do %>
     @debug math.random(); // 0.2821251858
@@ -511,10 +518,10 @@ title: sass:math
 
   * * *
 
-  If `$limit` is a number greater than or equal to 1, returns a random whole number between 1 and `$limit`.
+  Se `$limit` for um número maior do que ou igual à 1, retorna um número inteiro aleatório entre 1 e `$limit`.
 
   <% heads_up do %>
-    `random()` ignores units in `$limit`. [This behavior is deprecated] and `random($limit)` will return a random integer with the same units as the `$limit` argument.
+    `random()` ignora as unidades no `$limit`. [Este comportamento está depreciado][This behavior is deprecated] e `random($limit)` retornará um inteiro aleatório com a mesma unidade que o argumento `$limit`.
 
     [This behavior is deprecated]: ../breaking-changes/random-with-units
 
