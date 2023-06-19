@@ -1,22 +1,22 @@
 ---
-title: "Breaking Change: Media Queries Level 4"
+title: "Mudança de Rutura: Consultas de Media de Nível 4"
 introduction: >
-  Sass has added support for the CSS Media Queries Level 4 specification. This originally conflicted with some Sass-specific syntax, so this syntax was deprecated and is now interpreted according to the CSS standard.
+  A Sass adicionou suporte para as especificações de Consultas de Media de Nível 4 da CSS. Isto originalmente entrava em conflito com alguma sintaxe específica de Sass, assim esta sintaxe foi depreciada e agora é interpretada de acordo com o padrão da CSS.
 ---
 
 <% impl_status dart: '1.56.0', libsass: false, ruby: false %>
 
-Because Sass supports almost any Sass expression in parenthesized media conditions, there were a few constructs whose meaning was changed by adding full support for Media Queries Level 4. Specifically:
+Uma vez que a Sass suporta quase qualquer expressão de Sass em condições de media entre parênteses, existiam algumas construções cujo significado foi mudado adicionado suporte completo para Consultas de Media de Nível 4. Especificamente:
 
-* `@media (not (foo))` was historically interpreted by Sass as meaning
-  `@media (#{not (foo)})`, and so compiled to `@media (false)`.
+* `@media (not (foo))` era historicamente interpretada pela Sass como significando `@media (#{not (foo)})`, e então compilada para `@media (false)`.
 
-* `@media ((foo) and (bar))` and `@media ((foo) or (bar))` were similarly interpreted as SassScript's logical operators, compiling to `@media (bar)` and  `@media (foo)` respectively.
+* `@media ((foo) and (bar))` e `@media ((foo) or (bar))` eram de maneira semelhante interpretadas como operadores lógicos da SassScript, compilando para `@media (bar)` e `@media (foo)` respetivamente.
 
-Fortunately, these came up very infrequently in practice.
+Felizmente, estes vieram a tornar-se pouco frequentes na prática.
 
-## Transition Period
+<span id="transition-period"></span>
+## Período de Transição
 
 <% impl_status dart: '1.54.0', libsass: false, ruby: false %>
 
-First, we emitted deprecation warnings for the previous ambiguous cases. These will have suggestions for how to preserve the existing behavior or how to use the new CSS syntax.
+Primeiro, emitimos os avisos de depreciação para os anteriores casos ambíguos. Estes terão sugestões para como preservar o comportamento existente ou como usar a nova sintaxe de CSS.
