@@ -1,15 +1,15 @@
 ---
-title: "Breaking Change: -moz-document"
+title: "Mudança de Rutura: -moz-document"
 introduction: >
-  Firefox used to have a @-moz-document rule requiring special parsing. As support is removed from Firefox, Sass is in the process of removing support for parsing them.
+  O Firefox costumava ter uma regra `@-moz-document` exigindo analise especial. Já que o suporte foi removido do Firefox, Sass está no processo de remover o suporte de sua analise.
 ---
 
-Sass has historically supported a special parsing for the `@-moz-document` rule. As [Firefox dropped support for them], Sass will also drop support for the special parsing and will treat it as an unknown at-rule.
+A Sass tem historicamente suportado uma analise especial para a regra `@-moz-document`. Como o [Firefox desistiu do suporte delas], a Sass também desistirá do suporte da analise especial e a tratará como uma regra de arroba desconhecida.
 
 [Firefox dropped support for them]: https://web.archive.org/web/20200528221656/https://www.fxsitecompat.dev/en-CA/docs/2018/moz-document-support-has-been-dropped-except-for-empty-url-prefix/
 
 
-**There is one exception**: an empty url prefix function is still allowed, as that's used in a hack targetting Firefox.
+**Existe uma exceção**: uma função de prefixo de url vazia ainda é permitida, já que é usada num malabarismo destinado ao Firefox:
 
 <% example do %>
   @-moz-document url-prefix() {
@@ -23,10 +23,11 @@ Sass has historically supported a special parsing for the `@-moz-document` rule.
       color: red
 <% end %>
 
-## Transition Period
+<span id="transition-period"></span>
+## Período de Transição
 
 <% impl_status dart: '1.7.2', libsass: false, ruby: false %>
 
-First, we'll emit deprecation warnings for all usages of `@-moz-document` except for the empty url-prefix hack.
+Primeiro, emitiremos avisos de depreciação para todos os usos de `@-moz-document` exceto para o malabarismo de prefixo de url vazia.
 
-In Dart Sass 2.0, `@-moz-document` will be treated as an unknown at-rule.
+Na Sass de Dart 2.9, `@-moz-document` será tratada como uma regra de arroba desconhecida.
