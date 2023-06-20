@@ -1,12 +1,12 @@
 ---
-title: "Breaking Change: CSS Variable Syntax"
+title: "Mudança de Rutura: Sintaxe de Variável de CSS"
 introduction: >
-  Older versions of LibSass and Ruby Sass parsed custom property declarations just like any other property declaration, allowing the full range of [SassScript expressions](../syntax/structure#expressions) as values. But this wasn't compatible with CSS.
+  As versões mais antigas de LibSass e Sass de Ruby analisavam as declarações de propriedade personalizada tal como qualquer outra declaração de propriedade, permitindo a gama completa de [expressões de SassScript](../syntax/structure#expressions) como valores. Mas isto não era compatível com a CSS.
 ---
 
 <% impl_status dart: true, libsass: '3.5.0', ruby: '3.5.0' %>
 
-The CSS spec allows almost any string of characters to be used in a custom property declaration. Even though these values might not be meaningful for any CSS property, they could be accessed from JavaScript. When they were parsed as SassScript values, syntax that would have been valid plain CSS failed to parse. For example, the [Polymer library][] used this to support plain-CSS mixins:
+A especificação da CSS permite quase quaisquer caracteres de sequência de caracteres sejam usadas numa declaração de propriedade personalizada. Embora estes valores possam não ser importantes para qualquer propriedade de CSS, poderiam ser acessados através da JavaScript. Quando eram analisados como valores de SassScript, a sintaxe que teria sido CSS simples válida falha na analise. Por exemplo, a [Biblioteca Polymer][Polymer library] usava isto para suportar misturas de CSS simples:
 
 [Polymer library]: https://polymer-library.polymer-project.org/3.0/docs/devguide/custom-css-properties#use-custom-css-mixins
 
@@ -30,26 +30,26 @@ The CSS spec allows almost any string of characters to be used in a custom prope
   }
 <% end %>
 
-To provide maximum compatibility with plain CSS, more recent versions of Sass require SassScript expressions in custom property values to be written within [interpolation](../interpolation). Interpolation will also work for older Sass versions, and so is recommended for all stylesheets.
+Para fornecer a compatibilidade máxima com a CSS simples, versões mais recentes da Sass exigem que as expressões de SassScript em valores de propriedade personalizada sejam escritos dentro de [interpolação](../interpolation). A interpolação também funcionará para versões mais antigas da Sass, e assim é recomendado para todas as folhas de estilo:
 
 <% example do %>
   $accent-color: #fbbc04;
 
   :root {
-    // WRONG, will not work in recent Sass versions.
+    // ERRADO, não funcionará em versões mais recentes da Sass.
     --accent-color-wrong: $accent-color;
 
-    // RIGHT, will work in all Sass versions.
+    // CERTO, funcionará em todas as versões da Sass.
     --accent-color-right: #{$accent-color};
   }
   ===
   $accent-color: #fbbc04
 
   :root
-    // WRONG, will not work in recent Sass versions.
+    // ERRADO, não funcionará em versões mais recentes da Sass.
     --accent-color-wrong: $accent-color
 
-    // RIGHT, will work in all Sass versions.
+    // CERTO, funcionará em todas as versões da Sass.
     --accent-color-right: #{$accent-color}
   ===
   :root {
@@ -59,7 +59,7 @@ To provide maximum compatibility with plain CSS, more recent versions of Sass re
 <% end %>
 
 <% heads_up do %>
-  Because interpolation removes quotation marks from quoted strings, it may be necessary to wrap them in the [`meta.inspect()` function][] to preserve their quotes.
+  Uma vez que a interpolação remove os sinais de aspas das sequências de caracteres entre aspas, pode ser necessário envolvê-las numa [função `meta.inspect()`][`meta.inspect()` function] para preservar as suas aspas:
 
   [`meta.inspect()` function]: ../modules/meta#inspect
 
