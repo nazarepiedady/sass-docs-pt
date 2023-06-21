@@ -1,35 +1,35 @@
 ---
-title: "Breaking Change: Slash as Division"
+title: "Mudança de Rutura: Barra como Divisão"
 introduction: >
-  Sass currently treats `/` as a division operation in some contexts and a separator in others. This makes it difficult for Sass users to tell what any given `/` will mean, and makes it hard to work with new CSS features that use `/` as a separator.
+  A Sass atualmente trata `/` como uma operação de divisão em alguns contextos e um separador em outros. Isto torna difícil para os utilizadores da Sass dizer o que qualquer dada `/` significará, e dificulta trabalhar com as novas funcionalidades da CSS que usam `/` como separador.
 ---
 
 <% impl_status dart: :partial, libsass: false, ruby: false %>
 
-Today, Sass uses [complex heuristics][] to figure out whether a `/` should be treated as division or a separator. Even then, as a separator it just produces an unquoted string that's difficult to inspect from within Sass. As more and more CSS features like [CSS Grid][] and the [new `rgb()` and `hsl()` syntax][] use `/` as a separator, this is becoming more and more painful to Sass users.
+Hoje, a Sass usa [heurísticas complexas][complex heuristics] para compreender se uma `/` deveria ser tratada como divisão ou um separador. Mesmo assim, uma vez que um separador apenas produz uma sequência de caracteres sem aspas é difícil inspecionar a partir de dentro da Sass. Conforme mais e mais funcionalidades de CSS como [Grade de CSS][CSS Grid] e a [nova sintaxe de `rgb()` e `hsl()`][new `rgb()` and `hsl()` syntax] usam `/` como um separador, está a tornar-se ainda mais penoso para os utilizadores da Sass.
 
 [complex heuristics]: ../operators/numeric#slash-separated-values
 [CSS Grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row
 [new `rgb()` and `hsl()` syntax]: https://drafts.csswg.org/css-color/#rgb-functions
 
-Because Sass is a CSS superset, we're matching CSS's syntax by redefining `/` to be *only* a separator. `/` will be treated as a new type of list separator, similar to how `,` works today. Division will instead be written using the new `math.div()` function. This function will behave exactly the same as `/` does today.
+Uma vez que a Sass é um superconjunto de CSS, estamos a combinar a sintaxe da CSS redefinindo `/` para ser *apenas* um separador. `/` será tratado como um novo tipo de separador de lista, semelhante a como `,` funciona hoje. A divisão será escrita usando a nova função `math.div()`. Esta função comportar-se-á exatamente como `/` hoje.
 
-This deprecation does not affect uses of `/` inside `calc()` expressions.
+Esta depreciação não afeta os usos de `/` dentro de expressões de `calc()`:
 
 <% example do %>
   @use "sass:math";
 
-  // Future Sass, doesn't work yet!
+  // Sass do futuro, ainda não funciona!
   .item3 {
-    $row: span math.div(6, 2) / 7; // A two-element slash-separated list.
+    $row: span math.div(6, 2) / 7; // Uma lista separada por barra de dois elementos.
     grid-row: $row;
   }
   ===
   @use "sass:math"
 
-  // Future Sass, doesn't work yet!
+  // Sass do futuro, ainda não funciona!
   .item3
-    $row: span math.div(6, 2) / 7 // A two-element slash-separated list.
+    $row: span math.div(6, 2) / 7 // // Uma lista separada por barra de dois elementos.
     grid-row: $row
   ===
   .item3 {
@@ -37,34 +37,35 @@ This deprecation does not affect uses of `/` inside `calc()` expressions.
   }
 <% end %>
 
-## Transition Period
+<span id="transition-period"></span>
+## Período de Transição
 
 <% impl_status dart: "1.33.0", libsass: false, ruby: false,
-               feature: "math.div() and list.slash()" %>
+               feature: "math.div() e list.slash()" %>
 
-To ease the transition, we've begun by adding the `math.div()` function. The `/` operator still does division for now, but it also prints a deprecation warning when it does so. Users should switch all division to use `math.div()` instead.
+Para facilitar a transição, começamos por adicionar a função `math.div()`. Por agora o operador `/` continua a fazer divisão, mas também imprime um aviso de depreciação quando o faz. Os utilizadores deveriam trocar todas as divisões para usarem `math.div()`:
 
 <%= partial '../snippets/silence-deprecations' %>
 
 <% example(autogen_css: false) do %>
   @use "sass:math";
 
-  // WRONG, will not work in future Sass versions.
+  // ERRADO, não funcionará nas futuras versões da Sass.
   @debug (12px/4px); // 3
 
-  // RIGHT, will work in future Sass versions.
+  // CERTO, funcionará nas futuras versões da Sass.
   @debug math.div(12px, 4px); // 3
   ===
   @use "sass:math"
 
-  // WRONG, will not work in future Sass versions.
+  // ERRADO, não funcionará nas futuras versões da Sass.
   @debug (12px/4px) // 3
 
-  // RIGHT, will work in future Sass versions.
+  // CERTO, funcionará nas futuras versões da Sass.
   @debug math.div(12px, 4px) // 3
 <% end %>
 
-Slash-separated lists will also be available in the transition period. Because they can't be created with `/` yet, the `list.slash()` function will be added to create them. You will also be able to pass `"slash"` as the `$separator` to the [`list.join()` function][] and the [`list.append()` function][].
+As listas separadas por barra também estarão disponíveis no período de transição. Uma vez que ainda não podem ser criadas com `/`, a função `list.slash()` será adicionada para criá-las. Tu também serás capaz de passar `"slash"` como o `$separator` para a [função `list.join()`][`list.join()` function] e a [função `list.append()`][`list.append()` function]:
 
 [`list.join()` function]: ../modules/list#join
 [`list.append()` function]: ../modules/list#append
@@ -92,25 +93,26 @@ Slash-separated lists will also be available in the transition period. Because t
 
 <% impl_status dart: "1.40.0", libsass: false, ruby: false, feature: "First-class calc" %>
 
-Alternatively, users can wrap division operations inside a `calc()` expression, which Sass will simplify to a single number.
+Alternativamente, os utilizadores podem envolver os operadores de divisão dentro duma expressão de `calc()`, o qual a Sass simplificará para um único número:
 
 <% example(autogen_css: false) do %>
-  // WRONG, will not work in future Sass versions.
+  // ERRADO, não funcionará nas futuras versões da Sass.
   @debug (12px/4px); // 3
 
-  // RIGHT, will work in future Sass versions.
+  // CERTO, funcionará nas futuras versões da Sass.
   @debug calc(12px / 4px); // 3
   ===
-  // WRONG, will not work in future Sass versions.
+  // ERRADO, não funcionará nas futuras versões da Sass.
   @debug (12px/4px) // 3
 
-  // RIGHT, will work in future Sass versions.
+  // CERTO, funcionará nas futuras versões da Sass.
   @debug calc(12px / 4px) // 3
 <% end %>
 
-## Automatic Migration
+<span id="automatic-migration"></span>
+## Migração Automática
 
-You can use [the Sass migrator][] to automatically update your stylesheets to use `math.div()` and `list.slash()`.
+Tu podes usar [o migrador da Sass][the Sass migrator] para atualizar automaticamente as tuas folhas de estilo para usarem `math.div()` e `list.slash()`.
 
 [the Sass migrator]: https://github.com/sass/migrator#readme
 
