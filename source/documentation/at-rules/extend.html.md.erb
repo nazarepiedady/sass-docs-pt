@@ -2,7 +2,7 @@
 title: "@extend"
 table_of_contents: true
 introduction: >
-  There are often cases when designing a page when one class should have all the styles of another class, as well as its own specific styles. For example, the [BEM methodology](http://getbem.com/naming/) encourages modifier classes that go on the same elements as block or element classes. But this can create cluttered HTML, it's prone to errors from forgetting to include both classes, and it can bring non-semantic style concerns into your markup.
+  Frequentemente existem casos quando desenhas uma página quando uma classe deveria ter todos os estilos duma outra classe, bem como seus próprios estilos específicos. Por exemplo, a [metodologia BEM](http://getbem.com/naming/) encoraja classes de modificador que ligam-se aos mesmos elementos como classes de bloco ou elemento. Mas isto pode criar HTML atravancado, é propenso à erros de esquecer de incluir ambas classes, e pode trazer preocupações de estilo não semânticos para a tua marcação.
 ---
 
 <%# TODO(jina): I think these code blocks should be side-by-side %>
@@ -24,7 +24,7 @@ introduction: >
 }
 ```
 
-Sass's `@extend` rule solves this. It's written `@extend <selector>`, and it tells Sass that one selector should inherit the styles of another.
+A regra `@extend` da Sass soluciona isto. É escrita como `@extend <selector>`, e diz que a Sass que aquele seletor deve herdar os estilos dum outro:
 
 <% example do %>
   .error {
@@ -46,9 +46,9 @@ Sass's `@extend` rule solves this. It's written `@extend <selector>`, and it tel
       border-width: 3px
 <% end %>
 
-When one class extends another, Sass styles all elements that match the extender as though they also match the class being extended. When one class selector extends another, it works exactly as though you added the extended class to every element in your HTML that already had the extending class. You can just write `class="error--serious"`, and Sass will make sure it's styled as though it had `class="error"` as well.
+Quando uma classe estende uma outra, a Sass estiliza todos os elementos que correspondem ao extensor como se adicionasses a classe estendida à todos elementos na tua HTML que já tinha a classe em extensão. Tu podes apenas escrever `class="error--serious"`, e a Sass certificar-se-á de que é estilizada como se também tivesse `class="error"`.
 
-Of course, selectors aren't just used on their own in style rules. Sass knows to extend *everywhere* the selector is used. This ensures that your elements are styled exactly as if they matched the extended selector.
+Claro, os seletores não são apenas usados em suas próprias regras de estilo. A Sass sabe estender *em toda parte* que o seletor for usado. Isto garante que os teus elementos são estilizados exatamente como se correspondessem o seletor estendido:
 
 <% example do %>
   .error:hover {
@@ -70,27 +70,28 @@ Of course, selectors aren't just used on their own in style rules. Sass knows to
 <% end %>
 
 <% heads_up do %>
-  Extends are resolved after the rest of your stylesheet is compiled. In particular, it happens after [parent selectors][] are resolved. This means that if you `@extend .error`, it won't affect the inner selector in `.error { &__icon { ... } }`. It also means that [parent selectors in SassScript][] can't see the results of extend.
+  As extensões são resolvidas depois do resto da tua folha de estilo for compilado. Em particular, isto acontecer depois dos [seletores de pai][parent selectors] serem resolvidos. Isto significa que se fizeres `@extend .error`, não surtirá efeito no seletor interno em `.error { &__icon { ... } }`. Isto também significa que os [seletores de pai na SassScript][parent selectors in SassScript] não podem ver os resultados da extensão.
 
   [parent selectors]: ../style-rules/parent-selector
   [parent selectors in SassScript]: ../style-rules/parent-selector#in-sassscript
 <% end %>
 
-## How It Works
+<span id="how-it-works"></span>
+## Como Isto Funciona
 
-Unlike [mixins][], which copy styles into the current style rule, `@extend` updates style rules that contain the extended selector so that they contain the extending selector as well. When extending selectors, Sass does *intelligent unification*:
+Ao contrário das [misturas][mixins], que copiam os estilos para a atual regra de estilo, `@extend` atualiza as regras de estilo que contém o seletor estendido para que também contenham o seletor estendido. Quando estendes os seletores, a Sass faz a *unificação inteligente*:
 
 [mixins]: mixin
 
-* It never generates selectors like `#main#footer` that can't possibly match any elements.
+* Ela nunca gera seletores como `#main#footer` que possivelmente não podem corresponder quaisquer elementos.
 
-* It ensures that complex selectors are interleaved so that they work no matter which order the HTML elements are nested.
+* Ela garante que seletores complexos sejam intercalados para que funcionem não importa qual ordem os elementos da HTML são encaixados.
 
-* It trims redundant selectors as much as possible, while still ensuring that the specificity is greater than or equal to that of the extender.
+* Ela corta seletores redundantes o máximo possível, embora ainda garanta que a especificidade seja maior do que ou igual à aquela do extensor.
 
-* It knows when one selector matches everything another does, and can combine them together.
+* Ela sabe quando um seletor corresponde tudo que um outro faz, e pode combiná-los entre si.
 
-* It intelligently handles [combinators][], [universal selectors][], and [pseudo-classes that contain selectors][].
+* Ela manipula inteligentemente [combinadores][combinators], [seletores universais][universal selectors], e [pseudo-classes que contêm seletores][pseudo-classes that contain selectors].
 
 [combinators]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors#Combinators
 [pseudo-classes that contain selectors]: https://developer.mozilla.org/en-US/docs/Web/CSS/:not
@@ -101,20 +102,20 @@ Unlike [mixins][], which copy styles into the current style rule, `@extend` upda
     @extend .info;
   }
 
-  // This won't be extended, because `p` is incompatible with `nav`.
+  // Isto não será estendido, porque `p` é incompatível com `nav`.
   p.info {
     background-color: #dee9fc;
   }
 
-  // There's no way to know whether `<div class="guide">` will be inside or
-  // outside `<div class="content">`, so Sass generates both to be safe.
+  // Não existe maneira de saber se `<div class="guide">` estará dentro ou
+  // fora do `<div class="content">`, assim a Sass gera ambos por segurança.
   .guide .info {
     border: 1px solid rgba(#000, 0.8);
     border-radius: 2px;
   }
 
-  // Sass knows that every element matching "main.content" also matches ".content"
-  // and avoids generating unnecessary interleaved selectors.
+  // A Sass sabe que todo elemento correspondendo "main.content" também corresponde `.content`
+  // e evita gerar seletores intercalados desnecessários.
   main.content .info {
     font-size: 0.8em;
   }
@@ -123,26 +124,26 @@ Unlike [mixins][], which copy styles into the current style rule, `@extend` upda
     @extend .info
 
 
-  // This won't be extended, because `p` is incompatible with `nav`.
+  // Isto não será estendido, porque `p` é incompatível com `nav`.
   p.info
     background-color: #dee9fc
 
 
-  // There's no way to know whether `<div class="guide">` will be inside or
-  // outside `<div class="content">`, so Sass generates both to be safe.
+  // Não existe maneira de saber se `<div class="guide">` estará dentro ou
+  // fora do `<div class="content">`, assim a Sass gera ambos por segurança.
   .guide .info
     border: 1px solid rgba(#000, 0.8)
     border-radius: 2px
 
 
-  // Sass knows that every element matching "main.content" also matches ".content"
-  // and avoids generating unnecessary interleaved selectors.
+  // A Sass sabe que todo elemento correspondendo "main.content" também corresponde `.content`
+  // e evita gerar seletores intercalados desnecessários.
   main.content .info
     font-size: 0.8em
 <% end %>
 
 <% fun_fact do %>
-  You can directly access Sass's intelligent unification using [selector functions][]! The [`selector.unify()` function][] returns a selector that matches the intersection of two selectors, while the [`selector.extend()` function][] works just like `@extend`, but on a single selector.
+  Tu podes acessar diretamente a unificação inteligente da Sass usando [funções de seletor][selector functions]! A [função `selector.unify()`][`selector.unify()` function] retorna um seletor que corresponde a interseção de dois seletores, enquanto a [função `seletor.extend()`][`selector.extend()` function] funciona tal como `@extend`, mas sobre um único seletor.
 
   [selector functions]: ../modules/selector
   [`selector.unify()` function]: ../modules/selector#unify
@@ -150,75 +151,82 @@ Unlike [mixins][], which copy styles into the current style rule, `@extend` upda
 <% end %>
 
 <% heads_up do %>
-  Because `@extend` updates style rules that contain the extended selector, their styles have precedence in [the cascade][] based on where the extended selector's style rules appear, *not* based on where the `@extend` appears. This can be confusing, but just remember: this is the same precedence those rules would have if you added the extended class to your HTML!
+  Uma vez que `@extend` atualiza as regras de estilo que contém o seletor estendido, suas regras têm precedência [na cascata][the cascade] baseado em onde as regras de estilo do seletor estendido aparecem, *não* baseados em onde a `@extend` aparece. Isto pode ser confuso, mas apenas lembre: isto é a mesma precedência que estas regras teriam se adicionasses a classe estendida ao teu HTML!
 
   [the cascade]: https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade
 <% end %>
 
-## Placeholder Selectors
+<span id="placeholder-selectors"></span>
+## Seletores de Espaço Reservado
 
-Sometimes you want to write a style rule that's *only* intended to be extended. In that case, you can use [placeholder selectors][], which look like class selectors that start with `%` instead of `.`. Any selectors that include placeholders aren't included in the CSS output, but selectors that extend them are.
+Algumas vezes queres escrever uma regra de estilo que está *apenas* destinada a ser estendida. Neste caso, podes usar os [seletores de espaço reservado][placeholder selectors], que se parecerem com seletores de classe que começam com `%` ao invés de `.`. Quaisquer seletores que incluem espaços reservados não são incluídos na saída de CSS, mas os seletores que as estendem são:
 
 [placeholder selectors]: ../style-rules/placeholder-selectors
 
 <%= partial "code-snippets/example-placeholder" %>
 
-### Private Placeholders
+<span id="private-placeholders"></span>
+### Espaços Reservados Privados
 
-Like [module members][], a placeholder selector can be marked private by starting its name with either `-` or `_`. A private placeholder selector can only be extended within the stylesheet that defines it. To any other stylesheets, it will look as though that selector doesn't exist.
+Tal como os [membros do módulo][module members], um seletor de espaço reservado pode ser marcado como privado ao iniciar o seu nome ou com `-` ou `_`. Um seletor de espaço reservado privado apenas pode ser estendido dentro da folha de estilo que o define. Para quaisquer outras folhas de estilo, parecerá como se este seletor não existisse.
 
 [module members]: use#private-members
 
-## Extension Scope
+<span id="extension-scope"></span>
+## Âmbito de Extensão
 
-When one stylesheet extends a selector, that extension will only affect style rules written in *upstream* modules—that is, modules that are loaded by that stylesheet using the [`@use` rule][] or the [`@forward` rule][], modules loaded by *those* modules, and so on. This helps make your `@extend` rules more predictable, ensuring that they affect only the styles you were aware of when you wrote them.
+Quando uma folha de estilo estende um seletor, esta extensão apenas afetará as regras de estilo escritas módulos *ascendentes* — isto é, os módulos que são carregados por esta folha de estilo usando a [regra `@use`][`@use` rule] ou a [regra `@forward`][`@forward` rule], módulos carregados por *estes* módulos, e assim por diante. Isto ajuda a tornar as regras de `@extend` mais previsíveis, garantindo que afetam apenas os estilos que estavam cientes de quando as escrevestes-
 
 [`@use` rule]: use
 [`@forward` rule]: forward
 
 <% heads_up do %>
-  Extensions aren't scoped at all if you're using the [`@import` rule][]. Not only will they affect every stylesheet you import, they'll affect every stylesheet that imports your stylesheet, everything else those stylesheets import, and so on. Without `@use`, extensions are *global*.
+  As extensões não são limitadas ao todo se estiveres a usar a [regra `@import`][`@import` rule]. Não apenas afetarão todas as folhas de estilo que importas, afetarão todas as folhas de estilo que importam a tua folha de estilo, todo o resto que estas folhas de estilo importam, e assim por diante. Sem `@use`, as extensões são *globais*.
 
   [`@import` rule]: import
 <% end %>
 
-## Mandatory and Optional Extends
+<span id="mandatory-and-optional-extends"></span>
+## Extensões Obrigatórias e Opcionais
 
-Normally, if an `@extend` doesn't match any selectors in the stylesheet, Sass will produce an error. This helps protect from typos or from renaming a selector without renaming the selectors that inherit from it. Extends that require that the extended selector exists are *mandatory*.
+Normalmente, se uma `@extend` não corresponder quaisquer seletores na folha de estilo, Sass produzirá um erro. Isto ajuda proteger de erros de digitação ou de renomear um seletor sem renomear os seletores que herdam deste. Extensões que exigem que o seletor estendido exista são *obrigatória*.
 
-This may not always be what you want, though. If you want the `@extend` to do nothing if the extended selector doesn't exist, just add `!optional` to the end.
+Isto pode não ser sempre o que queres. Se quiseres que a `@extend` não faça nada se o seletor estendido não existir, apenas adicione `!optional` no final.
 
-## Extends or Mixins?
+<span id="extends-or-mixins"></span>
+## Extensões ou Misturas?
 
-Extends and [mixins][] are both ways of encapsulating and re-using styles in Sass, which naturally raises the question of when to use which one. Mixins are obviously necessary when you need to configure the styles using [arguments][], but what if they're just a chunk of styles?
+As extensões e [misturas][mixins] são ambas maneiras de encapsular e reutilizar estilos na Sass, o que naturalmente levanta a questão de quando usar uma ou outra. As misturas são obviamente necessárias quando precisas de configurar os estilos usando [argumentos][arguments], mas e se forem apenas um pedaço de estilos?
 
 [arguments]: mixin#arguments
 
-As a rule of thumb, extends are the best option when you're expressing a relationship between semantic classes (or other semantic selectors). Because an element with class `.error--serious` *is an* error, it makes sense for it to extend `.error`. But for non-semantic collections of styles, writing a mixin can avoid cascade headaches and make it easier to configure down the line.
+Como regra de ouro, extensões são a melhor opção quando estás a expressar uma relação entre classes semânticas (ou outros seletores semânticos). Uma vez que um elemento com a classe `.error--serious` *é um* erro, faz sentido para ele estender `.error`. Mas para coleções não semânticas de estilos, escrever uma mistura pode evitar dores de cabeças de cascata e torna mais fácil configurar.
 
 <% fun_fact do %>
-  Most web servers compress the CSS they serve using an algorithm that's very good at handling repeated chunks of identical text. This means that, although mixins may produce more CSS than extends, they probably won't substantially increase the amount your users need to download. So choose the feature that makes the most sense for your use-case, not the one that generates the least CSS!
+  A maioria dos servidores da Web compactam a CSS que servem usando um algoritmo que é muito bom em lidar com pedaços repetidos de texto idêntico. Isto significa que, embora as misturas possam produzir mais CSS do que as extensões, provavelmente não acrescentará substancialmente a quantidade que os teus utilizadores precisam descarregar. Então escolha a funcionalidade que faz mais sentido para o teu caso de uso, não aquele que gera menos CSS!
 
   [gzip]: https://en.wikipedia.org/wiki/Gzip
 <% end %>
 
-## Limitations
+<span id="limitations"></span>
+## Limitações
 
-### Disallowed Selectors
+<span id="disallowed-selectors"></span>
+### Seletores Desautorizados
 
 <% impl_status dart: true, libsass: false, ruby: false, feature: "No Compound Extensions" do %>
-  LibSass and Ruby Sass currently allow compound selectors like `.message.info` to be extended. However, this behavior doesn't match the definition of `@extend`: instead of styling elements that match the extending selector as though it had `class="message info"`, which would be affected by style rules that included either `.message` *or* `.info`, it only styled them with rules that included both `.message` *and* `info`.
+  A LibSass e Sass de Ruby atualmente permite que seletores compostos como `.message.info` sejam estendidos. No entanto, este comportamento não corresponde a definição de `@extend`: ao invés de estilizar elementos que correspondem o seletor estendendo como se tivesse `class="message info"`, o que seria afetado pelas regras de estilo que incluíam ou `.message` *ou* `.info`, este apenas os estilizou com regras que incluíam ambas `.message` *e* `.info`.
 
-  In order to keep the definition of `@extend` straightforward and understandable, and to keep the implementation clean and efficient, that behavior is now deprecated and will be removed from future versions.
+  Para manter a definição de `@extend` clara e compreensível, e manter a implementação clara e eficiente, este comportamento agora está depreciada e será removida das versões futuras.
 
-  See [the breaking change page][] for more details.
+  Consulte [a página de mudança de rutura][the breaking change page] por mais detalhes.
 
   [the breaking change page]: ../breaking-changes/extend-compound
 <% end %>
 
-Only *simple selectors*—individual selectors like `.info` or `a`—can be extended. If `.message.info` could be extended, the definition of `@extend` says that elements matching the extender would be styled as though they matched `.message.info`. That's just the same as matching both `.message` and `.info`, so there wouldn't be any benefit in writing that instead of `@extend .message, .info`.
+Apenas *seletores simples* — seletores de individuais como `.info` ou `a` — podem ser estendidos. Se `.message.info` poderia ser estendido, a definição de `@extend` diz que os elementos correspondendo o extensor seriam estilizados como se correspondesse `.message.info`. Isto apenas é o mesmo que corresponder ambas `.message` e `.info`, assim não existiriam qualquer beneficio em escrever esta no lugar de `@extend .message, .info`.
 
-Similarly, if `.main .info` could be extended, it would do (almost) the same thing as extending `.info` on its own. The subtle differences aren't worth the confusion of looking like it's doing something substantially different, so this isn't allowed either.
+De maneira semelhante, se `.main .info` pudessem ser estendidos, faria (quase) a mesma coisa como estender `.info` por si mesmo. As diferenças subtis não são dignas da confusão de parecer que está a fazer algo substancialmente diferente, assim isto não é permitido:
 
 <% example(autogen_css: false) do %>
   .alert {
@@ -241,9 +249,10 @@ Similarly, if `.main .info` could be extended, it would do (almost) the same thi
     // Error: write @extend .info instead.
 <% end %>
 
-### HTML Heuristics
+<span id="html-heuristics"></span>
+### Heurísticas da HTML
 
-When `@extend` [interleaves complex selectors][], it doesn't generate all possible combinations of ancestor selectors. Many of the selectors it could generate are unlikely to actually match real HTML, and generating them all would make stylesheets way too big for very little real value. Instead, it uses a [heuristic][]: it assumes that each selector's ancestors will be self-contained, without being interleaved with any other selector's ancestors.
+Quando a `@extend` [seletores complexos intercalados][interleaves complex selectors], não gera todas as combinações possíveis de seletores ancestrais. Muitos dos seletores que poderia gerar são pouco prováveis que na realidade correspondam a HTML real, gerá-los tornaria as folhas de estilo muito grande para um valor real muito pequeno. Ao invés disto, usa uma [heurística][heuristic]: supõe que cada ancestral do seletor será autosuficiente, sem ser intercalado com quaisquer outros ancestrais do seletor:
 
 [interleaves complex selectors]: #how-it-works
 [heuristic]: https://en.wikipedia.org/wiki/Heuristic
@@ -293,9 +302,10 @@ When `@extend` [interleaves complex selectors][], it doesn't generate all possib
     @extend li
 <% end %>
 
-### Extend in `@media`
+<span id="extend-in-media"></span>
+### Estender em `@media`
 
-While `@extend` is allowed within [`@media` and other CSS at-rules][], it's not allowed to extend selectors that appear outside its at-rule. This is because the extending selector only applies within the given media context, and there's no way to make sure that restriction is preserved in the generated selector without duplicating the entire style rule.
+Embora `@extend` seja permitido dentro da [`@media` e outras regras de arroba da CSS][`@media` and other CSS at-rules], não é permitido estender seletores que aparecem fora da sua regra de arroba. Isto porque estender seletor apenas aplicasse dentro do contexto duma dada media, e não existe maneira de garantir que a restrição está preservada no seletor gerado sem duplicar a regra de estilo inteira:
 
 [`@media` and other CSS at-rules]: css
 
