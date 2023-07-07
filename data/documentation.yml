@@ -1,5 +1,5 @@
 toc:
-- Syntax: /documentation/syntax
+- Sintaxe: /documentation/syntax
   :children:
   - Parsing a Stylesheet: /documentation/syntax/parsing
   - Structure of a Stylesheet: /documentation/syntax/structure
