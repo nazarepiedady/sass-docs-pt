@@ -66,7 +66,7 @@ module SassHelpers
   def _toc_level(parent_href, links)
     if parent_href
       overview = content_tag(:li,
-        content_tag(:a, "Visão de Conjunto", href: parent_href,
+        content_tag(:a, "Visão Geral", href: parent_href,
           class: ("selected" if current_page.url == parent_href + ".html")),
         class: "overview")
     end
