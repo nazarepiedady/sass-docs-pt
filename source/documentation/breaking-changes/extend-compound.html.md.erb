@@ -1,14 +1,14 @@
 ---
-title: "Breaking Change: Extending Compound Selectors"
+title: "Mudança de Rutura: Extensão de Seletores Compostos"
 introduction: >
-  LibSass currently allows compound selectors like `.message.info` to be [extended](../at-rules/extend), but the way it was extended doesn't match the way `@extend` is meant to work.
+  A LibSass atualmente permite que seletores compostos como `.message.info` sejam [estendidos](../at-rules/extend), mas a maneira como era estendida não correspondia a maneira que `@extend` está destinada a funcionar.
 ---
 
 <% impl_status dart: true, libsass: false, ruby: false %>
 
-When one selector extends another, Sass styles all elements that match the extender as though they also match the class being extended. In other words, if you write `.heads-up {@extend .info}`, it works just like you replaced `class="heads-up"` in your HTML with `class="heads-up info"`.
+Quando um seletor estende um outro, a Sass estiliza todos os elementos que correspondem ao extensor como se também correspondessem a classe a ser estendida. Em outras palavras, se escreveres `.heads-up {@extend .info}`, funciona exatamente como se tivesses substituído `class="heads-up"` no teu HTML por `class="heads-up info"`.
 
-Following that logic, you'd expect that `.heads-up {@extend .message.info}` to work like replacing `class="heads-up"` with `class="heads-up info message"`. But that's not how it works right now in LibSass and Ruby Sass--instead of adding `.heads-up` to every selector that has *either `.info` or `.message`*, it only adds it to selectors that have *`.info.message` together*.
+Seguindo esta lógica, esperarias que `.heads-up {@extend .message.info}` funcionasse como a substituição de `class="heads-up"` por `class="heads-up info message"`. Mas não é assim como funciona neste exato momento na LibSass e Sass de Ruby -- ao invés de adicionar `.heads-up` para cada seletor que tiver *ou `.info` ou `.message`*, este apenas adiciona-a aos seletores que têm *`.info.message` ao mesmo tempo*:
 
 <% example(autogen_css: false) do %>
   // These should both be extended, but they won't be.
@@ -35,7 +35,7 @@ Following that logic, you'd expect that `.heads-up {@extend .message.info}` to w
     @extend .message.info
 <% end %>
 
-To fix this issue, avoid more confusion, and keep the implementation clean and efficient the ability to extend compound selectors is unsupported in Dart Sass and will be removed in a future version of LibSass. For compatibility, users should extend each simple selector separately instead:
+Para corrigir este problema, evitar mais confusão, e manter a implementação limpa e eficiente, a habilidade de estender seletores compostos não é suportada na Sass de Dart e será removida numa versão futura da LibSass. Por compatibilidade, os utilizadores deveriam estender cada seletor simples separadamente:
 
 <% example do %>
   .message {
@@ -61,9 +61,9 @@ To fix this issue, avoid more confusion, and keep the implementation clean and e
 <% end %>
 
 <% heads_up do %>
-  Because Sass doesn't know the details of the HTML the CSS is going to style, any `@extend` might need to generate extra selectors that won't apply to your HTML in particular. This is especially true when switching away from extending compound selectors.
+  Uma vez que a Sass não sabe os detalhes do HTML que a CSS estilizará, qualquer `@extend` pode precisar de gerar seletores adicionais que não aplicar-se-ão ao teu HTML em particular. Isto é especialmente verdadeiro quando se deixa de estender os seletores compostos.
 
-  Most of the time, these extra selectors won't cause any problems, and will only add a couple extra bytes to gzipped CSS. But some stylesheets might be relying more heavily on the old behavior. In that case, we recommend replacing the compound selector with a [placeholder selector][].
+  Na maioria das vezes, estes seletores adicionais não causarão quaisquer problemas, e apenas adicionam um pouco de bytes a mais ao CSS compactado. Mas algumas folhas de estilo podem estar a depender muito do comportamento antigo. Neste caso, recomendamos substituir o seletor composto com uma [seletor de pai][placeholder selector]:
 
   [placeholder selector]: ../style-rules/placeholder-selectors
 
