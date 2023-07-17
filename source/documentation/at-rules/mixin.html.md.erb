@@ -1,17 +1,17 @@
 ---
-title: "@mixin and @include"
+title: "@mixin e @include"
 table_of_contents: true
 introduction: >
-  Mixins allow you to define styles that can be re-used throughout your stylesheet. They make it easy to avoid using non-semantic classes like `.float-left`, and to distribute collections of styles in libraries.
+  As misturas permitem-te definir estilos que podem ser reutilizados ao longo da tua folha de estilo. Elas tornam fácil evitar o uso de classes que são semânticas como `.float-left`, e distribuir coleções dos estilos nas bibliotecas.
 ---
 
-Mixins are defined using the `@mixin` at-rule, which is written `@mixin <name> { ... }` or `@mixin name(<arguments...>) { ... }`. A mixin's name can be any Sass identifier, and it can contain any [statement][] other than [top-level statements][]. They can be used to encapsulate styles that can be dropped into a single [style rule][]; they can contain style rules of their own that can be nested in other rules or included at the top level of the stylesheet; or they can just serve to modify variables.
+As misturas são definidas usando a regra de arroba `@mixin`, que é escrita com `@mixin <name> { ... }` ou `@mixin name(<arguments...>) { ... }`. Um nome de mistura pode ser qualquer identificador de Sass, e pode conter qualquer [declaração][statement] exceto [declarações de alto nível][top-level statements]. Elas podem ser usada para encapsular os estilos que podem ser reduzidos numa única [regra de estilo][style rule]; elas podem conter regras de estilo de si mesmas que podem ser encaixadas em outras regras de estilos ou incluídas no alto nível da folha de estilo; ou podem apenas servir para modificar variáveis.
 
 [statement]: ../syntax/structure#statements
 [top-level statements]: ../syntax/structure#top-level-statements
 [style rule]: ../style-rules
 
-Mixins are included into the current context using the `@include` at-rule, which is written `@include <name>` or `@include <name>(<arguments...>)`, with the name of the mixin being included.
+As misturas são incluídas no contexto atual usando a regra de arroba `@include`, que é escrita com `@include <name>` ou `@include <name>(<arguments...>)`, com o nome da mistura sendo incluído:
 
 <% example do %>
   @mixin reset-list {
@@ -59,15 +59,16 @@ Mixins are included into the current context using the `@include` at-rule, which
 <% end %>
 
 <% fun_fact do %>
-  Mixin names, like all Sass identifiers, treat hyphens and underscores as identical. This means that `reset-list` and `reset_list` both refer to the same mixin. This is a historical holdover from the very early days of Sass, when it *only* allowed underscores in identifier names. Once Sass added support for hyphens to match CSS's syntax, the two were made equivalent to make migration easier.
+  Os nomes de mistura, tal como todos os identificadores de Sass, tratam hiféns e sublinhados da mesma maneira. Isto significa que `reset-list` e `reset_list` ambas fazem referência à mesma mistura. Isto é um atraso histórico desde os primeiros dias da Sass, quando *apenas* permitia sublinhados como nomes de identificador.
 <% end %>
 
-## Arguments
+<span id="arguments"></span>
+## Argumentos
 
 <%# When changing this section, don't forget to change the function arguments
     section as well! %>
 
-Mixins can also take arguments, which allows their behavior to be customized each time they're called. The arguments are specified in the `@mixin` rule after the mixin's name, as a list of variable names surrounded by parentheses. The mixin must then be included with the same number of arguments in the form of [SassScript expressions][]. The values of these expression are available within the mixin's body as the corresponding variables.
+As misturas também podem receber argumentos, o que permite que o seu comportamento seja personalizado cada vez que forem chamadas. Os argumentos são especificados na regra `@mixin` depois do nome da mistura, como uma lista de nomes de variáveis envolvidos por parênteses. A mistura deve então ser incluída com o mesmo número de argumentos na forma de [expressões de SassScript][SassScript expressions]. Os valores destas expressões estão disponíveis dentro do corpo da mistura de acordo com as variáveis correspondentes:
 
 [SassScript expressions]: ../syntax/structure#expressions
 
@@ -97,12 +98,13 @@ Mixins can also take arguments, which allows their behavior to be customized eac
 <% end %>
 
 <% fun_fact do %>
-  Argument lists can also have trailing commas! This makes it easier to avoid syntax errors when refactoring your stylesheets.
+  As listas de argumentos também podem ter vírgulas finais! Isto torna mais fácil evitar erros de sintaxe quando refazes as tuas folhas de estilo.
 <% end %>
 
-### Optional Arguments
+<span id="optional-arguments"></span>
+### Argumentos Opcionais
 
-Normally, every argument a mixin declares must be passed when that mixin is included. However, you can make an argument optional by defining a *default value* which will be used if that argument isn't passed. Default values use the same syntax as [variable declarations][]: the variable name, followed by a colon and a [SassScript expression][]. This makes it easy to define flexible mixin APIs that can be used in simple or complex ways.
+Normalmente, todo argumento que uma mistura declara deve ser passado quando esta mistura for incluída. No entanto, podes tornar um argumento opcional definindo um *valor padrão* que será usado se este argumento não for passado. Os valores padrão usam a mesma sintaxe que as [declarações de variáveis][variable declarations]: o nome da variável, seguido por dois pontos e uma [expressão de SassScript][SassScript expression]. Isto torna fácil definir APIs de mistura flexíveis que podem ser usadas de maneiras simples ou complexas:
 
 [variable declarations]: ../variables
 [SassScript expression]: ../syntax/structure#expressions
@@ -139,12 +141,13 @@ Normally, every argument a mixin declares must be passed when that mixin is incl
 <% end %>
 
 <% fun_fact do %>
-  Default values can be any SassScript expression, and they can even refer to earlier arguments!
+  Os valores padrão podem ser qualquer expressão de SassScript, e podem mesmo fazer referência à argumentos anteriores!
 <% end %>
 
-### Keyword Arguments
+<span id="keyword-arguments"></span>
+### Argumentos de Palavra-Chave
 
-When a mixin is included, arguments can be passed by name in addition to passing them by their position in the argument list. This is especially useful for mixins with multiple optional arguments, or with [boolean][] arguments whose meanings aren't obvious without a name to go with them. Keyword arguments use the same syntax as [variable declarations][] and [optional arguments][].
+Quando uma mistura é incluída, os argumentos podem ser passados pelo nome além de passá-los pelas suas posições na lista de argumento. Isto é especialmente útil para misturas com vários argumentos opcionais, ou com argumentos [booleanos][boolean] cujos significados não são óbvios sem um nome ir com eles. Os argumentos de palavra-chave usa a mesma sintaxe que as [declarações de variáveis][variable declarations] e [argumentos opcionais][optional arguments]:
 
 [boolean]: ../values/booleans
 [optional arguments]: #optional-arguments
@@ -177,15 +180,16 @@ When a mixin is included, arguments can be passed by name in addition to passing
 <% end %>
 
 <% heads_up do %>
-  Because *any* argument can be passed by name, be careful when renaming a mixin's arguments... it might break your users! It can be helpful to keep the old name around as an [optional argument][] for a while and printing a [warning][] if anyone passes it, so they know to migrate to the new argument.
+  Uma vez que *qualquer* argumento pode ser passado pelo nome, seja cuidadoso quando renomeares os argumentos duma mistura... pode quebrar os teus utilizadores! Pode ser prestável manter o nome antigo por perto como um [argumento opcional][optional argument] por enquanto e imprimir um [aviso][warning] se alguém passá-lo, assim sabem que devem migrar para o novo argumento.
 
   [optional argument]: #optional-arguments
   [warning]: warn
 <% end %>
 
-### Taking Arbitrary Arguments
+<span id="taking-arbitrary-arguments"></span>
+### Recebendo Argumentos Arbitrários
 
-Sometimes it's useful for a mixin to be able to take any number of arguments. If the last argument in a `@mixin` declaration ends in `...`, then all extra arguments to that mixin are passed to that argument as a [list][]. This argument is known as an [argument list][].
+Algumas vezes é útil para uma mistura ser capaz de receber qualquer número de argumentos. Se o último argumento numa declaração de `@mixin` terminar em `...`, então todos argumentos adicionais para esta mistura são passado para este argumento como uma [lista][list]. Este argumento é conhecido como uma [lista de argumento][argument list]:
 
 [list]: ../values/lists
 [argument list]: ../values/lists#argument-lists
@@ -216,9 +220,10 @@ Sometimes it's useful for a mixin to be able to take any number of arguments. If
   @include order(150px, "input.name", "input.address", "input.zip")
 <% end %>
 
-#### Taking Arbitrary Keyword Arguments
+<span id="taking-arbitrary-keyword-arguments"></span>
+#### Recebendo Argumentos de Palavra-Chave Arbitrários
 
-Argument lists can also be used to take arbitrary keyword arguments. The [`meta.keywords()` function][] takes an argument list and returns any extra keywords that were passed to the mixin as a [map][] from argument names (not including `$`) to those arguments' values.
+As listas de argumentos também podem ser usadas para receber argumentos de palavra-chave arbitrários. A [função `meta.keywords()`][`meta.keywords()` function] recebe uma lista de argumento e retorna quaisquer palavras-chave adicionais que foram passadas para a mistura como um [mapa][map] a partir dos nomes de argumento (sem incluir `$`) à estes valores dos argumentos:
 
 [`meta.keywords()` function]: ../modules/meta#keywords
 [map]: ../values/maps
@@ -228,14 +233,15 @@ Argument lists can also be used to take arbitrary keyword arguments. The [`meta.
 <%= partial 'code-snippets/example-mixin-arbitrary-keyword-arguments' %>
 
 <% fun_fact do %>
-  If you don't ever pass an argument list to the [`meta.keywords()` function][], that argument list won't allow extra keyword arguments. This helps callers of your mixin make sure they haven't accidentally misspelled any argument names.
+  Se nunca passares um argumento de lista à [função `meta.keywords()`][`meta.keywords()` function], esta lista de argumento não permitirá argumentos de palavra-chave adicionais. Isto ajuda os chamadores da tua mistura a certificarem-se de que não escreveram mal acidentalmente quaisquer nomes.
 
   [`meta.keywords()` function]: ../modules/meta#keywords
 <% end %>
 
-#### Passing Arbitrary Arguments
+<span id="passing-arbitrary-arguments"></span>
+#### Passando Argumentos Arbitrários
 
-Just like argument lists allow mixins to take arbitrary positional or keyword arguments, the same syntax can be used to *pass* positional and keyword arguments to a mixin. If you pass a list followed by `...` as the last argument of an include, its elements will be treated as additional positional arguments. Similarly, a map followed by `...` will be treated as additional keyword arguments. You can even pass both at once!
+Tais como as listas de argumentos permitem as misturas receber argumentos posicionais arbitrários ou de palavra-chave, a mesma sintaxe pode ser usada para *passar* argumentos posicionais e de palavra-chave à uma mistura. Se passares uma lista seguida por `...` como último argumento duma inclusão, os seus elementos serão tratados como argumentos posicionais adicionais. De maneira semelhante, um mapa seguido por `...` será tratado como argumentos de palavra-chave adicionais. Tu podes mesmo passar ambos duma vez!
 
 <% example(autogen_css: false) do %>
   $form-selectors: "input.name", "input.address", "input.zip" !default;
@@ -248,7 +254,7 @@ Just like argument lists allow mixins to take arbitrary positional or keyword ar
 <% end %>
 
 <% fun_fact do %>
-  Because an [argument list][] keeps track of both positional and keyword arguments, you use it to pass both at once to another mixin. That makes it super easy to define an alias for a mixin!
+  Uma vez que uma [lista de argumento][argument list] continua a rastrear os argumentos posicionais e de palavra-chave, use-a para passar ambos duma vez à uma outra mistura. Isto torna super fácil definir um pseudónimo para uma mistura!
 
   [argument list]: ../values/lists#argument-lists
 
@@ -264,9 +270,10 @@ Just like argument lists allow mixins to take arbitrary positional or keyword ar
   <% end %>
 <% end %>
 
-## Content Blocks
+<span id="content-blocks"></span>
+## Blocos de Conteúdo
 
-In addition to taking arguments, a mixin can take an entire block of styles, known as a *content block*. A mixin can declare that it takes a content block by including the `@content` at-rule in its body. The content block is passed in using curly braces like any other block in Sass, and it's injected in place of the `@content` rule.
+Além de receber argumentos, uma mistura pode receber um bloco inteiro de estilos, conhecido como um *bloco de conteúdo*. Uma mistura pode declarar que recebe um bloco de conteúdo incluindo a regra de arroba `@content` no seu corpo. O bloco de conteúdo é passado usando chavetas como qualquer outro bloco na Sass, e é injetado no lugar da regra `@content`:
 
 <% example do %>
   @mixin hover {
@@ -295,25 +302,26 @@ In addition to taking arguments, a mixin can take an entire block of styles, kno
 <% end %>
 
 <% fun_fact do %>
-  A mixin can include multiple `@content` at-rules. If it does, the content block will be included separately for each `@content`.
+  Um mistura pode incluir várias regras de arroba `@content`. Se o fizer, o bloco de conteúdo será incluído separadamente para cada `@content`.
 <% end %>
 
 <% heads_up do %>
-  A content block is *lexically scoped*, which means it can only see [local variables][] in the scope where the mixin is included. It can't see any variables that are defined in the mixin it's passed to, even if they're defined before the content block is invoked.
+  Um bloco de conteúdo é *lexicalmente isolado*, o que significa que apenas pode ver [variáveis locais][local variables] no âmbito onde a mistura está incluída. Não pode ver quaisquer variáveis que são definidas onde a mistura é passada, mesmo se forem definidas antes do bloco de conteúdo ser invocado.
 
   [local variables]: ../variables#scope
 <% end %>
 
-### Passing Arguments to Content Blocks
+<span id="passing-arguments-to-content-blocks"></span>
+### Passando Argumentos aos Blocos de Conteúdo
 
 <% impl_status dart: '1.15.0', libsass: false, ruby: false %>
 
-A mixin can pass arguments to its content block the same way it would pass arguments to another mixin by writing `@content(<arguments...>)`. The user writing the content block can accept arguments by writing `@include <name> using (<arguments...>)`. The argument list for a content block works just like a mixin's argument list, and the arguments passed to it by `@content` work just like passing arguments to a mixin.
+Uma mistura pode passar argumentos ao seu bloco de conteúdo da mesma maneira que passaria argumentos à uma outra mistura escrevendo `@content(<arguments...>)`. O utilizador escrevendo o bloco de conteúdo pode aceitar argumentos escrevendo `@include <name> using (<arguments...>)`. A lista de argumentos para um bloco de conteúdo funciona tal como uma lista de argumento duma mistura, e os argumentos passados para ele por `@content` funcionam tal como a passagem de argumentos à uma mistura.
 
 <% heads_up do %>
-  If a mixin passes arguments to its content block, that content block *must* declare that it accepts those arguments. This means that it's a good idea to only pass arguments by position (rather than by name), and it means that passing more arguments is a breaking change.
+  Se uma mistura passar argumentos ao seu bloco de conteúdo, este bloco de conteúdo *deve* declarar que aceita estes argumentos. Isto significa que é uma boa ideia apenas passar argumentos por posição (ao invés por nome), e significa que a passagem de mais argumentos é uma mudança de rutura.
 
-  If you want to be flexible in what information you pass to a content block, consider passing it a [map][] that contains information it may need!
+  Se quiseres ser flexível em qual informação passas para um bloco de conteúdo, considere passar um [mapa][map] que contém informação que talvez precise!
 
   [map]: ../values/maps
 <% end %>
@@ -365,9 +373,10 @@ A mixin can pass arguments to its content block the same way it would pass argum
   }
 <% end %>
 
-## Indented Mixin Syntax
+<span id="indented-mixin-syntax"></span>
+## Sintaxe de Mistura Indentada
 
-The [indented syntax][] has a special syntax for defining and using mixins, in addition to the standard `@mixin` and `@include`. Mixins are defined using the character `=`, and they're included using `+`. Although this syntax is terser, it's also harder to understand at a glance and users are encouraged to avoid it.
+A [sintaxe indentada][indented syntax] tem uma sintaxe especial para definir e usar misturas, além da padrão `@mixin` e `@include`. As misturas são definidas usando o carácter `=`, e são incluídas usando `+`. Embora esta sintaxe seja mais concisa, é também mais difícil de entender a primeira vista e os utilizadores são encorajados a evitá-la:
 
 [indented syntax]: ../syntax#the-indented-syntax
 
