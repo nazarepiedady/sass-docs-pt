@@ -4,40 +4,41 @@ title: sass:meta
 
 <%= partial '../snippets/built-in-module-status' %>
 
-## Mixins
+<span id="mixins"></span>
+## Misturas
 
 <% function 'meta.load-css($url, $with: null)' do %>
   <% impl_status dart: '1.23.0', libsass: false, ruby: false do %>
-    Only Dart Sass currently supports this mixin.
+    Apenas a Sass de Dart atualmente suporta esta mistura.
   <% end %>
 
-  Loads the [module][] at `$url` and includes its CSS as though it were written as the contents of this mixin. The `$with` parameter provides [configuration][] for the modules; if it's passed, it must be a map from variable names (without `$`) to the values of those variables to use in the loaded module.
+  Carrega o [módulo][module] na `$url` e inclui o seu CSS como se estivesse escrito como conteúdo desta mistura. O parâmetro `$with` fornece [configuração][configuration] para os módulos; se for passada, deve ser um mapa dos nomes de variáveis (sem `$`) para os valores destas variáveis à usar no módulo carregado.
 
   [module]: ../at-rules/use
   [configuration]: ../at-rules/use#configuration
 
-  If `$url` is relative, it's interpreted as relative to the file in which `meta.load-css()` is included.
+  Se `$url` for relativa, é interpretada como relativa ao ficheiro no qual `meta.load-css()` está incluída.
 
-  **Like the [`@use` rule][]**:
+  **Tal como a [regra `@use`][`@use` rule]**:
 
   [`@use` rule]: ../at-rules/use
 
-  * This will only evaluate the given module once, even if it's loaded multiple times in different ways.
+  * Isto apenas avaliará o dado módulo uma vez, mesmo se for carregado várias vezes de maneiras diferentes.
 
-  * This cannot provide configuration to a module that's already been loaded, whether or not it was already loaded with configuration.
+  * Este não pode fornecer configuração para um módulo que já foi carregado, se já foi ou não carregado com configuração.
 
-  **Unlike the [`@use` rule][]**:
+  **Ao contrário da [regra `@use`][`@use` rule]**:
 
-  * This doesn't make any members from the loaded module available in the  current module.
+  * Este não torna quaisquer membros do módulo carregado disponíveis no módulo atual.
 
-  * This can be used anywhere in a stylesheet. It can even be nested within  style rules to create nested styles!
+  * Este pode ser usado em qualquer parte numa folha de estilo. Pode mesmo ser encaixada dentro das regras de estilos para criar estilos encaixados!
 
-  * The module URL being loaded can come from a variable and include  [interpolation][].
+  * A URL do módulo sendo carregado pode vir duma variável e incluir [interpolação][interpolation].
 
     [interpolation]: ../interpolation
 
   <% heads_up do %>
-    The `$url` parameter should be a string containing a URL like you'd pass to the `@use` rule. It shouldn't be a CSS `url()`!
+    O parâmetro `$url` deveria ser uma sequência de caracteres contendo uma URL como passarias para a regra `@use`. Não deveria ser uma `url()` de CSS!
   <% end %>
 
   <% example(autogen_css: false) do %>
@@ -84,16 +85,17 @@ title: sass:meta
   <% end %>
 <% end %>
 
-## Functions
+<span id="functions"></span>
+## Funções
 
 <% function 'meta.calc-args($calc)', returns: 'list' do %>
   <% impl_status dart: '1.40.0', libsass: false, ruby: false %>
 
-  Returns the arguments for the given [calculation].
+  Retorna os argumentos para o dado [cálculo][calculation].
 
   [calculation]: ../values/calculations
 
-  If an argument is a number or a nested calculation, it's returned as that type. Otherwise, it's returned as an unquoted string.
+  Se um argumento for um número ou um cálculo encaixado, é retornado como este tipo. De outro modo, é retornado como uma sequência de caracteres sem aspas.
 
   <% example(autogen_css: false) do %>
     @debug meta.calc-args(calc(100px + 10%)); // unquote("100px + 10%")
@@ -108,7 +110,7 @@ title: sass:meta
 <% function 'meta.calc-name($calc)', returns: 'quoted string' do %>
   <% impl_status dart: '1.40.0', libsass: false, ruby: false %>
 
-  Returns the name of the given [calculation].
+  Retorna o nome do dado [cálculo][calculation].
 
   [calculation]: ../values/calculations
 
@@ -125,9 +127,9 @@ title: sass:meta
 <% function 'meta.call($function, $args...)', 'call($function, $args...)' do %>
   <%= partial 'documentation/snippets/call-impl-status' %>
 
-  Invokes `$function` with `$args` and returns the result.
+  Invoca a `$function` com os `$args` e retorna o resultado.
 
-  The `$function` should be a [function][] returned by [`meta.get-function()`][].
+  A `$function` deve ser uma [função][function] retornada pelo [`meta.get-function()`][].
 
   [function]: ../values/functions
   [`meta.get-function()`]: #get-function
@@ -139,11 +141,11 @@ title: sass:meta
 <% function 'meta.content-exists()',
             'content-exists()',
             returns: 'boolean' do %>
-  Returns whether the current mixin was passed a [`@content` block][].
+  Retorna verdadeiro se um [bloco `@content`][`@content` block] foi passado à mistura atual.
 
   [`@content` block]: ../at-rules/mixin#content-blocks
 
-  Throws an error if called outside of a mixin.
+  Lança um erro se chamada fora duma mistura.
 
   <% example(autogen_css: false) do %>
     @mixin debug-content-exists {
@@ -171,15 +173,19 @@ title: sass:meta
 <% function 'meta.feature-exists($feature)',
             'feature-exists($feature)',
             returns: 'boolean' do %>
-  Returns whether the current Sass implementation supports `$feature`.
+  Retorna verdadeiro se a implementação de Sass atual suporta a `$feature`.
 
-  The `$feature` must be a string. The currently recognized features are:
+  A `$feature` deve ser uma sequência de caracteres. As funcionalidades atualmente reconhecidas são:
 
-  * `global-variable-shadowing`, which means that a local variable will [shadow][] a global variable unless it has the `!global` flag.
-  * `extend-selector-pseudoclass`, which means that the [`@extend` rule][] will affect selectors nested in pseudo-classes like `:not()`.
-  * `units-level3`, which means that [unit arithmetic][] supports units defined in [CSS Values and Units Level 3][].
-  * `at-error`, which means that the [`@error` rule][] is supported.
-  * `custom-property`, which means that [custom property declaration][] values don't support any [expressions][] other than [interpolation][].
+  * `global-variable-shadowing`, que significa que uma variável local [obscurecerá][shadow] uma variável global a menos que tenha a opção `!global`.
+
+  * `extend-selector-pseudoclass`, que significa que a [regra `@extend`][`@extend` rule] afetará os seletores encaixados nas pseudo-classes como `:not()`.
+
+  * `units-level3`, que significa que [aritmética de unidades][unit arithmetic] suporta unidades definidas nos [Valores de CSS e Unidades de Nível 3][CSS Values and Units Level 3].
+
+  * `at-error`, que significa que a [regra `@error`][`@error` rule] é suportada.
+
+  * `custom-property`, que significa que valores de [declaração de propriedade personalizada][custom property declaration] não suportam quaisquer [expressões][expressions] além da [interpolação][interpolation].
 
   [shadow]: ../variables#shadowing
   [`@extend` rule]: ../at-rules/extend
@@ -190,7 +196,7 @@ title: sass:meta
   [expressions]: ../syntax/structure#expressions
   [interpolation]: ../interpolation
 
-  Returns `false` for any unrecognized `$feature`.
+  Retorna `false` para qualquer `$feature` não reconhecida.
 
   <% example(autogen_css: false) do %>
     @debug meta.feature-exists("at-error"); // true
@@ -205,11 +211,12 @@ title: sass:meta
 <% function 'meta.function-exists($name, $module: null)',
             'function-exists($name)',
             returns: 'boolean' do %>
-  Returns whether a function named `$name` is defined, either as a built-in function or a user-defined function.
+  Retorna verdadeiro se uma função nomeada `$name` for definida, ou como uma função embutida ou uma [função definida pelo utilizador][user-defined].
 
-  If `$module` is passed, this also checks the module named `$module` for the function definition. `$module` must be a string matching the namespace of a [`@use` rule][] in the current file.
+  Se `$module` for passado, este também verifica o módulo nomeado `$module` para a definição de função. `$module` deve ser uma sequência de caracteres correspondendo o espaço de nome numa [regra `@use`][`@use` rule] no ficheiro atual.
 
   [`@use` rule]: ../at-rules/use
+  [user-defined]: ../at-rules/function
 
   <% example(autogen_css: false) do %>
     @use "sass:math";
@@ -240,21 +247,21 @@ title: sass:meta
 <% function 'meta.get-function($name, $css: false, $module: null)',
             'get-function($name, $css: false, $module: null)',
             returns: 'function' do %>
-  Returns the [function][] named `$name`.
+  Retorna a [função][function] nomeada `$name`.
 
   [function]: ../values/functions
 
-  If `$module` is `null`, this returns the function named `$name` without a namespace (including [global built-in functions][]). Otherwise, `$module` must be a string matching the namespace of a [`@use` rule][] in the current file, in which case this returns the function in that module named `$name`.
+  Se `$module` for `null`, este retorna a função nomeada `$name` sem um espaço de nome (incluindo [funções embutidas globais][global built-in functions]). De outro modo, `$module` deve ser uma sequência de caracteres correspondendo o espaço de nome duma [regra `@use`][`@use` rule] no ficheiro atual, no qual caso este retorna a função neste módulo nomeado `$name`.
 
   [global built-in functions]: ../modules#global-functions
   [`@use` rule]: ../at-rules/use
 
-  By default, this throws an error if `$name` doesn't refer to Sass function. However, if `$css` is `true`, it instead returns a [plain CSS function][].
+  Por padrão, este lança um erro se `$name` não referir-se à função de Sass. No entanto, se `$css` for `true`, retorna uma [função de CSS simples][plain CSS function].
 
   [user-defined]: ../at-rules/function
   [plain CSS function]: ../at-rules/function#plain-css-functions
 
-  The returned function can be called using [`meta.call()`](#call).
+  A função retornada pode ser chamada usando [`meta.call()`](#call).
 
   <%= partial 'code-snippets/example-first-class-function' %>
 <% end %>
@@ -263,15 +270,15 @@ title: sass:meta
 <% function 'meta.global-variable-exists($name, $module: null)',
             'global-variable-exists($name, $module: null)',
             returns: 'boolean' do %>
-  Returns whether a [global variable][] named `$name` (without the `$`) exists.
+  Retorna verdadeiro se uma [variável global][global variable] nomeada `$name` (sem o `$`) existir.
 
   [global variable]: ../variables#scope
 
-  If `$module` is `null`, this returns whether a variable named `$name` without a namespace exists. Otherwise, `$module` must be a string matching the namespace of a [`@use` rule][] in the current file, in which case this returns whether that module has a variable named `$name`.
+  Se `$module` for `null`, este retorna verdadeiro se uma variável nomeada `$name` sem um espaço de nome existir. De outro modo, `$module` deve ser uma sequência de caracteres correspondendo o espaço de nome duma [regra `@use`][`@use` rule] no ficheiro atual, no qual caso este retorna verdadeiro se este módulo tiver uma variável nomeada `$name`.
 
   [`@use` rule]: ../at-rules/use
 
-  See also [`meta.variable-exists()`](#variable-exists).
+  Consulte também [`meta.variable-exists()`](#variable-exists).
 
   <% example(autogen_css: false) do %>
     @debug meta.global-variable-exists("var1"); // false
@@ -301,12 +308,12 @@ title: sass:meta
 <% function 'meta.inspect($value)',
             'inspect($value)',
             returns: 'unquoted string' do %>
-  Returns a string representation of `$value`.
+  Retorna uma representação de sequência de caracteres do `$value`.
 
-  Returns a representation of *any* Sass value, not just those that can be represented in CSS. As such, its return value is not guaranteed to be valid CSS.
+  Retorna uma representação de *qualquer* valor de Sass, e não apenas aqueles que podem ser representados na CSS. Como tal, o seu valor de retorno não garante ser CSS válido.
 
   <% heads_up do %>
-    This function is intended for debugging; its output format is not guaranteed to be consistent across Sass versions or implementations.
+    Esta função está destinada para depuração; seu formato de saída não garante consistência através das versões ou implementações de Sass.
   <% end %>
 
   <% example(autogen_css: false) do %>
@@ -324,12 +331,12 @@ title: sass:meta
 
 
 <% function 'meta.keywords($args)', 'keywords($args)', returns: 'map' do %>
-  Returns the keywords passed to a mixin or function that takes [arbitrary arguments][]. The `$args` argument must be an [argument list][].
+  Retorna as palavras-chave passadas à uma mistura ou função que recebe [argumentos arbitrários][arbitrary arguments]. O argumento `$args` deve ser uma [lista de argumento][argument list].
 
   [arbitrary arguments]: ../at-rules/mixin#taking-arbitrary-arguments
   [argument list]: ../values/lists#argument-lists
 
-  The keywords are returned as a map from argument names as unquoted strings (not including `$`) to the values of those arguments.
+  As palavras-chave são retornadas como um mapa a partir dos nomes de argumento como sequências de caracteres sem aspas (sem incluir `$`) aos valores destes argumentos.
 
   <%= partial 'code-snippets/example-mixin-arbitrary-keyword-arguments' %>
 <% end %>
@@ -338,11 +345,11 @@ title: sass:meta
 <% function 'meta.mixin-exists($name, $module: null)',
             'mixin-exists($name, $module: null)',
             returns: 'boolean' do %>
-  Returns whether a [mixin][] named `$name` exists.
+  Retorna verdadeiro se uma [mistura][mixin] nomeada `$name` existir.
 
   [mixin]: ../at-rules/mixin
 
-  If `$module` is `null`, this returns whether a mixin named `$name` without a namespace exists. Otherwise, `$module` must be a string matching the namespace of a [`@use` rule][] in the current file, in which case this returns whether that module has a mixin named `$name`.
+  Se `$module` for `null`, este retorna verdadeiro se uma mistura nomeada `$name` sem um espaço de nome existir. De outro modo, `$module` deve ser uma sequência de caracteres correspondendo o espaço de nome duma [regra `@use`][`@use` rule] no ficheiro atual, no qual caso este retorna verdadeiro se este módulo tiver uma mistura nomeada `$name`.
 
   [`@use` rule]: ../at-rules/use
 
@@ -371,11 +378,11 @@ title: sass:meta
             returns: 'map' do %>
   <%= partial '../snippets/module-system-function-status' %>
 
-  Returns all the functions defined in a module, as a map from function names to [function values][].
+  Retorna todas as funções definidas num módulo, como um mapa a partir dos nomes de função aos [valores de função][function values]
 
   [function values]: ../values/functions
 
-  The `$module` parameter must be a string matching the namespace of a [`@use` rule][] in the current file.
+  O parâmetro `$module` deve ser uma sequência de caracteres correspondendo o espaço de nome duma [regra `@use`][`@use` rule] no ficheiro atual.
 
   [`@use` rule]: ../at-rules/use
 
@@ -422,9 +429,9 @@ title: sass:meta
             returns: 'map' do %>
   <%= partial '../snippets/module-system-function-status' %>
 
-  Returns all the variables defined in a module, as a map from variable names (without `$`) to the values of those variables.
+  Retorna todas as variáveis definidas num módulo, como um mapa a partir dos nomes de variáveis (sem `$`) aos valores destas variáveis.
 
-  The `$module` parameter must be a string matching the namespace of a [`@use` rule][] in the current file.
+  O parâmetro `$module` deve ser uma sequência de caracteres correspondendo o espaço de nome duma [regra `@use`][`@use` rule] no ficheiro atual.
 
   [`@use` rule]: ../at-rules/use
 
@@ -467,9 +474,9 @@ title: sass:meta
 <% function 'meta.type-of($value)',
             'type-of($value)',
             returns: 'unquoted string' do %>
-  Returns the type of `$value`.
+  Retorna o tipo de `$value`.
 
-  This can return the following values:
+  Esta pode retornar os seguintes valores:
 
   * [`number`](../values/numbers)
   * [`string`](../values/strings)
@@ -482,7 +489,7 @@ title: sass:meta
   * [`function`](../values/functions)
   * [`arglist`](../values/lists#argument-lists)
 
-  New possible values may be added in the future. It may return either `list` or `map` for `()`, depending on whether or not it was returned by a [map function][].
+  Possíveis novos valores podem ser adicionados no futuro. Pode retornar ou `list` ou `map` para `()`, dependendo de se foi ou não retornado por uma [função de mapa][map function].
 
   [map function]: map
 
@@ -501,11 +508,11 @@ title: sass:meta
 <% function 'meta.variable-exists($name)',
             'variable-exists($name)',
             returns: 'boolean' do %>
-  Returns whether a variable named `$name` (without the `$`) exists in the  current [scope][].
+  Retorna verdadeiro se uma variável nomeada `$name` (sem o `$`) existir no [âmbito][scope] atual.
 
   [scope]: ../variables#scope
 
-  See also [`meta.global-variable-exists()`](#global-variable-exists).
+  Consulte também [`meta.global-variable-exists()`](#global-variable-exists).
 
   <% example(autogen_css: false) do %>
     @debug meta.variable-exists("var1"); // false
