@@ -1,12 +1,12 @@
 ---
 title: Dart Sass 1.0.0 is Released
 author: Natalie Weizenbaum
-date: 2018-03-26 13:15 PST
+date: 2018-03-26 13:15:00 -8
 ---
 
-I've just uploaded Dart Sass 1.0.0, the very first stable release, to [GitHub](https://github.com/sass/dart-sass/releases/tag/1.0.0-rc.1), [npm](https://www.npmjs.com/package/sass), [Chocolatey](https://chocolatey.org/packages/sass), [Homebrew](https://github.com/sass/homebrew-sass), and [pub](http://pub.dartlang.org/packages/sass). After working on it for almost two years, I'm thrilled to have a stable release out there and officially ready to use in real-world applications. [All the reasons we chose Dart](/blog/announcing-dart-sass) as the implementation language are bearing fruit: Dart Sass is much faster than Ruby Sass, much easier to make available across operating systems and language environments, and much more maintainable.
+I've just uploaded Dart Sass 1.0.0, the very first stable release, to [GitHub](https://github.com/sass/dart-sass/releases/tag/1.0.0-rc.1), [npm](https://www.npmjs.com/package/sass), [Chocolatey](https://community.chocolatey.org/packages/sass), [Homebrew](https://github.com/sass/homebrew-sass), and [pub](http://pub.dartlang.org/packages/sass). After working on it for almost two years, I'm thrilled to have a stable release out there and officially ready to use in real-world applications. [All the reasons we chose Dart](/blog/announcing-dart-sass) as the implementation language are bearing fruit: Dart Sass is much faster than Ruby Sass, much easier to make available across operating systems and language environments, and much more maintainable.
 
-The 1.0.0 stable release indicates that Dart Sass is fully compatible with the Sass language as defined by [the sass-spec test suite](http://github.com/sass/sass-spec), and that its npm package is compatible with the [Node Sass API](https://github.com/sass/node-sass/blob/master/README.md#usage), with the exception of source map support which is [coming soon](https://github.com/sass/dart-sass/issues/2).
+The 1.0.0 stable release indicates that Dart Sass is fully compatible with the Sass language as defined by [the sass-spec test suite](http://github.com/sass/sass-spec), and that its npm package is compatible with the [Node Sass API](https://github.com/sass/node-sass#usage), with the exception of source map support which is [coming soon](https://github.com/sass/dart-sass/issues/2).
 
 I've also updated sass-lang.com to cover Dart Sass. The release bar now shows the latest version of all three major implementations, as well as links to their release notes and documentation about each one. The [install page](/install) covers Dart Sass instead of Ruby Sass, and the [Dart Sass page](/dart-sass) talks all about what Dart Sass is and the various ways it can be used.
 
@@ -35,7 +35,7 @@ One of the big benefits of switching to Dart is increased portability, which mea
 - [Chocolatey](https://chocolatey.org/) users on Windows can run `choco install sass` (or `choco upgrade sass` if you already have it).
 
 - [Homebrew](https://brew.sh/) users on Mac OS X can run `brew install sass/sass/sass` (or `brew upgrade sass` if you already have it).
-    
+
 - Or if you're a Dart user, you can run `pub global activate sass`.
 
 Now, get styling!

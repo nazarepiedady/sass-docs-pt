@@ -1,7 +1,7 @@
 ---
 title: A Change in Plans for Sass 3.3
 author: Natalie Weizenbaum
-date: 2013-12-19 20:05 PST
+date: 2013-12-19 20:05:00 -8
 ---
 
 _This was originally published as [a gist](https://gist.github.com/nex3/8050187)._
@@ -36,7 +36,7 @@ Did you get it? That's right: `&` in this example is `.foo, .bar`, which means t
 
 We knew we wanted to support the `&-suffix` use case, and our clever plan for doing so had failed. We put our heads together and discussed, and decided that the best way to support it was the most straightforward: we'd just allow `&-suffix`. This was, after all, what most people tried first when they wanted this behavior, and with the `&` embedded directly in the selector, we can handle selector lists easily.
 
-This means that **`&-suffix` will be supported in Sass 3.3**, without needing `#{}` or `@at-root`. I've created [issue 1055](https://github.com/nex3/sass/issues/1055) to track it. When compiling these selectors, if the parent selector is one that would result in an invalid selector (e.g. `*-suffix` or `:nth-child(1)-suffix`), we'll throw an error there describing why that selector was generated.
+This means that **`&-suffix` will be supported in Sass 3.3**, without needing `#{}` or `@at-root`. I've created [issue 1055](https://github.com/sass/sass/issues/1055) to track it. When compiling these selectors, if the parent selector is one that would result in an invalid selector (e.g. `*-suffix` or `:nth-child(1)-suffix`), we'll throw an error there describing why that selector was generated.
 
 We are still worried about cases where people write mixins using `&-suffix` that will then fail to work with certain parent selectors, but in this case we determined that this would be the least of all available evils.
 
@@ -46,8 +46,7 @@ In addition to supporting `&-suffix`, **we've decided to pull SassScript `&` fro
 
 There are two reasons that we want to hold off on using `&` in SassScript for now. The first is that we want some time to create the functions that will go along with it and put them through their paces. This may require changing the way it works in various ways, and we don't want to have to make backwards-incompatible changes to do so.
 
-The second reason is that we've spent a fair amount of energy talking up `#{&}` as a solution to the `&-suffix` problem. This is our own fault, clearly, but it's true and it's something we need to deal with. Making `&-suffix` work is great, but if everyone is using `#{&}` anyway because that's what we told them about a few months ago, then it's not doing everything it can. Having a release where `&-suffix` works but `#{&}` doesn't will help guide users towards the best way to solve their problem, before we make the more advanced functionality
-available.
+The second reason is that we've spent a fair amount of energy talking up `#{&}` as a solution to the `&-suffix` problem. This is our own fault, clearly, but it's true and it's something we need to deal with. Making `&-suffix` work is great, but if everyone is using `#{&}` anyway because that's what we told them about a few months ago, then it's not doing everything it can. Having a release where `&-suffix` works but `#{&}` doesn't will help guide users towards the best way to solve their problem, before we make the more advanced functionality available.
 
 `@at-root` will still be included in Sass 3.3.
 

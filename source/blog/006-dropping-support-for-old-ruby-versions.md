@@ -1,7 +1,7 @@
 ---
 title: Dropping Support For Old Ruby Versions
 author: Natalie Weizenbaum
-date: 2016-02-29 14:25 PST
+date: 2016-02-29 14:25:00 -8
 ---
 
 As of version 3.5, Ruby Sass will drop support for Ruby 1.8.7 and Ruby 1.9.3. We will continue to support Ruby 2.0.0 and higher.

@@ -1,7 +1,7 @@
 ---
 title: "Security Alert: Tar Permissions"
 author: Natalie Weizenbaum
-date: 2022-12-09 16:00 PST
+date: 2022-12-09 16:00:00 -8
 ---
 
 The Sass team was recently alerted by prolific external contributor [@ntkme] to a security issue in our release process.
@@ -20,7 +20,8 @@ Not vulnerable:
 -rwxr-xr-x 1 nweiz primarygroup 407 Dec 13 12:33 sass-1.56.2/sass
 ```
 
-If you're using the `sass-embedded` package, do the same thing for `node_modules/sass-embedded/dist/lib/src/vendor/dart-sass-embedded/dart-sass-embedded`.
+If you're using the `sass-embedded` package, do the same thing for
+`node_modules/sass-embedded/dist/lib/src/vendor/dart-sass-embedded/dart-sass-embedded`.
 
 ## Who's Affected?
 
@@ -42,8 +43,7 @@ This is a privilege-escalation issue, which means it could allow a hypothetical 
 
 ## What went wrong?
 
-We were inadvertently uploading `.tar.gz` archives with permissions metadata
-indicating that executable files could be overwritten by all users, not just the owner.
+We were inadvertently uploading `.tar.gz` archives with permissions metadata indicating that executable files could be overwritten by all users, not just the owner.
 
 In most cases, this metadata is ignored when extracting the archives and the permissions are set to only be writable by the user doing the extraction. However, when extracting archives as the Unix root user or explicitly passing the `-p`/`--preserve-permissions` flag, the permissions for the extracted files are set according to the archive's metadata. Because the metadata was incorrect, an attacker with access to a low-privilege account would be able to overwrite the executable file and escalate their privileges once it's executed.
 

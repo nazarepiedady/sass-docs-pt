@@ -1,14 +1,14 @@
 ---
 title: Dart Sass is On Chocolatey
 author: Natalie Weizenbaum
-date: 2017-01-13 14:43 PST
+date: 2017-01-13 14:43:00 -8
 ---
 
 One of the quieter benefits of [moving to Dart](/blog/announcing-dart-sass) is how easy it is to distribute Dart applications. The Dart VM is able to bundle all the sources for an application into one easy-to-load binary snapshot, which means running a Dart application requires only three files: the `dart` executable, the snapshot file, and a tiny shell script to invoke the app[^1]. This is a huge relief coming from Ruby, which required a whole installation of executables and libraries in order to run a single app.
 
-Those three files are what we distribute today [on our GitHub release page](https://github.com/sass/dart-sass/releases). But finding, downloading, and opening an archive and adding it to the command-line path is still a barrier to entry that we'd like to avoid where possible. Today we're taking a step in that direction by releasing [a Dart Sass package](https://chocolatey.org/packages/sass) on [Chocolatey](https://chocolatey.org/), the Windows package manager. You can install it now using:
+Those three files are what we distribute today [on our GitHub release page](https://github.com/sass/dart-sass/releases). But finding, downloading, and opening an archive and adding it to the command-line path is still a barrier to entry that we'd like to avoid where possible. Today we're taking a step in that direction by releasing [a Dart Sass package](https://community.chocolatey.org/packages/sass) on [Chocolatey](https://chocolatey.org/), the Windows package manager. You can install it now using:
 
-```
+```shellsession
 $ choco install sass -prerelease
 ```
 

@@ -1,7 +1,7 @@
 ---
 title: LibSass is Deprecated
 author: Natalie Weizenbaum
-date: 2020-10-26 12:00 PST
+date: 2020-10-26 12:00:00 -8
 ---
 
 After much discussion among the Sass core team, we've come to the conclusion that it's time to officially declare that LibSass and the packages built on top of it, including Node Sass, are deprecated. For several years now, it's been clear that there's simply not enough engineering bandwidth behind LibSass to keep it up-to-date with the latest developments in the Sass language (for example, the most recent new language feature was added in [November 2018]). As much as we've hoped to see this pattern turn around, even the excellent work of long-time LibSass contributors Michael Mifsud and Marcel Greter couldn't keep up with the fast pace of language development in both CSS and Sass.
@@ -12,7 +12,7 @@ I'll go into detail about what this means below, but here are the major points:
 
 * We no longer recommend LibSass for new Sass projects. Use [Dart Sass] instead.
 
-  [Dart Sass]: https://sass-lang.com/dart-sass
+  [Dart Sass]: /dart-sass
 
 * We recommend all existing LibSass users make plans to eventually move onto Dart Sass, and that all Sass libraries make plans to eventually drop support for LibSass.
 
@@ -28,7 +28,7 @@ For several years now, Sass has managed to exist in an ambiguous kind of state w
 
 Official support for LibSass doesn't just cause pain for individual users. Because LibSass doesn't support the [Sass module system] that launched last year, major shared Sass libraries have been unable to use it for fear that their downstream users would be incompatible. By clearly indicating that all Sass users should eventually move off of LibSass, we hope to make it more feasible for these library authors to use more modern features.
 
-[Sass module system]: https://sass-lang.com/blog/the-module-system-is-launched
+[Sass module system]: /blog/the-module-system-is-launched
 
 LibSass has even inhibited the development of the Sass language itself. We've been unable to move forward with the proposal for [treating `/` as a separator] because any code they'd write would either produce deprecation warnings in Dart Sass or fail to compile in LibSass. By marking LibSass as deprecated, this becomes much more feasible, and Sass becomes much better at supporting the latest versions of CSS.
 
@@ -56,7 +56,7 @@ If you're a user of Node Sass, migrating to Dart Sass is straightforward: just r
 
 If you're using the SassC command-line interface, you can switch to [Dart Sass's CLI]. Note that this doesn't have exactly the same interface as SassC, so you may need to change a few flags.
 
-[Dart Sass's CLI]: https://sass-lang.com/documentation/cli/dart-sass
+[Dart Sass's CLI]: /documentation/cli/dart-sass
 
 If you're using LibSass through a wrapper library in another language, you can either switch to the Dart Sass CLI or ask the maintainer of the LibSass wrapper to convert it to a host for the [Sass embedded protocol]. The embedded protocol allows any language to provide a native API that calls out to Dart Sass.
 

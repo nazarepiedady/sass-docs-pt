@@ -1,7 +1,7 @@
 ---
 title: "The Discontinuation of node-fibers"
 author: Natalie Weizenbaum
-date: 2021-3-26 15:00 PST
+date: 2021-3-26 15:00:00 -8
 ---
 
 We have recently received the unfortunate but not entirely surprising news that [the `node-fibers` package has reached its end-of-life] and will not be updated for compatibility with Node 16. Dart Sass has historically allowed JavaScript users to pass in `node-fibers` to improve the performance of the asynchronous `render()` method, but going forward this will unfortunately no longer be an option in Node 16 and on.

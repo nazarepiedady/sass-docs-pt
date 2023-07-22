@@ -1,7 +1,7 @@
 ---
 title: Cleaning Up Interpolation
 author: Natalie Weizenbaum
-date: 2015-12-09 15:20 PST
+date: 2015-12-09 15:20:00 -8
 ---
 
 Interpolation—the ability to add variables and other snippets using `#{...}`—is one of the handiest all-purpose features of Sass. You can use it just about everywhere you might need to inject a variable, a function call, or some other expression. In most of those places it just plops the value into the surrounding text. It's straightforward, easy to understand, and useful, which is exactly what we want from a feature.

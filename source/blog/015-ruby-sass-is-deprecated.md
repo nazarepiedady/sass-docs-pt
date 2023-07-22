@@ -1,7 +1,7 @@
 ---
 title: Ruby Sass is Deprecated
 author: Natalie Weizenbaum
-date: 2018-04-02 11:35 PST
+date: 2018-04-02 11:35:00 -8
 ---
 
 With the release of [Dart Sass 1.0.0 stable](/blog/dart-sass-100-is-released) last week, Ruby Sass was officially deprecated. I'll continue to maintain it over the next year, but when 26 March 2019 rolls around it will reach its official end-of-life. I encourage all users to start migrating away sooner rather than later.
@@ -32,7 +32,7 @@ We're also planning to add support to Dart Sass for [embedding it in Ruby](https
 
 On 26 March 2019, the deprecation period for Ruby Sass will end and it will no longer be maintained. The new `sass/ruby-sass` repository will be [archived](https://help.github.com/articles/about-archiving-repositories/), which means no changes will be made and no new issues or pull requests will be accepted. The old `sass/sass` repository will have its Git history replaced with feature specifications that have historically just been scattered around issue comments.
 
-Leading up to the end of life, we'll be migrating the user-focused [reference documentation](/documentation/file.SASS_REFERENCE.html) from the Ruby Sass repository to the Sass website. We could use some help doing the migration and touching up the documentation, so if you're interested please [chime in on the tracking issue](https://github.com/sass/sass-site/issues/205)!
+Leading up to the end of life, we'll be migrating the user-focused [reference documentation](/documentation/) from the Ruby Sass repository to the Sass website. We could use some help doing the migration and touching up the documentation, so if you're interested please [chime in on the tracking issue](https://github.com/sass/sass-site/issues/205)!
 
 #### Unless...
 

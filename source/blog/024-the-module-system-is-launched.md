@@ -1,7 +1,7 @@
 ---
 title: The Module System is Launched
 author: Natalie Weizenbaum
-date: 2019-10-01 18:58 PST
+date: 2019-10-01 18:58:00 -8
 ---
 
 The Sass team has known for years that the `@import` rule, one of the earliest additions to Sass, wasn't as good as we wanted it. It caused a litany of problems for our users:
@@ -40,15 +40,18 @@ The [`@use` rule][] is the primary replacement for `@import`: it makes CSS, vari
 In addition to namespacing, there are a few important differences between `@use` and `@import`:
 
 * `@use` only executes a stylesheet and includes its CSS once, no matter how many times that stylesheet is used.
+
 * `@use` only makes names available in the current stylesheet, as opposed to globally.
+
 * Members whose names begin with `-` or `_` are private to the current stylesheet with `@use`.
+
 * If a stylesheet includes `@extend`, that extension is only applied to stylesheets it imports, not stylesheets that import it.
 
 Note that placeholder selectors are *not* namespaced, but they *do* respect privacy.
 
 ### Controlling Namespaces
 
-Although a `@use` rule's default namespace is determined by the basename of its URL, it can also be set explicitly using `as`:
+Although a `@use` rule's default namespace is determined by the basename of its URL, it can also be set explicitly using `as`.
 
 ```scss
 @use "bootstrap" as b;
@@ -58,7 +61,7 @@ Although a `@use` rule's default namespace is determined by the basename of its 
 }
 ```
 
-The special construct `as *` can also be used to include everything in the top-level namespace. Note that if multiple modules expose members with the same name and are used with `as *`, Sass will produce an error:
+The special construct `as *` can also be used to include everything in the top-level namespace. Note that if multiple modules expose members with the same name and are used with `as *`, Sass will produce an error.
 
 ```scss
 @use "bootstrap" as *;
@@ -70,7 +73,7 @@ The special construct `as *` can also be used to include everything in the top-l
 
 #### Configuring Libraries
 
-With `@import`, libraries are often configured by setting global variables that override `!default` variables defined by those libraries. Because variables are no longer global with `@use`, it supports a more explicit way of configuring libraries: the `with` clause:
+With `@import`, libraries are often configured by setting global variables that override `!default` variables defined by those libraries. Because variables are no longer global with `@use`, it supports a more explicit way of configuring libraries: the `with` clause.
 
 ```scss
 // bootstrap.scss
@@ -92,7 +95,7 @@ This sets bootstrap's `$paragraph-margin-bottom` variable to `1.2rem` before eva
 
 ## `@forward`, for Library Authors
 
-The [`@forward` rule][] includes another module's variables, mixins, and functions as part of the API exposed by the current module, without making them visible to code within the current module. It allows library authors to be able to split up their library among many different source files without sacrificing locality within those files. Unlike `@use`, forward doesn't add any namespaces to names:
+The [`@forward` rule][] includes another module's variables, mixins, and functions as part of the API exposed by the current module, without making them visible to code within the current module. It allows library authors to be able to split up their library among many different source files without sacrificing locality within those files. Unlike `@use`, forward doesn't add any namespaces to names.
 
 [`@forward` rule]: /documentation/at-rules/forward
 
@@ -154,7 +157,7 @@ We've also taken this opportunity to change a couple confusing old function name
 
 Sass's shorthand color functions `lighten()`, `darken()`, `saturate()`, `desaturate()`, `opacify()`, `fade-in()`, `transparentize()`, and `fade-out()` all had very unintuitive behavior. Rather than scaling their associated attributes fluidly, they just incremented them by a static amount, so that `lighten($color, 20%)` would return `white` for a color with `85%` lightness rather than returning a color with `88%` lightness (`20%` closer to full white).
 
-To help set us on the path towards fixing this, these functions (along with `adjust-hue()`) aren't included in the new built-in modules. You can still get the same effect by calling [`color.adjust()`](/documentation/modules/color#adjust) — for example, `lighten($color, $amount)` is equivalent to `color.adjust($color, $lightness: $amount)` — but we recommend trying to use [`color.scale()`](/documentation/modules/color#scale) instead if possible because of how much more intuitive it is.
+To help set us on the path towards fixing this, these functions (along with `adjust-hue()`) aren't included in the new built-in modules. You can still get the same effect by calling [`color.adjust()`](/documentation/modules/color#adjust)—for example, `lighten($color, $amount)` is equivalent to `color.adjust($color, $lightness: $amount)`—but we recommend trying to use [`color.scale()`](/documentation/modules/color#scale) instead if possible because of how much more intuitive it is.
 
 At some point in the future, we plan to add `color.lighten()` and similar functions as shorthands for `color.scale()`.
 
@@ -164,7 +167,7 @@ The new module system comes with a new built-in mixin, [`meta.load-css($url, $wi
 
 ## `@import` Compatibility
 
-The Sass ecosystem won't switch to `@use` overnight, so in the meantime it needs to [interoperate well with `@import`](/documentation/at-rules/import#import-and-modules). This is supported in both directions:
+The Sass ecosystem won't switch to `@use` overnight, so in the meantime it needs to [interoperate well with `@import`](/documentation/at-rules/import/#import-and-modules). This is supported in both directions:
 
 * When a file that contains `@import`s is `@use`d, everything in its global namespace is treated as a single module. This module's members are then referred to using its namespace as normal.
 
@@ -174,15 +177,15 @@ In order to allow libraries to maintain their existing `@import`-oriented API, w
 
 ## Automatic Migration
 
-Concurrent with the launch of the new module system, we're launching a new [automated Sass migrator](/documentation/cli/migrator). This tool makes it easy to migrate most stylesheets to use the new module system automatically. Follow the instructions on [the Sass website](/documentation/cli/migrator#installation) to install it, then run it on your application:
+Concurrent with the launch of the new module system, we're launching a new [automated Sass migrator](/documentation/cli/migrator). This tool makes it easy to migrate most stylesheets to use the new module system automatically. Follow the instructions on [the Sass website](/documentation/cli/migrator/#installation) to install it, then run it on your application:
 
 ```shellsession
 $ sass-migrator module --migrate-deps <path/to/style.scss>
 ```
 
-The [`--migrate-deps` flag](/documentation/cli/migrator#migrate-deps) tells the migrator to migrate not only the file you pass, but anything it imports as well. The migrator will automatically pick up files imported through [Webpack's `node_modules` syntax](https://github.com/webpack-contrib/sass-loader#resolving-import-at-rules), but you can also pass explicit load paths with the [`--load-path` flag](/documentation/cli/migrator#load-path).
+The [`--migrate-deps` flag](/documentation/cli/migrator/#migrate-deps) tells the migrator to migrate not only the file you pass, but anything it imports as well. The migrator will automatically pick up files imported through [Webpack's `node_modules` syntax](https://github.com/webpack-contrib/sass-loader#resolving-import-at-rules), but you can also pass explicit load paths with the [`--load-path` flag](/documentation/cli/migrator/#load-path).
 
-If you want the migrator to tell you what changes it would make without actually making them, pass both the [`--dry-run` flag](/documentation/cli/migrator#dry-run) and the [`--verbose` flag](/documentation/cli/migrator#verbose) to tell it to just print out the changes it would make without saving them to disk.
+If you want the migrator to tell you what changes it would make without actually making them, pass both the [`--dry-run` flag](/documentation/cli/migrator/#dry-run) and the [`--verbose` flag](/documentation/cli/migrator/#verbose) to tell it to just print out the changes it would make without saving them to disk.
 
 ### Migrating a Library
 
@@ -192,9 +195,9 @@ If you want to migrate a Sass library that's meant for downstream users to load 
 $ sass-migrator module --migrate-deps --forward=all <path/to/index.scss>
 ```
 
-The [`--forward` flag](/documentation/cli/migrator#forward) tells the migrator to add [`@forward` rules](/documentation/at-rules/forward) so that users can still load all the mixins, variables, and functions your library defines with a single `@use`.
+The [`--forward` flag](/documentation/cli/migrator/#forward) tells the migrator to add [`@forward` rules](/documentation/at-rules/forward) so that users can still load all the mixins, variables, and functions your library defines with a single `@use`.
 
-If you added a manual namespace to your library to avoid name conflicts, the migrator will remove it for you if you pass the [`--remove-prefix` flag](/documentation/cli/migrator#remove-prefix). You can even choose to only forward members that originally had that prefix by passing `--forward=prefixed`.
+If you added a manual namespace to your library to avoid name conflicts, the migrator will remove it for you if you pass the [`--remove-prefix` flag](/documentation/cli/migrator/#remove-prefix). You can even choose to only forward members that originally had that prefix by passing `--forward=prefixed`.
 
 ### Filing Issues
 
@@ -214,9 +217,9 @@ Alternately, check out [the installation page](/install) for all the different w
 
 The Sass team wants to allow for a large amount of time when `@use` and `@import` can coexist, to help the ecosystem smoothly migrate to the new system. However, doing away with `@import` entirely is the ultimate goal for simplicity, performance, and CSS compatibility. As such, we plan to gradually turn down support for `@import` on the following timeline:
 
--   ~~One year after both Dart Sass and LibSass have launched support for the module system _or_ two years after Dart Sass launches support for the module system, whichever comes sooner (**1 October 2021** at latest), we will deprecate `@import` as well as global core library function calls that could be made through modules.~~
-    
--   ~~One year after this deprecation goes into effect (**1 October 2022** at latest), we will drop support for `@import` and most global functions entirely. This will involve a major version release for all implementations.~~
+- ~~One year after both Dart Sass and LibSass have launched support for the module system _or_ two years after Dart Sass launches support for the module system, whichever comes sooner (**1 October 2021** at latest), we will deprecate `@import` as well as global core library function calls that could be made through modules.~~
+
+- ~~One year after this deprecation goes into effect (**1 October 2022** at latest), we will drop support for `@import` and most global functions entirely. This will involve a major version release for all implementations.~~
 
 ~~This means that there will be at least two full years when `@import` and `@use` are both usable at once, and likely closer to three years in practice.~~
 

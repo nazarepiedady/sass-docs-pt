@@ -1,14 +1,14 @@
 ---
 title: "New JS API Release Candidate is Live"
 author: Natalie Weizenbaum
-date: 2021-11-20 16:15 PST
+date: 2021-11-20 16:15:00 -8
 ---
 
 The new JavaScript API that we [announced a few months ago] is now fully implemented in Dart Sass and ready for you to try! The new API is designed to be more idiomatic, performant, and usable than the old one, and we hope it'll be adopted swiftly by tooling packages.
 
 Because this is such a substantial addition, we want to give users a chance to kick the tires a bit before we set it in stone, so we've released it as a release candidate in Dart Sass 1.45.0-rc.1. Download it, try it out, and let us know what you think by [filing issues] or [sending us a tweet]. Unless major changes are necessary, we plan to make a stable release some time next week.
 
-[announced a few months ago]: https://sass-lang.com/blog/request-for-comments-new-js-api
+[announced a few months ago]: /blog/request-for-comments-new-js-api
 [filing issues]: https://github.com/sass/sass/issues/new
 [sending us a tweet]: https://twitter.com/SassCSS
 

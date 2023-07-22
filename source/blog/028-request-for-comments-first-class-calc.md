@@ -1,7 +1,7 @@
 ---
 title: "Request for Comments: First-Class Calc"
 author: Natalie Weizenbaum
-date: 2021-3-15 1:35 PST
+date: 2021-3-15 1:35:00 -8
 ---
 
 One of the absolutely most-requested features in Sass is the ability to more easily work with `calc()` expressions. These expressions have historically been parsed opaquely: between the parentheses, you can put any text at all, and Sass will just treat it as an unquoted string. This has simplified Sass's parser, since we don't have to support the specific `calc()` microsyntax, and it's meant that we automatically support new features like the use of [CSS variables] within `calc()`.
@@ -10,7 +10,7 @@ One of the absolutely most-requested features in Sass is the ability to more eas
 
 However, it comes at a substantial usability cost as well. Because each `calc()` is totally opaque to Sass's parser, users can't simply use Sass variables in place of values; they have to [interpolate] variables explicitly. And once a `calc()` expression has been created, there's no way to manipulate it with Sass the way you can manipulate a plain number.
 
-[interpolate]: https://sass-lang.com/documentation/interpolation
+[interpolate]: /documentation/interpolation
 
 We're looking to change that with a new proposal we call "First-Class Calc". This proposal changes `calc()` (and other supported mathematical functions) from being parsed as unquoted strings to being parsed in-depth, and sometimes (although not always) producing a new data type known as a "calculation". This data type represents mathematical expressions that can't be resolved at compile-time, such as `calc(10% + 5px)`, and allows those expressions to be combined gracefully within further mathematical functions.
 
@@ -38,5 +38,5 @@ For backwards compatibility, `calc()` expressions that contain interpolation wil
 
 If you're interested in learning more about this proposal, [read it in full] on GitHub. It's open for comments and revisions for the next month, so if you'd like to see something change please [file an issue] and we can discuss it!
 
-[read it in full]: https://github.com/sass/sass/tree/main/proposal/first-class-calc.md
+[read it in full]: https://github.com/sass/sass/blob/main/accepted/first-class-calc.md
 [file an issue]: https://github.com/sass/sass/issues/new

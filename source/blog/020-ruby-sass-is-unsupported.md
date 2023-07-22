@@ -1,7 +1,7 @@
 ---
 title: Ruby Sass Has Reached End-Of-Life
 author: Natalie Weizenbaum
-date: 2019-04-03 16:15 PST
+date: 2019-04-03 16:15:00 -8
 ---
 
 One year has passed since we announced [the deprecation of Ruby Sass](/blog/ruby-sass-is-deprecated), and it has now officially reached its end-of-life. We will release one final version of the Ruby Sass gem that will print a warning indicating that it's no longer receiving updates, and then archive [the GitHub repository](https://github.com/sass/ruby-sass).

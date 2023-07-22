@@ -1,7 +1,7 @@
 ---
 title: "Embedded Sass is Live"
 author: Natalie Weizenbaum
-date: 2022-02-01 2:00 PST
+date: 2022-02-01 2:00:00 -8
 ---
 
 After several years of planning and development, I'm excited to finally announce the stable release of Embedded Dart Sass along with its first official wrapper, the [`sass-embedded`] package available now on npm!
@@ -12,8 +12,8 @@ Embedded Sass is an ongoing effort to make a highly-performant Sass library avai
 
 The `sass-embedded` package fully supports the [new JS API] as well as the [legacy API] other than a few cosmetic options. You can use it as a drop-in replacement for the `sass` package, and it should work with all the same build plugins and libraries. Note that `sass-embedded` is a bit faster in *asynchronous* mode than it is in synchronous mode (whereas the `sass` package was faster in synchronous mode). For substantial Sass files, running `sass-embedded` in either mode will generally be much faster than `sass`.
 
-[new JS API]: https://sass-lang.com/documentation/js-api#usage
-[legacy API]: https://sass-lang.com/documentation/js-api#legacy-api
+[new JS API]: /documentation/js-api/#md:usage
+[legacy API]: /documentation/js-api/#md:legacy-api
 
 In order to limit the confusion about which version of which package supports which feature, the `sass-embedded` package will always have the same version as the `sass` package. When new features are added to the JS API, they'll be supported at the same time in both packages, and when new language features are added to Sass they'll always be included in a new `sass-embedded` release straight away.
 
@@ -36,6 +36,6 @@ Embedded Sass is composed of three parts:
 
 Embedded Sass was designed in part as a way for languages other than JavaScript to have access to the full power of Sass compilation with custom importers and functions, similarly to how C++ wrappers for [LibSass] worked in the past. We hope that community members will use this protocol to implement embedded hosts for many other popular frontend languages. If you end up doing so, message us [on Twitter] or [Gitter] and we'll link it on this site!
 
-[LibSass]: https://sass-lang.com/libsass
+[LibSass]: /libsass
 [on Twitter]: https://twitter.com/SassCSS
 [Gitter]: https://gitter.im/sass/sass

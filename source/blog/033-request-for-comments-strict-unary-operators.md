@@ -1,15 +1,15 @@
 ---
 title: "Request for Comments: Strict Unary Operators"
 author: Natalie Weizenbaum
-date: 2022-06-15 15:30 PST
+date: 2022-06-15 15:30:00 -8
 ---
 
 Do you know what `margin: $a -$b` does in Sass? If you said "the same thing as `margin: $a (-$b)`, I'm sorry, but you're wrong. It's *actually* the same thing as `margin: $a - $b`. Don't worry, you're not the first person to get tripped up by this weird corner of Sass's parser! But our new language proposal aims to fix that.
 
 In the [Strict Unary Operators] proposal, which is currently open for community feedback, we propose to first deprecate and then eventually disallow expressions of the form `$a -$b`. We know deprecations are never pleasant, but this should be fairly painless as they go: you can simply write `$a - $b` or `$a (-$b)`, depending which you intend. We'll also provide a [Sass migrator] migration to automatically update your stylesheets.
 
-[strict unary operators]: https://github.com/sass/sass/blob/main/proposal/strict-unary.md
-[Sass migrator]: https://sass-lang.com/documentation/cli/migrator
+[strict unary operators]: https://github.com/sass/sass/blob/main/accepted/strict-unary.md
+[Sass migrator]: /documentation/cli/migrator
 
 **Deprecated:**
 
@@ -23,8 +23,8 @@ In the [Strict Unary Operators] proposal, which is currently open for community 
 
 The `$a - $b` or `$a (-$b)` options are supported by all widely-used Sass versions, so there shouldn't be any trouble for libraries to avoid this deprecation warning and continue to support older Sass versions. In addition, you can always use the [`--quiet-deps` command-line flag] or the [`quietDeps` JS API option] to silence warnings from dependencies you don't control.
 
-[`--quiet-deps` command-line flag]: https://sass-lang.com/documentation/cli/dart-sass#quiet-deps
-[`quietDeps` JS API option]: https://sass-lang.com/documentation/js-api/interfaces/Options#quietDeps
+[`--quiet-deps` command-line flag]: /documentation/cli/dart-sass/#quiet-deps
+[`quietDeps` JS API option]: /documentation/js-api/interfaces/Options/#quietDeps
 
 ## Why does it work this way?
 
@@ -44,5 +44,5 @@ In theory, we could change Sass so that `$a -$b` parses the same as `$a (-$b)`: 
 
 If you've got thoughts or opinions about this change, please read over [the full proposal] and then [file an issue] with your feedback. We'll be leaving this open to comments for a month, after which we'll finalize the proposal and start implementing it.
 
-[the full proposal]: https://github.com/sass/sass/blob/main/proposal/strict-unary.md
+[the full proposal]: https://github.com/sass/sass/blob/main/accepted/strict-unary.md
 [file an issue]: https://github.com/sass/sass/issues/new

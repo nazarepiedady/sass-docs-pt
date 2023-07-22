@@ -1,14 +1,14 @@
 ---
 title: How @extend Works
 author: Natalie Weizenbaum
-date: 2013-11-22 16:57 PST
+date: 2013-11-22 16:57:00 -8
 ---
 
 _This was originally published as [a gist](https://gist.github.com/nex3/7609394)_.
 
-[Aaron Leung](https://github.com/akhleung) is working on [hcatlin/libsass](http://github.com/hcatlin/libsass) and was wondering how `@extend` is implemented in the Ruby implementation of Sass. Rather than just tell him, I thought I'd write up a public document about it so anyone who's porting Sass or is just curious about how it works can see.
+[Aaron Leung](https://github.com/akhleung) is working on [libsass](https://github.com/sass/libsass) and was wondering how `@extend` is implemented in the Ruby implementation of Sass. Rather than just tell him, I thought I'd write up a public document about it so anyone who's porting Sass or is just curious about how it works can see.
 
-Note that this explanation is simplified in numerous ways. It's intended to explain the most complex parts of a basic correct `@extend` transformation, but it leaves out numerous details that will be important if full Sass compatibility is desired. This should be considered an explication of the groundwork for `@extend`, upon which full support can be built. For a complete understanding of `@extend`, there's no substitute for consulting the [Ruby Sass code](http://github.com/sass/ruby-sass/tree/master/lib/sass) and [its tests](https://github.com/sass/ruby-sass/blob/master/test/sass/extend_test.rb).
+Note that this explanation is simplified in numerous ways. It's intended to explain the most complex parts of a basic correct `@extend` transformation, but it leaves out numerous details that will be important if full Sass compatibility is desired. This should be considered an explication of the groundwork for `@extend`, upon which full support can be built. For a complete understanding of `@extend`, there's no substitute for consulting the [Ruby Sass code](https://github.com/sass/ruby-sass/tree/master/lib/sass) and [its tests](https://github.com/sass/ruby-sass/blob/master/test/sass/extend_test.rb).
 
 This document assumes familiarity with the selector terminology defined in the [Selectors Level 4](http://dev.w3.org/csswg/selectors4/#syntax) spec. Throughout the document, selectors will be treated interchangeably with lists or sets of their components. For example, a complex selector may be treated as a list of compound selectors or a list of lists of simple selectors.
 
@@ -20,10 +20,12 @@ Following are a set of primitive objects, definitions, and operations that are n
 
 * A custom data structure I call a "subset map" is also necessary. A subset map has two operations: `Map.set(Set, Object)` and `Map.get(Set) => [Object]`. The former associates a value with a set of keys in the map. The latter looks up all values that are associated with *subsets* of a set of keys. For example:
 
-        map.set([1, 2], 'value1')
-        map.set([2, 3], 'value2)
-        map.set([3, 4], 'value3')
-        map.get([1, 2, 3]) => ['value1', 'value2']
+  ```ruby
+  map.set([1, 2], 'value1')
+  map.set([2, 3], 'value2')
+  map.set([3, 4], 'value3')
+  map.get([1, 2, 3]) => ['value1', 'value2']
+  ```
 
 * A selector `S1` is a "superselector" of a selector `S2` if every element matched by `S2` is also matched by `S1`. For example, `.foo` is a superselector of `.foo.bar`, `a` is a superselector of `div a`, and `*` is a superselector of everything. The inverse of a superselector is a "subselector".
 
@@ -73,12 +75,12 @@ define extend_compound(COMPOUND, SEEN) to be:
   let RESULTS be an empty list of complex selectors
   for each (EXTENDER, TARGET) in MAP.get(COMPOUND):
     if SEEN contains TARGET, move to the next iteration
-  
+
     let COMPOUND_WITHOUT_TARGET be COMPOUND without any of the simple selectors in TARGET
     let EXTENDER_COMPOUND be the last compound selector in EXTENDER
     let UNIFIED be unify(EXTENDER_COMPOUND, COMPOUND_WITHOUT_TARGET)
     if UNIFIED is null, move to the next iteration
-    
+
     let UNIFIED_COMPLEX be EXTENDER with the last compound selector replaced with UNIFIED
     with TARGET in SEEN:
       add each complex selector in extend_complex(UNIFIED_COMPLEX, SEEN) to RESULTS

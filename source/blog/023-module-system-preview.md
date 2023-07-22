@@ -1,10 +1,10 @@
 ---
 title: Module System Preview
 author: Natalie Weizenbaum
-date: 2019-09-04 15:14 PST
+date: 2019-09-04 15:14:00 -8
 ---
 
-Exciting news, Sass fans! After a year of development and some iteration on the spec, we're ready to launch a beta preview of the new Sass module system! We may still make a few last-minute tweaks based on user feedback, so don't go using it in production just yet, but please do take this opportunity to play around with it and let us know what you think.
+Exciting news, Sass fans! After a year of development and some iteration on the spec, we're ready to launch a beta preview of the new Sass module system! We may still make a few last-minute tweaks based on user feedback, so don't go using itin production just yet, but please do take this opportunity to play around with it and let us know what you think.
 
 ## Installing the Preview
 

@@ -1,7 +1,7 @@
 ---
 title: Sass 3.5 is Released
 author: Natalie Weizenbaum
-date: 2017-07-07 15:33 PST
+date: 2017-07-07 15:33:00 -8
 ---
 
 I'm excited to announce that I've just released the stable version of Sass 3.5. This release focuses on compatibility with new CSS syntax, and helps lay the groundwork for the upcoming module system and compatibility with [Dart Sass](/blog/announcing-dart-sass).
@@ -32,7 +32,7 @@ There are also some deprecations for functionality that's not supported in Ruby 
 
   When you write `h1 {@extend .a.b}`, this *should* mean that all `h1` elements are styled as though they match `.a.b`—that is, as though they have `class="a b"`, which means they'd match both `.a` and `.b` separately. But instead we extend only selectors that contain *both* `.a` and `.b`, which is incorrect.
 
-* Color arithmetic is deprecated. Channel-by-channel arithmetic doesn't correspond closely to intuitive understandings of color. Sass's suite of [color functions](/documentation/Sass/Script/Functions.html#other_color_functions) are a much cleaner and more comprehensible way of manipulating colors dynamically.
+* Color arithmetic is deprecated. Channel-by-channel arithmetic doesn't correspond closely to intuitive understandings of color. Sass's suite of [color functions](/documentation/modules/color/) are a much cleaner and more comprehensible way of manipulating colors dynamically.
 
 * The reference combinator, `/foo/`, is deprecated since it hasn't been in the CSS specification for some time and is being removed from Chrome soon.
 

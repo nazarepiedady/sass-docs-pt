@@ -1,7 +1,7 @@
 ---
 title: "Request For Comments: Importing CSS Files"
 author: Natalie Weizenbaum
-date: 2018-07-09 11:19 PST
+date: 2018-07-09 11:19:00 -8
 ---
 
 As Dart Sass catches up with Ruby Sass in terms of usability, we're starting work on adding new features to the language. The first feature we're looking at is one that's long been requested by users: adding support for importing plain CSS files without having to rename them to `.scss`. Not only do we expect this to be very useful, it's already partially implemented in LibSass, so this will help bring the implementations more in line with one another.

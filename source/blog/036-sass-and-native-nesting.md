@@ -1,10 +1,10 @@
 ---
 title: "Sass and Native Nesting"
 author: Natalie Weizenbaum
-date: 2023-03-29 14:30 PST
+date: 2023-03-29 14:30:00 -8
 ---
 
-The stable release of Chrome 112, which is releasing today, is the first stable browser to add support for the new [native CSS nesting feature]. This feature — inspired by Sass's nesting—adds the ability to nest style rules in plain CSS, and even uses Sass's convention of `&` to refer to the parent selector.
+The stable release of Chrome 112, which is releasing today, is the first stable browser to add support for the new [native CSS nesting feature]. This feature—inspired by Sass's nesting—adds the ability to nest style rules in plain CSS, and even uses Sass's convention of `&` to refer to the parent selector.
 
 [native CSS nesting feature]: https://drafts.csswg.org/css-nesting/
 
@@ -12,83 +12,70 @@ We here at Sass HQ are honored every time our language design inspires improveme
 
 ## The Future of Sass Nesting
 
-This raises an important question, though: what will happen to Sass's nesting? First of all, we won't ever change existing valid Sass code so that it starts emitting CSS that's incompatible with widely-used browsers. This means that even if we did decide to phase out Sass nesting and just emit plain CSS nesting instead, we wouldn't do so until [98% of the global browser market share] supported native nesting.
+This raises an important question, though: what will happen to Sass's nesting? First of all, we won't ever change existing valid Sass code so that it starts emitting CSS that's incompatible with widely-used browsers. This means that even if we did decide to phase out Sass nesting and just emit plain CSS nesting instead, we wouldn't do so until [98% of the global browser market share]
+supported native nesting.
 
 [98% of the global browser market share]: https://github.com/sass/dart-sass#browser-compatibility
 
 More importantly, though, **native CSS nesting is subtly incompatible with Sass nesting**. This affects three different cases:
 
-<ol><li>
-<% force_markdown do %>
+1. Native CSS nesting implicitly wraps the parent selector in [`:is()`], while Sass copies its text into the resolved selector. That means that
 
-Native CSS nesting implicitly wraps the parent selector in [`:is()`], while Sass copies its text into the resolved selector. That means that
+   [`:is()`]: https://developer.mozilla.org/en-US/docs/Web/CSS/:is
 
-[`:is()`]: https://developer.mozilla.org/en-US/docs/Web/CSS/:is
+   ```scss
+   .foo, #bar {
+     .baz { /* ... */ }
+   }
+   ```
 
-```scss
-.foo, #bar {
-  .baz { /* ... */ }
-}
-```
+   produces the selector `.foo .baz, #bar .baz` in Sass but `:is(.foo, #bar) .baz` in native CSS. This changes the specificity: `:is()` always has the specificity of its _most specific selector_, so `:is(.foo, #bar) .baz` will match
 
-produces the selector `.foo .baz, #bar .baz` in Sass but `:is(.foo, #bar) .baz` in native CSS. This changes the specificity: `:is()` always has the specificity of its _most specific selector_, so `:is(.foo, #bar) .baz` will match:
+   ```html
+   <div class=foo>
+     <p class=baz>
+   </div>
+   ```
 
-```html
-<div class=foo>
-  <p class=baz>
-</div>
-```
+   with specificity 1 0 1 in native CSS and 0 0 2 in Sass even though neither element is matched by ID.
 
-with specificity 1 0 1 in native CSS and 0 0 2 in Sass even though neither element is matched by ID.
+2. Also because native CSS nesting uses `:is()`, a parent selector with descendant combinators will behave differently.
 
-<% end %>
-</li><li>
-<% force_markdown do %>
+   ```scss
+   .foo .bar {
+     .green-theme & { /* ... */ }
+   }
+   ```
 
-Also because native CSS nesting uses `:is()`, a parent selector with descendant combinators will behave differently.
+   produces the selector `.green-theme .foo .bar` in Sass, but in native CSS it produces `.green-theme :is(.foo .bar)`. This means that the native CSS version will match
 
-```scss
-.foo .bar {
-  .green-theme & { /* ... */ }
-}
-```
+   ```html
+   <div class=foo>
+     <div class="green-theme">
+       <p class=bar>
+     </div>
+   </div>
+   ```
 
-produces the selector `.green-theme .foo .bar` in Sass, but in native CSS it produces `.green-theme :is(.foo .bar)`. This means that the native CSS version will match
+   but Sass will not, since the element matching `.foo` is outside the element matching `.green-theme`.
 
-```html
-<div class=foo>
-  <div class="green-theme">
-    <p class=bar>
-  </div>
-</div>
-```
+3. Sass nesting and native CSS nesting both support syntax that looks like `&foo`, but it means different things. In Sass, this adds a suffix to the parent selector, so
 
-but Sass will not, since the element matching `.foo` is outside the element matching `.green-theme`.
+   ```scss
+   .foo {
+     &-suffix { /* ... */ }
+   }
+   ```
 
-<% end %>
-</li><li>
-<% force_markdown do %>
+   produces the selector `.foo-suffix`. But in native CSS, this adds a type selector to the parent selector, so
 
-Sass nesting and native CSS nesting both support syntax that looks like `&foo`, but it means different things. In Sass, this adds a suffix to the parent selector, so:
+   ```scss
+   .foo {
+     &div { /* ... */ }
+   }
+   ```
 
-```scss
-.foo {
-  &-suffix { /* ... */ }
-}
-```
-
-produces the selector `.foo-suffix`. But in native CSS, this adds a type selector to the parent selector, so:
-
-```scss
-.foo {
-  &div { /* ... */ }
-}
-```
-
-produces the selector `div.foo` (where Sass would produce `.foodiv` instead). Native CSS nesting has no way to add a suffix to a selector like Sass.
-
-<% end %>
-</li></ol>
+   produces the selector `div.foo` (where Sass would produce `.foodiv` instead). Native CSS nesting has no way to add a suffix to a selector like Sass.
 
 ### Design Commitments
 

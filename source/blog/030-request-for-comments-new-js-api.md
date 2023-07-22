@@ -1,7 +1,7 @@
 ---
 title: "Request for Comments: New JS API"
 author: Natalie Weizenbaum
-date: 2021-08-05 15:30 PST
+date: 2021-08-05 15:30:00 -8
 ---
 
 I'm excited to officially unveil something that's been in the works for quite a while now: a (proposal for a) brand new JavaScript API for Sass. This API has been redesigned from the ground up based on lessons learned from both the Node Sass API and various other historical Sass APIs in other languages through the years, and it addresses many of the shortcomings of the existing API.
@@ -30,7 +30,7 @@ The existing JavaScript API is showing its age. It predates Dart Sass, having be
 
 * All of the asynchronous functions were callback-based rather than promise-based.
 
-[module system]: https://sass-lang.com/blog/the-module-system-is-launched
+[module system]: /blog/the-module-system-is-launched
 
 The new API addresses these issues and more with a modern, idiomatic API that will make working with Sass from JS a breeze.
 
@@ -63,26 +63,39 @@ function compileStringAsync(
 The `compile()` and `compileAsync()` functions load a Sass file from a path on disk, whereas `compileString()` and `compileStringAsync()` compile Sass source code passed in as a string. All these take the following options:
 
 * `alertAscii`: Whether errors and warnings should use only ASCII characters (as opposed to, for example, Unicode box-drawing characters).
+
 * `alertColor`: Whether errors and warnings should use terminal colors.
+
 * `loadPaths`: A list of file paths to use to look up files to load, just like `includePaths` in the old API.
+
 * `importers`: A list of [custom importers](#importers) to use to load Sass source files.
+
 * `functions`: An object whose keys are Sass function signatures and whose values are [custom functions](#functions).
+
 * `quietDeps`: Whether to silence deprecation warnings in dependencies.
+
 * `logger`: The [custom logger](#loggers) to use to emit warnings and debug messages.
+
 * `sourceMap`: Whether to generate a source map during compilation.
+
 * `style`: The output style, `'compressed'` or `'expanded'`.
+
 * `verbose`: Whether to emit every deprecation warning encountered.
 
 The `compileString()` and `compileStringAsync()` functions take a few additional options:
 
 * `syntax`: The syntax of the file, `'scss'` (the default), `'indented'`, or `'css'`.
+
 * `url`: The [canonical URL](#canonicalizing) of the file.
+
 * `importer`: The [custom importer](#importers) to treat as the file's source. If this is passed, this importer will be used to resolve relative loads from this stylesheet.
 
 All these functions return an object with the following fields:
 
 * `css`: The compiled CSS, as a string.
+
 * `loadedUrls`: All the URLs loaded during the compilation, in no particular order.
+
 * `sourceMap`: The source map for the file if `sourceMap: true` was passed, as a decoded object.
 
 As with the Node Sass API, the synchronous functions will be substantially faster than their asynchronous counterparts. Unfortunately the new API will not support the `fibers` option for speeding up asynchronous compilation, since [the `fibers` package has been discontinued].
@@ -122,7 +135,7 @@ The `warn` function handles warnings, including both warnings from the compiler 
 
 The `debug` function handles only `@debug` rules, and is just passed the message and the rule's span. For more information on the `SourceSpan` type, see [the Logger proposal].
 
-[the Logger proposal]: https://github.com/sass/sass/tree/main/proposal/js-logger.d.ts
+[the Logger proposal]: https://github.com/sass/sass/blob/main/accepted/js-logger.d.ts
 
 Sass will also provide a built-in logger, `Logger.silent`, that never emits any messages. This will allow you to easily run Sass in "quiet mode" where no warnings are ever surfaced.
 
@@ -197,6 +210,7 @@ interface FileImporter {
 The `findFileUrl()` method takes a relative URL and returns an object with the following fields:
 
 * `url`: The absolute `file:` URL of the file to load. This URL doesn't need to be fully canonicalized: the Sass compiler will take care of resolving partials, file extensions, index files, and so on.
+
 * `sourceMapUrl`: An optional browser-accessible `URL` to include in source maps when referring to this file.
 
 ## Functions
@@ -664,10 +678,10 @@ class SassFunction extends Value {
 
 If you want to know more about these proposals and see their most up-to-date forms, they're available on GitHub to view in full:
 
-* [Compile API proposal](https://github.com/sass/sass/tree/main/proposal/new-js-api.d.ts)
-* [Logger proposal](https://github.com/sass/sass/blob/main/proposal/js-logger.d.ts)
-* [Importer proposal](https://github.com/sass/sass/blob/main/proposal/new-js-importer.d.ts)
-* [Functions and values proposal](https://github.com/sass/sass/blob/main/proposal/new-function-and-values-api.d.ts)
+* [Compile API proposal](https://github.com/sass/sass/blob/main/accepted/new-js-api.d.ts)
+* [Logger proposal](https://github.com/sass/sass/blob/main/accepted/js-logger.d.ts)
+* [Importer proposal](https://github.com/sass/sass/blob/main/accepted/new-js-importer.d.ts)
+* [Functions and values proposal](https://github.com/sass/sass/blob/main/accepted/new-function-and-values-api.d.ts)
 
 We're eager for feedback, so please [let us know what you think]! The proposals in question will be open for at least a month after this blog post goes live, and possibly more depending on how lively the discussion around them is.
 

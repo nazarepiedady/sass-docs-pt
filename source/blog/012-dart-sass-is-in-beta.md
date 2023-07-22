@@ -1,7 +1,7 @@
 ---
 title: Dart Sass is in Beta
 author: Natalie Weizenbaum
-date: 2017-06-05 13:00 PST
+date: 2017-06-05 13:00:00 -8
 ---
 
 Last weekend was [three days long](https://en.wikipedia.org/wiki/Memorial_Day) and the weather in Seattle was gorgeous. Contrary to stereotype, spring here is often characterized by bright sunny days that aren't too hot, and on days like that I love to curl up on the armchair in my living room and write some code. This weekend, that meant finishing up the last few outstanding `@extend` bugs, finally **making Dart Sass fully sass-spec compatible**[^1].
@@ -18,8 +18,7 @@ Our long-term compatibility goal is to ensure, as much as possible, that **if a 
 
 ## Next Steps: Dart Sass
 
-On the Dart front, we have [a number of
-issues](https://github.com/sass/dart-sass/milestone/1) outstanding that we want to resolve before we release a stable version of 1.0.0. The majority of these issues are focused on one thing: compatibility with the node-sass `render()` API. This will make it easy to integrate Dart Sass into existing JS ecosystem tools and workflows, since anything that works with node-sass will automatically work with Dart Sass as well.
+On the Dart front, we have [a number of issues](https://github.com/sass/dart-sass/milestone/1) outstanding that we want to resolve before we release a stable version of 1.0.0. The majority of these issues are focused on one thing: compatibility with the node-sass `render()` API. This will make it easy to integrate Dart Sass into existing JS ecosystem tools and workflows, since anything that works with node-sass will automatically work with Dart Sass as well.
 
 ## Try It Out
 

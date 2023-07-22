@@ -1,7 +1,7 @@
 ---
 title: "Request for Comments: HWB Functions"
 author: Natalie Weizenbaum
-date: 2020-10-06 16:00 PST
+date: 2020-10-06 16:00:00 -8
 ---
 
 The CSS working group has been up to all sorts of exciting stuff recently in the [Color Level 4] spec, and the Sass team is starting to think about how to integrate those cool new features into Sass's color model. We need more time to hammer out exactly the right designs for complex features like the Lab color space, but that doesn't mean we can't add a few new color goodies.
@@ -37,5 +37,5 @@ All three color modification functions now support `$whiteness` and `$blackness`
 
 If you’re interested in learning more about this proposal, [read it in full] on GitHub. It’s open for comments and revisions for the next month, so if you’d like to see something change please [file an issue] and we can discuss it!
 
-[read it in full]: https://github.com/sass/sass/tree/main/proposal/color-4-hwb.md
+[read it in full]: https://github.com/sass/sass/blob/main/accepted/color-4-hwb.md
 [file an issue]: https://github.com/sass/sass/issues/new

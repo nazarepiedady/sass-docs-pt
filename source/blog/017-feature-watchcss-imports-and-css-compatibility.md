@@ -1,7 +1,7 @@
 ---
 title: "Feature Watch: CSS Imports and CSS Compatibility"
 author: Natalie Weizenbaum
-date: 2018-08-13 14:17 PST
+date: 2018-08-13 14:17:00 -8
 ---
 
 Dart Sass 1.11 has just been released, and with it a handful of new features. This is an exciting moment, because it marks the first major new feature that's been added to the language since Dart Sass was launched. It's also the first release with features that have gone through the new process, from [proposal](https://github.com/sass/language/blob/main/accepted/css-imports.md) to [tests](https://github.com/sass/sass-spec/pull/1277) to [implementation](https://github.com/sass/dart-sass/pull/436).
@@ -23,8 +23,11 @@ Dart Sass 1.11 also adds support for CSS's `min()` and `max()` mathematical func
 Because Sass has its own functions named `min()` and `max()`, it was difficult to use these CSS functions... until now. Dart Sass 1.11 will intelligently decide whether to use the plain CSS functions or the built-in Sass functions based on whether or not you're passing in dynamic Sass values. For example:
 
 * The Sass function will be called if you pass a variable, like `max($width, 100px)`.
+
 * The Sass function will be called if you call another Sass function, like `max(compute-width(), 100px)`.
+
 * It will compile to a plain CSS function if you just use plain CSS numbers, like `max(50% + 10px, 100px)`.
+
 * It will still compile to a plain CSS function even if you use interpolation, like `max(50% + #{$width / 2}, #{$width})`.
 
 This preserves backwards-compatibility with existing uses of the Sass functions, while also users to use the CSS functions the same way they would in plain CSS.
@@ -62,4 +65,3 @@ Escapes are now normalized to a standard format, which means that (for example) 
 We don't anticipate this affecting many users, but we always strive to bring Sass as close to the semantics of CSS as possible. This is a small but important step on that path.
 
 This feature isn't yet implemented in [LibSass](https://github.com/sass/libsass/issues/2700) or [Ruby Sass](https://github.com/sass/ruby-sass/issues/76).
-

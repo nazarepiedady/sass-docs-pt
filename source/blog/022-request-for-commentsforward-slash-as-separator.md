@@ -1,7 +1,7 @@
 ---
 title: "Request For Comments: Forward Slash as Separator"
 author: Natalie Weizenbaum
-date: 2019-05-06 16:15 PST
+date: 2019-05-06 16:15:00 -8
 ---
 
 Early on in Sass's history, the decision was made to use `/` as a division operator, since that was (and is) by far the most common representation across programming languages. The `/` character was used in very few plain CSS properties, and for those it was an optional shorthand. So Sass defined [a set of heuristics][] that defined when `/` would be rendered as a literal slash versus treated as an operator.
@@ -23,13 +23,18 @@ This is a major breaking change to existing Sass semantics, so we'll roll it out
 
 1. The first stage won't introduce any breaking changes. It will:
    * Add a `divide()` function which will work exactly like the `/` operator does today, except that it will produce deprecation warnings for any non-number arguments.
+
    * Add slash-separated lists to Sass's object models, *without* a literal syntax for creating them. That will come later, since it would otherwise be a breaking change.
+
    * Add a `slash-list()` function that will create slash-separated lists.
+
    * Produce deprecation warnings for all `/` operations that are interpreted as division.
 
 2. The second stage *will* be a breaking change. It will:
    * Make `/` exclusively a list separator.
+
    * Make `divide()` throw errors for non-number arguments.
+
    * Deprecate the `slash-list()` function, since it will now be redundant.
 
 3. The third stage will just remove the `slash-list()` function. This is not a priority, and will be delayed until the next major version release.

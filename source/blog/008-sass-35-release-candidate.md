@@ -1,13 +1,12 @@
 ---
 title: Sass 3.5 Release Candidate
 author: Natalie Weizenbaum
-date: 2016-08-30 15:00 PST
+date: 2016-08-30 15:00:00 -8
 ---
 
 I've just pushed the button to release Sass 3.5.0-rc.1. If it seems like it's been a while since the last release, that's true! But there's a good reason. We decided to enter feature freeze after the 3.5 release to give [libsass](/libsass), the super-speedy C++ implementation of Sass, time to reach feature parity with Sass 3.4. Libsass is much younger than Sass, and C++ is generally a slower language to work in than Ruby, so this took some time. But it paid off: libsass is now almost 100% compatible with Ruby Sass, differing only in a few small bugs.
 
 After the feature freeze lifted, we were primarily focused on designing the new module system that will be the central feature of Sass 4.0. But we also found some time to add some new features, which are the focus of this release.
-
 
 ## CSS Custom Property Support
 
@@ -15,7 +14,7 @@ Sass 3.5 now fully supports [CSS custom properties](https://developer.mozilla.or
 
 ```css
 .wacky-property {
-  --property: .%(#@$~`^[^_+]<;:"}"|?)*+
+  --property: .%(#@$~`^[^_+]<;:"}"|?)*+;
 }
 ```
 
@@ -27,7 +26,7 @@ In particular, this means that SassScript expressions are *also* valid CSS, whic
     background-color: green;
     border-radius: 4px;
     border: 1px solid gray;
-  };
+  }
 }
 ```
 
@@ -39,7 +38,7 @@ On the other hand, we needed *some* way of including dynamic SassScript values i
     background-color: #{$toolbar-background};
     border-radius: 4px;
     border: 1px solid gray;
-  };
+  }
 }
 ```
 
@@ -55,8 +54,7 @@ Any stylesheets that are currently passing around function names as strings shou
 
 ## New Syntax: Bracketed Lists
 
-The new [CSS Grid
-Layout](https://css-tricks.com/snippets/css/complete-guide-grid/) module added a new type of syntax: identifiers surrounded by square brackets. We're always striving to be totally compatible with CSS, which meant we needed to support these brackets as well. Here's what they look like in CSS:
+The new [CSS Grid Layout](https://css-tricks.com/snippets/css/complete-guide-grid/) module added a new type of syntax: identifiers surrounded by square brackets. We're always striving to be totally compatible with CSS, which meant we needed to support these brackets as well. Here's what they look like in CSS:
 
 ```css
 .container {
@@ -65,7 +63,7 @@ Layout](https://css-tricks.com/snippets/css/complete-guide-grid/) module added a
 }
 ```
 
-The solution was clear: Sass already has a [list data type](/documentation/file.SASS_REFERENCE.html#lists), so we'd just allow lists to have square brackets. So `[first]` is just a list containing the unquoted string `first`. Like all Sass lists, bracketed lists can either be space-separated or comma-separated: `[foo bar baz]` and `[foo, bar, baz]` are both lists containing three elements.
+The solution was clear: Sass already has a [list data type](/documentation/values/lists/), so we'd just allow lists to have square brackets. So `[first]` is just a list containing the unquoted string `first`. Like all Sass lists, bracketed lists can either be space-separated or comma-separated: `[foo bar baz]` and `[foo, bar, baz]` are both lists containing three elements.
 
 We've also added function support for bracketed lists. The `is-bracketed($list)` function returns whether a list is bracketed or not, and `join()` has a new `$bracketed` parameter that allows the caller to choose whether or not the resulting list will have brackets (by default, the result is bracketed if the first list is).
 

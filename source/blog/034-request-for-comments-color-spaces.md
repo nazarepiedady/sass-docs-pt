@@ -1,7 +1,7 @@
 ---
 title: "Request for Comments: Color Spaces"
 author: Miriam Suzanne and Natalie Weizenbaum
-date: 2022-09-21 13:00 PST
+date: 2022-09-21 13:00:00 -8
 ---
 
 There's been a lot of exciting work in the CSS color specifications lately, and as it begins to land in browsers we've been preparing to add support for it in Sass as well. The first and largest part of that is adding support for *color spaces* to Sass, which represents a huge (but largely backwards-compatible) rethinking of the way colors work.

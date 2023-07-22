@@ -1,7 +1,7 @@
 ---
 title: Dropping Support For Old Ruby Versions
 author: Natalie Weizenbaum
-date: 2016-05-24 14:41 PST
+date: 2016-05-24 14:41:00 -8
 ---
 
 You may not know [Marcel Greter](https://github.com/mgreter), but you almost certainly know his work. For more than two years, he has been the #1 contributor on LibSass and is the #2 contributor for the history of the project. His monumental efforts, together with [Michael Mifsud](https://github.com/xzyfer), are what has kept LibSass thriving recently and why it has reached feature parity with Ruby Sass and is now used by more users than Ruby Sass every day.

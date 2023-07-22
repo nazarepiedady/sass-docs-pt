@@ -1,10 +1,10 @@
 ---
 title: "Request For Comments: Module System"
 author: Natalie Weizenbaum
-date: 2018-11-27 13:10 PST
+date: 2018-11-27 13:10:00 -8
 ---
 
-Many of the most frequently-requested features for Sass have to do with its imports. The import system that we've had since the very early releases of Sass is, to put it simply, not great. It does little more than textually include one Sass file in another, which makes it hard to keep track of where mixins, functions, and variables were defined and hard to be sure that any new additions won't happen to conflict with something elsewhere in the project. To make matters worse, it overlaps with CSS's built-in `@import` rule, which forces us to have [a bunch of heuristics](/documentation/file.SASS_REFERENCE.html#import) to decide which is which.
+Many of the most frequently-requested features for Sass have to do with its imports. The import system that we've had since the very early releases of Sass is, to put it simply, not great. It does little more than textually include one Sass file in another, which makes it hard to keep track of where mixins, functions, and variables were defined and hard to be sure that any new additions won't happen to conflict with something elsewhere in the project. To make matters worse, it overlaps with CSS's built-in `@import` rule, which forces us to have [a bunch of heuristics](/documentation/at-rules/import/) to decide which is which.
 
 Because of these problems and others, we've wanted to do a full overhaul of the way Sass files relate to one another for a long time. Over the last few years, I've been working with the Sass core team and Sass framework maintainers to create a proposal for a module system that's fit to replace `@import`. That proposal is now in a place that the core team is pretty happy with, at least as a starting point, so we want to open it up for community feedback.
 
@@ -75,15 +75,18 @@ This proposal adds two at-rules, `@use` and `@forward`, which may only appear at
 In addition to namespacing, there are a few important differences between `@use` and `@import`:
 
 * `@use` only executes a stylesheet and includes its CSS once, no matter how many times that stylesheet is used.
+
 * `@use` only makes names available in the current stylesheet, as opposed to globally.
+
 * Members whose names begin with `-` or `_` are private to the current stylesheet with `@use`.
+
 * If a stylesheet includes `@extend`, that extension is only applied to stylesheets it imports, not stylesheets that import it.
 
 Note that placeholder selectors are *not* namespaced, but they *do* respect privacy.
 
 #### Controlling Namespaces
 
-Although a `@use` rule's default namespace is determined by the basename of its URL, it can also be set explicitly using `as`:
+Although a `@use` rule's default namespace is determined by the basename of its URL, it can also be set explicitly using `as`.
 
 ```scss
 @use "bootstrap" as b;
@@ -93,7 +96,7 @@ Although a `@use` rule's default namespace is determined by the basename of its 
 }
 ```
 
-The special construct `as *` can also be used to include everything in the top-level namespace. Note that if multiple modules expose members with the same name and are used with `as *`, Sass will produce an error:
+The special construct `as *` can also be used to include everything in the top-level namespace. Note that if multiple modules expose members with the same name and are used with `as *`, Sass will produce an error.
 
 ```scss
 @use "bootstrap" as *;
@@ -105,7 +108,7 @@ The special construct `as *` can also be used to include everything in the top-l
 
 #### Configuring Libraries
 
-With `@import`, libraries are often configured by setting global variables that override `!default` variables defined by those libraries. Because variables are no longer global with `@use`, it supports a more explicit way of configuring libraries: the `with` clause:
+With `@import`, libraries are often configured by setting global variables that override `!default` variables defined by those libraries. Because variables are no longer global with `@use`, it supports a more explicit way of configuring libraries: the `with` clause.
 
 ```scss
 // bootstrap.scss
@@ -127,7 +130,7 @@ This sets bootstrap's `$paragraph-margin-bottom` variable to `1.2rem` before eva
 
 ### `@forward`
 
-The `@forward` rule includes another module's variables, mixins, and functions as part of the API exposed by the current module, without making them visible to code within the current module. It allows library authors to be able to split up their library among many different source files without sacrificing locality within those files. Unlike `@use`, forward doesn't add any namespaces to names:
+The `@forward` rule includes another module's variables, mixins, and functions as part of the API exposed by the current module, without making them visible to code within the current module. It allows library authors to be able to split up their library among many different source files without sacrificing locality within those files. Unlike `@use`, forward doesn't add any namespaces to names.
 
 ```scss
 // bootstrap.scss
@@ -195,7 +198,9 @@ This proposal also adds a new built-in mixin, `meta.load-css($url, $with: ())`. 
 
 * **Why this privacy model?** We considered a number of models for declaring members to be private, including a JS-like model where only members that were explicitly exported from a module were visible and a C#-like model with an explicit `@private` keyword. These models involve a lot more boilerplate, though, and they work particularly poorly for placeholder selectors where privacy may be mixed within a single style rule. Name-based privacy also provides a degree of compatibility with conventions libraries are already using.
 
-* **Can I make a member library-private?** There's no language-level notion of a "library", so library-privacy isn't built in either. However, members used by one module aren't automatically visible to downstream modules. If a module isn't [`@forward`ed](#forward) through a library's main stylesheet, it won't be visible to downstream consumers and thus is effectively library-private. <br><br> As a convention, we recommend that libraries write library-private stylesheets that aren't intended to be used directly by their users in a directory named `src`.
+* **Can I make a member library-private?** There's no language-level notion of a "library", so library-privacy isn't built in either. However, members used by one module aren't automatically visible to downstream modules. If a module isn't [`@forward`ed](#forward) through a library's main stylesheet, it won't be visible to downstream consumers and thus is effectively library-private.
+
+  As a convention, we recommend that libraries write library-private stylesheets that aren't intended to be used directly by their users in a directory named `src`.
 
 * **How do I make my library configurable?** If you have a large library made up of many source files that all share some core `!default`-based configuration, we recommend that you define that configuration in a file that gets forwarded from your library's entrypoint and used by your library's files. For example:
 

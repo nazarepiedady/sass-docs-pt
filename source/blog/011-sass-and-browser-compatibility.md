@@ -1,7 +1,7 @@
 ---
 title: Sass and Browser Compatibility
 author: Natalie Weizenbaum
-date: 2017-02-10 17:46 PST
+date: 2017-02-10 17:46:00 -8
 ---
 
 One of the core design principles of Sass has always been to **understand CSS as little as possible**. As a CSS preprocessor of course we have to understand the syntax of CSS, but as much as we can we try to avoid caring about the *semantics*—the meaning behind the styles. This means that Sass has no idea which properties are valid, which HTML elements actually exist, or even to a large extent what the syntax of most @-rules is.

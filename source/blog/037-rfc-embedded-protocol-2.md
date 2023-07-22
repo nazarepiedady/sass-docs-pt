@@ -1,7 +1,7 @@
 ---
 title: "Request for Comments: New Embedded Protocol"
 author: Natalie Weizenbaum
-date: 2023-05-19 16:00 PST
+date: 2023-05-19 16:00:00 -8
 ---
 
 If you're not an author of a host package for the Embedded Sass Protocol, you can skip this blog post—although if you're a big enough nerd, you may find it interesting regardless!
@@ -26,7 +26,7 @@ We're using this opportunity to also introduce three much smaller breaking chang
 
 The repository-organization changes have already been made, but the changes to the protocol itself are fully documented [in a proposal in the language repository].
 
-[in a proposal in the language repository]: https://github.com/sass/sass/blob/main/proposal/embedded-protocol-2.md
+[in a proposal in the language repository]: https://github.com/sass/sass/blob/main/accepted/embedded-protocol-2.md
 
 ## Combining Executables
 
