@@ -1,0 +1,61 @@
+@use '../config';
+
+.sl-r-banner {
+  position: relative;
+
+  // add bottom padding to increase space
+  // above page titles (visible on mobile site)
+  padding-bottom: var(--sl-gutter--triple);
+
+  a {
+    display: inline-block;
+  }
+
+  &__brand a {
+    border: 0;
+  }
+
+  img {
+    display: inline-block;
+    margin: 0;
+    height: config.sl-px-to-rem(48px);
+
+    @include config.sl-breakpoint--medium {
+      height: config.sl-px-to-rem(96px);
+    }
+  }
+
+  &--playground {
+    padding-bottom: 0;
+
+    img {
+      height: config.sl-px-to-rem(48px);
+    }
+
+    .sl-r-banner__brand {
+      @include config.sl-breakpoint--medium-max {
+        flex: 0 1 auto;
+      }
+    }
+  }
+
+  &__navigation {
+    font-weight: var(--sl-font-weight--bold);
+
+    ul {
+      position: relative;
+      margin: 0 var(--sl-gutter--negative) !important;
+
+      @include config.sl-breakpoint--medium {
+        right: var(--sl-gutter--negative);
+        margin: 0 !important;
+      }
+    }
+
+    a {
+      display: block;
+      padding: var(--sl-gutter--minus) var(--sl-gutter);
+      border: 0;
+    }
+  }
+}

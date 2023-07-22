@@ -1,0 +1,14 @@
+@use '../config';
+
+.sl-c-introduction {
+  color: var(--sl-color--patina);
+  font-weight: var(--sl-font-weight--light);
+
+  @include config.sl-breakpoint--medium {
+    font-size: var(--sl-font-size--xx-large);
+  }
+
+  &--center {
+    text-align: center;
+  }
+}
