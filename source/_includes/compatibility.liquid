@@ -1,10 +1,10 @@
 <dl class="impl-status sl-c-description-list sl-c-description-list--horizontal">
   <div class="compatibility">
-    Compatibility{% if feature %} ({{ feature }}){% endif %}:
+    Compatibilidade{% if feature %} ({{ feature }}){% endif %}:
   </div>
   {%- if dart != null -%}
     <div>
-      <dt>Dart Sass</dt>
+      <dt>Sass de Dart</dt>
       <dd>{{ dart | implStatus }}</dd>
     </div>
   {%- endif -%}
@@ -16,13 +16,13 @@
   {%- endif -%}
   {%- if node != null -%}
     <div>
-      <dt>Node Sass</dt>
+      <dt>Sass de Node</dt>
       <dd>{{ node | implStatus }}</dd>
     </div>
   {%- endif -%}
   {%- if ruby != null -%}
     <div>
-      <dt>Ruby Sass</dt>
+      <dt>Sass de Ruby</dt>
       <dd>{{ ruby | implStatus }}</dd>
     </div>
   {%- endif -%}
