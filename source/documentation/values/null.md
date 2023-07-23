@@ -1,10 +1,10 @@
 ---
 title: "null"
 introduction: >
-  O valor `null` é o único valor do seu tipo. Ele representa a ausência de um valor, e é frequentemente retornado pelas [funções](../at-rules/function) para indicar a falta de um resultado.
+  O valor `null` é o único valor do seu tipo. Ele representa a ausência de um valor, e é frequentemente retornado pelas [funções](/documentation/at-rules/function) para indicar a falta de um resultado.
 ---
 
-<% example(autogen_css: false) do %>
+{% codeExample 'null', false %}
   @use "sass:map";
   @use "sass:string";
 
@@ -18,13 +18,13 @@ introduction: >
   @debug string.index("Helvetica Neue", "Roboto")  // null
   @debug map.get(("large": 20px), "small")  // null
   @debug &  // null
-<% end %>
+{% endcodeExample %}
 
 Se um [lista][list] conter um `null`, este `null` é omitido da CSS gerada.
 
-[list]: lists
+[list]: /documentation/values/lists
 
-<% example do %>
+{% codeExample 'null-lists' %}
   $fonts: ("serif": "Helvetica Neue", "monospace": "Consolas");
 
   h3 {
@@ -35,11 +35,11 @@ Se um [lista][list] conter um `null`, este `null` é omitido da CSS gerada.
 
   h3
     font: 18px bold map-get($fonts, "sans")
-<% end %>
+{% endcodeExample %}
 
 Se um valor de propriedade for `null`, esta propriedade é omitida completamente.
 
-<% example do %>
+{% codeExample 'null-value-omitted' %}
   $fonts: ("serif": "Helvetica Neue", "monospace": "Consolas");
 
   h3 {
@@ -57,13 +57,13 @@ Se um valor de propriedade for `null`, esta propriedade é omitida completamente
       size: 18px
       weight: bold
       family: map-get($fonts, "sans")
-<% end %>
+{% endcodeExample %}
 
 `null` também é [*falso*][*falsey*], o que significa que conta como `false` para quaisquer regras ou [operadores][operators] que recebem booleanos. Isto torna fácil usar valores que podem ser `null` como condições para [`@if`][] e [`if()`][]:
 
-[*falsey*]: ../at-rules/control/if#truthiness-and-falsiness
-[operators]: ../operators/boolean
-[`@if`]: ../at-rules/control/if
-[`if()`]: ../modules#if
+[*falsey*]: /documentation/at-rules/control/if#truthiness-and-falsiness
+[operators]: /documentation/operators/boolean
+[`@if`]: /documentation/at-rules/control/if
+[`if()`]: /documentation/modules#if
 
-<%= partial 'code-snippets/example-if-parent-selector' %>
+{% render 'code_snippets/example-if-parent-selector' %}
