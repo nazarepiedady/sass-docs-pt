@@ -6,7 +6,7 @@ introduction: >
 
 Como é que esta propriedade é compilada?
 
-<% example(autogen_css: false) do %>
+{% codeExample 'strict-unary', false %}
   $size: 10px;
 
   div {
@@ -17,7 +17,7 @@ Como é que esta propriedade é compilada?
 
   div
     margin: 15px -$size
-<% end %>
+{% endcodeExample %}
 
 Alguns utilizadores podem dizer "o `-` está anexado ao `$size`, então deve ser `margin: 20px -10px`". Outros podem dizer "o `-` está entre `20px` e `$size`, então deve ser `margin: 5px`". A Sass atualmente concorda com a última opinião, mas o verdadeiro problema é que é tão confuso em primeiro lugar! Trata-se de uma situação natural porém uma consequência infeliz da sintaxe de lista separadas por espaço da CSS combinada com a sintaxe aritmética da Sass.
 
@@ -31,17 +31,15 @@ Se quiseres usar um operador `-` ou `+` unário como parte duma lista separada p
 
 * Válido: `15px (-$size)`
 
-<span id="transition-period"></span>
-## Período de Transição
+## Período de Transição {#transition-period}
 
-<% impl_status dart: '1.55.0', libsass: false, ruby: false %>
+{% compatibility 'dart: "1.55.0"', 'libsass: false', 'ruby: false' %}{% endcompatibility %}
 
 Tornaremos isto um erro na Sass de Dart 2.0.0, mas até lá apenas emitirá um aviso de depreciação:
 
-<%= partial '../snippets/silence-deprecations' %>
+{% render 'doc_snippets/silence-deprecations' %}
 
-<span id="automatic-migration"></span>
-## Migração Automática
+## Migração Automática {#automatic-migration}
 
 Tu podes usar [o migrador da Sass] para atualizar automaticamente as tuas folhas de estilo, para adicionares um espaço depois de quaisquer operadores `-` ou `+` que precisar dele, o que preservará o comportamento existente destas folhas de estilo:
 

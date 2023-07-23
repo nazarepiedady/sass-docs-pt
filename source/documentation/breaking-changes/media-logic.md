@@ -4,7 +4,7 @@ introduction: >
   A Sass adicionou suporte para as especificações de Consultas de Media de Nível 4 da CSS. Isto originalmente entrava em conflito com alguma sintaxe específica de Sass, assim esta sintaxe foi depreciada e agora é interpretada de acordo com o padrão da CSS.
 ---
 
-<% impl_status dart: '1.56.0', libsass: false, ruby: false %>
+{% compatibility 'dart: "1.56.0"', 'libsass: false', 'ruby: false' %}{% endcompatibility %}
 
 Uma vez que a Sass suporta quase qualquer expressão de Sass em condições de media entre parênteses, existiam algumas construções cujo significado foi mudado adicionado suporte completo para Consultas de Media de Nível 4. Especificamente:
 
@@ -14,9 +14,8 @@ Uma vez que a Sass suporta quase qualquer expressão de Sass em condições de m
 
 Felizmente, estes vieram a tornar-se pouco frequentes na prática.
 
-<span id="transition-period"></span>
-## Período de Transição
+## Período de Transição {#transition-period}
 
-<% impl_status dart: '1.54.0', libsass: false, ruby: false %>
+{% compatibility 'dart: "1.54.0"', 'libsass: false', 'ruby: false' %}{% endcompatibility %}
 
 Primeiro, emitimos os avisos de depreciação para os anteriores casos ambíguos. Estes terão sugestões para como preservar o comportamento existente ou como usar a nova sintaxe de CSS.

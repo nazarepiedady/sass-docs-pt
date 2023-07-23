@@ -18,7 +18,7 @@ Nenhuma destas é CSS válida, e todos eles farão os navegadores ignorarem a re
 
 **Existe uma exceção importante**: os combinadores à esquerda e à direita ainda podem ser usados para fins de encaixamento. Por exemplo, o seguinte código continua a ser muito suportado:
 
-<% example do %>
+{% codeExample 'bogus-combinators' %}
   .sidebar > {
     .error {
       color: red;
@@ -28,19 +28,18 @@ Nenhuma destas é CSS válida, e todos eles farão os navegadores ignorarem a re
   .sidebar >
     .error
       color: red
-<% end %>
+{% endcodeExample %}
 
 A Sass apenas produzirá um erro se um seletor ainda tiver um combinador à esquerda ou à direita _depois do encaixamento for resolvido_. Os combinadores repetidos, por outro lado, sempre resultará em erros.
 
 Para garantir as folhas de estilo existentes que (provavelmente por acidente) contêm combinadores inválidos, suportaremos um período de transição até o próximo lançamento principal da Sass de Dart.
 
-<span id="transition-period"></span>
-## Período de Transição
+## Período de Transição {#transition-period}
 
-<% impl_status dart: '1.54.0', libsass: false, ruby: false %>
+{% compatibility 'dart: "1.54.0"', 'libsass: false', 'ruby: false' %}{% endcompatibility %}
 
 Primeiro, emitiremos avisos de depreciação para todos os combinadores duplos, bem como para os combinadores à esquerda ou à direita que terminam em seletores depois do encaixamento ser resolvido.
 
-<%= partial '../snippets/silence-deprecations' %>
+{% render 'doc_snippets/silence-deprecations' %}
 
 Além disto, começaremos imediatamente a omitir os seletores que sabemos ser CSS inválidos da CSS compilada, com uma exceção: _não omitiremos_ os seletores que começam com um combinador à esquerda, visto que podem ser usados a partir duma regra `@import` encaixada ou mistura `meta.load-css()`. No entanto, não encorajamos este padrão e abandonaremos o suporte para isto na Sass de Dart 2.0.0.

@@ -11,7 +11,7 @@ A Sass tem historicamente suportado uma analise especial para a regra `@-moz-doc
 
 **Existe uma exceção**: uma função de prefixo de url vazia ainda é permitida, já que é usada num malabarismo destinado ao Firefox:
 
-<% example do %>
+{% codeExample 'moz-document' %}
   @-moz-document url-prefix() {
     .error {
       color: red;
@@ -21,12 +21,11 @@ A Sass tem historicamente suportado uma analise especial para a regra `@-moz-doc
   @-moz-document url-prefix()
     .error
       color: red
-<% end %>
+{% endcodeExample %}
 
-<span id="transition-period"></span>
-## Período de Transição
+## Período de Transição {#transition-period}
 
-<% impl_status dart: '1.7.2', libsass: false, ruby: false %>
+{% compatibility 'dart: "1.7.2"', 'libsass: false', 'ruby: false' %}{% endcompatibility %}
 
 Primeiro, emitiremos avisos de depreciação para todos os usos de `@-moz-document` exceto para o malabarismo de prefixo de url vazia.
 
