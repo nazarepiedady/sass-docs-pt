@@ -2,10 +2,10 @@
 title: Declarações de Propriedade
 table_of_contents: true
 introduction: >
-  Na Sass assim como na CSS, as declarações de propriedade definem como os elementos que correspondem um seletor são estilizados. Porém a Sass adiciona funcionalidades adicionais para torná-las mais fáceis de escrever e automatizar. Antes de mais, um valor da declaração pode ser qualquer [expressão de SassScript](../syntax/structure#expressions), que será avaliada e incluída no resultado.
+  Na Sass assim como na CSS, as declarações de propriedade definem como os elementos que correspondem um seletor são estilizados. Porém a Sass adiciona funcionalidades adicionais para torná-las mais fáceis de escrever e automatizar. Antes de mais, um valor da declaração pode ser qualquer [expressão de SassScript](/documentation/syntax/structure#expressions), que será avaliada e incluída no resultado.
 ---
 
-<% example do %>
+{% codeExample 'declaration' %}
   .circle {
     $size: 100px;
     width: $size;
@@ -18,16 +18,15 @@ introduction: >
     width: $size
     height: $size
     border-radius: $size * 0.5
-<% end %>
+{% endcodeExample %}
 
-<span id="interpolation"></span>
-## Interpolação
+## Interpolação {#interpolation}
 
 Um nome de propriedade pode incluir [interpolação][interpolation], o que torna possível gerar dinamicamente as propriedades quando necessário. Tu podes mesmo interpolar o nome da propriedade inteira!
 
-[interpolation]: ../interpolation
+[interpolation]: /documentation/interpolation
 
-<% example do %>
+{% codeExample 'interpolation' %}
   @mixin prefix($property, $value, $prefixes) {
     @each $prefix in $prefixes {
       -#{$prefix}-#{$property}: $value;
@@ -48,14 +47,13 @@ Um nome de propriedade pode incluir [interpolação][interpolation], o que torna
 
   .gray
     @include prefix(filter, grayscale(50%), moz webkit)
-<% end %>
+{% endcodeExample %}
 
-<span id="nesting"></span>
-## Encaixamento
+## Encaixamento {#nesting}
 
 Muitas propriedades de CSS começam com o mesmo prefixo que agem como tipo de espaço de nome. Por exemplo, `font-family`, `font-size`, e `font-weight` todas começam com `font-`. A Sass torna isto mais fácil e menos redundante permitindo que as declarações de propriedade sejam encaixadas. Os nomes da propriedade externa são adicionados à interna, separados por um hífen:
 
-<% example do %>
+{% codeExample 'nesting' %}
   .enlarge {
     font-size: 14px;
     transition: {
@@ -76,11 +74,11 @@ Muitas propriedades de CSS começam com o mesmo prefixo que agem como tipo de es
 
     &:hover
       font-size: 36px
-<% end %>
+{% endcodeExample %}
 
 Algumas destas propriedades de CSS têm versões abreviadas que usam o espaço de nome de acordo com nome da propriedade. Para estas, podes escrever ambos valor abreviado *e* as versões encaixadas mais explícitas:
 
-<% example do %>
+{% codeExample 'nesting-shorthand' %}
   .info-page {
     margin: auto {
       bottom: 10px;
@@ -92,17 +90,16 @@ Algumas destas propriedades de CSS têm versões abreviadas que usam o espaço d
     margin: auto
       bottom: 10px
       top: 2px
-<% end %>
+{% endcodeExample %}
 
-<span id="hidden-declarations"></span>
-## Declarações Escondidas
+## Declarações Escondidas {#hidden-declarations}
 
 Algumas vezes só queres que uma declaração de propriedade apareça por algum tempo. Se o valor de uma declaração for [`null`][] ou [sequência de caracteres sem aspas][unquoted string] vazia, a Sass não compilará esta declaração para o CSS:
 
-[`null`]: ../values/null
-[unquoted string]: ../values/strings#unquoted
+[`null`]: /documentation/values/null
+[unquoted string]: /documentation/values/strings#unquoted
 
-<% example do %>
+{% codeExample 'hidden-declarations' %}
   $rounded-corners: false;
 
   .button {
@@ -115,18 +112,17 @@ Algumas vezes só queres que uma declaração de propriedade apareça por algum 
   .button
     border: 1px solid black
     border-radius: if($rounded-corners, 5px, null)
-<% end %>
+{% endcodeExample %}
 
-<span id="custom-properties"></span>
-## Propriedades Personalizadas
+## Propriedades Personalizadas {#custom-properties}
 
-<% impl_status dart: true, libsass: '3.5.0', ruby: '3.5.0', feature: 'Sintaxe de SassScript' do %>
+{% compatibility 'dart: true', 'libsass: "3.5.0"', 'ruby: "3.5.0"', 'feature: "Sintaxe de SassScript"' %}
   As versões mais antigas de LibSass e Sass de Ruby analisavam as declarações de propriedade personalizadas tal como qualquer outra declaração de propriedade, permitindo a gama completa de expressões de SassScript como valores. Mesmo quando usares estas versões, é recomendado que uses a interpolação para injetar os valores de SassScript para compatibilidade para a frente.
 
   Consulte [a página de mudança de rutura][the breaking change page] por mais detalhes.
 
-  [the breaking change page]: ../breaking-changes/css-vars
-<% end %>
+  [the breaking change page]: /documentation/breaking-changes/css-vars
+{% endcompatibility %}
 
 As [propriedades personalizadas de CSS][CSS custom properties], também conhecidas como variáveis de CSS, tem uma sintaxe de declaração invulgar: elas permitem praticamente qualquer texto valores das suas declarações. Além disto, estes valores são acessíveis ao JavaScript, então qualquer valor pode potencialmente ser relevante para o utilizador. Isto inclui valores que normalmente seriam analisados como SassScript.
 
@@ -134,9 +130,9 @@ As [propriedades personalizadas de CSS][CSS custom properties], também conhecid
 
 Por causa disto, a Sass analisa as declarações de propriedade personalizada de maneira diferente de outras declarações de propriedade. Todas as fichas, incluindo aqueles que se parecem com a SassScript, são passadas para CSS como são. A única exceção é [interpolação][interpolation], que é a única maneira de injetar valores dinâmicos para uma propriedade personalizada.
 
-<!-- TODO(nweiz): auto-generate this CSS once we're compiling with Dart Sass -->
+[interpolation]: /documentation/interpolation
 
-<% example do %>
+{% codeExample 'custom-properties' %}
   $primary: #81899b;
   $accent: #302e24;
   $warn: #dfa612;
@@ -163,22 +159,15 @@ Por causa disto, a Sass analisa as declarações de propriedade personalizada de
     // Muito embora isto se pareça com uma variável de Sass,
     // é CSS válida então não é avaliada.
     --consumed-by-js: $primary
-  ===
-  :root {
-    --primary: #81899b;
-    --accent: #302e24;
-    --warn: #dfa612;
-    --consumed-by-js: $primary;
-  }
-<% end %>
+{% endcodeExample %}
 
-<% heads_up do %>
+{% headsUp %}
   Infelizmente, [interpolação][interpolation] remove as aspas das sequências de caracteres, o que a torna difícil usar sequências de caracteres com aspas como valores para propriedades personalizadas quando vêm das variáveis de Sass. Como uma maneira de dar a volta a isto, podes usar a [função `meta.inspect()`][`meta.inspect()` function] para preservar as aspas:
 
-  [interpolation]: ../interpolation
-  [`meta.inspect()` function]: ../modules/meta#inspect
+  [interpolation]: /documentation/interpolation
+  [`meta.inspect()` function]: /documentation/modules/meta#inspect
 
-  <% example do %>
+  {% codeExample 'custom-properties-strings-meta' %}
     @use "sass:meta";
 
     $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
@@ -197,10 +186,5 @@ Por causa disto, a Sass analisa as declarações de propriedade personalizada de
     :root
       --font-family-sans-serif: #{meta.inspect($font-family-sans-serif)}
       --font-family-monospace: #{meta.inspect($font-family-monospace)}
-    ===
-    :root {
-      --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-      --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas;
-    }
-  <% end %>
-<% end %>
+  {% endcodeExample %}
+{% endheadsUp %}
