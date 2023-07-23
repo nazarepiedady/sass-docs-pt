@@ -5,13 +5,13 @@ introduction: >
   As sequências de caracteres são o que seu nome diz, sequências de caracteres (especialmente [pontos de código unicode](https://en.wikipedia.org/wiki/Code_point)). A Sass suporta dois tipos de sequências de caracteres cujas estrutura interna é o mesmo mas que são interpretados de maneira diferente: [sequências de caracteres com aspas](#quoted), como `"Helvetica Neue"`, e [sequências de caracteres sem aspas](#unquoted) (também conhecidas como *identificadores*), como `bold`. Juntas, estas cobrem os diferentes tipos de texto que aparecem na CSS.
 ---
 
-<% fun_fact do %>
+{% funFact %}
   Tu podes converter uma sequência de caracteres com aspas para uma sequência de caracteres sem aspas usando a [função `string.unquote`][`string.unquote()` function], e podes converter uma sequência de caracteres sem aspas para uma sequência de caracteres com aspas usando a [função `string.quote()`].
 
-  [`string.unquote()` function]: ../modules/string#unquote
-  [`string.quote()` function]: ../modules/string#quote
+  [`string.unquote()` function]: /documentation/modules/string#unquote
+  [`string.quote()` function]: /documentation/modules/string#quote
 
-  <% example(autogen_css: false) do %>
+  {% codeExample 'fun-fact-strings', false %}
     @use "sass:string";
 
     @debug string.unquote(".widget:hover"); // .widget:hover
@@ -21,11 +21,10 @@ introduction: >
 
     @debug string.unquote(".widget:hover")  // .widget:hover
     @debug string.quote(bold)  // "bold"
-  <% end %>
-<% end %>
+  {% endcodeExample %}
+{% endfunFact %}
 
-<span id="escapes"></span>
-## Saídas
+## Saídas {#escapes}
 
 Todas as sequências de caracteres da Sass suportam os [códigos de saída][escape codes] da CSS padrão:
 
@@ -38,7 +37,7 @@ Todas as sequências de caracteres da Sass suportam os [códigos de saída][esca
 [Unicode code point number]: https://en.wikipedia.org/wiki/List_of_Unicode_characters
 [hexadecimal]: https://en.wikipedia.org/wiki/Hexadecimal
 
-<% example(autogen_css: false) do %>
+{% codeExample 'escapes', false %}
   @debug "\""; // '"'
   @debug \.widget; // \.widget
   @debug "\a"; // "\a" (a string containing only a newline)
@@ -50,19 +49,17 @@ Todas as sequências de caracteres da Sass suportam os [códigos de saída][esca
   @debug "\a"  // "\a" (a string containing only a newline)
   @debug "line1\a line2"  // "line1\a line2" (foo and bar are separated by a newline)
   @debug "Nat + Liz \1F46D"  // "Nat + Liz 👭"
-<% end %>
+{% endcodeExample %}
 
-<% fun_fact do %>
+{% funFact %}
   Para os caracteres que são permitidos aparecerem em sequências de caracteres, escrever a saída de unicode produz exatamente a mesma sequência de caracteres que a escrita do próprio carácter.
-<% end %>
+{% endfunFact %}
 
-<span id="quoted"></span>
-## Com Aspas
+## Com Aspas {#quoted}
 
 As sequências de caracteres são escritas ou entre aspas simples ou entre aspas duplas, como em `"Helvetica Neue"`. Elas podem conter [interpolação][interpolation], bem como qualquer carácter cuja saída não foi tratada exceto para:
 
-
-[interpolation]: ../interpolation
+[interpolation]: /documentation/interpolation
 
 * `\`, que pode ser tratado como `\\`;
 * `'` ou `"`, qualquer que foi usado para definir aquela sequência de caracteres, que pode podem ser tratadas como `\'` ou `\"`;
@@ -72,7 +69,7 @@ As sequências de caracteres são asseguradas que sejam compiladas para sequênc
 
 [ASCII]: https://en.wikipedia.org/wiki/ASCII
 
-<% example(autogen_css: false) do %>
+{% codeExample 'quoted', false %}
   @debug "Helvetica Neue"; // "Helvetica Neue"
   @debug "C:\\Program Files"; // "C:\\Program Files"
   @debug "\"Don't Fear the Reaper\""; // "\"Don't Fear the Reaper\""
@@ -88,27 +85,27 @@ As sequências de caracteres são asseguradas que sejam compiladas para sequênc
 
   $roboto-variant: "Mono"
   @debug "Roboto #{$roboto-variant}"  // "Roboto Mono"
-<% end %>
+{% endcodeExample %}
 
-<% fun_fact do %>
+{% funFact %}
   Quando uma sequência de caracteres com aspas é injetada num outro valor através da interpolação, [suas aspas são removidas][its quotes are removed]! Isto torna fácil escrever sequências de caracteres contendo seletores, por exemplo, que pode ser injetada para regras de estilo sem adicionar aspas.
 
-  [its quotes are removed]: ../interpolation#quoted-strings
-<% end %>
+  [its quotes are removed]: /documentation/interpolation#quoted-strings
+{% endfunFact %}
 
-<span id="unquoted"></span>
-## Sem Aspas
+## Sem Aspas {#unquoted}
 
 As sequências de caracteres sem aspas são escritas como [identificadores][identifiers] de CSS, seguindo o diagrama de sintaxe abaixo. Eles podem incluir [interpolação][interpolation] em qualquer parte.
 
 [identifiers]: https://drafts.csswg.org/css-syntax-3/#ident-token-diagram
+[interpolation]: /documentation/interpolation
 
 <figure>
   <object type="image/svg+xml" data="/assets/img/illustrations/identifier-diagram.svg"></object>
   <figcaption class="copyright">Direitos de autor da Diagrama da Railroad © 2018 W3C<sup>®</sup> (MIT, ERCIM, Keio, Beihang). <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">Responsabilidade</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">marca comercial</a> da W3C e as regras da <a href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">licença de documento permissiva</a> aplicam-se.
 </figcaption>
 
-<% example do %>
+{% codeExample 'unquoted', false %}
   @debug bold; // bold
   @debug -webkit-flex; // -webkit-flex
   @debug --123; // --123
@@ -122,9 +119,9 @@ As sequências de caracteres sem aspas são escritas como [identificadores][iden
 
   $prefix: ms
   @debug -#{$prefix}-flex  // -ms-flex
-<% end %>
+{% endcodeExample %}
 
-<% heads_up do %>
+{% headsUp %}
   Nem todos os identificadores são analisados como sequências de caracteres sem aspas.
 
   * Os [nomes de cor de CSS][CSS color names] são analisados como [cores][colors].
@@ -136,20 +133,19 @@ As sequências de caracteres sem aspas são escritas como [identificadores][iden
   * `not`, `and`, `or` são analisados como [operadores booleanos][Boolean operators].
 
   [CSS color names]: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#Color_keywords
-  [colors]: colors
-  [Sass's `null` value]: null
-  [Booleans]: booleans
-  [Boolean operators]: ../operators/boolean
+  [colors]: /documentation/values/colors
+  [Sass's `null` value]: /documentation/values/null
+  [Booleans]: /documentation/values/booleans
+  [Boolean operators]: /documentation/operators/boolean
 
   Por causa disto, é geralmente uma boa ideia escrever sequências de caracteres com aspas a menos que estejas especificamente a escrever o valor de uma propriedade de CSS que usa sequências de caracteres sem aspas.
-<% end %>
+{% endheadsUp %}
 
-<span id="escapes-in-unquoted-strings"></span>
-### Saídas em Sequências de Caracteres Sem Aspas
+### Saídas em Sequências de Caracteres Sem Aspas {#escapes-in-unquoted-strings}
 
-<% impl_status dart: '1.11.0', libsass: false, ruby: false, feature: 'Normalization' do %>
+{% compatibility 'dart: "1.11.0"', 'libsass: false', 'ruby: false', 'feature: "Normalização"' %}
   A LibSass, Sass de Ruby, e versões antigas da Sass de Dart não normalizam as saídas nos identificadores. Ao invés disto, o texto na sequência de caracteres sem aspas é o preciso texto que o utilizador escreveu. Por exemplo, `\1F46D` e `👭` não são considerados equivalentes.
-<% end %>
+{% endcompatibility %}
 
 Quando uma sequência de caracteres sem aspas é analisada, o texto literal das saídas são analisadas como parte da sequência de caracteres. Por exemplo, `\a` é analisado como os caracteres `\`, `a`, e espaço. Para assegurar que as sequências de caracteres sem aspas que tem os mesmos significados na CSS sejam analisadas da mesma maneira, ainda que, estas saídas sejam *normalizadas*. Para cada ponto de código, ou é escapado ou não é escapado:
 
@@ -159,7 +155,7 @@ Quando uma sequência de caracteres sem aspas é analisada, o texto literal das 
 
 * De outro modo, a saída de unicode minúscula é incluída com um espaço intermédio. Por exemplo, `\7Fx` retorna a sequência de caracteres sem aspas `\7f x`.
 
-<% example(autogen_css: false) do %>
+{% codeExample 'normalization', false %}
   @use "sass:string";
 
   @debug \1F46D; // 👭
@@ -173,16 +169,15 @@ Quando uma sequência de caracteres sem aspas é analisada, o texto literal das 
   @debug \21  // \!
   @debug \7Fx  // \7f x
   @debug string.length(\7Fx)  // 5
-<% end %>
+{% endcodeExample %}
 
-<span id="string-indexes"></span>
-## Índices da Sequência de Caracteres
+## Índices da Sequência de Caracteres {#string-indexes}
 
 A Sass tem um número de [funções de sequência de caracteres][string functions] que recebem ou retornam números, chamados *índices*, que fazem referência aos caracteres numa sequência de caracteres. O índice 1 indica o primeiro carácter da sequência de caracteres. Nota que isto é diferente de muitas linguagens de programação onde os índices começam no 0! A Sass também torna fácil fazer referência ao final duma sequência de caracteres. O índice -1 faz referência ao último carácter numa sequência de caracteres, -2 faz referência ao penúltimo, e assim por diante.
 
-[string functions]: ../modules/string
+[string functions]: /documentation/modules/string
 
-<% example(autogen_css: false) do %>
+{% codeExample 'string-indexes', false %}
   @use "sass:string";
 
   @debug string.index("Helvetica Neue", "Helvetica"); // 1
@@ -194,4 +189,4 @@ A Sass tem um número de [funções de sequência de caracteres][string function
   @debug string.index("Helvetica Neue", "Helvetica")  // 1
   @debug string.index("Helvetica Neue", "Neue")  // 11
   @debug string.slice("Roboto Mono", -4)  // "Mono"
-<% end %>
+{% endcodeExample %}
