@@ -1,14 +1,14 @@
 ---
 title: "@error"
 introduction: >
-  Quando escreves [misturas](mixin) e [funções](function) que recebem argumentos, normalmente queres garantir que estes argumentos têm os tipos e formatos que a tua API espera. Se tiverem, o utilizador precisa ser notificado e a tua mistura ou função precisa parar a execução.
+  Quando escreves [misturas](/documentation/at-rules/mixin) e [funções](/documentation/at-rules/function) que recebem argumentos, normalmente queres garantir que estes argumentos têm os tipos e formatos que a tua API espera. Se tiverem, o utilizador precisa ser notificado e a tua mistura ou função precisa parar a execução.
 ---
 
 A Sass torna isto fácil com a regra `@error`, que é escrita como `@error <expression>`. Ela imprime o valor da [expressão][expression] (normalmente uma sequência de caracteres) juntamente com um vestígio da pilha indicando como a mistura ou função atual foi chamada. Assim que o erro for imprimido, a Sass para a compilação da folha de estilo e diz ao seja qual for o sistema que estiver a executá-la que um erro ocorreu:
 
-[expression]: ../syntax/structure#expressions
+[expression]: /documentation/syntax/structure#expressions
 
-<% example(autogen_css: false) do %>
+{% codeExample 'error', false %}
   @mixin reflexive-position($property, $value) {
     @if $property != left and $property != right {
       @error "Property #{$property} must be either left or right.";
@@ -51,7 +51,7 @@ A Sass torna isto fácil com a regra `@error`, que é escrita como `@error <expr
     @include reflexive-position(top, 12px)
     //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     // Error: Property top must be either left or right.
-<% end %>
+{% endcodeExample %}
 
 O formato exato do erro e vestígio da pilha varia de implementação à implementação, e também pode depender do teu sistema de construção. Isto é como se parece na Sass de Dart quando executado a partir da linha de comando:
 
