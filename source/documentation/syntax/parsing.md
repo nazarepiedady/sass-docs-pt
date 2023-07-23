@@ -4,12 +4,11 @@ introduction: >
   Uma folha de estilo de Sass é analisado a partir duma sequência de pontos de código de unicode. É analisado diretamente, sem primeiro ser convertida para uma corrente simbólico.
 ---
 
-<span id="input-encoding"></span>
-## Codificação da Entrada
+## Codificação da Entrada {#input-encoding}
 
-<% impl_status dart: false, libsass: true, ruby: true do %>
+{% compatibility 'dart: false', 'libsass: true', 'ruby: true' %}
   A Sass de Dart atualmente *apenas* suporta a codificação UTF-8. Como tal, é mais seguro codificar todas as folhas de estilos de Sass como UTF-8.
-<% end %>
+{% endcompatibility %}
 
 É frequentemente o caso de que um documento está inicialmente disponível apenas como uma sequência de bytes, que deve ser descodificado para Unicode. A Sass realiza esta descodificação como se segue:
 
@@ -21,8 +20,7 @@ introduction: >
 
 * De outro modo, a UTF-8 é usada.
 
-<span id="parse-errors"></span>
-## Erros de Analise
+## Erros de Analise {#parse-errors}
 
 Quando a Sass deparar-se com sintaxe inválida numa folha de estilos, a analise falhará e um erro será apresentado ao utilizador com a informação sobre a localização da sintaxe inválida e o motivo que fez dela inválida.
 
