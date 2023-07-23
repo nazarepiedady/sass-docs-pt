@@ -1,27 +1,24 @@
 ---
 title: "@each"
-table_of_contents: true
 introduction: >
-  A regra `@each` torna fácil emitir estilos ou avaliar código para cada elemento duma [lista](../../values/lists) ou cada par dum [mapa][map](../../values/maps). É excelente para estilos repetitivos que só têm poucas variações entre eles. É normalmente escrito `@each <variable> in <expression> { ... }`, onde a [expressão](../../syntax/structure#expressions) retorna uma lista. O bloco é avaliado para cada elemento da lista como consequência, que é atribuído ao dado nome de variável.
+  A regra `@each` torna fácil emitir estilos ou avaliar código para cada elemento duma [lista](/documentation/values/lists) ou cada par dum [mapa][map](/documentation/values/maps)). É excelente para estilos repetitivos que só têm poucas variações entre eles. É normalmente escrito `@each <variable> in <expression> { ... }`, onde a [expressão](/documentation/syntax/structure#expressions) retorna uma lista. O bloco é avaliado para cada elemento da lista como consequência, que é atribuído ao dado nome de variável.
 ---
 
-<%= partial 'code-snippets/example-each-list' %>
+{% render 'code_snippets/example-each-list' %}
 
-<span id="with-maps"></span>
-## Com Mapas
+## Com Mapas {#with-maps}
 
 Tu também podes usar `@each` para iterar sobre cada par de chave e valor num mapa escrevendo `@each <variable>, <variable> in <expression> { ... }`. A chave é atribuída ao primeiro nome de variável, e o elemento é atribuído ao segundo:
 
-<%= partial 'code-snippets/example-each-map' %>
+{% render 'code_snippets/example-each-map' %}
 
-<span id="destructuring"></span>
-## Desestruturação
+## Desestruturação {#destructuring}
 
 Se tiveres uma lista de listas, podes usar `@each` para atribuir automaticamente variáveis para cada um dos valores das listas internas escrevendo `@each <variable...> in <expression> { ... }`. Isto é conhecido como *desestruturação*, visto que a variável corresponde a estrutura de listas internas. Cada nome de variável é atribuído ao valor na posição correspondente na lista, ou [`null`][] se a lista não tiver valores suficientes:
 
-[`null`]: ../../values/null
+[`null`]: /documentation/values/null
 
-<% example do %>
+{% codeExample 'each' %}
   $icons:
     "eye" "\f112" 12px,
     "start" "\f12e" 16px,
@@ -47,10 +44,10 @@ Se tiveres uma lista de listas, podes usar `@each` para atribuir automaticamente
       font-family: "Icon Font"
       content: $glyph
       font-size: $size
-<% end %>
+{% endcodeExample %}
 
-<% fun_fact do %>
+{% funFact %}
   Uma vez que `@each` suporta desestruturação e [mapas contam como lista de listas][maps count as lists of lists], o suporte de mapa de `@each` funciona sem precisar de suporte especial para mapas em particular.
 
-  [maps count as lists of lists]: ../../values/maps
-<% end %>
+  [maps count as lists of lists]: /documentation/values/maps
+{% endfunFact %}

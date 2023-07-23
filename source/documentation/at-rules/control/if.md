@@ -2,16 +2,16 @@
 title: "@if e @else"
 table_of_contents: true
 introduction: >
-  Se a regra `@if` for escrita `@if <expression> { ... }`, e controlar se o seu bloco é ou não avaliado (incluindo emissões de quaisquer estilos como CSS). A [expressão](../../syntax/structure#expressions) normalmente retorna ou [`true` ou `false`](../../values/booleans) — se a expressão retornar `true`, o bloco é avaliado, e se a expressão retornar `false` não.
+  Se a regra `@if` for escrita `@if <expression> { ... }`, e controlar se o seu bloco é ou não avaliado (incluindo emissões de quaisquer estilos como CSS). A [expressão](/documentation/syntax/structure#expressions) normalmente retorna ou [`true` ou `false`](/documentation/values/booleans) — se a expressão retornar `true`, o bloco é avaliado, e se a expressão retornar `false` não.
 ---
 
-<%= partial 'code-snippets/example-if' %>
+{% render 'code_snippets/example-if' %}
 
-## `@else`
+## `@else` {#else}
 
 Uma regra `@if` pode opcionalmente será seguido por uma regra `@else`, escrita `@else { ... }`. Este bloco da regra é avaliado se a expressão de `@if` retornar `false`:
 
-<% example do %>
+{% codeExample 'if' %}
   $light-background: #f2ece4;
   $light-text: #036;
   $dark-background: #6b717f;
@@ -53,19 +53,19 @@ Uma regra `@if` pode opcionalmente será seguido por uma regra `@else`, escrita 
     @include theme-colors($light-theme: true)
     body.dark &
       @include theme-colors($light-theme: false)
-<% end %>
+{% endcodeExample %}
 
 As expressões condicionais pode conter [operadores booleanos][boolean operators][boolean operators] (`and`, `or`, `not`).
 
-[boolean operators]: ../../operators/boolean
+[boolean operators]: /documentation/operators/boolean
 
-### `@else if`
+### `@else if` {#else-if}
 
 Tu também podes escolher se avalia um bloco da regra `@else` escrevendo-o `@else if <expression> { ... }`. Se fizeres, o bloco é avaliado somente se a expressão da `@if` precedente retornar `false` *e* a expressão da `@else if` retornar `true`.
 
 Na realidade, podes acorrentar tantos `@else if` quiseres depois dum `@if`. O primeiro bloco na cadeia cuja expressão retorna `true` será avaliado, e os outros não. Se existir um `@else` simples no final da cadeia, o seu bloco será avaliado se todos os outros blocos falharem:
 
-<% example do %>
+{% codeExample 'else' %}
   @use "sass:math";
 
   @mixin triangle($size, $color, $direction) {
@@ -118,15 +118,6 @@ Na realidade, podes acorrentar tantos `@else if` quiseres depois dum `@if`. O pr
 
   .next
     @include triangle(5px, black, right)
-  ===
-  .next {
-    height: 0;
-    width: 0;
-    border-color: transparent;
-    border-style: solid;
-    border-width: 2.5px;
-    border-left-color: black;
-  }
-<% end %>
+{% endcodeExample %}
 
-<%= partial 'documentation/snippets/truthiness-and-falsiness' %>
+{% render 'doc_snippets/truthiness-and-falsiness' %}
