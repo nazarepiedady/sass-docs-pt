@@ -4,20 +4,19 @@ introduction: >
   A Sass suporta um punhado de `operadores` úteis para trabalhar com diferentes valores. Estes incluem operadores matemáticos padrão como `+` e `*`, bem como operadores para outros vários tipos:
 ---
 
-<%= partial 'documentation/snippets/operator-list', locals: {parens: false} %>
+{% render 'doc_snippets/operator-list', parens: false %}
 
-<% heads_up do %>
+{% headsUp %}
   No princípio da história da Sass, ela adicionou suporte para operações matemática sobre as [cores][colors]. Estas operações operavam sobre cada canal de RGB das cores separadamente, assim adicionando duas cores produziria um cor com a soma de seus canais de vermelho de acordo com o seu canal de vermelho e assim por diante.
 
-  [colors]: values/colors
+  [colors]: /documentation/values/colors
 
   Este comportamento não era muito útil, já que sua aritmética de RGB de canal por canal não correspondia bem a como os humanos percebem a cor. As [funções de cor][Color functions] foram adicionadas as quais são mais úteis, e os operadores de cor foram depreciados. Eles continuam a ser suportados na LibSass e Sass de Ruby, mas produziram avisos e os utilizadores são fortemente encorajados a evitá-los.
 
-  [Color functions]: modules/color
-<% end %>
+  [Color functions]: /documentation/modules/color
+{% endheadsUp %}
 
-<span id="order-of-operations"></span>
-## Ordem das Operações
+## Ordem das Operações {#order-of-operations}
 
 A Sass tem uma linda [ordem de operações][order of operations] padrão, do mais apertado até o mais desapertado:
 
@@ -32,50 +31,48 @@ A Sass tem uma linda [ordem de operações][order of operations] padrão, do mai
 7. O [operador `or`][`or` operator].
 8. O [operador `=`][`=` operator], quando estiver disponível.
 
-[`not`]: operators/boolean
-[`+`, `-`]: operators/numeric#unary-operators
-[`/`]: operators/string#unary-operators
-[`*`, `/`, and `%` operators]: operators/numeric
-[`+` and `-` operators]: operators/numeric
-[`>`, `>=`, `<` and `<=` operators]: operators/relational
-[`==` and `!=` operators]: operators/equality
-[`and` operator]: operators/boolean
-[`or` operator]: operators/boolean
+[`not`]: /documentation/operators/boolean
+[`+`, `-`]: /documentation/operators/numeric#unary-operators
+[`/`]: /documentation/operators/string#unary-operators
+[`*`, `/`, and `%` operators]: /documentation/operators/numeric
+[`+` and `-` operators]: /documentation/operators/numeric
+[`>`, `>=`, `<` and `<=` operators]: /documentation/operators/relational
+[`==` and `!=` operators]: /documentation/operators/equality
+[`and` operator]: /documentation/operators/boolean
+[`or` operator]: /documentation/operators/boolean
 [`=` operator]: #single-equals
 
-<% example(autogen_css: false) do %>
+{% codeExample 'operators', false %}
   @debug 1 + 2 * 3 == 1 + (2 * 3); // true
   @debug true or false and false == true or (false and false); // true
   ===
   @debug 1 + 2 * 3 == 1 + (2 * 3)  // true
   @debug true or false and false == true or (false and false)  // true
-<% end %>
+{% endcodeExample %}
 
-<span id="parentheses"></span>
-### Parênteses
+### Parênteses {#parentheses}
 
 Tu podes controlar explicitamente a ordem das operações usando parêntesis. Uma operação dentro de parêntesis é sempre avaliada antes de quaisquer operadores fora dos parêntesis. Os parêntesis podem mesmo ser encaixados, no qual caso os parêntesis mais íntimo serão avaliados primeiro:
 
-<% example(autogen_css: false) do %>
+{% codeExample 'parentheses', false %}
   @debug (1 + 2) * 3; // 9
   @debug ((1 + 2) * 3 + 4) * 5; // 65
   ===
   @debug (1 + 2) * 3  // 9
   @debug ((1 + 2) * 3 + 4) * 5  // 65
-<% end %>
+{% endcodeExample %}
 
-<span id="single-equals"></span>
-## Único Sinal de Igualdade
+## Único Sinal de Igualdade {#single-equals}
 
 A Sass suporta um operador especial `=` que é apenas permitido nos argumentos de função, que cria apenas uma [sequência de caracteres sem aspas][unquoted string] com os seus dois operandos separados pelo `=`. Isto existe por questões de retro-compatibilidade com a sintaxe muito antiga usada apenas no Internet Explorer.
 
-[unquoted string]: values/strings#unquoted
+[unquoted string]: /documentation/values/strings#unquoted
 
-<% example do %>
+{% codeExample 'single-equals' %}
   .transparent-blue {
     filter: chroma(color=#0000ff);
   }
   ===
   .transparent-blue
     filter: chroma(color=#0000ff)
-<% end %>
+{% endcodeExample %}

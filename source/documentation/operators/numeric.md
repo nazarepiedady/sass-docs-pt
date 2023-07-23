@@ -2,7 +2,7 @@
 title: Operadores Numéricos
 table_of_contents: true
 introduction: >
-  A Sass suporta o conjunto padrão de operadores matemáticos para [números](../values/numbers). Eles são convertidos automaticamente entre unidades compatíveis.
+  A Sass suporta o conjunto padrão de operadores matemáticos para [números](/documentation/values/numbers). Eles são convertidos automaticamente entre unidades compatíveis.
 ---
 
 * `<expression> + <expression>` adiciona o primeiro valor da [expressão][expression] ao segundo.
@@ -10,10 +10,10 @@ introduction: >
 * `<expression> * <expression>` multiplica o primeiro valor da [expressão][expression] pelo segundo.
 * `<expression> % <expression>` retorna o resto do valor da primeira [expressão][expression] dividido pelo segundo. Este é conhecido como [operador *modulo*][*modulo* operator].
 
-[expression]: ../syntax/structure#expressions
+[expression]: /documentation/syntax/structure#expressions
 [*modulo* operator]: https://en.wikipedia.org/wiki/Modulo_operation
 
-<% example(autogen_css: false) do %>
+{% codeExample 'numeric', false %}
   @debug 10s + 15s; // 25s
   @debug 1in - 10px; // 0.8958333333in
   @debug 5px * 3px; // 15px*px
@@ -23,21 +23,21 @@ introduction: >
   @debug 1in - 10px  // 0.8958333333in
   @debug 5px * 3px  // 15px*px
   @debug 1in % 9px  // 0.0625in
-<% end %>
+{% endcodeExample %}
 
 Números sem unidade podem ser usados com números de qualquer unidade:
 
-<% example(autogen_css: false) do %>
+{% codeExample 'unitless-numbers', false %}
   @debug 100px + 50; // 150px
   @debug 4s * 10; // 40s
   ===
   @debug 100px + 50  // 150px
   @debug 4s * 10  // 40s
-<% end %>
+{% endcodeExample %}
 
 Números com unidades incompatíveis não podem ser usados com adição, subtração, ou modulo:
 
-<% example(autogen_css: false) do %>
+{% codeExample 'incompatible-units', false %}
   @debug 100px + 10s;
   //     ^^^^^^^^^^^
   // Error: Incompatible units px and s.
@@ -45,17 +45,16 @@ Números com unidades incompatíveis não podem ser usados com adição, subtra�
   @debug 100px + 10s
   //     ^^^^^^^^^^^
   // Error: Incompatible units px and s.
-<% end %>
+{% endcodeExample %}
 
-<span id="unary-operators"></span>
-## Operadores Unários
+## Operadores Unários {#unary-operators}
 
 Tu podes também escrever `+` e `-` como operadores unários, que recebem apenas um valor:
 
 * `+<expression>` retorna o valor da expressão sem mudá-lo.
 * `-<expression>` retorna a versão negativa do valor da expressão.
 
-<% example(autogen_css: false) do %>
+{% codeExample 'unary-operators', false %}
   @debug +(5s + 7s); // 12s
   @debug -(50px + 30px); // -80px
   @debug -(10px - 15px); // 5px
@@ -63,9 +62,9 @@ Tu podes também escrever `+` e `-` como operadores unários, que recebem apenas
   @debug +(5s + 7s)  // 12s
   @debug -(50px + 30px)  // -80px
   @debug -(10px - 15px)  // 5px
-<% end %>
+{% endcodeExample %}
 
-<% heads_up do %>
+{% headsUp %}
   Uma vez que `-` pode fazer referência a ambos subtração e negação unária, pode ser confuso distinguir numa lista separada por espaço. Para estar a salvo:
 
   * Sempre escreva espaços nos ambos lados de `-` quando subtraíres.
@@ -80,7 +79,7 @@ Tu podes também escrever `+` e `-` como operadores unários, que recebem apenas
   4. `-` entre dois números apesar do espaço em branco, que é analisado como uma subtração.
   5. `-` antes de um valor senão um número literal, que é analisado como negação unária.
 
-  <% example(autogen_css: false) do %>
+  {% codeExample 'heads-up-subtraction-unary-negation', false %}
     @debug a-1; // a-1
     @debug 5px-3px; // 2px
     @debug 5-3; // 2
@@ -98,21 +97,19 @@ Tu podes também escrever `+` e `-` como operadores unários, que recebem apenas
     $number: 2
     @debug 1 -$number 3  // -1 3
     @debug 1 (-$number) 3  // 1 -2 3
-  <% end %>
-<% end %>
+  {% endcodeExample %}
+{% endheadsUp %}
 
-<span id="division"></span>
-## Divisão
+## Divisão {#division}
 
-<% impl_status dart: '1.33.0', libsass: false, ruby: false, feature: 'math.div()' %>
+{% compatibility 'dart: "1.33.0"', 'libsass: false', 'ruby: false', 'feature: "math.div()"' %}{% endcompatibility %}
 
 Ao contrário dos outros operadores matemáticos, a divisão na Sass é feita com a função [`math.div()`]. Embora muitas linguagens de programação usem `/` como um operador de divisão, na CSS `/` é usada como um separador (como em `font: 15px/32px` ou `hsl(120 100% 50% / 0.8)`). Ainda que a Sass suporte o uso de `/` como um operador de divisão, este está depreciado e [será removido][will be removed] numa versão futura.
 
-[`math.div()`]: ../modules/math#div
-[will be removed]: ../breaking-changes/slash-div
+[`math.div()`]: /documentation/modules/math#div
+[will be removed]: /documentation/breaking-changes/slash-div
 
-<span id="slash-separated-values"></span>
-### Valores Separados Por Barra
+### Valores Separados Por Barra {#slash-separated-values}
 
 Por agora ainda que a Sass continue a suportar `/` como um operador de divisão, tem de ter uma maneira de desambiguar entre `/` como um separador e `/` como divisão. Para fazer isto funcionar, se dois números forem separados por `/`, a Sass imprimirá o resultado como separado por barra no lugar de dividido a menos que uma destas condições seja cumprida:
 
@@ -120,12 +117,14 @@ Por agora ainda que a Sass continue a suportar `/` como um operador de divisão,
 * O resultado é armazenado numa variável ou retornado por uma função.
 * A operação é envolvida por parêntesis, a menos que estes parêntesis estejam no lado de fora duma lista que contém a operação.
 * O resultado é usado como parte duma outra operação (que não `/`).
+* O resultado é retornado por um [cálculo][calculation].
 
 Tu podes usar [`list.slash()`] para forçar `/` ser usado como um separador.
 
-[`list.slash`]: ../modules/list#slash
+[`list.slash()`]: /documentation/modules/list#slash
+[calculation]: /documentation/values/calculations
 
-<% example(autogen_css: false) do %>
+{% codeExample 'slash-separated-values', false %}
   @use "sass:list";
 
   @debug 15px / 30px; // 15px/30px
@@ -161,6 +160,6 @@ Tu podes usar [`list.slash()`] para forçar `/` ser usado como um separador.
   @debug (15px/30px)  // 0.5
   @debug (bold 15px/30px sans-serif)  // bold 15px/30px sans-serif
   @debug 15px/30px + 1  // 1.5
-<% end %>
+{% endcodeExample %}
 
-<%= partial 'documentation/snippets/number-units' %>
+{% render 'doc_snippets/number-units' %}

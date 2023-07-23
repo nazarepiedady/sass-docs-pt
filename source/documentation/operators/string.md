@@ -1,17 +1,17 @@
 ---
 title: Operadores de Sequência de Caracteres
 introduction: >
-  A Sass suporta alguns operadores que geram [sequências de caracteres](../values/strings):
+  A Sass suporta alguns operadores que geram [sequências de caracteres](/documentation/values/strings):
 ---
 
 * `<expression> + <expression>` retorna uma sequência de caracteres que contém os valores de ambas expressões. Se um dos valores for uma [sequência de caracteres com aspas][quoted string], o resultado será com aspas; de outro modo, será sem aspas.
 
 * `<expression> - <expression>` retorna uma sequência de caracteres sem aspas contém os valores de ambas expressões, separados por `-`. Isto é um operador legado, e a [interpolação][interpolation] deveria ser geralmente usada de preferência.
 
-[quoted string]: ../values/strings#quoted
-[interpolation]: ../interpolation
+[quoted string]: /documentation/values/strings#quoted
+[interpolation]: /documentation/interpolation
 
-<% example(autogen_css: false) do %>
+{% codeExample 'string', false %}
   @debug "Helvetica" + " Neue"; // "Helvetica Neue"
   @debug sans- + serif; // sans-serif
   @debug sans - serif; // sans-serif
@@ -19,7 +19,7 @@ introduction: >
   @debug "Helvetica" + " Neue"  // "Helvetica Neue"
   @debug sans- + serif  // sans-serif
   @debug sans - serif  // sans-serif
-<% end %>
+{% endcodeExample %}
 
 Estes operadores não trabalham apenas com sequências de caracteres! Eles podem ser usados com quaisquer valores que pode ser escrito para CSS, com algumas exceções:
 
@@ -27,35 +27,34 @@ Estes operadores não trabalham apenas com sequências de caracteres! Eles podem
 
 * Cores que não podem ser usados como valor à esquerda, já que costumam a ter [seus próprios operadores][color]
 
-[numeric]: numeric
-[color]: ../operators
+[numeric]: /documentation/operators/numeric
+[color]: /documentation/operators
 
-<% example(autogen_css: false) do %>
+{% codeExample 'string-exceptions', false %}
   @debug "Elapsed time: " + 10s; // "Elapsed time: 10s";
   @debug true + " is a boolean value"; // "true is a boolean value";
   ===
   @debug "Elapsed time: " + 10s  // "Elapsed time: 10s";
   @debug true + " is a boolean value"  // "true is a boolean value";
-<% end %>
+{% endcodeExample %}
 
-<% heads_up do %>
+{% headsUp %}
   É muitas vezes mais limpo e claro usar a [interpolação][interpolation] para criar sequências de caracteres, ao invés de depender destes operadores.
 
-  [interpolation]: ../interpolation
-<% end %>
+  [interpolation]: /documentation/interpolation
+{% endheadsUp %}
 
-<span id="unary-operators"></span>
-## Operadores Unário
+## Operadores Unário {#unary-operators}
 
 Por razões históricas, a Sass também suporta `/` e `-` como operadores unários que recebem apenas um valor:
 
 * `/<expression>` retorna uma sequência de caracteres sem aspas começando com `/` e seguido pelo valor da expressão.
 * `-<expression>` retorna uma sequência de caracteres sem aspas começando com `-` e seguido pelo valor da expressão.
 
-<% example(autogen_css: false) do %>
+{% codeExample 'unary-operators', false %}
   @debug / 15px; // /15px
   @debug - moz; // -moz
   ===
   @debug / 15px  // /15px
   @debug - moz  // -moz
-<% end %>
+{% endcodeExample %}

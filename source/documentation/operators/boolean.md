@@ -1,7 +1,7 @@
 ---
 title: Operadores Booleanos
 introduction: >
-  Ao contrário de linguagens como JavaScript, a Sass usa mais palavras do que símbolos para os seus operadores [booleanos](../values/booleans).
+  Ao contrário de linguagens como JavaScript, a Sass usa mais palavras do que símbolos para os seus operadores [booleanos](/documentation/values/booleans).
 ---
 
 * `not <expression>` retorna o oposto do valor da expressão: transforma `true` em `false` e `false` em `true`.
@@ -10,7 +10,7 @@ introduction: >
 
 * `<expression> or <expression>` retorna `true` se *um ou outro* valor da expressão for `true`, e `false` se ambos forem `false`.
 
-<% example(autogen_css: false) do %>
+{% codeExample 'boolean', false %}
   @debug not true; // false
   @debug not false; // true
 
@@ -28,6 +28,6 @@ introduction: >
 
   @debug true or false  // true
   @debug false or false  // false
-<% end %>
+{% endcodeExample %}
 
-<%= partial 'documentation/snippets/truthiness-and-falsiness' %>
+{% render 'doc_snippets/truthiness-and-falsiness' %}

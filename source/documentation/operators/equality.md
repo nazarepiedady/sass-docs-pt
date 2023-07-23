@@ -2,15 +2,15 @@
 title: Operadores de Igualdade
 ---
 
-<% impl_status dart: true, libsass: false, ruby: '4.0.0 (unreleased)', feature: "Igualdade Sem Unidade" do %>
+{% compatibility 'dart: true', 'libsass: false', 'ruby: "4.0.0 (unreleased)"', 'feature: "Igualdade Sem Unidade"'%}
   A LibSass e versões antigas de Sass de Ruby consideram números sem unidades como iguais aos números com quaisquer unidades. Este comportamento foi depreciado e tem sido removido dos lançamentos mais recentes porque viola a [transatividade][transitivity].
 
   [transitivity]: https://en.wikipedia.org/wiki/Transitive_relation
-<% end %>
+{% endcompatibility %}
 
 Os operadores de igualdade retornam se dois valores são ou não iguais. São escritos `<expression> == <expression>`, que retorna se duas [expressões][expression] são iguais, e `<expression> != <expression>`, que retorna se duas expressões *não* forem iguais. Os dois valores são considerados iguais se forem do mesmo tipo *e* se forem o mesmo valor, o que significa coisas diferentes para tipos diferentes:
 
-[expressions]: ../syntax/structure#expressions
+[expressions]: /documentation/syntax/structure#expressions
 
 * [Números][Numbers] são iguais se tiverem o mesmo valor *e* a mesma unidade, ou se os seus valores forem iguais quando suas unidades forem convertidas mutuamente entre si.
 
@@ -28,19 +28,19 @@ Os operadores de igualdade retornam se dois valores são ou não iguais. São es
 
 * [Funções][Functions] são iguais a mesma função. As funções são comparadas *por referência*, então mesmo se duas funções tiverem o mesmo nome e definição são consideradas diferentes se não forem definidas no mesmo lugar.
 
-[Numbers]: ../values/numbers
-[Strings]: ../values/strings
-[quoted]: ../values/strings#quoted
-[unquoted]: ../values/strings#unquoted
-[Colors]: ../values/colors
-[Lists]: ../values/lists
-[`true`, `false`]: ../values/booleans
-[`null`]: ../values/null
-[Maps]: ../values/maps
-[Calculations]: ../values/calculations
-[Functions]: ../values/functions
+[Numbers]: /documentation/values/numbers
+[Strings]: /documentation/values/strings
+[quoted]: /documentation/values/strings#quoted
+[unquoted]: /documentation/values/strings#unquoted
+[Colors]: /documentation/values/colors
+[Lists]: /documentation/values/lists
+[`true`, `false`]: /documentation/values/booleans
+[`null`]: /documentation/values/null
+[Maps]: /documentation/values/maps
+[Calculations]: /documentation/values/calculations
+[Functions]: /documentation/values/functions
 
-<% example(autogen_css: false) do %>
+{% codeExample 'equality', false %}
   @debug 1px == 1px; // true
   @debug 1px != 1em; // true
   @debug 1 != 1px; // true
@@ -97,4 +97,4 @@ Os operadores de igualdade retornam se dois valores são ou não iguais. São es
 
   @debug get-function("rgba") == get-function("rgba")  // true
   @debug get-function("rgba") != get-function("hsla")  // true
-<% end %>
+{% endcodeExample %}
