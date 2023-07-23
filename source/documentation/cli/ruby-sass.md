@@ -3,14 +3,13 @@ title: Ruby Sass Command-Line Interface
 table_of_contents: true
 ---
 
-<% heads_up do %>
+{% headsUp %}
+  [Ruby Sass has reached end of life][] and is now totally unmaintained. Please switch to [Dart Sass][] or [LibSass][] at your earliest convenience.
 
-[Ruby Sass has reached end of life][] and is now totally unmaintained. Please switch to [Dart Sass][] or [LibSass][] at your earliest convenience.
-
-[Ruby Sass has reached end of life]: /blog/ruby-sass-is-unsupported
-[Dart Sass]: /dart-sass
-[LibSass]: /libsass
-<% end %>
+  [Ruby Sass has reached end of life]: /blog/ruby-sass-is-unsupported
+  [Dart Sass]: /dart-sass
+  [LibSass]: /libsass
+{% endheadsUp %}
 
 ## Usage
 
@@ -18,27 +17,27 @@ The Ruby Sass executable can be invoked in one of two modes.
 
 ### One-to-One Mode
 
-```
+```shellsession
 sass [input.scss] [output.css]
 ```
 
-One-to-one mode compiles a single input file (`input.scss`) to a single output location (`output.css`). If no output location is passed, the compiled CSS is printed to the terminal. If no input *or* output is passed, the CSS is read from [standard input][] and printed to the terminal.
+One-to-one mode compiles a single input file (`input.scss`) to a single output location (`output.css`). If no output location is passed, the compiled CSS is printed to the terminal. If no input _or_ output is passed, the CSS is read from [standard input][] and printed to the terminal.
 
 [standard input]: https://en.wikipedia.org/wiki/Standard_streams#Standard_input_(stdin)
 
 The input file is parsed as [SCSS][] if its extension is `.scss` or as the [indented syntax][] if its extension is `.sass`. If it doesn't have one of these two extensions, or if it comes from standard input, it's parsed as the indented syntax by default. This can be controlled with the [`--scss` flag][].
 
-[SCSS]: ../syntax#scss
-[indented syntax]: ../syntax#the-indented-syntax
+[SCSS]: /documentation/syntax#scss
+[indented syntax]: /documentation/syntax#the-indented-syntax
 [`--scss` flag]: #scss
 
 ### Many-to-Many Mode
 
-```
+```shellsession
 sass [<input.css>:<output.css>] [<input/>:<output/>] [input.css] [input/]...
 ```
 
-Many-to-many mode compiles one or more input files to one or more output files. The inputs are separated from the outputs with colons. It can also compile all Sass files in a directory to CSS files with the same names in another directory. Many-to-many mode is enabled when any argument contains a colon, *or* when the [`--update` flag][] or the [`--watch` flag][] is passed.
+Many-to-many mode compiles one or more input files to one or more output files. The inputs are separated from the outputs with colons. It can also compile all Sass files in a directory to CSS files with the same names in another directory. Many-to-many mode is enabled when any argument contains a colon, _or_ when the [`--update` flag][] or the [`--watch` flag][] is passed.
 
 [`--update` flag]: #update
 [`--watch` flag]: #watch
@@ -63,7 +62,7 @@ $ sass themes:public/css
 
 When compiling whole directories, Sass will ignore [partial files][] whose names begin with `_`. You can use partials to separate out your stylesheets without creating a bunch of unnecessary output files.
 
-[partial files]: ../at-rules/use#partials
+[partial files]: /documentation/at-rules/use/#partials
 
 Many-to-many mode will only compile stylesheets whose dependencies have been modified more recently than the corresponding CSS file was generated. It will also print status messages when updating stylesheets.
 
@@ -75,7 +74,7 @@ Many-to-many mode will only compile stylesheets whose dependencies have been mod
 
 This option (abbreviated `-I`) adds an additional [load path][] for Sass to look for stylesheets. It can be passed multiple times to provide multiple load paths. Earlier load paths will take precedence over later ones.
 
-[load path]: ../at-rules/use#load-paths
+[load path]: /documentation/at-rules/use#load-paths
 
 ```shellsession
 $ sass --load-path=node_modules/bootstrap/dist/css style.scss style.css
@@ -113,10 +112,10 @@ $ sass --compass style.scss style.css
 
 This option (abbreviated `-t`) controls the output style of the resulting CSS. Ruby Sass supports four output styles:
 
-* `nested` (the default) indents CSS rules to match the nesting of the Sass source.
-* `expanded` writes each selector and declaration on its own line.
-* `compact` puts each CSS rule on its own single line.
-* `compressed` removes as many extra characters as possible, and writes the entire stylesheet on a single line.
+- `nested` (the default) indents CSS rules to match the nesting of the Sass source.
+- `expanded` writes each selector and declaration on its own line.
+- `compact` puts each CSS rule on its own single line.
+- `compressed` removes as many extra characters as possible, and writes the entire stylesheet on a single line.
 
 ```shellsession
 $ sass --style=nested
@@ -161,7 +160,7 @@ This flag prints the current version of Sass.
 
 ```shellsession
 $ sass --version
-<%= impl_version(:ruby) %>
+Sass 3.7.4
 ```
 
 ### Watching and Updating
@@ -210,7 +209,7 @@ $ sass --update style.scss
 
 #### `--force`
 
-This flag (abbreviated `-f`) may only be passed in [many-to-many mode][]. It causes Sass files to *always* be compiled to CSS files, instead of only being compiled when the source files are more up-to-date than the output.
+This flag (abbreviated `-f`) may only be passed in [many-to-many mode][]. It causes Sass files to _always_ be compiled to CSS files, instead of only being compiled when the source files are more up-to-date than the output.
 
 The `--force` flag may not be passed alongside the [`--watch` flag][].
 
@@ -253,10 +252,10 @@ This option controls how Sass generates source maps, which are files that tell b
 [Chrome]: https://developers.google.com/web/tools/chrome-devtools/javascript/source-maps
 [Firefox]: https://developer.mozilla.org/en-US/docs/Tools/Style_Editor#Source_map_support
 
-* `auto` (the default) uses relative URLs to link from the source map to the Sass stylesheets where possible, and absolute [`file:` URLs][] otherwise.
-* `file` always uses absolute absolute `file:` URLs to link from the source map to the Sass stylesheets.
-* `inline` includes the text of the Sass stylehseets in the source map directly.
-* `none` doesn't generate source maps at all.
+- `auto` (the default) uses relative URLs to link from the source map to the Sass stylesheets where possible, and absolute [`file:` URLs][] otherwise.
+- `file` always uses absolute absolute `file:` URLs to link from the source map to the Sass stylesheets.
+- `inline` includes the text of the Sass stylehseets in the source map directly.
+- `none` doesn't generate source maps at all.
 
 [`file:` URLs]: https://en.wikipedia.org/wiki/File_URI_scheme
 
@@ -292,7 +291,7 @@ The `--stdin` flag may not be used with [many-to-many mode][].
 This option (abbreviated `-E`) controls the default [character encoding][] that Sass will use to load source files that don't [explicitly specify][] a character encoding. It defaults to the operating system's default encoding.
 
 [character encoding]: https://en.wikipedia.org/wiki/Character_encoding
-[explicitly specify]: ../syntax/parsing#input-encoding
+[explicitly specify]: /documentation/syntax/parsing#input-encoding
 
 ```shellsession
 $ sass --default-encoding=Shift-JIS style.scss style.css
@@ -310,9 +309,9 @@ $ sass --unix-newlines style.scss style.css
 
 This flag (abbreviated `-g`) causes Sass to emit dummy `@media` queries that indicate where each style rule was defined in the source stylehseet.
 
-<% heads_up do %>
-This flag only exists for backwards-compatibility. Source maps are now the recommended way of mapping CSS back to the Sass that generated it.
-<% end %>
+{% headsUp %}
+  This flag only exists for backwards-compatibility. Source maps are now the recommended way of mapping CSS back to the Sass that generated it.
+{% endheadsUp %}
 
 ```shellsession
 $ sass --debug-info style.scss
@@ -338,8 +337,8 @@ h1 {
 
 This flag (abbreviated `-i`) tells Sass to run in interactive mode, where you can write [SassScript expressions][] and see their results. Interactive mode also supports [variables][].
 
-[SassScript expressions]: ../syntax/structure#expressions
-[variables]: ../variables
+[SassScript expressions]: /documentation/syntax/structure#expressions
+[variables]: /documentation/variables
 
 ```shellsession
 $ sass --interactive
@@ -365,7 +364,7 @@ $ sass --check style.scss
 
 This option tells Sass how many digits of [precision][] to use when emitting decimal numbers.
 
-[precision]: ../values/numbers#precision
+[precision]: /documentation/values/numbers#precision
 
 ```shellsession
 $ echo -e 'h1\n  font-size: (100px / 3)' | sass --precision=20
@@ -422,12 +421,13 @@ Traceback (most recent call last):
          1: from /usr/share/gems/sass/lib/sass/scss/parser.rb:1305:in `expected'
 test.scss:1: Invalid CSS after "h1 {font-size: ": expected expression (e.g. 1px, bold), was "}" (Sass::SyntaxError)
 ```
+
 #### `--quiet`
 
 This flag (abbreviated `-q`) tells Sass not to emit any warnings when compiling. By default, Sass emits warnings when deprecated features are used or when the [`@warn` rule][] is encountered. It also silences the [`@debug` rule][].
 
-[`@warn` rule]: ../at-rules/warn
-[`@debug` rule]: ../at-rules/debug
+[`@warn` rule]: /documentation/at-rules/warn
+[`@debug` rule]: /documentation/at-rules/debug
 
 ```shellsession
 $ sass --quiet style.scss style.css

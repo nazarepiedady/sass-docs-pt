@@ -9,7 +9,7 @@ The Dart Sass executable can be invoked in one of two modes.
 
 ### One-to-One Mode
 
-```
+```shellsession
 sass <input.scss> [output.css]
 ```
 
@@ -17,20 +17,20 @@ One-to-one mode compiles a single input file (`input.scss`) to a single output l
 
 The input file is parsed as [SCSS][] if its extension is `.scss`, as the [indented syntax][] if its extension is `.sass`, or as [plain CSS][] if its extension is `.css`. If it doesn't have one of these three extensions, or if it comes from standard input, it's parsed as SCSS by default. This can be controlled with the [`--indented` flag][].
 
-[SCSS]: ../syntax#scss
-[indented syntax]: ../syntax#the-indented-syntax
-[plain CSS]: ../at-rules/import#importing-css
+[SCSS]: /documentation/syntax#scss
+[indented syntax]: /documentation/syntax#the-indented-syntax
+[plain CSS]: /documentation/at-rules/import/#importing-css
 [`--indented` flag]: #indented
 
 The special string `-` can be passed in place of the input file to tell Sass to read the input file from [standard input][]. Sass will default to parsing it as SCSS unless the [`--indented` flag][] is passed.
 
 [standard input]: https://en.wikipedia.org/wiki/Standard_streams#Standard_input_(stdin)
 
-### Many-to-many Mode
+### Many-to-Many Mode
 
-<% impl_status dart: '1.4.0' %>
+{% compatibility 'dart: "1.4.0"' %}{% endcompatibility %}
 
-```
+```shellsession
 sass [<input.scss>:<output.css>] [<input/>:<output/>]...
 ```
 
@@ -47,17 +47,15 @@ $ sass light.scss:light.css dark.scss:dark.css
 $ sass themes:public/css
 ```
 
-When compiling whole directories, Sass will ignore [partial files][] whose names
-begin with `_`. You can use partials to separate out your stylesheets without
-creating a bunch of unnecessary output files.
+When compiling whole directories, Sass will ignore [partial files][] whose names begin with `_`. You can use partials to separate out your stylesheets without creating a bunch of unnecessary output files.
 
-[partial files]: ../at-rules/import#partials
+[partial files]: /documentation/at-rules/import/#partials
 
 ## Options
 
 ### Input and Output
 
-These options control how Sass loads its input files and how it produces output files.
+These options control how Sass loads its input files and how it produces output  iles.
 
 #### `--stdin`
 
@@ -77,10 +75,9 @@ The `--stdin` flag may not be used with [many-to-many mode][].
 
 #### `--indented`
 
-This flag tells Sass to parse the input file as the [indented syntax][]. If it's used in [many-to-many mode][], all input files are parsed as the indented syntax, although files they [use][] will have their syntax determined as usual. The inverse, `--no-indented`, can be used to force all input files to be parsed
-as [SCSS][] instead.
+This flag tells Sass to parse the input file as the [indented syntax][]. If it's used in [many-to-many mode][], all input files are parsed as the indented syntax, although files they [use][] will have their syntax determined as usual. The inverse, `--no-indented`, can be used to force all input files to be parsed as [SCSS][] instead.
 
-[use]: ../at-rules/use
+[use]: /documentation/at-rules/use
 
 The `--indented` flag is mostly useful when the input file is coming from [standard input][], so its syntax can't be automatically determined.
 
@@ -95,7 +92,7 @@ h1 {
 
 This option (abbreviated `-I`) adds an additional [load path][] for Sass to look for stylesheets. It can be passed multiple times to provide multiple load paths. Earlier load paths will take precedence over later ones.
 
-[load path]: ../at-rules/use#load-paths
+[load path]: /documentation/at-rules/use#load-paths
 
 ```shellsession
 $ sass --load-path=node_modules/bootstrap/dist/css style.scss style.css
@@ -105,8 +102,8 @@ $ sass --load-path=node_modules/bootstrap/dist/css style.scss style.css
 
 This option (abbreviated `-s`) controls the output style of the resulting CSS. Dart Sass supports two output styles:
 
-* `expanded` (the default) writes each selector and declaration on its own line.
-* `compressed` removes as many extra characters as possible, and writes the entire stylesheet on a single line.
+- `expanded` (the default) writes each selector and declaration on its own line.
+- `compressed` removes as many extra characters as possible, and writes the entire stylesheet on a single line.
 
 ```shellsession
 $ sass --style=expanded style.scss
@@ -120,7 +117,7 @@ h1{font-size:40px}
 
 #### `--no-charset`
 
-<% impl_status dart: '1.19.0' %>
+{% compatibility 'dart: "1.19.0"' %}{% endcompatibility %}
 
 This flag tells Sass never to emit a `@charset` declaration or a UTF-8 [byte-order mark][]. By default, or if `--charset` is passed, Sass will insert either a `@charset` declaration (in expanded output mode) or a byte-order mark (in compressed output mode) if the stylesheet contains any non-ASCII characters.
 
@@ -141,9 +138,9 @@ h1::before {
 
 #### `--error-css`
 
-<% impl_status dart: '1.20.0' %>
+{% compatibility 'dart: "1.20.0"' %}{% endcompatibility %}
 
-This flag tells Sass whether to emit a CSS file when an error occurs during compilation. This CSS file describes the error in a comment *and* in the `content` property of `body::before`, so that you can see the error message in the browser without needing to switch back to the terminal.
+This flag tells Sass whether to emit a CSS file when an error occurs during compilation. This CSS file describes the error in a comment _and_ in the `content` property of `body::before`, so that you can see the error message in the browser without needing to switch back to the terminal.
 
 By default, error CSS is enabled if you're compiling to at least one file on disk (as opposed to standard output). You can pass `--error-css` explicitly to enable it even when you're compiling to standard out, or `--no-error-css` to disable it everywhere. When it's disabled, the [`--update` flag][] and [`--watch` flag][] will delete CSS files instead when an error occurs.
 
@@ -178,7 +175,7 @@ Error: Incompatible units em and px.
 
 #### `--update`
 
-<% impl_status dart: '1.4.0' %>
+{% compatibility 'dart: "1.4.0"' %}{% endcompatibility %}
 
 If the `--update` flag is passed, Sass will only compile stylesheets whose dependencies have been modified more recently than the corresponding CSS file was generated. It will also print status messages when updating stylesheets.
 
@@ -189,9 +186,9 @@ Compiled themes/light.scss to public/css/light.css.
 
 ### Source Maps
 
-<% impl_status dart: '1.3.0' %>
+{% compatibility 'dart: "1.3.0"' %}{% endcompatibility %}
 
-<%= partial 'documentation/snippets/source-maps' %>
+{% render 'doc_snippets/source-maps' %}
 
 Dart Sass generates source maps by default for every CSS file it emits.
 
@@ -207,8 +204,8 @@ $ sass --no-source-map style.scss style.css
 
 This option controls how the source maps that Sass generates link back to the Sass files that contributed to the generated CSS. Dart Sass supports two types of URLs:
 
-* `relative` (the default) uses relative URLs from the location of the source map file to the locations of the Sass source file.
-* `absolute` uses the absolute [`file:` URLs][] of the Sass source files. Note that absolute URLs will only work on the same computer that the CSS was compiled.
+- `relative` (the default) uses relative URLs from the location of the source map file to the locations of the Sass source file.
+- `absolute` uses the absolute [`file:` URLs][] of the Sass source files. Note that absolute URLs will only work on the same computer that the CSS was compiled.
 
 [`file:` URLs]: https://en.wikipedia.org/wiki/File_URI_scheme
 
@@ -240,13 +237,13 @@ $ sass --embed-source-map sass/style.scss css.style.css
 
 #### `--watch`
 
-<% impl_status dart: '1.6.0' %>
+{% compatibility 'dart: "1.6.0"' %}{% endcompatibility %}
 
 This flag (abbreviated `-w`) acts like the [`--update` flag][], but after the first round compilation is done Sass stays open and continues compiling stylesheets whenever they or their dependencies change.
 
 [`--update` flag]: #update
 
-Sass watches only the directories that you pass as-is on the command line, parent directories of filenames you pass on the command line, and load paths. It does not watch additional directories based on a file's `@import`/`@use`/ `@forward` rules.
+Sass watches only the directories that you pass as-is on the command line, parent directories of filenames you pass on the command line, and load paths. It does not watch additional directories based on a file's `@import`/`@use`/`@forward` rules.
 
 ```shellsession
 $ sass --watch themes:public/css
@@ -258,7 +255,7 @@ Compiled themes/dark.scss to public/css/dark.css.
 
 #### `--poll`
 
-<% impl_status dart: '1.8.0' %>
+{% compatibility 'dart: "1.8.0"' %}{% endcompatibility %}
 
 This flag, which may only be passed along with `--watch`, tells Sass to manually check for changes to the source files every so often instead of relying on the operating system to notify it when something changes. This may be necessary if you're editing Sass on a remote drive where the operating system's notification system doesn't work.
 
@@ -272,7 +269,7 @@ Compiled themes/dark.scss to public/css/dark.css.
 
 #### `--stop-on-error`
 
-<% impl_status dart: '1.8.0' %>
+{% compatibility 'dart: "1.8.0"' %}{% endcompatibility %}
 
 This flag tells Sass to stop compiling immediately when an error is detected, rather than trying to compile other Sass files that may not contain errors. It's mostly useful in [many-to-many mode][].
 
@@ -288,13 +285,13 @@ Error: Expected expression.
 
 #### `--interactive`
 
-<% impl_status dart: '1.5.0' %>
+{% compatibility 'dart: "1.5.0"' %}{% endcompatibility %}
 
 This flag (abbreviated `-i`) tells Sass to run in interactive mode, where you can write [SassScript expressions][] and see their results. Interactive mode also supports [variables][] and [`@use` rules][].
 
-[SassScript expressions]: ../syntax/structure#expressions
-[variables]: ../variables
-[`@use` rules]: ../at-rules/use
+[SassScript expressions]: /documentation/syntax/structure#expressions
+[variables]: /documentation/variables
+[`@use` rules]: /documentation/at-rules/use
 
 ```shellsession
 $ sass --interactive
@@ -313,7 +310,7 @@ This flag (abbreviated `-c`) tells Sass to emit [terminal colors][], and the inv
 
 [terminal colors]: https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 
-<pre class="highlight plaintext"><code>$ sass --color style.scss style.css
+<pre class="language-plaintext"><code>$ sass --color style.scss style.css
 Error: Incompatible units em and px.
   <span style="color: blue">╷</span>
 <span style="color: blue">1 │</span> $width: <span style="color: crimson">15px + 2em</span>
@@ -331,7 +328,7 @@ Error: Incompatible units em and px.
 
 #### `--no-unicode`
 
-<% impl_status dart: '1.17.0' %>
+{% compatibility 'dart: "1.17.0"' %}{% endcompatibility %}
 
 This flag tells Sass only to emit ASCII characters to the terminal as part of error messages. By default, or if `--unicode` is passed, Sass will emit non-ASCII characters for these messages. This flag does not affect the CSS output.
 
@@ -357,8 +354,8 @@ Error: Incompatible units em and px.
 
 This flag (abbreviated `-q`) tells Sass not to emit any warnings when compiling. By default, Sass emits warnings when deprecated features are used or when the [`@warn` rule][] is encountered. It also silences the [`@debug` rule][].
 
-[`@warn` rule]: ../at-rules/warn
-[`@debug` rule]: ../at-rules/debug
+[`@warn` rule]: /documentation/at-rules/warn
+[`@debug` rule]: /documentation/at-rules/debug
 
 ```shellsession
 $ sass --quiet style.scss style.css
@@ -374,8 +371,7 @@ $ sass --load-path=node_modules --quiet-deps style.scss style.css
 
 #### `--fatal-deprecation`
 
-<% impl_status dart: '1.59.0' %>
-
+{% compatibility 'dart: "1.59.0"' %}{% endcompatibility %}
 
 This option tells Sass to treat a particular type of deprecation warning as an error. For example, this command tells Sass to treat deprecation warnings for `/`-as-division as errors:
 
@@ -385,7 +381,7 @@ Error: Using / for division outside of calc() is deprecated and will be removed 
 
 Recommendation: math.div(4, 2) or calc(4 / 2)
 
-More info and automated migrator: https://sass-lang.com/d/slash-div
+More info and automated migrator: /documentation/breaking-changes/slash-div
 
 This is only an error because you've set the slash-div deprecation to be fatal.
 Remove this setting if you need to keep using this feature.
@@ -418,7 +414,7 @@ The following deprecation IDs can be passed to this option:
     <td>Using <code>@elseif</code> instead of <code>@else if</code>.</td>
   </tr>
   <tr>
-    <td><a href="../breaking-changes/moz-document"><code>moz-document</code></a></td>
+    <td><a href="/documentation/breaking-changes/moz-document"><code>moz-document</code></a></td>
     <td>1.7.2</td>
     <td>Using <code>@-moz-document</code> (except for the empty url prefix hack).</td>
   </tr>
@@ -433,30 +429,34 @@ The following deprecation IDs can be passed to this option:
     <td>Using color module functions in place of plain CSS functions.</td>
   </tr>
   <tr>
-    <td><a href="../breaking-changes/slash-div"><code>slash-div</code></a></td>
+    <td><a href="/documentation/breaking-changes/slash-div"><code>slash-div</code></a></td>
     <td>1.33.0</td>
     <td>Using the <code>/</code> operator for division.</td>
   </tr>
   <tr>
-    <td><a href="../breaking-changes/bogus-combinators"><code>bogus-combinators</code></a></td>
+    <td><a href="/documentation/breaking-changes/bogus-combinators"><code>bogus-combinators</code></a></td>
     <td>1.54.0</td>
     <td>Leading, trailing, and repeated combinators.</td>
   </tr>
   <tr>
-    <td><a href="../breaking-changes/strict-unary"><code>strict-unary</code></a></td>
+    <td><a href="/documentation/breaking-changes/strict-unary"><code>strict-unary</code></a></td>
     <td>1.55.0</td>
     <td>Ambiguous <code>+</code> and <code>-</code> operators.</td>
   </tr>
   <tr>
-    <td><a href="../breaking-changes/function-units"><code>function-units</code></a></td>
+    <td><a href="/documentation/breaking-changes/function-units"><code>function-units</code></a></td>
     <td>1.56.0</td>
     <td>Passing invalid units to built-in functions.</td>
+  </tr>
+  <tr>
+    <td><a href="/documentation/breaking-changes/duplicate-var-flags"><code>duplicate-var-flags</code></a></td>
+    <td>1.62.0</td>
+    <td>Using multiple copies of <code>!global</code> or <code>!default</code> in a single variable declaration.</td>
   </tr>
 </tbody>
 </table>
 
 Alternatively, you can pass a Dart Sass version to treat all deprecations that were present in that version as errors. For example, `--fatal-deprecation=1.33.0` would treat all deprecations in the table above up to and including `slash-div` as errors, but leave any newer deprecations as warnings.
-
 
 #### `--trace`
 
@@ -503,5 +503,5 @@ This flag prints the current version of Sass.
 
 ```shellsession
 $ sass --version
-<%= impl_version(:dart) %>
+{{ releases['dart-sass'].version }}
 ```

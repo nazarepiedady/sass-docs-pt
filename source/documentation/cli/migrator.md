@@ -1,5 +1,5 @@
 ---
-title: "Migrator"
+title: Migrator
 table_of_contents: true
 introduction: >
   The Sass migrator automatically updates your Sass files to help you move on to the latest and greatest version of the language. Each of its commands migrates a single feature, to give you as much control as possible over what you update and when.
@@ -11,20 +11,20 @@ To use the Sass migrator, tell it [which migration][] you want to run and what S
 
 [which migration]: #migrations
 
-```
+```shellsession
 sass-migrator <migration> <entrypoint.scss...>
 ```
 
 By default, the migrator will only change files that you explicitly pass on the command line. Passing the [`--migrate-deps` option][] tells the migrator to also change all the stylesheets that are loaded using the [`@use` rule][], [`@forward` rule][], or [`@import` rule][]. And if you want to do a test run to see what changes will be made without actually saving them, you can pass <code>[--dry-run][] [--verbose][]</code> (or `-nv` for short).
 
 [`--migrate-deps` option]: #migrate-deps
-[`@use` rule]: ../at-rules/use
-[`@forward` rule]: ../at-rules/forward
-[`@import` rule]: ../at-rules/import
+[`@use` rule]: /documentation/at-rules/use
+[`@forward` rule]: /documentation/at-rules/forward
+[`@import` rule]: /documentation/at-rules/import
 [--dry-run]: #dry-run
 [--verbose]: #verbose
 
-<%= partial 'code-snippets/example-module-migrator' %>
+{% render 'code_snippets/example-module-migrator' %}
 
 ## Installation
 
@@ -34,7 +34,7 @@ You can install the Sass migrator from most of the same places that you can inst
 
 You can install the Sass migrator on Windows, Mac, or Linux by downloading the package for your operating system [from GitHub][] and [adding it to your `PATH`][].
 
-[from GitHub]: <%= release_url(:migrator) %>
+[from GitHub]: {{ releases['migrator'].url }}
 [adding it to your `PATH`]: https://katiek2.github.io/path-doc/
 
 ### npm
@@ -43,7 +43,7 @@ If you use Node.js, you can also install the Sass migrator using [npm][] by runn
 
 [npm]: https://www.npmjs.com
 
-```
+```shellsession
 npm install -g sass-migrator
 ```
 
@@ -53,7 +53,7 @@ If you use [the Chocolatey package manager][] for Windows, you can install the S
 
 [the Chocolatey package manager]: https://chocolatey.org
 
-```
+```shellsession
 choco install sass-migrator
 ```
 
@@ -63,7 +63,7 @@ If you use [the Homebrew package manager][] for Mac OS X, you can install Dart S
 
 [the Homebrew package manager]: https://brew.sh
 
-```
+```shellsession
 brew install sass/sass/migrator
 ```
 
@@ -85,13 +85,13 @@ Migrating _fonts.scss
 Migrating _grid.scss
 ```
 
-<% heads_up do %>
+{% headsUp %}
   The [module migrator][] assumes that any stylesheet that is depended on using a [`@use` rule][] or a [`@forward` rule][] has already been migrated to the module system, so it won't attempt to migrate them, even when the `--migrate-deps` option is passed.
 
   [module migrator]: #module
-  [`@use` rule]: ../at-rules/use
-  [`@forward` rule]: ../at-rules/forward
-<% end %>
+  [`@use` rule]: /documentation/at-rules/use
+  [`@forward` rule]: /documentation/at-rules/forward
+{% endheadsUp %}
 
 ### `--load-path`
 
@@ -99,7 +99,7 @@ This option (abbreviated `-I`) tells the migrator a [load path][] where it shoul
 
 Dependencies loaded from load paths are assumed to be third-party libraries, so the migrator will not migrate them even when the [`--migrate-deps` option][] is passed.
 
-[load path]: ../at-rules/use#load-paths
+[load path]: /documentation/at-rules/use#load-paths
 
 ### `--dry-run`
 
@@ -144,24 +144,23 @@ This flag (abbreviated `-v`) tells the migrator to print extra information to th
 
 [`--dry-run` option]: #dry-run
 
-<%# Indent this because otherwise the table-of-contents generator interprets
-the `===` as a heading. %>
+```shellsession
+$ sass-migrator module --verbose --dry-run style.scss
+Dry run. Logging migrated files instead of overwriting...
+<==> style.scss
+@use "bootstrap" with (
+  $body-bg: #000,
+  $body-color: #111
+);
 
-    $ sass-migrator module --verbose --dry-run style.scss
-    Dry run. Logging migrated files instead of overwriting...
-    <==> style.scss
-    @use "bootstrap" with (
-      $body-bg: #000,
-      $body-color: #111
-    );
-
-    @include bootstrap.media-breakpoint-up(sm) {
-      .navbar {
-        display: block;
-      }
-    }
-    $ sass-migrator module --verbose style.scss
-    Migrating style.scss
+@include bootstrap.media-breakpoint-up(sm) {
+  .navbar {
+    display: block;
+  }
+}
+$ sass-migrator module --verbose style.scss
+Migrating style.scss
+```
 
 ## Migrations
 
@@ -169,7 +168,7 @@ the `===` as a heading. %>
 
 This migration converts stylesheets that use [`/` as division] to use the built-in `math.div` function instead.
 
-[`/` as division]: ../breaking-changes/slash-div
+[`/` as division]: /documentation/breaking-changes/slash-div
 
 #### `--pessimistic`
 
@@ -181,30 +180,30 @@ If you want to avoid this behavior, you can pass the `--pessimistic` flag. With 
 
 This migration converts stylesheets that use the old [`@import` rule][] to load dependencies so that they use the Sass module system via the [`@use` rule][] instead. It doesn't just naïvely change `@import`s to `@use`s—it updates stylesheets intelligently so that they keep working the same way they did before, including:
 
-* Adding namespaces to uses of members (variables, mixins, and functions) from other modules.
+- Adding namespaces to uses of members (variables, mixins, and functions) from other modules.
 
-* Adding new `@use` rules to stylesheets that were using members without importing them.
+- Adding new `@use` rules to stylesheets that were using members without importing them.
 
-* Converting overridden default variables to [`with` clauses][].
+- Converting overridden default variables to [`with` clauses][].
 
-  [`with` clauses]: ../at-rules/use#configuration
+  [`with` clauses]: /documentation/at-rules/use#configuration
 
-* Automatically removing `-` and `_` prefixes from members that are used from other files (because otherwise they'd be considered [private][] and could only be used in the module they're declared).
+- Automatically removing `-` and `_` prefixes from members that are used from other files (because otherwise they'd be considered [private][] and could only be used in the module they're declared).
 
-  [private]: ../at-rules/use#private-members
+  [private]: /documentation/at-rules/use#private-members
 
-* Converting [nested imports][] to use the [`meta.load-css()` mixin][] instead.
+- Converting [nested imports][] to use the [`meta.load-css()` mixin][] instead.
 
-  [nested imports]: ../at-rules/import#nesting
-  [`meta.load-css()` mixin]: ../modules/meta#load-css
+  [nested imports]: /documentation/at-rules/import/#nesting
+  [`meta.load-css()` mixin]: /documentation/modules/meta#load-css
 
-<% heads_up do %>
-  Because the module migrator may need to modify both member definitions *and* member names, it's important to either run it with the [`--migrate-deps` option][] or ensure that you pass it all the stylesheets in your package or application.
+{% headsUp %}
+  Because the module migrator may need to modify both member definitions _and_ member names, it's important to either run it with the [`--migrate-deps` option][] or ensure that you pass it all the stylesheets in your package or application.
 
   [`--migrate-deps` option]: #migrate-deps
-<% end %>
+{% endheadsUp %}
 
-<%= partial 'code-snippets/example-module-migrator' %>
+{% render 'code_snippets/example-module-migrator' %}
 
 #### Loading Dependencies
 
@@ -228,7 +227,7 @@ If you use a [load path][] when compiling your stylesheets, make sure to pass th
 
 Unfortunately, the migrator does not support custom importers, but it does have built-in support for resolving URLs starting with `~` by searching in `node_modules`, similar to [what Webpack supports][].
 
-[load path]: ../at-rules/use#load-paths
+[load path]: /documentation/at-rules/use#load-paths
 [`--load-path` option]: #load-path
 [what Webpack supports]: https://github.com/webpack-contrib/sass-loader#resolving-import-at-rules
 
@@ -258,8 +257,8 @@ $ cat style.scss
 
 When you pass this option, the migrator will also generate an [import-only stylesheet][] that [forwards][] all the members with the prefix added back, to preserve backwards-compatibility for users who were importing the library.
 
-[import-only stylesheet]: ../at-rules/import#import-only-files
-[forwards]: ../at-rules/forward
+[import-only stylesheet]: /documentation/at-rules/import/#import-only-files
+[forwards]: /documentation/at-rules/forward
 
 This option may be passed multiple times, or with multiple values separated by commas. Each prefix will be removed from any members that have it. If a member matches multiple prefixes, the longest matching prefix will be removed.
 
@@ -267,11 +266,11 @@ This option may be passed multiple times, or with multiple values separated by c
 
 This option tells the migrator which members to forward using the [`@forward` rule][]. It supports the following settings:
 
-* `none` (the default) doesn't forward any members.
+- `none` (the default) doesn't forward any members.
 
-* `all` forwards all members except those that started with `-` or `_` in the original stylesheet, since that was commonly used to mark a package-private member before the module system was introduced.
+- `all` forwards all members except those that started with `-` or `_` in the original stylesheet, since that was commonly used to mark a package-private member before the module system was introduced.
 
-* `prefixed` forwards only members that begin with the prefix passed to the [`--remove-prefix` option][]. This option may only be used in conjunction with the `--remove-prefix` option.
+- `prefixed` forwards only members that begin with the prefix passed to the [`--remove-prefix` option][]. This option may only be used in conjunction with the `--remove-prefix` option.
 
   [`--remove-prefix` option]: #remove-prefix
 
@@ -293,7 +292,7 @@ $ cat _index.scss
 
 This migration allows you to easily change the [namespaces][] of the `@use` rules in a stylesheet. This is useful if the namespaces that the module migrator generates to resolve conflicts are non-ideal, or if you don't want to use the default namespace that Sass determines based on the rule's URL.
 
-[namespaces]: ../at-rules/use#choosing-a-namespace
+[namespaces]: /documentation/at-rules/use#choosing-a-namespace
 
 #### `--rename`
 
@@ -308,18 +307,18 @@ For simple use cases, this just looks like `--rename 'old to new'`, which would 
 However, you can also do this to accomplish more complicated renames. For instance, say that you previously had a stylesheet that looked like this:
 
 ```scss
-@import "components/button/lib/mixins";
-@import "components/input/lib/mixins";
-@import "components/table/lib/mixins";
+@import 'components/button/lib/mixins';
+@import 'components/input/lib/mixins';
+@import 'components/table/lib/mixins';
 // ...
 ```
 
 Since all of these URLs would have the default namespace `mixins` when migrated to `@use` rules, the module migrator may end up generating something like this:
 
 ```scss
-@use "components/button/lib/mixins" as button-lib-mixins;
-@use "components/input/lib/mixins" as input-lib-mixins;
-@use "components/table/lib/mixins" as table-lib-mixins;
+@use 'components/button/lib/mixins' as button-lib-mixins;
+@use 'components/input/lib/mixins' as input-lib-mixins;
+@use 'components/table/lib/mixins' as table-lib-mixins;
 // ...
 ```
 
@@ -328,9 +327,9 @@ This is valid code since the namespaces don't conflict, but they're way more com
 If we run the namespace migrator with `--rename 'url components/(\w+)/lib/mixins to \1'`, we'll end up with:
 
 ```scss
-@use "components/button/lib/mixins" as button;
-@use "components/input/lib/mixins" as input;
-@use "components/table/lib/mixins" as table;
+@use 'components/button/lib/mixins' as button;
+@use 'components/input/lib/mixins' as input;
+@use 'components/table/lib/mixins' as table;
 // ...
 ```
 
