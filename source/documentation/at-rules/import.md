@@ -15,7 +15,7 @@ As importações de Sass têm a mesma sintaxe que as importações de CSS, excet
   [gradually phase it out]: https://github.com/sass/sass/blob/main/accepted/module-system.md#timeline
   [`@use` rule]: /documentation/at-rules/use
 
-  #### O Que Existe de Errado com a `@import`? {#whats-wrong-with-import}
+  <h4>{{ "O Que Existe de Errado com a `@import`?" | markdown }}</h4>
 
   A regra `@import` tem um número de problemas sérios:
 
@@ -33,7 +33,7 @@ As importações de Sass têm a mesma sintaxe que as importações de CSS, excet
 
   O novo sistema de módulo e a regra `@use` abordam todos estes problemas.
 
-  <h4 id="how-do-i-migrate">{{ 'Como Migro?' | markdown }}</h4>
+  <h4>{{ "Como Migro?" | markdown }}</h4>
 
   Escrevemos uma [ferramenta de migração][migration tool] que converte automaticamente a maioria do código baseado na `@import` para código baseado na `@use` num instante. Apenas aponte-a os teus pontos de entrada e deixe-a executar!
 
