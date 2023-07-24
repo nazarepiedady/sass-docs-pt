@@ -3,14 +3,14 @@
   itemtype="https://schema.org/SiteNavigationElement"
   itemscope="itemscope"
   role="navigation"
-  aria-label="Site navigation">
+  aria-label="Navegação do sítio">
 
-- [Playground](/playground)
-- [Install](/install)
-- [Learn Sass](/guide)
-- [Blog](/blog)
-- [Documentation](/documentation)
-- [Get Involved](/community)
+- [Zona de Experimentos](/playground)
+- [Instalar](/install)
+- [Guia](/guide)
+- [Blogue](/blog)
+- [Documentação](/documentation)
+- [Comunidade](/community)
 - <div id="docsearch"></div>
 
 </nav>
