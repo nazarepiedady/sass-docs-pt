@@ -57,7 +57,7 @@ Os comentários também podem ser usados dentro de [expressões][expressions] na
 
   p .sans
     font: Helvetica, /* Comentários em linha devem ser fechados. */ sans-serif
-<% end %>
+{% endcodeExample %}
 
 ## Comentários de Documentação {#documentation-comments}
 
