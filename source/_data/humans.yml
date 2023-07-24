@@ -28,8 +28,8 @@ contributors:
     twitter: parenteau
 
 thanks:
-  - name: All the people at SassConf that came to help with DNS and server-related issues.
-  - name: To everyone who has contributed through pull requests.
+  - name: Todas as pessoas na SassConf que vieram ajudar com questões relacionada à DNS e servidor.
+  - name: À todos que contribuíram através de pedidos de atualização do repositório.
 
 markup:
   - name: HTML
