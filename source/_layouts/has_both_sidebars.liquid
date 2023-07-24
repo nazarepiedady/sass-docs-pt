@@ -18,7 +18,7 @@ layout: base
                 {% assign toc = content | getToc: top_level_toc %}
                 {% if toc | size %}
                   <nav aria-labelledby="page-sections" class="page-sections sl-c-list-navigation-wrapper sl-c-list-navigation-wrapper--collapsible">
-                    <h3 id="page-sections">Page Sections</h3>
+                    <h3 id="page-sections">Seções da Página</h3>
                     {% render 'documentation_toc', url: '', toc: toc %}
                   </nav>
                 {% endif %}
