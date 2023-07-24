@@ -5,7 +5,9 @@ introduction: >
   Antes de poderes usar a Sass, precisas de configurar o teu projeto. Se quiseres apenas pesquisar aqui, vá em frente, mas recomendamos-te primeiro ir instalar a Sass. [Siga para aqui](/install) se quiseres aprender a como ter tudo configurado.
 navigation: |
   <h3>Tópicos</h3>
+
   <nav class="sl-c-list-navigation-wrapper">
+
     - [Pré-Processamento](#preprocessing)
     - [Variáveis](#variables)
     - [Encaixamento](#nesting)
@@ -14,6 +16,7 @@ navigation: |
     - [Misturas](#mixins)
     - [Herança](#inheritance)
     - [Operadores](#operators)
+
   </nav>
 ---
 
@@ -55,6 +58,7 @@ A Sass observaria todos os ficheiros na pasta `app/sass` por mudanças, e compil
 <section id="variables">
 {%- # retain older link -%}
 <span id="topic-2"></span>
+
 ## Variáveis
 
 Pense em variáveis como uma maneira de armazenar informação que queres reutilizar ao longo da tua folha de estilo. Tu podes armazenar coisas como cores, pilhas de fonte, ou qualquer valor de CSS que pensas em reutilizar. A Sass usa o símbolo `$` para tornar algo numa variável. Cá está um exemplo:
@@ -155,8 +159,8 @@ Tu podes criar ficheiros de Sass parciais que contêm pequenos trechos de CSS qu
 
 Tu não tens de escrever todo o teu código de Sass num único ficheiro. Tu podes separá-lo de qualquer modo que quiseres com a regra `@use`. Esta regra carrega um outro ficheiro de Sass como um *módulo*, o que significa que podes fazer referência as suas variáveis, [misturas][mixins], e [funções][functions] no teu ficheiro de Sass com um espaço de nome baseado no nome do ficheiro. Usar um ficheiro também incluirá o CSS que gera no tua saída compilada:
 
-[mixins]: #topic-6
-[functions]: documentation/at-rules/function
+[mixins]: #mixins
+[functions]: /documentation/at-rules/function
 
 {% codeExample 'modules' %}
   // _base.scss
