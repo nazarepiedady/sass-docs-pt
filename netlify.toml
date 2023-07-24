@@ -1,3 +1,10 @@
+[[plugins]]
+    package = "netlify-plugin-11ty"
+
+    [plugins.inputs]
+        cache_img = "./assets/img"
+        cache_assets = false
+
 [build]
-  publish = "build"
-  command = "bundle exec rake sass:import; bundle exec middleman build"
+  publish = "_site"
+  command = "pnpm run build"
