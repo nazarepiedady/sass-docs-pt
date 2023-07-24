@@ -9,7 +9,7 @@ no_container: true
 
 ## Aplicações {#applications}
 
-![Mouse](illustrations/mouse.svg)
+![Rato](/assets/img/illustrations/mouse.svg)
 
 Existem muitas boas aplicações que ajudar-te-ão a executar e trabalhar com a Sass em alguns minutos para Mac, Windows e Linux. Tu podes descarregar a maioria das aplicações gratuitamente e algumas delas tens que pagar por elas <small>(mas valem a pena)</small>.
 
@@ -39,7 +39,7 @@ Também existem invólucros mantidos pela comunidade para as seguinte linguagens
 
 ## Linha de Comando {#command-line}
 
-![Keyboard](illustrations/keyboard.svg)
+![Teclado](/assets/img/illustrations/keyboard.svg)
 
 Quando instalares o Sass na linha de comando, serás capaz de executar o executável `sass` para compilar os ficheiros `.sass` e `.scss` para ficheiros `.css`. Por exemplo:
 
@@ -47,8 +47,7 @@ Quando instalares o Sass na linha de comando, serás capaz de executar o execut�
 sass source/stylesheets/index.scss build/stylesheets/index.css
 ```
 
-Primeiro instale o Sass usando uma das opções abaixo, depois execute `sass --version` para teres a certeza de que foi instalada corretamente. Se feita, isto incluirá `#{impl_version(:dart)}`. Tu também podes executar `sass --help` para mais informações sobre a interface da linha de comando.
-
+Primeiro instale o Sass usando uma das opções abaixo, depois execute `sass --version` para teres a certeza de que foi instalada corretamente. Se feita, isto incluirá `{{ releases['dart-sass'].version }}`. Tu também podes executar `sass --help` para mais informações sobre a interface da linha de comando.
 
 Uma vez que tudo estiver configurado, <strong>vai e experimente</strong>. Se fores novato para a Sass definimos alguns recursos para ajudar-te aprender muito rapidamente.
 
@@ -62,27 +61,27 @@ Instalar em Qualquer Lugar (npm)
 
 : Se usas a Node.js, também podes instalar o Sass usando o [npm](https://www.npmjs.com/) executando:
 
-```shellsession
-npm install -g sass
-```
+  ```shellsession
+  npm install -g sass
+  ```
 
-**No entanto, nota** que isto instalará a implementação de JavaScript pura de Sass, o qual executa um tanto mais lento do que as opções listadas aqui. Mas tem a mesma interface, então será fácil trocar por uma outra implementação mais tarde se precisares de um pouco mais de velocidade!
+  **No entanto, nota** que isto instalará a implementação de JavaScript pura de Sass, a qual executa um tanto mais lenta do que as opções listadas aqui. Mas tem a mesma interface, então será fácil trocar por uma outra implementação mais tarde se precisares de um pouco mais de velocidade!
 
 Instalar no Windows (Chocolatey)
 
 : Se usas o [o gestor de pacote Chocolatey](https://chocolatey.org/) para Windows, podes instalar a implementação de Dart de Sass executando:
 
-```shellsession
-choco install sass
-```
+  ```shellsession
+  choco install sass
+  ```
 
 Instalar no Mac OS X ou Linux (Homebrew)
 
 : Se usas o [gestor de pacote Homebrew](https://brew.sh/) para Mac Os X ou Linux, podes instalar a implementação de Dart de Sass executando:
 
-```shellsession
-brew install sass/sass/sass
-```
+  ```shellsession
+  brew install sass/sass/sass
+  ```
 
   </div>
 </div>
