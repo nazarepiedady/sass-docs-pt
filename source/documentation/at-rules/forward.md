@@ -1,7 +1,7 @@
 ---
 title: "@forward"
 introduction: >
-  A regra `@forward` carrega uma folha de estilo de Sass e torna suas [misturas](/documentation/at-rules/mixin), [funções](/documentation/at-rules/function), e [variáveis](/documentation/variables) disponíveis quando a tua folha de estilo for carregada com a [regra `@rule`](/documentation/at-rules/use). Isto torna possível organizar as bibliotecas de Sass através de vários ficheiros, enquanto permite os seus utilizadores carregarem um único ficheiro de ponto de entrada.
+  A regra `@forward` carrega uma folha de estilo de Sass e torna suas [misturas](/documentation/at-rules/mixin), [funções](/documentation/at-rules/function), e [variáveis](/documentation/variables) disponíveis quando a tua folha de estilo for carregada com a [regra `@use`](/documentation/at-rules/use). Isto torna possível organizar as bibliotecas de Sass através de vários ficheiros, enquanto permite os seus utilizadores carregarem um único ficheiro de ponto de entrada.
 ---
 
 A regra é escrita como `@forward "<url>"`. Ela carrega o módulo numa dada URL tal como a `@use`, exceto que torna os membros [públicos][public] do módulo carregado disponíveis para os utilizadores do teu módulo como se estivessem definidos diretamente no teu módulo. Mesmo assim estes membros não estão disponíveis no teu módulo — se quiseres isto, precisarás também de escrever uma regra `@use`. Não te preocupes, apenas carregará o módulo uma vez!
