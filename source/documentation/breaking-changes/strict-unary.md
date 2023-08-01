@@ -41,7 +41,7 @@ Tornaremos isto um erro na Sass de Dart 2.0.0, mas até lá apenas emitirá um a
 
 ## Migração Automática {#automatic-migration}
 
-Tu podes usar [o migrador da Sass] para atualizar automaticamente as tuas folhas de estilo, para adicionares um espaço depois de quaisquer operadores `-` ou `+` que precisar dele, o que preservará o comportamento existente destas folhas de estilo:
+Tu podes usar [o migrador da Sass][the Sass migrator] para atualizar automaticamente as tuas folhas de estilo, para adicionares um espaço depois de quaisquer operadores `-` ou `+` que precisar dele, o que preservará o comportamento existente destas folhas de estilo:
 
 [the Sass migrator]: https://github.com/sass/migrator#readme
 
