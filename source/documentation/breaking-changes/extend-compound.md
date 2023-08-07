@@ -1,7 +1,7 @@
 ---
 title: "Mudança de Rutura: Extensão de Seletores Compostos"
 introduction: >
-  A LibSass atualmente permite que seletores compostos como `.message.info` sejam [estendidos](/documentation/at-rules/extend), mas a maneira como era estendida não correspondia a maneira que `@extend` está destinada a funcionar.
+  A LibSass atualmente permite que seletores compostos como `.message.info` serem [estendidos](/documentation/at-rules/extend), mas a maneira como era estendida não correspondia a maneira que `@extend` está destinada a funcionar.
 ---
 
 {% compatibility 'dart: true', 'libsass: false', 'ruby: false' %}{% endcompatibility %}
@@ -11,7 +11,7 @@ Quando um seletor estende um outro, a Sass estiliza todos os elementos que corre
 Seguindo esta lógica, esperarias que `.heads-up {@extend .message.info}` funcionasse como a substituição de `class="heads-up"` por `class="heads-up info message"`. Mas não é assim como funciona neste exato momento na LibSass e Sass de Ruby -- ao invés de adicionar `.heads-up` para cada seletor que tiver *ou `.info` ou `.message`*, este apenas adiciona-a aos seletores que têm *`.info.message` ao mesmo tempo*:
 
 {% codeExample 'extend-compound-bad', false %}
-  // These should both be extended, but they won't be.
+  // Estes deveriam ambos serem estendidos, mas não serão.
   .message {
     border: 1px solid black;
   }
@@ -23,7 +23,7 @@ Seguindo esta lógica, esperarias que `.heads-up {@extend .message.info}` funcio
     @extend .message.info;
   }
   ===
-  // These should both be extended, but they won't be.
+  // Estes deveriam ambos serem estendidos, mas não serão.
   .message
     border: 1px solid black
 
@@ -68,14 +68,14 @@ Para corrigir este problema, evitar mais confusão, e manter a implementação l
   [placeholder selector]: /documentation/style-rules/placeholder-selectors
 
   {% codeExample 'extend-compound-heads-up' %}
-    // Instead of just `.message.info`.
+    // Ao invés de apenas `.message.info`.
     %message-info, .message.info {
       border: 1px solid black;
       font-size: 1.5rem;
     }
 
     .heads-up {
-      // Instead of `.message.info`.
+      // Ao invés de apenas `.message.info`.
       @extend %message-info;
     }
     ===
@@ -86,7 +86,7 @@ Para corrigir este problema, evitar mais confusão, e manter a implementação l
 
 
     .heads-up
-      // Instead of `.message.info`.
+      // Ao invés de apenas `.message.info`.
       @extend %message-info
   {% endcodeExample %}
 {% endheadsUp %}
