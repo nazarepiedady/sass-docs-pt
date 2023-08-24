@@ -1,55 +1,55 @@
 toc:
-  - Syntax: /documentation/syntax/
+  - Sintaxe: /documentation/syntax/
     :children:
-      - Parsing a Stylesheet: /documentation/syntax/parsing/
-      - Structure of a Stylesheet: /documentation/syntax/structure/
-      - Comments: /documentation/syntax/comments/
-      - Special Functions: /documentation/syntax/special-functions/
-  - Style Rules: /documentation/style-rules/
+      - Analisando uma Folha de Estilo: /documentation/syntax/parsing/
+      - Estrutura duma Folha de Estilo: /documentation/syntax/structure/
+      - Comentários: /documentation/syntax/comments/
+      - Funções Especiais: /documentation/syntax/special-functions/
+  - Regras de Estilo: /documentation/style-rules/
     :children:
-      - Property Declarations: /documentation/style-rules/declarations/
-      - Parent Selector: /documentation/style-rules/parent-selector/
-      - Placeholder Selectors: /documentation/style-rules/placeholder-selectors/
-  - Variables: /documentation/variables/
-  - Interpolation: /documentation/interpolation/
-  - At-Rules: /documentation/at-rules/
+      - Declarações de Propriedade: /documentation/style-rules/declarations/
+      - Seletor Pai: /documentation/style-rules/parent-selector/
+      - Seletores de Espaço Reservado: /documentation/style-rules/placeholder-selectors/
+  - Variáveis: /documentation/variables/
+  - Interpolação: /documentation/interpolation/
+  - Regras Que Usam Arroba: /documentation/at-rules/
     :children:
       - <code>@use</code>: /documentation/at-rules/use/
       - <code>@forward</code>: /documentation/at-rules/forward/
       - <code>@import</code>: /documentation/at-rules/import/
-      - <code>@mixin</code> and <code>@include</code>: /documentation/at-rules/mixin/
+      - <code>@mixin</code> e <code>@include</code>: /documentation/at-rules/mixin/
       - <code>@function</code>: /documentation/at-rules/function/
       - <code>@extend</code>: /documentation/at-rules/extend/
       - <code>@error</code>: /documentation/at-rules/error/
       - <code>@warn</code>: /documentation/at-rules/warn/
       - <code>@debug</code>: /documentation/at-rules/debug/
       - <code>@at-root</code>: /documentation/at-rules/at-root/
-      - Flow Control: /documentation/at-rules/control/
+      - Controlo de Fluxo: /documentation/at-rules/control/
         :children:
-          - <code>@if</code> and <code>@else</code>: /documentation/at-rules/control/if/
+          - <code>@if</code> e <code>@else</code>: /documentation/at-rules/control/if/
           - <code>@each</code>: /documentation/at-rules/control/each/
           - <code>@for</code>: /documentation/at-rules/control/for/
           - <code>@while</code>: /documentation/at-rules/control/while/
-      - From CSS: /documentation/at-rules/css/
-  - Values: /documentation/values/
+      - Da CSS: /documentation/at-rules/css/
+  - Valores: /documentation/values/
     :children:
-      - Numbers: /documentation/values/numbers/
-      - Strings: /documentation/values/strings/
-      - Colors: /documentation/values/colors/
-      - Lists: /documentation/values/lists/
-      - Maps: /documentation/values/maps/
-      - <code>true</code> and <code>false</code>: /documentation/values/booleans/
+      - Números: /documentation/values/numbers/
+      - Sequências de Caracteres: /documentation/values/strings/
+      - Cores: /documentation/values/colors/
+      - Listas: /documentation/values/lists/
+      - Mapas: /documentation/values/maps/
+      - <code>true</code> e <code>false</code>: /documentation/values/booleans/
       - <code>null</code>: /documentation/values/null/
-      - Calculations: /documentation/values/calculations/
-      - Functions: /documentation/values/functions/
-  - Operators: /documentation/operators/
+      - Cálculos: /documentation/values/calculations/
+      - Funções: /documentation/values/functions/
+  - Operadores: /documentation/operators/
     :children:
-      - Equality: /documentation/operators/equality/
-      - Relational: /documentation/operators/relational/
-      - Numeric: /documentation/operators/numeric/
-      - String: /documentation/operators/string/
-      - Boolean: /documentation/operators/boolean/
-  - Built-In Modules: /documentation/modules/
+      - Igualdade: /documentation/operators/equality/
+      - Relacional: /documentation/operators/relational/
+      - Numérico: /documentation/operators/numeric/
+      - Sequência de Caracteres: /documentation/operators/string/
+      - Booleano: /documentation/operators/boolean/
+  - Módulos Embutidos: /documentation/modules/
     :children:
       - <code>sass:color</code>: /documentation/modules/color/
       - <code>sass:list</code>: /documentation/modules/list/
@@ -58,22 +58,22 @@ toc:
       - <code>sass:meta</code>: /documentation/modules/meta/
       - <code>sass:selector</code>: /documentation/modules/selector/
       - <code>sass:string</code>: /documentation/modules/string/
-  - Breaking Changes: /documentation/breaking-changes/
+  - Mudanças de Rutura: /documentation/breaking-changes/
     :children:
-      - Strict Unary Operators: /documentation/breaking-changes/strict-unary/
-      - Random With Units: /documentation/breaking-changes/function-units/
-      - Invalid Combinators: /documentation/breaking-changes/bogus-combinators/
-      - Media Queries Level 4: /documentation/breaking-changes/media-logic/
-      - <code>/</code> as Division: /documentation/breaking-changes/slash-div/
-      - Function Units: /documentation/breaking-changes/function-units/
+      - Operadores Unários Estritos: /documentation/breaking-changes/strict-unary/
+      - Aleatório com Unidades: /documentation/breaking-changes/function-units/
+      - Combinadores Inválidos: /documentation/breaking-changes/bogus-combinators/
+      - Consultas de Media de Nível 4: /documentation/breaking-changes/media-logic/
+      - <code>/</code> como Divisão: /documentation/breaking-changes/slash-div/
+      - Unidades de Função: /documentation/breaking-changes/function-units/
       - <code>-moz-document</code>: /documentation/breaking-changes/moz-document/
-      - Extending Compound Selectors: /documentation/breaking-changes/extend-compound/
-      - CSS Variable Syntax: /documentation/breaking-changes/css-vars/
-      - Duplicate Variable Flags: /documentation/breaking-changes/duplicate-var-flags/
-      - Default Exports: /documentation/breaking-changes/default-export/
-  - Command Line: /documentation/cli/
+      - Extensão de Seletores Compostos: /documentation/breaking-changes/extend-compound/
+      - Sintaxe de Variável de CSS: /documentation/breaking-changes/css-vars/
+      - Sinalizadores de Variável Duplicadas: /documentation/breaking-changes/duplicate-var-flags/
+      - Exportações Padrão: /documentation/breaking-changes/default-export/
+  - Linha de Comando: /documentation/cli/
     :children:
-      - Dart Sass: /documentation/cli/dart-sass/
-      - Ruby Sass: /documentation/cli/ruby-sass/
-      - Migrator: /documentation/cli/migrator/
-  - JavaScript API: /documentation/js-api/
+      - Sass de Dart: /documentation/cli/dart-sass/
+      - Sass de Ruby: /documentation/cli/ruby-sass/
+      - Migrador: /documentation/cli/migrator/
+  - API de JavaScript: /documentation/js-api/
