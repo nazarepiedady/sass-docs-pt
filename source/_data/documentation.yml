@@ -12,7 +12,7 @@ toc:
       - Seletores de Espaço Reservado: /documentation/style-rules/placeholder-selectors/
   - Variáveis: /documentation/variables/
   - Interpolação: /documentation/interpolation/
-  - Regras Que Usam Arroba: /documentation/at-rules/
+  - Regras de Arroba: /documentation/at-rules/
     :children:
       - <code>@use</code>: /documentation/at-rules/use/
       - <code>@forward</code>: /documentation/at-rules/forward/
